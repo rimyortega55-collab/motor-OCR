@@ -4,3 +4,8 @@ __pycache__/
 
 # Resultados de corridas de prueba (se regeneran)
 pruebas/pdfs_escaneados/
+
+# Base de datos y datos de ejecucion
+datos/
+.datos_prueba/
+*.db

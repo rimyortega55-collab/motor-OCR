@@ -136,9 +136,9 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
+        "MSAM107",
         "MSBM10",
-        "MSAM73",
-        "MSAM107"
+        "MSAM73"
       ]
     },
     {

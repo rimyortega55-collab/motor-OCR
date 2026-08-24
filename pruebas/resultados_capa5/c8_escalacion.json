@@ -1,8 +1,8 @@
 {
   "pdf": "c8.pdf",
-  "fecha": "2026-08-24T17:54:59.472966",
+  "fecha": "2026-08-24T18:14:07.992961",
   "documento": {
-    "documento_id": "ddbbde10-b2bb-47b7-b858-614daab97463",
+    "documento_id": "91ff622b-83f5-4db8-bab4-88606a984454",
     "titulo": "c8",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -35,7 +35,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 20:54:52.274961",
+    "fecha_procesamiento": "2026-08-24 21:14:01.499436",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
@@ -60,17 +60,10 @@
   "inconsistencias_detectadas": [],
   "escalaciones": [],
   "costo": {
-    "total_llamadas": 1,
+    "total_llamadas": 0,
     "tokens_entrada_total": 0,
     "tokens_salida_total": 0,
     "costo_estimado_usd": 0.0,
-    "por_tipo_cola": {
-      "inconsistencia_documental": {
-        "llamadas": 1,
-        "tokens_entrada": 0,
-        "tokens_salida": 0,
-        "costo_estimado_usd": 0.0
-      }
-    }
+    "por_tipo_cola": {}
   }
 }

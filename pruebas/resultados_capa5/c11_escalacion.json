@@ -1,8 +1,8 @@
 {
   "pdf": "c11.pdf",
-  "fecha": "2026-08-24T17:53:31.889842",
+  "fecha": "2026-08-24T18:12:41.865180",
   "documento": {
-    "documento_id": "af6d48fd-eaa4-4527-ad5c-56cb2546ebb2",
+    "documento_id": "c32efabf-f1a2-4e8b-bc36-1396f26b895e",
     "titulo": "c11",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -67,7 +67,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 20:53:22.461884",
+    "fecha_procesamiento": "2026-08-24 21:12:31.971181",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

@@ -1,8 +1,8 @@
 {
   "pdf": "c4.pdf",
-  "fecha": "2026-08-24T17:54:02.429562",
+  "fecha": "2026-08-24T18:13:14.482061",
   "documento": {
-    "documento_id": "8ab43a20-298e-4cb7-8e7b-ee17e9b18872",
+    "documento_id": "25e52e6b-05a9-4d48-b6ed-22d9c4934b87",
     "titulo": "c4",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -99,7 +99,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 20:53:52.240067",
+    "fecha_procesamiento": "2026-08-24 21:13:02.975551",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

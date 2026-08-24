@@ -1,8 +1,8 @@
 {
   "pdf": "c9.pdf",
-  "fecha": "2026-08-24T17:55:11.372591",
+  "fecha": "2026-08-24T18:14:16.872806",
   "documento": {
-    "documento_id": "fa2622ed-fcc5-465d-80ab-1acc515b9cac",
+    "documento_id": "88e6eccc-239d-4318-84fd-810465a24a7c",
     "titulo": "c9",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -59,7 +59,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 20:55:00.140690",
+    "fecha_procesamiento": "2026-08-24 21:14:08.527143",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
@@ -84,17 +84,10 @@
   "inconsistencias_detectadas": [],
   "escalaciones": [],
   "costo": {
-    "total_llamadas": 1,
+    "total_llamadas": 0,
     "tokens_entrada_total": 0,
     "tokens_salida_total": 0,
     "costo_estimado_usd": 0.0,
-    "por_tipo_cola": {
-      "inconsistencia_documental": {
-        "llamadas": 1,
-        "tokens_entrada": 0,
-        "tokens_salida": 0,
-        "costo_estimado_usd": 0.0
-      }
-    }
+    "por_tipo_cola": {}
   }
 }

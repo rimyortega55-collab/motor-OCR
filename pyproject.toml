@@ -24,6 +24,8 @@ dependencies = [
     "anthropic",
     "jinja2",
     "langgraph",
+    # Persistencia (usuarios, documentos, costos, decisiones)
+    "sqlalchemy>=2",
     # Interfaz web y API (Capa 7)
     "fastapi",
     "uvicorn",

@@ -139,7 +139,9 @@ def procesar_escalaciones(
                     bloques_revision_humana.append(str(bloque.id))
 
     # ========== Estadísticas finales ==========
-    estadisticas = obtener_estadisticas()
+    # Acotadas a este documento: sin el filtro devolvía el acumulado del proceso
+    # entero, mezclando el costo de documentos de otros usuarios.
+    estadisticas = obtener_estadisticas(documento.documento_id)
 
     return {
         "escalaciones_micro_segmentos": escalaciones_micro,
