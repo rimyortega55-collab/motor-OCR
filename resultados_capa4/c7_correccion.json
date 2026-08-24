@@ -1,0 +1,116 @@
+{
+  "pdf": "c7.pdf",
+  "fecha": "2026-08-21T22:14:38.061091",
+  "documento": {
+    "documento_id": "e0bb7f74-c44d-4d44-a05f-f472aacd8dad",
+    "titulo": "c7",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 25,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          4
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          5,
+          5
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          6,
+          7
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          8,
+          8
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          9,
+          11
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          12,
+          15
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          16,
+          17
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          18,
+          18
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          19,
+          24
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.3",
+    "fecha_procesamiento": "2026-08-22 01:14:27.130250",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 4200,
+    "bloques_corregidos": 0,
+    "reparaciones_aplicadas": 0,
+    "inconsistencias": 1,
+    "bloques_escalados": 0
+  },
+  "muestras_correcciones": [],
+  "inconsistencias": [
+    {
+      "tipo": "salto_numeracion",
+      "detalle": "Salto en numeraci\u00f3n de teorema: 1.0 \u2192 7.1",
+      "ubicacion_pagina": 6
+    }
+  ]
+}

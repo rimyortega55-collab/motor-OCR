@@ -1,0 +1,4 @@
+timestamp,bloque_id,documento_id,pagina,tipo_bloque,decision,contenido_original,contenido_final,confianza_engine,confianza_llm,confianza_usuario,comentarios,revisor
+2026-08-22T01:33:13.077757,d08f543b-448e-4dac-8288-a2d9069f941a,b61ab7bc-febc-4625-8a88-af955d0da920,0,parrafo,aceptar,Springer Undergraduate Mathematics Series,Springer Undergraduate Mathematics Series,0.95,,0.95,Aceptado como está,usuario_test
+2026-08-22T01:33:13.082046,bfbb37e1-c651-4b8e-b3f2-2c4f9510e520,b61ab7bc-febc-4625-8a88-af955d0da920,0,formula_inline,editar,x^2 + y^2 = z^2,x^{2} + y^{2} = z^{2},0.72,,0.88,Corregido formato LaTeX de exponentes,usuario_test
+2026-08-22T01:33:13.083103,7564075d-f10f-48cf-a12a-c3cd0c68bea0,b61ab7bc-febc-4625-8a88-af955d0da920,0,parrafo,escalar,Contenido ambiguo,Contenido ambiguo,0.45,,0.0,No se puede determinar con certeza,usuario_test

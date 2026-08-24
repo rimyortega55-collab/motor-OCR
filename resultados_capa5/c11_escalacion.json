@@ -1,0 +1,101 @@
+{
+  "pdf": "c11.pdf",
+  "fecha": "2026-08-21T22:22:42.639854",
+  "documento": {
+    "documento_id": "57d902e8-d555-4f81-9349-c13a3b83017d",
+    "titulo": "c11",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 23,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          0
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          1,
+          8
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          9,
+          9
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          10,
+          14
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          15,
+          16
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          17,
+          17
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          18,
+          22
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.4",
+    "fecha_procesamiento": "2026-08-22 01:22:35.947017",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 2734,
+    "inconsistencias": 0,
+    "escalaciones_micro": 0,
+    "escalaciones_inconsistencias": 0,
+    "bloques_revision_humana": 0
+  },
+  "inconsistencias_detectadas": [],
+  "escalaciones": [],
+  "costo": {
+    "total_llamadas": 0,
+    "tokens_entrada_total": 0,
+    "tokens_salida_total": 0,
+    "costo_estimado_usd": 0.0,
+    "por_tipo_cola": {}
+  }
+}

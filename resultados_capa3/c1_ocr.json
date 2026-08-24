@@ -1,0 +1,5710 @@
+{
+  "pdf": "c1.pdf",
+  "fecha": "2026-08-21T22:03:20.381876",
+  "total_bloques_procesados": 814,
+  "ocr_results": [
+    {
+      "bloque_id": "2acaa1d5-e24b-4763-a93b-30b13e14e8fe",
+      "contenido": "Springer Undergraduate Mathematics Series",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f5015f23-a9ef-4c4e-b903-1bb8481b6eb9",
+      "contenido": "University of Dundee, Dundee, Scotland, UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f825d518-35c4-45e4-9656-64e40cc51bc6",
+      "contenido": "University of Oxford, Oxford, England, UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5d8e794b-5299-4b8e-9c2a-9fb2ffe8e572",
+      "contenido": "University of Cambridge, Cambridge, England, UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f98590a5-639f-4198-9e06-ba9050c0b7a7",
+      "contenido": "University of Cambridge, Cambridge, England, UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d5ebcd71-73e8-4516-8a1a-0f8b5f7cc255",
+      "contenido": "Advisory Board",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "75256ab6-e2c8-460c-8e64-c5de9e56103d",
+      "contenido": "M.A.J. Chaplain,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f8bad550-5a0f-40e8-9351-c103dfb52098",
+      "contenido": "K. Erdmann,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5d8f0595-c73b-4c6e-9470-cec41397e43f",
+      "contenido": "A. MacIntyre,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b46c6560-0957-4bec-92b5-bfe7fffed30d",
+      "contenido": "E. S\u00fcli,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "290d35a2-0d72-4927-9cc5-18f62b6c95ec",
+      "contenido": "M.R. Tehranchi,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8bfef178-9de5-42d3-9754-8e7f8887010c",
+      "contenido": "J.F. Toland,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d92605b5-19e1-4d28-b92f-45df59325e23",
+      "contenido": "University of Oxford, Oxford, England, UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7b6bf1ff-2182-44e1-a438-1580188a7e1b",
+      "contenido": "Queen Mary, University of London, London, England, UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "88401f2e-2b27-4e0c-b386-cc9b66b8ad12",
+      "contenido": "More information about this series at http://www.springer.com/series/3423",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7758b80d-f5e7-4260-ae94-751e2ffbb2d3",
+      "contenido": "Franco Vivaldi",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f448e3db-454e-4bdb-896c-4d2b608f0312",
+      "contenido": "Mathematical Writing",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e7d01246-e938-45e4-8f7a-d42672819e0c",
+      "contenido": "123",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6121ad5f-505e-4ddf-9d3c-b950c71f5136",
+      "contenido": "Franco Vivaldi School of Mathematical Sciences",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d402de89-6d23-47d1-a50a-88fb118651fc",
+      "contenido": "Queen Mary, University of London London",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e5bfb861-d9db-47da-a5ec-b0d86f0fac4a",
+      "contenido": "UK",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "13c8aba5-9082-45cd-b725-a88dab055ac0",
+      "contenido": "ISSN 1615-2085 ISSN 2197-4144 (electronic) ISBN 978-1-4471-6526-2 ISBN 978-1-4471-6527-9 (eBook)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0e9c0c57-e9f9-4812-bc36-dd2f70e97efb",
+      "contenido": "DOI 10.1007/978-1-4471-6527-9",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "107b73af-88a6-4f83-943d-bad4f7c80955",
+      "contenido": "Library of Congress Control Number: 2014944546",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "faffd39b-3372-4986-8c0e-0c2bceece14f",
+      "contenido": "Mathematics Subject Classi\ufb01cation: 00A05",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "000b71c4-5959-466e-9caf-8fbe917b3940",
+      "contenido": "Springer London Heidelberg New York Dordrecht",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "04a70b82-9230-4964-81d3-80aa46ea6c48",
+      "contenido": "\u0002",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fe855307-0b4f-4293-bf65-ed759eb886e6",
+      "contenido": "Springer-Verlag London 2014 This work is subject to copyright. All rights are reserved by the Publisher, whether the whole or part of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e4722979-0eb3-4fb4-8c3a-954f0c99cb34",
+      "contenido": "the material is concerned, speci\ufb01cally the rights of translation, reprinting, reuse of illustrations, recitation, broadcasting, reproduction on micro\ufb01lms or in any other physical way, and transmission",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3e610f33-749e-41d6-9ee7-e408b4a43e0a",
+      "contenido": "information storage and retrieval, electronic adaptation, computer software, or by similar or dissimilar methodology now known or hereafter developed. Exempted from this legal reservation are brief",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "451f85dc-b6eb-4bdb-8b85-2ecd4198a728",
+      "contenido": "excerpts in connection with reviews or scholarly analysis or material supplied speci\ufb01cally for the purpose of being entered and executed on a computer system, for exclusive use by the purchaser of the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fb674c00-9efd-4421-af2d-1ef7fa76f819",
+      "contenido": "work. Duplication of this publication or parts thereof is permitted only under the provisions of the Copyright Law of the Publisher\u2019s location, in its current version, and permission for use must",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3ae63181-4e4f-45c8-9ff3-fb895525451a",
+      "contenido": "always be obtained from Springer. Permissions for use may be obtained through RightsLink at the Copyright Clearance Center. Violations are liable to prosecution under the respective Copyright Law.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "85987400-7867-49a8-b0ec-2c5877d1d5aa",
+      "contenido": "The use of general descriptive names, registered names, trademarks, service marks, etc. in this publication does not imply, even in the absence of a speci\ufb01c statement, that such names are exempt",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b44b7ea7-044a-4ed0-8197-4a71e622b85a",
+      "contenido": "from the relevant protective laws and regulations and therefore free for general use. While the advice and information in this book are believed to be true and accurate at the date of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "045d7fb4-01f8-4cbe-90da-dc56131e8f67",
+      "contenido": "publication, neither the authors nor the editors nor the publisher can accept any legal responsibility for any errors or omissions that may be made. The publisher makes no warranty, express or implied",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b4b1d68c-0689-49fc-9576-83082fba1a78",
+      "contenido": "respect to the material contained herein.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "53ebd87b-dd5b-4f00-bc5f-47c2616199b4",
+      "contenido": "Printed on acid-free paper",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7d775317-685d-4743-a5a9-b9c4c349bae4",
+      "contenido": "Springer is part of Springer Science+Business Media (www.springer.com)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "77644d84-f322-45da-8725-f5fb32e337a9",
+      "contenido": "To Mary-Carmen",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f4bb0cd2-51fe-4f79-b9cf-3ee0127a4bcd",
+      "contenido": "Mathematical Writing",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "100f8718-b976-4e83-a45e-8c8eec1585c3",
+      "contenido": "offered to second- year undergraduate students at Queen Mary, University of London.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bb5638d4-dd4e-4d8a-801e-44b85b9845fa",
+      "contenido": "Instructions on writing mathematics are normally given to postgraduate students, because they must write research papers and a thesis. However, there are",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "93593091-ef8e-44a9-b073-decb5f7a7ae3",
+      "contenido": "compelling reasons for providing a similar training at undergraduate level, and, more generally, for raising the pro\ufb01le of writing in a mathematics degree. 1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7425569e-469a-471b-a847-1ef00972f610",
+      "contenido": "A researcher knows that writing an article, presenting a result in a seminar, or simply explaining ideas to a colleague are decisive tests of one\u2019s understanding of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "94060b3b-f77d-4c0a-a0b1-ea68e11a348d",
+      "contenido": "a topic. If a sketched argument has \ufb02aws, these \ufb02aws will surface as soon as one tries to convince someone else that the argument is correct. The act of exposition is",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ba70eebf-03d5-4360-b05e-43ce97549aea",
+      "contenido": "inextricably linked to thinking, understanding, and self-evaluation. For this reason, undergraduate students should be encouraged to elucidate their",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "02a8c4a1-c860-47c5-a8b8-f9bdc9e3a021",
+      "contenido": "thinking in writing, and to assume greater responsibility for the quality of the exposition of their ideas. Their \ufb01rst-written submissions tend to be cryptic",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2b1f7e29-6ca9-409b-8561-2766d010713b",
+      "contenido": "collections of symbols, which easily hide from view learning inadequacies and fragility of knowledge. It is quite possible to perform a correct calculation having",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1901bf06-3b4c-4118-8350-bf87a5e91936",
+      "contenido": "only limited understanding of the subject matter, but it is not possible to write about it. A good writing assignment exposes bad studying habits (approaching",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "941746d9-592e-4865-bf4e-adb5ea8ed885",
+      "contenido": "formal concepts informally, or treating them as mere processes\u2014see [1]), and provides a most effective tool for correcting them.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a4c8dcc5-939a-4055-a489-516994bbe5d6",
+      "contenido": "This course\u2019s declared objective is to teach the students how to develop and present mathematical arguments, in preparation for writing a thesis in their \ufb01nal",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7a73a0d7-d2dd-4362-aecc-645278c2d8b5",
+      "contenido": "year. For those who will not write a thesis, this course represents an indispensable minimal alternative, which is also more manageable in terms of teaching resour-",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "224d555f-a1fe-4922-a8be-bdfba76b0858",
+      "contenido": "ces. The writing material is taken mostly from introductory courses in calculus and algebra. This suf\ufb01ces to challenge even the most capable students, who com-",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8daa720b-480f-47bb-a664-431442313a97",
+      "contenido": "mented on the \u2018\u2018unexpected depth\u2019\u2019 required in their thinking, once forced to offer verbal explanations. The students are asked to use words and symbols with the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06f2f7c5-41fe-4958-b18b-9634b8a552c1",
+      "contenido": "1 The poor quality of student writing in Higher Education has raised broad concern [44].",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4b34e5a6-d34e-4a25-a508-26906c299707",
+      "contenido": "Preface",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cd6bee0b-88aa-47b7-be0c-ef41925f3353",
+      "contenido": "This book has evolved from a course in",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5d2adde9-aa5b-421f-b357-bbac0256620e",
+      "contenido": "vii",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2862f381-bb4f-4e67-b1e9-e018590a39d3",
+      "contenido": "viii Preface",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "57f6d9e6-f22a-4cc4-8a70-16b1c8a4fab4",
+      "contenido": "same clarity, precision, and conciseness found in books and lecture notes. This demanding exercise encourages logical accuracy, attention to structure, and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c87538fb-77c1-4f79-b894-36dd969727d8",
+      "contenido": "economy of thought\u2014the attributes of a mathematical mind. It also forces us to understand better the mathematics we are supposed to know.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1a3c49cf-581e-4197-93f2-a3bf0d7f578f",
+      "contenido": "The development of writing techniques proceeds from the particular to the general, from the small to the large: words, phrases, sentences, paragraphs, to end with short",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b2d24797-7551-4210-84ed-4a42d4985611",
+      "contenido": "compositions. These may represent the introduction of a concept, the proof of a theorem, the summary of a section of a book, and the \ufb01rst few slides of a presentation.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "19352f0d-2dc1-46d8-85d7-cd7c835a337e",
+      "contenido": "The \ufb01rst chapter is a warm-up, listing do\u2019s and don\u2019ts of writing mathematics. An essential dictionary on sets, functions, sequences, and equations is presented in",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f9e2856a-a186-4071-b110-5797207ff5b0",
+      "contenido": "Chaps. 2 and 3 ; these words are then used extensively in simple phrases and sentences. The analysis of mathematical sentences begins in Chap. 4 , where we",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d8078928-eb57-465f-bac3-efb2cbcee36c",
+      "contenido": "develop some constructs of elementary logic (predicates, quanti\ufb01ers). This mate- rial underpins the expansion of the mathematical dictionary in Chap. 5 , where",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "071a3d5b-ac40-46cf-aca6-e0e8eed39bfb",
+      "contenido": "basic attributes of real functions are introduced: ordering, symmetry, boundedness, and continuity. Mathematical arguments are studied in detail in the second part of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4885f823-9b8e-4a7d-8caf-92c6ba084d17",
+      "contenido": "the book. Chapters 7 and 8 are devoted to basic proof techniques, whereas Chap. 9 deals with existence statements and de\ufb01nitions. Some chapters are dedicated",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "65ca692b-4c64-4d33-a6b1-eec24d45a518",
+      "contenido": "explicitly to writing: Chap. 1 gives basic guidelines; Chap. 6 is concerned with mathematical notation and quality of exposition; Chap. 10 is about writing a thesis.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ebf6705c-20b9-427c-9acf-b7bd33d6abaf",
+      "contenido": "Solutions and hints to selected exercises are given in \u2018\u2018Solutions to Exercises\u2019\u2019. The symbol",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bf33cfd3-1963-4e49-89d2-04a1864c46cd",
+      "contenido": "\u03b5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1c319976-8125-47e4-851d-650bd0a85ed8",
+      "contenido": "appears often in exercises. It indicates that the written material should contain",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "765f5798-0603-4bb4-b83e-f2d868264522",
+      "contenido": "\u0002",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5cdc83c1-436e-4668-b446-c0eb38d7e8ee",
+      "contenido": "no mathematical symbols",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aaee5400-ab2f-4ae8-9ed6-f366fa1735b3",
+      "contenido": ". (The allied symbol",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "58126151-a626-4e04-a826-2ab7801e021d",
+      "contenido": "speci\ufb01es an approximate word length",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7e4b4c40-16bf-46a7-85e7-1fe76f7a611f",
+      "contenido": "n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d4526f8e-8ede-47e7-92d6-23b5bdf9d59d",
+      "contenido": "of the assignment.) In an appropriate context, having to express mathematics without symbols is a very useful exercise. It brings about the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "40d15acd-3cc2-436c-89ff-a0122db1bb65",
+      "contenido": "discipline needed to use symbols effectively, and is invaluable for learning how to communicate to an audience of non-experts. Consider the following question:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "101b2aab-699c-4dac-b11d-f52afeb5cb59",
+      "contenido": "I have a circle and a point outside it, and I must \ufb01nd the lines through this point which are tangent to the circle. What shall I do?",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6689a788-b8b0-44b7-ba82-afad0a696e32",
+      "contenido": "The mathematics is elementary; yet answering the question requires a clear understanding of the structure of the problem, and a fair deal of organisation.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da16db94-8e3e-4b8c-ad75-bfc662f5a414",
+      "contenido": "Write down the equation of a line passing through the point. This equation depends on one parameter, the line\u2019s slope, which is the quantity to be",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ce2420a2-da7d-4cdc-b592-f385c8271291",
+      "contenido": "Adjoin the equation of the line to that of the circle, and eliminate one of the unknowns. After a substitution, you\u2019ll end up with a quadratic equation in",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "19ff7147-c452-4e98-a1af-96e832e63be2",
+      "contenido": "one unknown, whose coef\ufb01cients still depend on the parameter.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2b6b3e87-1eae-4a27-9b8d-b97ca1c6e46a",
+      "contenido": "Equate the discriminant of the quadratic equation to zero, to obtain an equation\u2014also quadratic\u2014for the slope. Its two solutions are the desired",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9da2f3a5-5b17-4fa9-b9f6-ca482cfb0630",
+      "contenido": "slopes of the tangent lines. Any geometrical con\ufb01guration involving vertical lines (in\ufb01nite slope) will require some care.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c3ed679d-bd01-46ae-b251-c0214f7fcd9f",
+      "contenido": "\u00bd6",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "acfaa76f-8d5b-4b9c-bc7b-97abd29c557a",
+      "contenido": "determined.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3f570f0d-60ba-4336-ace4-278cb5e142ad",
+      "contenido": ";",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "72c28f40-40a6-4a18-adae-6ae77ef432d8",
+      "contenido": "\u03b5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fab3e222-52dd-4b5c-bd7f-c698687fe1ba",
+      "contenido": "n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cde37b61-577f-419d-9a36-ccfc067a2335",
+      "contenido": "\u00bd6",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c12557f8-7f17-456f-8380-26be3ac1af27",
+      "contenido": "\u0002",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "946ca901-f791-4f34-968a-fbe67867c437",
+      "contenido": ";",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "809d6709-cce6-4053-9847-b608826bc36c",
+      "contenido": ":",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ab235bce-7c9a-4b88-805e-ffd848797a5c",
+      "contenido": "\u03b5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c826a240-0d33-48b0-963d-4d637937b676",
+      "contenido": "100",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a3f1f8f9-76dc-4cdb-8f58-42c5bc1ad6b2",
+      "contenido": "\u00bd6",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06f2f312-e808-4239-80d5-5f7cd81f1448",
+      "contenido": "\u0002",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "217d894a-7863-491d-ba7e-6095207f67b8",
+      "contenido": "Preface ix",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1a6a66bf-a1cd-47b2-8711-d6f79e3a9538",
+      "contenido": "The most challenging exercise of this kind is the MICRO - ESSAY , where the syn- thesis of a mathematical topic has to be performed in a couple of paragraphs,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8d50ccc5-0a78-4522-812d-ef3813b19477",
+      "contenido": "without using any symbols at all. This exercise prepares the students for writing abstracts, a notoriously dif\ufb01cult task.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "af12bd88-7a3a-4381-a4b7-22cb028da1ef",
+      "contenido": "The available literature on mathematical writing is almost entirely targeted to postgraduate students and researchers. An exception is",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bbe109af-2764-4860-8e71-3e50d434e541",
+      "contenido": "How to think like a mathematician",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d7fb3c8c-544c-45ec-ae27-19b03f1bd258",
+      "contenido": ", by K. Houston [20], written for students entering university, which devotes two early chapters to mathematical writing. The advanced texts include",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b28f1006-2078-46f0-a4cd-39e095eafa14",
+      "contenido": "by D.E. Knuth, T.L. Larrabee, and P.M. Roberts [24],",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5d25ff47-affe-44c4-a677-8d516bd656e5",
+      "contenido": "Handbook of writing for the mathematical sciences",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b24e0d86-de92-4880-abe2-a3b8fa31473d",
+      "contenido": "by S.G. Krantz [22]. Equally valuable is the concise classic text",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6a127d2b-bff7-49cf-a0c0-d2015460efd4",
+      "contenido": "Writing mathematics well,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1887aebc-e147-494b-ae7f-cdf194279e6e",
+      "contenido": "by L. Gillman [13]. Unfortunately, this 50-page booklet is out of print, and used copies may command high prices.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f951ac76-5ee6-44fb-ac2e-7b1dd633f393",
+      "contenido": "The elements of style,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "585c75d1-7445-43a3-bab8-4558bc1408b3",
+      "contenido": "by W. Strunk Jr. and E.B. White [37] is an ideal complement to the present textbook. Anyone interested",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "480184c1-c60b-4875-9249-b06234c4811b",
+      "contenido": "in writing should study it carefully. This book was inspired by the lecture notes of a course in logic given by Wilfrid",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "53d6889e-8a38-488e-98e2-911efe6d84ef",
+      "contenido": "Hodges at Queen Mary in 2005\u20132006. This course used writing as an essential tool, in an innovative way. Wilfrid has been an ideal companion during a decade-",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9a55556b-afd8-45f5-8574-52d286e2a5f8",
+      "contenido": "long effort to bring writing to centre stage in our mathematics degree, and I am much indebted to him.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4ecfcebc-8ed0-4a5f-a155-0cb2b6a10e2a",
+      "contenido": "The development of the \ufb01rst draft of this book was made possible by a grant from the Thinking Writing Secondment Scheme, at Queen Mary, University of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "61fc2a52-8e3c-46c9-8509-4db7fcb3e2d5",
+      "contenido": "London; their support is gratefully acknowledged. I also thank Will Clavering and Sally Mitchell for their advice and encouragement throughout this project, and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2c5658c2-e093-466d-95f2-bbf258c8406c",
+      "contenido": "Ivan Toma\u0161ic\u00b4 for the discussions on logic over coffee. The students of the Mathematical Writing course at Queen Mary endured the many early versions of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "051fc0a2-d1bf-49fe-a5f5-026080097ca1",
+      "contenido": "this work; I thank them for spotting errors and mis-prints. I am very grateful to Lara Alcock for her thoughtful, detailed feedback on an earlier version of the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "11dcc1ad-587e-4244-b1eb-19f624b14bfe",
+      "contenido": "manuscript, which prompted me to re-consider the structure of some chapters. Finally, I owe a special debt to my daughter Giulia who had the patience to read",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fb6158d6-5a5f-44a4-a432-388a3129281a",
+      "contenido": "the \ufb01nal draft, suggesting improvements in hundreds of sentences and removing hundreds of commas.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "496f9157-dd66-4a89-840b-ddfba994b309",
+      "contenido": "London, October 2014 Franco Vivaldi",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d83e556d-abae-41be-9e6d-a6fcf93a975e",
+      "contenido": "Mathematical writing,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c2fb0b2b-11ad-4989-93ac-dbdd3fd763d7",
+      "contenido": "A primer of mathematical writing",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b965db3d-d7b0-4aef-b2e4-0af20f26fa02",
+      "contenido": "The timeless, concise book",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "84ce6725-eaa3-4ee1-a6a8-efb35d2481ec",
+      "contenido": "by N. Higham [19], and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "60eaea59-ce82-447f-a972-a6e82de94ec8",
+      "contenido": "Contents",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "db5d792f-a4e1-4807-90b7-2575eeb160bf",
+      "contenido": "1 Some Writing Tips",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cadbf406-6c01-4ead-8dca-7d5c38d9baed",
+      "contenido": "2 Essential Dictionary I",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4d1f327d-1a6f-4a64-a0e0-4ae0f9d6ad10",
+      "contenido": "3 Essential Dictionary II",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4f955c47-4a20-4b78-a1a3-296791dfb93d",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.1 Grammar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cf3cb3ed-f0a1-4f42-8e78-56f50e5ee096",
+      "contenido": "1.2 Numbers and Symbols . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 1.3 Style . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e7df4820-96cb-4773-90c5-6f1fc4692113",
+      "contenido": "1.4 Preparation and Structure. . . . . . . . . . . . . . . . . . . . . . . . . . . 6",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e912894b-78d8-46cf-84ed-1a88a8d8c7e8",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 2.1 Sets. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2e08a9d1-0bae-461e-8260-a8a35956b54c",
+      "contenido": "2.1.1 Defining Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 2.1.2 Arithmetic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a2951b00-62cd-4523-aaa2-ac03fa37f397",
+      "contenido": "2.1.3 Sets of Numbers. . . . . . . . . . . . . . . . . . . . . . . . . . . 17 2.1.4 Writing About Sets. . . . . . . . . . . . . . . . . . . . . . . . . 19",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6b25140e-80e6-41f0-98db-42a80f399c68",
+      "contenido": "2.2 Functions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 2.3 Some Advanced Terms . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1f515f07-e4e3-4436-8b6b-092d3fa1296a",
+      "contenido": "2.3.1 Families of Sets . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 2.3.2 Sums and Products of Sets . . . . . . . . . . . . . . . . . . . 26",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7d56c90e-d7ad-4740-914c-90aea9b48cdc",
+      "contenido": "2.3.3 Representations of Sets . . . . . . . . . . . . . . . . . . . . . . 28",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0910c48f-f273-468f-8dd1-8323e28edd6f",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 3.1 Sequences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cb832b70-d630-4039-ada3-fdc5488a23d4",
+      "contenido": "3.2 Sums. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 3.3 Equations and Identities . . . . . . . . . . . . . . . . . . . . . . . . . . . 37",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3a112ba5-f154-4367-8d3a-453d633355e9",
+      "contenido": "3.4 Expressions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40 3.4.1 Levels of Description . . . . . . . . . . . . . . . . . . . . . . . 41",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0e0b947e-3842-45a3-ae13-4d20ab776ada",
+      "contenido": "3.4.2 Describing Expressions . . . . . . . . . . . . . . . . . . . . . . 43 3.5 Some Advanced Terms . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1157e1cc-48cb-4774-a09f-3d530cdddc19",
+      "contenido": "3.5.1 Sets and Sequences. . . . . . . . . . . . . . . . . . . . . . . . . 47 3.5.2 More on Equations . . . . . . . . . . . . . . . . . . . . . . . . . 48",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b5d0e037-f1e8-4427-ac0e-0e5ddacc6e5f",
+      "contenido": "xi",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3f7a5c66-5d31-4cd2-ac4d-9d649bd88fb3",
+      "contenido": "4 Mathematical Sentences",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3759f3f7-c3ac-4cac-8c2f-84404ad7a876",
+      "contenido": "5 Describing Functions",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c7b3dbed-8144-4769-8aee-93ec811dc8aa",
+      "contenido": "7 Forms of Argument",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1c31e416-ce4d-41a2-a256-e525d42287dd",
+      "contenido": "xii Contents",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "67a5cb89-d7d7-4c5f-a620-07eb560f75ea",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51 4.1 Relational Operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1e48cca4-d00c-45a5-8abd-00f5954c9248",
+      "contenido": "4.2 Logical Operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53 4.3 Predicates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2679b8f5-09ec-470d-8ca2-8466c9f753d4",
+      "contenido": "4.4 Quantifiers. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59 4.4.1 Quantifiers and Functions . . . . . . . . . . . . . . . . . . . . 64",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c2dcde53-5586-4e68-ab3f-4896bc7446dc",
+      "contenido": "4.4.2 Existence Statements. . . . . . . . . . . . . . . . . . . . . . . . 66 4.5 Negating Logical Expressions . . . . . . . . . . . . . . . . . . . . . . . 67",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "52b831f3-bcf3-42e6-8ac6-b7d6248fef37",
+      "contenido": "4.6 Relations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e029c303-4b1c-48c5-b043-ef40a4294ee3",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77 5.1 Ordering Properties. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7495261f-32f2-4c77-8ef6-735fdf42c211",
+      "contenido": "5.2 Symmetries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78 5.3 Boundedness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "dfdae1eb-eb59-48fe-8aad-54bc0ead38fb",
+      "contenido": "5.4 Neighbourhoods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81 5.4.1 Neighbourhoods and Sets . . . . . . . . . . . . . . . . . . . . 82",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bcc82029-dba9-404c-9ba0-0fe08f27aa32",
+      "contenido": "5.5 Continuity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83 5.6 Other Properties . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "61b6723a-495e-48cc-b53e-b7c98802a26a",
+      "contenido": "5.7 Describing Sequences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 87",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2701caf9-9d56-4cb5-ad20-10b8a156d673",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93 6.1 Choosing Words. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "13c77219-f1b2-4eab-9317-b1febd354a0f",
+      "contenido": "6.2 Choosing Symbols . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96 6.3 Improving Formulae . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "afb768a2-784a-4ae2-bbd8-a81bd80d255a",
+      "contenido": "6.4 Writing Definitions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 104 6.5 Introducing a Concept. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 106",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "183e4fc4-c956-4fd7-8b54-58ad2d5fe3c6",
+      "contenido": "6.6 Writing a Short Description . . . . . . . . . . . . . . . . . . . . . . . . . 108",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7ed178c0-a93b-42bb-b623-37d7629f8292",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 113 7.1 Anatomy of a Proof . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 113",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "24960f6b-1a95-4150-a280-327f02757578",
+      "contenido": "7.2 Proof by Cases. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116 7.3 Implications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 117",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f868925b-ff9d-4f3f-8f44-cd7523b92076",
+      "contenido": "7.3.1 Direct Proof. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 118 7.3.2 Proof by Contrapositive. . . . . . . . . . . . . . . . . . . . . . 119",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "34062724-e2fc-4d7e-ad86-60ce5058e8bf",
+      "contenido": "7.4 Conjunctions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 7.4.1 Loops of Implications . . . . . . . . . . . . . . . . . . . . . . . 122",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c8739d47-dd8d-4869-9037-4c94435d2c51",
+      "contenido": "7.5 Proof by Contradiction . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123 7.6 Counterexamples and Conjectures . . . . . . . . . . . . . . . . . . . . 124",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c2536145-3945-45a1-a4fd-41b2f7760f40",
+      "contenido": "7.7 Wrong Arguments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 127 7.7.1 Examples Versus Proofs . . . . . . . . . . . . . . . . . . . . . 127",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b876a3e1-1845-41b4-adde-f00117bf2385",
+      "contenido": "7.7.2 Wrong Implications . . . . . . . . . . . . . . . . . . . . . . . . 128 7.7.3 Mishandling Functions . . . . . . . . . . . . . . . . . . . . . . 129",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "43918f64-4db9-4b3d-b4fd-6da22db3e2eb",
+      "contenido": "7.8 Writing a Good Proof . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b64f4d97-52c5-4020-92fa-c73b785c5db8",
+      "contenido": "6 Writing Well",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0d05b1d7-981d-49b7-a2a3-ec0dfab7fb73",
+      "contenido": "8 Induction",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6a7c55b6-e1ef-4637-ae5a-e17a93658929",
+      "contenido": "9 Existence and De\ufb01nitions",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b9385e7a-c644-420a-b571-28386bf6ca56",
+      "contenido": "10 Writing a Thesis",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b9319cba-264c-4232-b9d8-c39e2bbe75e3",
+      "contenido": "TEX",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aad04ac9-4031-4671-afbf-949f45c3dceb",
+      "contenido": "10.5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7b131b95-0e5d-4394-aa8d-e511a6dbee82",
+      "contenido": "and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2e4205ed-ea1c-40d7-952a-23c02790de4d",
+      "contenido": "Solutions to Exercises",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "173d0021-85ff-467e-a6d4-0fb736288ba5",
+      "contenido": "References",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d255fcff-9288-43fe-bd3e-9638561c8868",
+      "contenido": "Index",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6df1387b-0a44-4f9b-85fa-1d88c2e9931b",
+      "contenido": "Contents xiii",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "65a869bf-de6f-45f2-ac1f-cf9cdcdfa7f9",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 139 8.1 The Well-Ordering Principle . . . . . . . . . . . . . . . . . . . . . . . . 140",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ea7c1e41-17e7-466c-9a7f-d04fa97f5fff",
+      "contenido": "8.2 The Infinite Descent Method . . . . . . . . . . . . . . . . . . . . . . . . 141 8.3 Peano\u2019s Induction Principle . . . . . . . . . . . . . . . . . . . . . . . . . 143",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "11d127ec-1552-4477-87c8-e420b94965bf",
+      "contenido": "8.4 Strong Induction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145 8.5 Good Manners with Induction Proofs . . . . . . . . . . . . . . . . . . 147",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3f6210fb-c3a4-4e8a-84aa-bbef76b04d23",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 151 9.1 Proofs of Existence. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 151",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "36974ddd-42f9-4743-bad8-485c08809f5b",
+      "contenido": "9.2 Unique Existence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 155 9.3 Definitions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 157",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d55f43c9-d887-4d71-8020-b3f848046f45",
+      "contenido": "9.4 Recursive Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 158 9.5 Wrong Definitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 161",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3738ffc2-bdfc-49e9-b0eb-6d67b193f19a",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 165 10.1 Theses and Other Publications . . . . . . . . . . . . . . . . . . . . . . . 165",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "380003a4-cad3-4e01-b1e2-df1c6608ff73",
+      "contenido": "10.2 Title . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 168 10.3 Abstract. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 170",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7e2fd8f3-8e8f-4e49-af4a-0bd6e005c372",
+      "contenido": "10.4 Citations and Bibliography . . . . . . . . . . . . . . . . . . . . . . . . . 174 10.4.1 Avoiding Plagiarism . . . . . . . . . . . . . . . . . . . . . . . . 177",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bb944840-7144-4cc0-ac80-5ab93dfea9e7",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 197",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b8f6a001-529d-4269-bbcd-80944f835124",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 199",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2893fdf4-f43c-463f-a1a2-c7f5f679c7bc",
+      "contenido": "L A TEX",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9217c2e1-e128-4536-acb5-d4989645f646",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 177",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0669358c-2bbe-4a56-b9da-6793357072a0",
+      "contenido": ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 181",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "91471c1f-6641-4309-8f14-7ba17a0e5ad6",
+      "contenido": "How to Use this Book",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7da889cf-94ba-48c6-8b72-36797fb7acc0",
+      "contenido": "Students",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "437f297c-cac7-4efe-9bd5-60bfe1acfef7",
+      "contenido": "teacher. We explain succinctly the purpose of each chapter:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ab725ba7-5b51-42ca-b4bc-ec04b1fd17c1",
+      "contenido": "1. Getting into the spirit of the course. 2. Writing about sets and functions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0a3d7512-7065-46ca-955a-d0d33c048aad",
+      "contenido": "3. Writing about sequences and equations. 4. The logic underpinning complex sentences.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4ce4d883-2f29-4bdb-b3c2-9ca706531984",
+      "contenido": "5. Advanced writing on functions. 6. Improving various aspects of a mathematical text.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "42a2608a-7820-420b-a711-b960e6c4f15f",
+      "contenido": "7. Structuring a mathematical proof. 8. Using induction arguments.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ced57196-33cd-4ec8-9088-215293de8e77",
+      "contenido": "9. Writing de\ufb01nitions. 10. Writing a thesis.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4f1c7496-27a3-4924-8e1d-ccb0b6503e12",
+      "contenido": "Chapter 1 should be read by everyone. Chapters 2 and 3 are fundamental but introductory; an advanced student should be familiar with much of their content,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a35ee731-4fee-4cdc-a902-ee309ed99e81",
+      "contenido": "and will consult them only if necessary. Chapter 4 develops the basic logic needed,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f3fc132c-7ac4-4f0b-8c27-3d9f3d861a25",
+      "contenido": "This book is appropriate for self-study at undergraduate or master level. It will be of interest not only to dissertation-writing students looking for speci\ufb01c advice, but",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1b9de60e-0394-4df9-b385-dce12238f63d",
+      "contenido": "also to students at earlier stages of a mathematics programme, and for various purposes.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a7f2b73a-004f-485e-9b4f-dcac0d2c91fe",
+      "contenido": "For example, a student may wish to raise the quality of their written output in coursework and exams, or may need to expand their vocabulary to re\ufb02ect a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3112a40d-b9c2-4426-94cf-d654acdb4091",
+      "contenido": "growing mathematical maturity. Others may be interested in writing about a particular construct, or may seek to improve the form and style of their proofs.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "eab20008-1059-4bf1-bcc1-e0a06ab25876",
+      "contenido": "One year of university mathematics should provide suf\ufb01cient background for reading this book. Parts of it may be read earlier, even at the start of university if",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f74c6776-37e4-4ef3-9aa7-a14942bed407",
+      "contenido": "one has a good sense of conceptual accuracy. There is a large supply of exercises; solutions and hints are provided to facilitate self-assessment in absence of a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7bb6c072-c996-46db-8b85-646d8713232f",
+      "contenido": "xv",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0dab80e8-10d7-4776-9d4d-e359ea6511fc",
+      "contenido": "xvi How to Use this Book",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06bedf4d-bc4e-4036-84f1-b4efcd814687",
+      "contenido": "say, for a \ufb01rst analysis course. This material is a pre-requisite for Chaps. 5 , 7 , 9 , while Chaps. 6 , 10 , and most of Chap. 8 may be read without it. Chapter 10",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "934f67b6-a44a-47b6-a2f6-cbc7c5e9103f",
+      "contenido": "requires the mathematical maturity of a \ufb01nal year student. With this in mind, we suggest some possible paths through this book:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d2e2f429-9955-43ef-bfa0-8e85738e45d9",
+      "contenido": "To improve the use of basic terms: Chaps. 2 \u2013 5 .",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "48d51b8f-434e-4250-82e3-dfef14d290f4",
+      "contenido": "To improve conceptual accuracy: Chaps. 4 , 6 , 7 , 9 .",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d570d4cf-34b1-42d9-96ce-178deb996ba9",
+      "contenido": "To write better proofs: Chaps. 7 , 8 .",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "33a8ea57-19c9-4567-826b-bad3fe6adff0",
+      "contenido": "To write a dissertation: Chaps. 6 , 10 .",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d16fa645-7411-424c-87de-062bdf8ad9b2",
+      "contenido": "This book has been used for several years as the textbook for a second-year course in mathematical writing at the University of London, in classes of 50\u201370 students.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e6f7a059-cf88-4891-976a-c89a73543738",
+      "contenido": "The syllabus covers Chaps. 1 \u2013 9 , excluding the last section of Chaps. 2 \u2013 4 , which contain specialised material not needed elsewhere. Chapter 1 is assigned as a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ce157d54-f2df-4d62-9576-e1f808391daf",
+      "contenido": "self-study exercise at the beginning of the course; Chap. 5 is given as a reading assignment during a pause in the teaching mid-way through the course.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4749229e-35e5-4f58-b303-96adec049c0f",
+      "contenido": "The students are given weekly exercises taken from the book. In the early part of the course, the writing is limited to short phrases and sentences. Once the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8a1f3d07-f22a-49f9-8a48-5435db729041",
+      "contenido": "students have consolidated their mathematical vocabulary, more complex assign- ments are introduced. In a typical one, the students are given a two-page excerpt",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "277ff2c5-a92f-44ec-96d9-ce43ce6ca4b7",
+      "contenido": "from a standard \ufb01rst-year textbook introducing a mainstream topic (the logarithm, Euclid\u2019s algorithm, complex numbers, etc.). They are asked to write a short",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9fbce828-a878-4cf6-b833-22ca74f8ec99",
+      "contenido": "document comprising a title, a few concise key points, and a short summary (150\u2013200 words)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9b6b465e-fdf0-4132-b1cd-26498c14fc83",
+      "contenido": "without using any mathematical symbol",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "00c0c4a9-0ace-4b14-bb44-a535db55582a",
+      "contenido": ". This form of writing is demanding but short, hence manageable in large classes. The requirement that no",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2de2e249-bfb3-4fd0-9f02-30403a1ad288",
+      "contenido": "symbols be used has several educational virtues, and the added bonus of making plagiarism more dif\ufb01cult. An example of this assignment is given at the beginning",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "12f3bd25-e02f-4331-b6cd-fbbb7a725567",
+      "contenido": "of Sect. 6.6 , in the form of a summary of a section of the present book. Related exercises are found at the end of Chap. 6 .",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4e68178a-d51b-4ec1-b8da-a2fa4a6eb71a",
+      "contenido": "The students submit their weekly work electronically, as a single pdf \ufb01le. They are given complete freedom in the choice of the electronic medium used to",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f1a4cacf-6859-4c85-8f9c-727f7bc05d3f",
+      "contenido": "generate their \ufb01les (anything from scanning hand-written pages to",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6453e0c2-6b51-492c-9933-bebdd7f75f00",
+      "contenido": "). This policy works well, and it also encourages independence and sense of responsi-",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "48da2b1a-807d-4574-861f-e1a9d283544e",
+      "contenido": "bility. Each assignment requires only a limited use of symbols, to minimise the lure and distraction of electronic typesetting. Invariably, the best students are keen",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "757de8d3-4ff0-47f3-861b-2e42ed345218",
+      "contenido": ", and they do so without any supervision. The coursework is marked by postgraduate students, who receive specialised",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "918207aa-a14f-4b51-94c4-42ecca87b395",
+      "contenido": "training and are provided with detailed marking schemes. Lecturer and markers meet weekly to \ufb01ne-tune the marking and resolve unusual cases. Postgraduate",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "21b0fc16-97fc-4529-89d9-037bee9cb2de",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "dd9fe9f1-394a-44ed-8462-a0c7bca7310f",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "99cc4bc7-f14a-4e0e-9648-56bb61da9e7d",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0f2b77f7-d2db-4acb-ac15-fdbd71106103",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4f322e77-c2f8-419e-b2d7-f5d7bde97dcc",
+      "contenido": "Teachers",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4e44634c-bdb3-4536-b3b5-9793bb9049ab",
+      "contenido": "to learn",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "42ed49d6-a695-4eb1-87c3-80a02348c06c",
+      "contenido": "L A TEX",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "59432007-1b9f-4d09-958b-ce8c8aeb5013",
+      "contenido": "L A TEX",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2353d019-70d9-48e1-a10d-6932ee8e32a6",
+      "contenido": "How to Use this Book xvii",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7a7148b8-8344-448a-9abe-ef64939e8474",
+      "contenido": "students tend to \ufb01nd this experience more instructive than marking conventional exercises.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "43570dd2-8f3f-47b8-adee-78faf271cd07",
+      "contenido": "The coursework constitutes 20\u201330 % of the assessment for the course, the rest being the \ufb01nal exam. In a small class, it may be desirable to adjust the assessment",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "413ea632-3549-462e-b8b0-bc750652a5d1",
+      "contenido": "balance, increasing the weight of coursework and adding a mini-project or a short presentation at the end of the course.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "313bd78b-a1db-452c-b42d-79a51eadb38b",
+      "contenido": "Finally, this book could be used as supplementary material for various courses and programmes: a \ufb01rst-year introduction to mathematical structures, a course in",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "73695f86-f9ea-4bdf-b1e6-c8e5fb8c9b90",
+      "contenido": "analysis or in logic, a workshop on writing dissertations.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fcd98a18-361b-48f8-9067-fc466b83566d",
+      "contenido": "Chapter 1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "51bccc86-a8c0-4a83-95a5-e16138241d0f",
+      "contenido": "Some Writing Tips",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "229d27df-3a76-44c6-80e9-64bf21162392",
+      "contenido": "answers with those given at the end of the book.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "afbee316-fb48-45b1-add2-4603f37d86ad",
+      "contenido": "Exercise 1.1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c3e570fe-b2a1-4545-bc2d-05217c01efdf",
+      "contenido": "Improve the writing.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1bc6fbb1-a572-4c70-a975-8f4f79762d5a",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a7eead9f-3304-4af3-9791-de8f9a8918ea",
+      "contenido": "1.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4daa8df5-bf97-4921-9a7f-5f2395f4a4f3",
+      "contenido": "is positive. 2. Two is the only even prime.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "617a213e-df4f-4b44-bf8a-781bdf655965",
+      "contenido": ">",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6e5856ec-d784-48f5-82c8-3a36e4e18a69",
+      "contenido": "(",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "67fe0f54-c899-4702-a85a-59b72f0fac5e",
+      "contenido": ")",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "15b15161-a427-4942-beb0-c9ffae078345",
+      "contenido": "\u0338 =",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "10ed349b-e570-4b38-bf70-4f2279ee6bf1",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3df6a5d2-c07a-4f84-9f07-a76a5920ade0",
+      "contenido": "g",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e9f03900-5244-43d8-b280-008cae240b99",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cdce4526-dfa7-48fe-bdc1-322cb2cc052e",
+      "contenido": "3. If",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1ecbb6bb-4ed3-4242-bb5f-e014f0c04409",
+      "contenido": "0",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3b68a9cc-b3be-425c-81f0-afc59b4f775d",
+      "contenido": "0. 4. We minus the equation.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7db61e48-57f6-4928-a3c4-1a6fa8510c95",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "edb664fe-983f-4756-adc2-054f35786790",
+      "contenido": "+",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c1b28623-babf-4c02-bc5d-74c89bd021e8",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2bf43a22-c5df-45bf-b724-7af8976c036d",
+      "contenido": "1 has no real solution. 6. When you times it by negative",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "edb998f5-2e79-4fb9-ae40-ba702b9e0259",
+      "contenido": "5.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c81f6211-1d62-4634-83bc-96d57c571146",
+      "contenido": "\u03c0",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "31c66376-f29c-4b6b-a772-30953b90c06f",
+      "contenido": "(",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6b1c87c0-0360-4c9e-9be9-d1044c0cf521",
+      "contenido": ")",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b5d1f189-2632-4c6b-bc4c-7dfcf19bdd51",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c2af8c15-3bb9-4051-bc5c-8c16e85f987a",
+      "contenido": "\u21d2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8049fe00-a868-463a-bc82-65f1d823103e",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "59786927-5a0f-4a55-b32d-20c672ffea20",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a5501adf-3841-4083-8702-a1d4c7099924",
+      "contenido": "8. sin",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3d864a96-46e9-42df-80ea-a29fff12a468",
+      "contenido": "0",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8a8d0214-0380-422b-a815-0ccb10bfefcb",
+      "contenido": "10. This in\ufb01nete sequence has less negative terms.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8535621a-5018-42eb-ae9e-be85d0dc21f5",
+      "contenido": "1.1 Grammar",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f21c0f3c-a38f-45fd-bbcb-b95b5a76a431",
+      "contenido": "instance, [37, pp. 89\u201395].",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0f24a0f7-6409-46b7-b46b-e35c3e83324f",
+      "contenido": "1 Abbreviation for the Latin",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "655c2250-acf4-4523-ab87-41b5577fcdf1",
+      "contenido": "\u00a9 Springer-Verlag London 2014 F. Vivaldi,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2d866539-9614-4ce7-ac89-2ddad7263bd6",
+      "contenido": "Mathematical Writing",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bdcb2e1f-95fd-44ac-bd0c-122590e25453",
+      "contenido": "The following short mathematical sentences are poorly formed in one way or another. Can you identify all the errors and would you know how to \ufb01x them? Compare your",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c14c27e7-7f37-4453-ace9-669f910ff148",
+      "contenido": "\u2a7d",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1cf64450-f631-4988-b79a-6192f0285b21",
+      "contenido": "\u2a7e",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "16f23486-85db-454c-903c-6fb2ef3238d1",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b6ffeb8a-8693-4d14-b40a-7e63b1aa0f13",
+      "contenido": ",",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "441c986b-a551-4804-8300-266a97696af4",
+      "contenido": "becomes",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d56ec9ea-68d4-4f6c-90da-dfec46e006ea",
+      "contenido": ". 7. The set of solutions are all odd.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "67bdd695-acc7-48d4-a159-4bb0abb8e0cd",
+      "contenido": "is integer. 9. An invertible matrics is when the determinant is non-zero.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0b942d97-4bb3-453a-93aa-0a545bbf14aa",
+      "contenido": "In this chapter you will learn how to recognise and correct common mistakes, the \ufb01rst step towards writing mathematics well. By the time you reach the exercises at",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2bbeeef5-a723-4683-9b9d-8b0a50004904",
+      "contenido": "the end of the chapter you should already feel a sense of progress. You should return to this chapter repeatedly, to monitor the assimilation of good practice.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ebc0e5b-59bc-4090-82c5-9cb4517ea646",
+      "contenido": "You are advised to use an English dictionary, e.g., 1 [34], and to recall the basic terminology of grammar (adjective, adverb, noun, pronoun, verb, etc. 2 )\u2014see, for",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "290aadeb-1bf4-44c8-834e-db75962a7be8",
+      "contenido": "exempli gratia",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "abeaccd8-0b19-4d06-96ba-df9a4b6fea8f",
+      "contenido": ", meaning \u2018for the sake of example\u2019. 2 Abbreviation for the Latin",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2aa1d912-1c18-406f-afd7-707b37527f3a",
+      "contenido": "et cetera",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a29b0146-df3d-4b68-bb8e-ef857acd7daf",
+      "contenido": ", meaning \u2018and the rest\u2019.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b5e03f1b-b233-4071-b34e-5db56ea3e0e1",
+      "contenido": ", Springer Undergraduate Mathematics Series, DOI 10.1007/978-1-4471-6527-9_1 1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "681cf3f7-9683-4c0d-952d-6679ea2113c0",
+      "contenido": "2 1 Some Writing Tips",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fce584cc-b3f7-4182-9163-802dd32a6a4f",
+      "contenido": "Write in complete sentences. Every sentence should begin with a capital letter, end with a full stop, and contain a subject and a verb. The expression \u2018A cubic",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8c3c13af-4a8a-4aa8-8423-c313cc481875",
+      "contenido": "polynomial\u2019 is not asentencebecauseit doesn\u2019t haveaverb. It wouldbeappropriate as a caption, or a title, but you can\u2019t simply insert it in the middle of a paragraph.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5f460daf-1483-4811-87a2-77e3fb72e871",
+      "contenido": "Make sure that the nouns match the verbs grammatically.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bbbc2a47-4b1a-4f9e-84f8-f33df702ecd1",
+      "contenido": "The set of primes are in\ufb01nite.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4b603ec5-8ba1-42c5-bf1e-496a44ab2560",
+      "contenido": "The set of primes is in\ufb01nite.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "28f137cd-ef3a-434c-8ba8-e34b197d1df4",
+      "contenido": "(The verb refers to \u2018the set\u2019, which is singular.)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a112bd04-faa4-4880-8bf9-ed841b06a0cd",
+      "contenido": "Make a pronoun agree with its antecedent.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fb7c9e3d-adb0-4de8-9058-14181e51d093",
+      "contenido": "Each function is greater than their minimum.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f81f11b6-cc44-4ac8-8d12-6e402378f073",
+      "contenido": "Each function is greater than its minimum.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7591cd5a-d66c-4d22-a77e-b08215c91bef",
+      "contenido": "(The pronoun \u2018its\u2019 refers to \u2018function\u2019, which is singular.)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e6c88d9a-bc8f-4a7a-bb0c-b4d670b2af68",
+      "contenido": "If possible, do not split in\ufb01nitives.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "230577b1-8b04-4ad6-983d-0530c6a263cc",
+      "contenido": "We have to thoroughly examine this proof.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b86ddcff-57d8-4c00-aae4-685d1cd15fc7",
+      "contenido": "We have to examine this proof thoroughly.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a6c87a28-3ad6-4c9e-a17f-a849481a5d6a",
+      "contenido": "I was taught to always simplify fractions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e9b36ce0-e948-44d3-a1a3-da3d0af5a31c",
+      "contenido": "I was taught always to simplify fractions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7a94d226-c39b-4eeb-8397-c4deef1a4768",
+      "contenido": "(The in\ufb01nitives are \u2018to examine\u2019 and \u2018to simplify\u2019.) In some cases a split in\ufb01nitive may be acceptable, even desirable.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "54f26506-22bf-4656-a9c7-81d55e4288c6",
+      "contenido": "This is a sure way to more than double the length of the manuscript.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1d3fd0bd-e30f-447d-b641-ae194781c438",
+      "contenido": "Check the spelling. No point in crafting a document carefully, if you then spoil it with spelling mistakes. If you use a word processor, take advantage of a spell",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "88cd3b85-c9d6-42ca-be73-784ebacbce43",
+      "contenido": "checker. These are some frequent spelling mistakes:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "837b5fdc-e434-48e3-9873-d4a865bf4b1d",
+      "contenido": "auxillary, catagory, consistant, correspondance, impliment, indispensible, ocurrence, preceeding, refering, seperate.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "717d6ab2-9642-4623-af57-81967d3b007a",
+      "contenido": "These are misspelled mathematical words that I have found in mathematics exam- ination papers:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0e397ef5-7ad1-48b8-86fc-861a0061327c",
+      "contenido": "arithmatic, arithmatric, derivitive, divisable, falls (false), in\ufb01naty, matrics, orthoganal, orthoginal, othogonal, reciprical, scalor, theorom.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d7b75d34-8a76-4c3f-ab64-f093cf99dddb",
+      "contenido": "Be careful about distinctions in meaning. Do not confuse",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0d9d4ca3-82a8-400e-8171-57b61cc6ae79",
+      "contenido": "it\u2019s",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "de7b9f5c-f0ef-4d19-86e0-7aa1ed1780a7",
+      "contenido": "it is",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4ffaf1fb-3e59-496b-915d-f48ea834ad60",
+      "contenido": "(abbreviation for",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "40b1d562-4b2c-44c4-9491-675d1bd1d96d",
+      "contenido": ") with",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "27569459-8f19-4d0a-8f9b-7b315add41af",
+      "contenido": "Its an equilateral triangle: it\u2019s sides all have the same length.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "652b5e05-d1a1-4214-9b1c-700abf14d48f",
+      "contenido": "principle",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "728b910d-e3e8-4622-af7f-0a3c050f57a5",
+      "contenido": "(main, \ufb01rst in rank of importance).",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "87496e05-7966-4ad9-9a74-5eb22a926d2d",
+      "contenido": "the principal of induction",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1afe78ba-27df-4daf-86e5-ef2fe23590f0",
+      "contenido": "the principle branch of the logarithm",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2868a48c-3f62-4d3c-bedf-a15c08a68dd6",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7e507921-562f-47dd-89a3-7b332f4bd74f",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "56413169-5d07-482c-88e0-3e458c61e61b",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d882179e-e6d2-4893-9041-53efa0d824be",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c9931946-f3f1-425a-89c6-db1aaec2d38f",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d69e5d47-c354-4c29-bd0a-1d724d670a2b",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "66d7d6a4-00a2-4542-bb3f-61de4cb972d9",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4336cbc2-8ecd-40dc-8a30-81a48cab3429",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ac2476ce-346c-4c46-a5d1-2409be36b8bd",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e074d0fc-0064-4606-a34d-2f60785f33e2",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c5e5405a-1823-4e9c-8b9e-a50322fc03f1",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bdce65ec-8fdb-49d0-a518-1198d5f6928d",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "31cca064-3bd4-4c3f-93e2-1a12ac8fb580",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2edf1470-8a26-4555-a6cf-72668a0e3b5e",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "619e8e9b-7a79-4bfb-9f13-ab4dc09d9ad5",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2a4d75ec-8b72-4df3-9847-3fc23d72ba48",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aea84276-f07d-4c75-982a-d766e24ff448",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "34420d39-9a3f-4769-b5e8-97e5a05a02bd",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "508f84bc-9e09-440f-8afe-fac76d79e4b3",
+      "contenido": "Donotconfusethenoun",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4519b1f2-da08-46eb-92cd-56f1f0216976",
+      "contenido": "principal",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1aceb33b-e90f-420a-b4ae-96c2a042b222",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da31a769-3484-4a62-adf6-6db07934167b",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "be11bfa7-bcc1-4842-8246-ec37afaca6e0",
+      "contenido": "its",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a3cc101b-7f93-405e-8b86-b49b03035185",
+      "contenido": "(possessive pronoun).",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aec2a0b5-40ef-463a-8fd7-dc69f528df20",
+      "contenido": "(generallaw,primaryelement)withtheadjective",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e2af5d68-4c6c-4e2d-b17d-0f578e1d2afe",
+      "contenido": "1.1 Grammar 3",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cbf91128-daf1-4c2d-a077-add18b60fa4a",
+      "contenido": "(of smaller amount, quantity) when you should be using",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4d79688c-52fd-4af3-bec9-81a4490c5528",
+      "contenido": "(not as many as).",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fffe55e5-53c6-4074-abfe-e05f2ea9b790",
+      "contenido": "There are less primes between 100 and 200 than between 1 and 100.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ef3a7176-a7cd-4a61-9441-a99cc1fee430",
+      "contenido": "where",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d60f9d84-a7bf-407f-89ba-6f470dab8e60",
+      "contenido": "inappropriately. As a relative adverb,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5477e1ba-0136-4bd1-98f2-424358294876",
+      "contenido": "of which",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7abfcf0d-7342-423b-8622-a548fd5ea895",
+      "contenido": "; it does not stand for",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "034b965a-bb35-4209-b453-3d2247115911",
+      "contenido": ".",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d4301b7e-881c-4bf3-9a8e-833ab85b84d7",
+      "contenido": "We consider the logarithmic function, where the derivative is positive.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3c437adf-619b-4dac-9637-51d6d36a78cf",
+      "contenido": "We consider the logarithmic function, whose derivative is positive.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3c0da5b4-1a48-4a2f-868b-112f90024e96",
+      "contenido": "is subject to similar misuse.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3d2b2a04-b58d-44bd-b567-a139e64d6db1",
+      "contenido": "A prime number is when there are no proper divisors.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "463c6b8a-fcfe-473a-b5f3-ecd2f921838e",
+      "contenido": "A prime number is an integer with no proper divisors.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6df41343-6383-4cb2-8f52-a885920ce80f",
+      "contenido": "that",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2c413143-789c-48a8-83cf-339bdf8c7b36",
+      "contenido": "when you should be using",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "71fdccbc-f655-40b1-be08-49c133ce5703",
+      "contenido": ". Even when both words are correct, they have different meanings. The pronoun",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "46ab073a-79ba-44d9-8cc1-9b4c2901ed5d",
+      "contenido": "that",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "84cbf952-f352-4992-b8f5-185eb9a07d2c",
+      "contenido": "is de\ufb01ning, it is used to identify an object uniquely, while",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "466bba14-fbe2-4a6f-aef4-59d74d858c97",
+      "contenido": "which",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b84fcb65-9bb5-4876-abfd-463eb62454d3",
+      "contenido": "is non-de\ufb01ning, it adds information to an object already identi\ufb01ed.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "565ed225-5614-4eb6-b4c4-e880644e2a49",
+      "contenido": "The argument that was used above is based on induction. [",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2d7deaa7-4d45-45d9-9123-2bbaeb700c31",
+      "contenido": "] The following argument, which will be used in subsequent proofs, is based",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06536db3-825f-483a-8ba7-566d862ac559",
+      "contenido": "Adds a fact about the argument in question.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "30924b6e-2255-41c2-aaa2-dabbc21cbf51",
+      "contenido": "]",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c59e27f7-40b2-46cf-b9c3-e36a80f671ec",
+      "contenido": "which",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4eb1b496-39ed-4576-b6d9-c7cad3fa10ba",
+      "contenido": "only when it is preceded by a comma or by a preposition, or when it is used interrogatively.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e79a5788-4f9f-4654-9b43-2181a974f559",
+      "contenido": "In presence of parentheses, the punctuation follows strict rules. The punctuation outside parentheses should be correct if the statement in parentheses is removed;",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06a60443-e169-4a77-8a77-4d870cde5114",
+      "contenido": "the punctuation within parentheses should be correct independently of the outside.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9713a399-02e5-4af0-a627-770deb217330",
+      "contenido": "This is bad. (Super\ufb01cially, it looks good).",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "25bcea55-4ee3-4de3-9050-a59e3e910feb",
+      "contenido": "bad",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a26ca556-ff96-4bed-a7ff-bd48908111c4",
+      "contenido": "This is good. (Super\ufb01cially, it looks like the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5699081d-f798-4573-946a-11a3b28b78eb",
+      "contenido": "one.)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c95bc1fa-2c54-43fa-a71b-b1d7172f65d6",
+      "contenido": "This is bad, (on two accounts.)",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ee0b528d-6306-4e3d-9bc8-e36d7ccc7443",
+      "contenido": "This is good (as you would expect).",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7415d899-b8b3-4c05-b76a-3792153c223b",
+      "contenido": "Effectively combining numbers, symbols, and words is a main theme in this course. We begin to look at some basic conventions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7a3526d7-5e5a-4075-a23e-5fb9f5c19e3b",
+      "contenido": "A sentence containing numbers and symbols must still be a correct English sen- tence, including punctuation.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "89c6c8e0-450f-4c43-844d-1b10b54386f2",
+      "contenido": "\u0338 =",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2cecf020-d674-494b-8c40-09013b883d6c",
+      "contenido": "0",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "97b4a96f-254d-4986-bbca-6398120b681c",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d94a8ba7-7863-48fe-bba4-87f01166c28a",
+      "contenido": "\u0338 =",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a62ea095-dacd-488f-806a-e52838d0d2ba",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "819a571f-9236-4749-af25-afb5053874ce",
+      "contenido": "b",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "901fcdac-6a15-4f70-98c6-d81f2870ffe1",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "667aad66-92f9-4659-a974-3ce9618619bb",
+      "contenido": "and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "54112417-3d46-45e7-b3f0-5e12aadcd53a",
+      "contenido": "0.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b55732ed-fc2a-4106-aa6c-fb361f37b071",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d2ccc54f-bf5c-4e76-9f9d-92928b4b961e",
+      "contenido": "\u0338 =",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "56ea9fec-b701-481c-8ead-1c6f130f70cf",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d8cbad12-49a2-4b7d-b593-ffc84e31ca20",
+      "contenido": "b",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "83efe5a6-d2bd-41aa-bc99-086ae57c3ef8",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cea51b30-618f-4337-8290-42b75b8913f6",
+      "contenido": "We \ufb01nd that",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4562e878-b6e2-438f-9b66-f9c3a36a51b7",
+      "contenido": "and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2aff5fa9-8411-43e5-bdd5-4eef78820e0f",
+      "contenido": "0.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a98dfd61-ec75-4346-b45c-afe70369b55e",
+      "contenido": "less",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "91b118dd-1ca4-4a89-8594-c73b268e8139",
+      "contenido": "Do not use",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6e3ce600-ac95-4dc6-965e-6af2b070b0c3",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e2c3cfd3-06a5-44c2-84e1-1723d151b461",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a2766f94-a877-4ac3-adbf-bc28616ca793",
+      "contenido": "where",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3e4aedad-80df-41da-9fae-fad75e734aa5",
+      "contenido": "Do not use",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "30ecb13c-1ffc-4ba0-8a04-1185f0d33f74",
+      "contenido": "to which",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0db70784-7195-42e6-b741-a55247d6d148",
+      "contenido": "or",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "88720481-93da-41ab-a020-4936099dfbe9",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "42e836ae-8903-4719-ba08-64d43b0641d6",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "450a5bb6-cd59-4e06-bbe4-31b9e34a33bd",
+      "contenido": "when",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b28d8ba7-aa16-4492-b84f-d5af880a5b15",
+      "contenido": "The adverb",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e867e8c0-8450-4557-8889-f57a3a3c0e9e",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "030b6b5b-1b82-48e3-806a-1028477531b4",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a3bee1b3-ce4b-41b4-9c9a-c2da3b158a46",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "654e5854-007b-4b22-b0e6-80e150884f95",
+      "contenido": "which",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "40a09d8a-e4ce-4272-a238-b35c26623110",
+      "contenido": "Do not use",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "70cee9e4-16c2-4b4c-8b24-8303387dd5e7",
+      "contenido": "Speci\ufb01es which argument.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b6c1e592-d8bf-4c9b-9c0e-6ed1f3311bf4",
+      "contenido": "on induction. [",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ada1439-abbb-450c-94f8-e45a44e67323",
+      "contenido": "A simple rule is to use",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fac147af-e15a-47bd-9c59-e6117562828b",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cd0b9f03-d26f-460a-8ca8-8209abfefb44",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f0679bed-16a5-4140-9a84-eedfb46a2a14",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3f2d3b97-610a-4d56-b5eb-7250c892f359",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "160ca7da-0d9d-476d-aefe-5bb25ccfac7a",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b6cb6d10-7d6f-44f7-bc31-f0dcfd9148c3",
+      "contenido": "1.2 Numbers and Symbols",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "50745cd3-5ef5-4103-8010-6ab1ba937f41",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aa980f21-c009-4a2e-a4d4-de94201458e9",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "dd5e7434-ad93-423c-a740-2e68557fe96e",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cee002fb-41a0-44e4-a247-cc63b422ac28",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7524ddda-c7d2-4c68-8c44-b07e7fb3a7f8",
+      "contenido": "b a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9bfca478-7057-4706-a8c8-dfe228b78ed8",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "16bb2493-e28b-4f16-ae17-b93766ed22ea",
+      "contenido": "We have",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5d2e0cd8-8651-4e1f-994a-3bc5a31d6519",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fc45aa86-410c-4d3f-9355-b9cf63d267d1",
+      "contenido": "fewer",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "72591ec0-1359-4726-a971-293c1776596e",
+      "contenido": "in which",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f775c5d4-b9db-4ea1-9898-3fabe4ed3265",
+      "contenido": "stands for",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "15b6c81e-0ee4-474c-958e-74526c28876e",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9ea62443-c615-44d2-837e-6a2bab2e54dc",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ec4569ac-34f7-4c58-a7f4-26a0ac3aeb40",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "045c84d3-92a0-44bb-8335-39d814d6d1e5",
+      "contenido": "b",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "59bdf768-1fba-4cb4-b30d-96c99de1cd2d",
+      "contenido": "Let",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "78464da9-d083-4117-9460-ea5ae7016073",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "15519208-d6e3-4180-97cf-39a85882b747",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "84d98a70-8c8f-4ea7-bf1b-224e48e355c8",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5fbee40e-a1a6-44cb-9ee1-be84a90d27c8",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1f4c0a56-16d4-4dba-85aa-b265999cf5de",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "40b51506-21e2-4438-b83d-5827a31bf75e",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bd11bcd0-c794-4db7-bb1c-865b53d7267e",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "600ef78c-b4d6-4994-8553-49ee439cc3c5",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0a2a842a-e273-4432-afe1-9ce0417ce8cc",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "80841a07-0cb4-434e-a679-97e4db5fbd29",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "57bf8556-8ace-43c0-ad4d-fa4fe680e8b7",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ceaa9bc9-4d9c-405a-af99-8145acd0b905",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6b778b98-5c53-4f66-85b3-391286208be1",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4235bc96-651e-4f0f-ab41-cb99b2023c60",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ff1eefa6-0db7-4812-84ee-9648bf253d41",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7d7e8e09-77cf-472b-973f-a21c871d9f6b",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "120e3908-7b57-440b-b87b-b9dfdf5ff073",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b18c3cbd-ec6a-4a34-b4b4-592c511af0b1",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "43fa713f-b180-457b-898d-54ac92d7ef09",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "dafb6940-d242-4f99-912b-a4150cfaf76b",
+      "contenido": "mathematics.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ca88801-174c-4e0e-bd86-7a8fdd829360",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "37983853-c9e8-43de-8cdd-be368d7d05b9",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cf691ad2-1c49-40dc-871e-625640040b3c",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b6932cbc-5960-4710-9125-3d1e2a0ce6df",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e16d4fca-4eb9-49d0-9e1d-c01c11c08be5",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1440bf2e-a286-4fab-b3c0-0a2b615dc39e",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1cb07faf-f013-4dab-9418-133ead862c1f",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e0917e3e-f471-4992-b4b8-fe9d4313fcc7",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "05d86376-eb02-46e3-8551-bb2b5b15c942",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8d345072-2729-4a64-88d4-7c8054215a49",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6c6288ee-c998-4179-9e23-e50118f6da6b",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bd18a581-6c17-414f-b5d0-6cb13bd53bce",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4edc94d2-6ec3-4ce6-831a-9dc977e44cf1",
+      "contenido": "4 1 Some Writing Tips",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06556885-61c2-49e7-a130-4e392c23c9dd",
+      "contenido": "\u0338 =",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c3438c3c-1d25-4364-99c4-6a6f1a8b5d2c",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "97c26403-b5ac-4683-9ec0-fa00ab6a3a5b",
+      "contenido": ", with",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da3297e9-f415-4cda-8d39-2c0ab74ae621",
+      "contenido": "0.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e9d0fcbb-756f-4f10-9cf4-55636058c643",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6c615138-b9f8-4ae5-8ab2-a178388c7019",
+      "contenido": "7 2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ddd4a6a9-93da-457e-9d7d-4a18423da3b6",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "55bbc73e-07f2-4e01-b6a8-54a5362de143",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bc15ec65-cf9f-4907-9d98-67a348a2ef56",
+      "contenido": "= \u00b1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0fcabb32-ba6e-4127-95e3-e03d49316aeb",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c0f3f23e-4948-474c-85ce-7f6dd709dec0",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c383c43b-4086-4fa3-8f7b-aea4f91ff2d9",
+      "contenido": "0.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6de74b6c-bab5-41df-8e1d-0b1608481426",
+      "contenido": "7.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "39b7d4e7-c967-4de3-b6d0-f70df6bde84a",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aaf19774-a1b9-42e6-953f-53bbfee437bd",
+      "contenido": "7 2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e8cbb6f9-5bf7-497f-bc20-9b692e7a1671",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cd7b633e-aa83-4acf-8c3b-7613a3ec2639",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5241bc7e-cf4f-42fe-8817-f43a1c55fa0e",
+      "contenido": "= \u00b1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "657b65d4-260a-49dc-8b72-da577750864d",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f3aba840-eab9-47ee-85d6-ec0677651cdc",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "16f11a32-6304-4f7a-a7be-1076e8105963",
+      "contenido": "0; then",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d3048a54-eaa1-4fc4-acea-229313fe8a34",
+      "contenido": "7.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b47db27b-dac6-45bb-b778-f567c77dedef",
+      "contenido": "Let",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "56dd05b6-196d-4c8c-bd6e-9fc3fea4ee92",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4087c3d1-69f6-4a2b-8fef-19ec732b6f5e",
+      "contenido": "7 2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "27d90c23-47cc-4d39-80c3-7935ded82d31",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0eba0e98-a536-4969-8047-b6f6ff8dad3b",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4124079d-8b7e-4b7e-8416-63f0e1842058",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e365ef99-44aa-46b6-bc4f-493214e03473",
+      "contenido": "The equation",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c1d1a232-27ab-46af-8882-075d5f8a307e",
+      "contenido": "Omit unnecessary symbols.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "24050f38-59b8-4789-888a-e1fa99d85658",
+      "contenido": "Every differentiable real function",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "690f904f-6204-4f29-8b22-0a0fb6292357",
+      "contenido": "Every differentiable real function is continuous.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "09147260-1b49-43ba-8e64-85ce6243e994",
+      "contenido": "If you use small numbers for counting, write them out in full; if you refer to speci\ufb01c numbers, use numerals.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cf97ed6c-4f84-4381-8f58-e163f87f23bc",
+      "contenido": "The equation has 4 solutions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bfb93fa6-7bff-431f-9384-0ab8c3db423d",
+      "contenido": "The equation has four solutions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ebe475b1-e232-49c2-99ef-d30322617440",
+      "contenido": "The equation has 127 solutions.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8b8f26b5-5539-4ccd-8d2c-73f6c6cdc59a",
+      "contenido": "Both three and \ufb01ve are prime numbers.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "730e7d2c-2182-49fd-884a-76afb2b05d1f",
+      "contenido": "Both 3 and 5 are prime numbers.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7837c737-6a82-4252-b20a-8071f919b1bf",
+      "contenido": "If at all possible, do not begin a sentence with a numeral or a symbol.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "93be41fb-65c8-4ede-97f0-eb060699b77e",
+      "contenido": "\u03c1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "864f9d01-98b7-4bd4-bc6a-db7047b41bc3",
+      "contenido": "is a rational number with odd denominator.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "25920270-343c-489e-b226-7bb65d637ca1",
+      "contenido": "\u03c1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "feb8bdbe-4014-49f0-932e-6962e37485e7",
+      "contenido": "The rational number",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "875545b5-c8ab-46e1-8ccb-3812a3ebc1d2",
+      "contenido": "has odd denominator.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "231d44b8-f889-4b9c-a0e9-38122d6aa91a",
+      "contenido": "+",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d11e1d83-0b50-44ac-820c-f09c11521958",
+      "contenido": "\u0338 =",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "26f30792-5f79-4a1d-a8c7-cadcee641d6d",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d0f9937f-1ec6-468c-a0e4-517aac5295ba",
+      "contenido": "Do not combine operators (",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b50c7e37-1ad4-4705-90f0-11b62b334c2c",
+      "contenido": ",",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1054b662-3700-41aa-91ad-6b02ea59db84",
+      "contenido": ",",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bdaec65e-edd3-4ced-a05e-39c4fcae666a",
+      "contenido": ", etc.) with words.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1d52d774-c09a-4030-9175-d2368b24cbc5",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "80564214-c6ef-4e38-99b5-34bf4b31d37e",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9be63ece-9cd7-4ff2-8d99-5c752cc7e156",
+      "contenido": "b",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f65c414b-fcbd-42fa-99dc-c1cc420a57bb",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a32476f6-6270-4942-9c04-6394ea29e8e6",
+      "contenido": "The difference",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6788b285-2f6a-48d1-a9e0-e7cda8d99c80",
+      "contenido": "is",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aef7f676-652f-41db-9eb8-5a537156d92c",
+      "contenido": "0",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ac313634-28a5-4b0e-9fbe-01db21d54319",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a0e4bb94-9fde-4155-a8d1-5511b6028860",
+      "contenido": "b",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9ef1d3e8-8fe8-4b6f-8162-99c396fb366f",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "46eee0f6-0ad7-4167-b3e0-0a5d7794474e",
+      "contenido": "The difference",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d2055171-f779-4aae-8d07-d0d58f2cadb6",
+      "contenido": "is negative.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da85fc31-ae77-437c-b023-3fe6132329a2",
+      "contenido": "\u21d2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fb687a7c-55ca-4f93-87fd-1a516d08fd90",
+      "contenido": "Do not misuse the implication operator",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0d352a24-35dc-4240-a837-4ab5bf3bf5b2",
+      "contenido": ". The former is employed only in symbolic sentences (Sect. 4.2 ); the latter is not used in higher",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1a404e94-992b-419e-a0dc-fc19c5136374",
+      "contenido": "\u21d2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f9dde80b-ccee-44cd-a915-a91ec1d5e182",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0a7b01fa-e970-4362-b365-b8f20eb8d480",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "76d6c08e-0034-41bd-999e-807c0e333c6f",
+      "contenido": "is an integer",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "78c34bb2-80fa-4e4b-837d-90de2dc0821d",
+      "contenido": "is a rational number.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "25841f7d-aec9-411e-9ee5-02000718d067",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "59acd84b-5902-4d53-b42f-9e5d74327f5f",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e110fd2e-3a76-48f7-b984-6bcb22d1cf65",
+      "contenido": "If",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "316f6b4d-26b3-4870-afcd-28560df703c5",
+      "contenido": "is an integer, then",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "408b3087-2355-43cc-b482-87ce7254fc51",
+      "contenido": "is a rational number.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9cea71b9-bcf3-4da4-9b2b-090b6ddb742d",
+      "contenido": "\u21d2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1386d0d6-62af-4892-a791-32926f1250bf",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d3de06c0-aac0-4e18-b8b5-b67657ec75a9",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5827f88b-2eec-4cc0-8c38-4ac0194443ff",
+      "contenido": "3.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fd305aa9-a747-481b-97b6-fd411f64e4cc",
+      "contenido": "\u2234",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "27b6ce29-e331-4353-9fc8-b10792606f56",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f87f9ed5-f47b-4aa2-a6c9-ffbb6a5bd1f0",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d35d04f6-4ef6-40b8-9e8a-efccf716d2cd",
+      "contenido": "3.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "51da94f9-21b8-433a-973c-e4b0e22f7f5d",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f6fec718-89c8-4f9b-bc89-61ee032c56a0",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "333b4673-a2dd-450e-bc99-fe5507e4ea50",
+      "contenido": "hence",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "129a018d-f26b-4fde-8bd8-c2337a860967",
+      "contenido": "3.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "09623cce-34d2-41c1-97ee-dc028111f4cf",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "16b31af3-d8f5-4284-a00e-470a4276975e",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "52e2f345-5b03-4099-8b75-13246ca5439b",
+      "contenido": "and therefore",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d4ebb501-d9b6-42c8-a291-f0f994b7ebfe",
+      "contenido": "3.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "955561ae-92aa-45b0-b5c0-9b4a54cc9775",
+      "contenido": "Within a sentence, adjacent formulae or symbols must be separated by words.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0f190ff5-8d7d-4a8d-9b5f-528b5d241265",
+      "contenido": ",",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "905991c2-5c21-4a02-81b5-489cdcda0a1e",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f7f0ef24-66d0-49b3-9b52-09bc69548ed7",
+      "contenido": "A n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d24874dc-1e14-4f0c-acf9-c76fddfb99a8",
+      "contenido": "n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8fe73fad-b89b-4076-a5d0-6ba742c2e132",
+      "contenido": "Consider",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ab0536c4-f077-4c12-bb1c-c37019aaadf2",
+      "contenido": "5.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0fc19609-c5f7-4855-a6d3-068065026ac9",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "489f4bd9-481b-41a6-b738-0f475b849909",
+      "contenido": "n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e0c64669-fe76-46c8-9dbb-02da4c5d7a7e",
+      "contenido": "A n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9792107b-e61a-4f38-b970-da5950930972",
+      "contenido": ", where",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4597bfa3-8524-4d22-8e5e-8d3032f7119a",
+      "contenido": "5.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bac25489-1c28-4bfe-acb4-75ad1e72c404",
+      "contenido": "Consider",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3a24a1e7-4f4d-4f69-95a6-874b7869615b",
+      "contenido": "p k",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5880b053-1523-428d-988d-69c54e68dde6",
+      "contenido": "c",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "19eb6002-96ac-434c-9b5b-a18292cbfc86",
+      "contenido": "Add",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c1ea9213-7652-4693-af5e-0998dbd2ec38",
+      "contenido": "times to",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "468fbff8-52ae-455f-b44e-466fdb3c6ac7",
+      "contenido": ".",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "07f9c074-bc49-4e88-93c5-d376e2f47570",
+      "contenido": "p",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8512f78a-ca6a-4719-80b5-3e00ccc63727",
+      "contenido": "c k",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c8af2fe5-554c-4203-a3a6-99f413a20fe8",
+      "contenido": "Add",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a3e99cd0-71a3-4da6-a475-959445fe3d26",
+      "contenido": "to",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "08968a96-694f-4d44-aec0-9d35fafcc66d",
+      "contenido": "times.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "272473d3-f031-4e21-92ae-2266be34854c",
+      "contenido": "p",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a14b6d76-598c-43a2-8468-3dcdb3520117",
+      "contenido": "c",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b38b289e-07bc-4c74-b46b-9e4dccacf0f4",
+      "contenido": "Add",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "81551fb2-5cab-4789-8422-c41382d1ae2f",
+      "contenido": "to",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "60060618-d3f1-406c-9eab-b902fa4c30af",
+      "contenido": ", repeating this process",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bdafa0af-68b3-4d2f-a364-894d3c880f93",
+      "contenido": "= \u00b1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "948c382d-7121-4ed5-b41b-e3084d68727d",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "93483ed6-e128-48d7-86f9-1cb6e4a807a1",
+      "contenido": "0 has two solutions:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2275cb73-bd4e-4ad7-86da-452b7b615044",
+      "contenido": "7.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6da3b8b8-51ca-4505-b5b3-c09cc94f1aa8",
+      "contenido": "f",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "092eab8c-b3c7-46de-a237-73704c8049b4",
+      "contenido": "is continuous.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "73ef1b2f-763b-49ac-b65c-87012ab3f53b",
+      "contenido": "\u2234",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "414061d9-974d-4acb-bfa9-fd21feb2c549",
+      "contenido": "or the symbol",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b345a949-4a53-44ec-a330-ee3a1bd971b9",
+      "contenido": "k",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c8ec8ee4-9105-4e8d-8623-74468082e5b2",
+      "contenido": "times.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "51c4d8f3-eaeb-41d1-a2ff-2c07e5ea76b2",
+      "contenido": "1.2 Numbers and Symbols 5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7d836123-268b-475a-b27d-066b3f5bf29f",
+      "contenido": "For displayed equations the rules are a bit different, because the spacing between symbols becomes a syntactic element. Thus an expression of the type",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "deb9f89f-a178-48ba-a88d-b6ca48421d1d",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0cce8f4f-837a-4c47-93c6-975fc1c72f14",
+      "contenido": ",",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9fdbb521-a03c-4232-80d6-5a6911d87b63",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d17ede4e-c483-49a8-89d0-3c6627d40699",
+      "contenido": "B n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5df2db50-f5bb-4804-ba29-af976edf8781",
+      "contenido": "n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3a1575fc-4798-4489-b07b-425e1416ac40",
+      "contenido": "A n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "63f730e6-2d99-4ab6-9189-c961e7630a4d",
+      "contenido": "5",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9a4bbe54-649b-44e4-9ee7-f87d7e59ce8c",
+      "contenido": "A good sentence needs a lot more than grammatical correctness.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0f28e96f-35ed-4868-90f5-49395e821ee5",
+      "contenido": "Give priority to clarity over fancy language. Avoid long and involved sentences; break long sentences into shorter ones.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ec543f61-8ab0-4d7a-a719-cd2e5901a869",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "73e9e7d2-02ce-480f-a8e0-7ad589d073bd",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8b861025-aad5-4624-a6d1-58939115ec53",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0f27ff94-b24b-4e97-b3da-3d6b33d5c639",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9b273ed1-fd5b-4beb-9f91-60bd24d05524",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "69f4266e-e68d-4514-9b06-f7c62951778b",
+      "contenido": "We note the fact that the polynomial 2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c6fe38e5-94b3-49a0-8035-f7c541cc36fa",
+      "contenido": "1 has the coef\ufb01cient of the",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7825d84f-bf4f-470a-93d8-e426c123ed82",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c4de301c-e0ca-44f9-98f3-b468ded22a1c",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ed0f6d5a-c2d6-4248-8c8e-634440a1cdbd",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d9dadefb-92c8-417b-bfde-83351a1b6fba",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3a0827cd-33e3-409e-862f-bb70fd8ce05a",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "af059c02-4b99-48ef-975c-40f83b214675",
+      "contenido": "The leading coef\ufb01cient of the polynomial 2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3a9ac4f0-9ed9-4869-af03-1abb20ef6482",
+      "contenido": "A",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5d150306-5a96-4170-aeb1-96b3928de156",
+      "contenido": "A",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a5beb5ee-3b90-42ff-af3e-c4558c81c52e",
+      "contenido": "requires the determinant of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ecbe3fe9-4a61-4ada-8349-0f6f48694ba6",
+      "contenido": "to be non-zero in order to exist, but the matrix",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "575e6ec5-1fea-4338-959e-438bf9f39e4b",
+      "contenido": "A",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "af57e045-7941-4f2e-b917-aec7811d0bb9",
+      "contenido": "has zero determinant, and so its inverse does not exist.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "515c07bf-99b3-4e9a-a0f4-c5940c03cd46",
+      "contenido": "has zero determinant, hence it has no inverse.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5ad03316-7da3-4621-85df-4813a32f8e63",
+      "contenido": "Place important words in a prominent position within the sentence. Suppose you are introducing the logarithm:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "20acc0c6-7a3b-45b5-bf30-374b0126a848",
+      "contenido": "An important example of a transcendental function is the logarithm.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8fab9221-8fc2-4b0b-b654-43f487925f74",
+      "contenido": "an example of something is something else",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ee42829f-2c6e-42b2-b7c3-a53810df429b",
+      "contenido": "\u2019, the focus of attention is the transcendental functions, not the logarithm.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "32a1ae26-5b06-43ff-9bea-ba2e8dd3f4e5",
+      "contenido": "The logarithm is an important example of a transcendental function.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8f0ecb72-e523-4ccc-ad91-accf07112e22",
+      "contenido": "Let us now de\ufb01ne a key transcendental function: the logarithm.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "851cd90c-bfc9-4dbe-be58-7ee98fae009e",
+      "contenido": "A commonly used method to check the orthogonality of two vectors is to verify that their scalar product is zero.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a9d74b35-5c32-43ef-8b1c-7ddace2005dc",
+      "contenido": "If the scalar product of two vectors is zero, then the vectors are orthog- onal.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8e75eced-9ea3-4eb1-b8f4-0698e4883349",
+      "contenido": "The convergence of the above series will now be established.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8ee0a1a5-8956-4a39-9b10-6baa04f8d1c8",
+      "contenido": "We establish the convergence of the above series.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5f842634-71d6-4117-9031-fbbc9deb6f1a",
+      "contenido": "Vary the choice of words to avoid repetition and monotony. 3",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "421da2b1-d548-4f0c-a395-4eaffc4f552d",
+      "contenido": "is quite acceptable (see Sect. 6.3 ).",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "74813271-2fc7-490d-9f04-d605183ea8fe",
+      "contenido": "1.3 Style",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "78aa1862-24b8-4f8f-9333-6c2cd72ed490",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b84ef676-a1ac-4ecd-af6a-15beb9132223",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "52aec61c-c3dc-473a-82f6-72a831b6b411",
+      "contenido": "2 term positive.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "05c77567-a083-4645-b37a-eb59624e4433",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0a9ded88-9a8f-40b2-b462-70d237e637d9",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "71d29dba-7a61-4222-ae21-cb94d298679d",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bd8b99b5-5c40-4df7-a5a9-a55f71ec105e",
+      "contenido": "The inverse of the matrix",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0ab9941c-3e00-4b6e-9eb6-a3da4cc3d2c4",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5618e5af-dcd4-4445-b3af-67c678b3e855",
+      "contenido": "A",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "65d16aa3-06ed-4ce7-91d5-2d7f16d632f2",
+      "contenido": "The matrix",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e4987dd6-43d4-4d33-a788-88c0599dbceb",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "90a55bae-5a65-436a-8bfc-0c58e2eadfc4",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b0264f16-73db-4c29-ba99-ccacb38acddd",
+      "contenido": "In this classic bad opening \u2018",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ad07ebc2-6d6b-4633-a99c-eb5f40d1cce0",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "03354766-e832-4eda-93c4-14c86e811b66",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "62636d08-8618-4c2c-930b-08760fa27fd1",
+      "contenido": "Suppose you wish to emphasise the scalar product:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ece090f-ef47-4de1-862d-74842714a7ee",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7d6711f4-fd4f-4d39-a9cb-a303eaa944d1",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c63c31a1-78ad-4229-8481-0ac5b57248b7",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d1ea01ed-822f-45fa-94ce-7c261a205d7a",
+      "contenido": "Prefer the active to the passive voice.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "85223249-c260-45d9-8731-e46469064edd",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9e92bca1-b7e2-4118-98c8-365688155ddd",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3bf42910-1e6b-467b-b03b-f363ee2d56a7",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "55f0c533-0d8b-4929-af2d-c8d8866942e4",
+      "contenido": "3 If necessary, consult a thesaurus.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ab1c4159-85a2-49c0-9e64-652591946b7d",
+      "contenido": "1 is positive.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2dd785e3-f782-4de3-a6ac-5146a8b70a15",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fd6cdc6d-3128-45de-b981-7b713b5dabe2",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d644b4ef-b420-49ea-aab6-ea1c366e492c",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e17d07b7-5cb4-44bd-b982-31a9e677b93d",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6d481164-2720-4a26-a0c3-0ca4257a8740",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5f76d91f-f82a-4991-9cb8-ad312de6db5e",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "185fc793-4969-469b-bdf7-da993c971560",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "02639fa5-b7e7-454d-8da5-41a4fd069761",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2149cd21-2f82-4f8a-ac66-70384e8dd5c5",
+      "contenido": "Good:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8833cc6d-b0fc-4cba-95ec-1663b0f0cb8e",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0eab0fe3-f5ec-4dda-b8ca-31d705279317",
+      "contenido": "Bad:",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b7e48853-1369-40f5-9d60-92e637f19b82",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b7ff8280-5e99-4fd3-9345-d032f72e5674",
+      "contenido": "Spse U subs",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0889d9b1-186d-4b01-8260-a570f2d51576",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da02f2a3-fdbb-4d52-9d4c-b0da29519883",
+      "contenido": "out\u2014or, if you have a word processor,",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ce9d06bd-920b-46a8-be81-fd9f321c819f",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1a8d851f-52d0-414d-8496-883ecb1fae03",
+      "contenido": "1.4 Preparation and Structure",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6b0d67ad-33ab-4bad-b24e-5170ea266f1b",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8d2d8550-ad21-4ebe-ac97-d9a98eca55ac",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "370e0677-9070-4655-ab53-d03328c7ef6b",
+      "contenido": "almost impossible to write one that\u2019s too easy.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ac1bcd5c-5934-4e4c-9167-59e35e69579b",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "677185ce-5a3a-4ca7-863f-8e4b07f82077",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0b3a9e0d-6acd-48ec-97c0-8d6a9341c72f",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8cd71903-1ff2-4d85-91a0-96ae2d577181",
+      "contenido": "6 1 Some Writing Tips",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "05abc605-d4f2-43a5-a7b9-ffebe3425a40",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cbdd2f72-df6a-4f43-9f3d-ce27fa307765",
+      "contenido": "y",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a8dcd510-5cf4-4e46-ac14-c7ce95f7aa6e",
+      "contenido": "The function de\ufb01ned above is a function of both",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "96cc287a-653d-46b6-ad85-cdff8150239c",
+      "contenido": "and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "bab5e81d-7bd0-4b2e-82a2-aa7d04fc9f2c",
+      "contenido": ".",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7509217e-53c3-4842-99ed-210b4f54df53",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "11cee59d-7f85-46d9-8502-1c27c01be6db",
+      "contenido": "y",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f1735300-b4a0-4814-9896-de7a73a160b7",
+      "contenido": "The function de\ufb01ned above depends on both",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a73164ce-3426-4269-82aa-0d0a140f8a3c",
+      "contenido": "and",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e1fac7f3-aa02-4d0d-949e-856979efb1e3",
+      "contenido": ".",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "04e51ac5-f9d0-4b6a-9c8c-a8ece0f8559b",
+      "contenido": "Do not use unfamiliar words unless you know their exact meaning.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2969489f-ff3c-49f2-98a6-0b30a12c46bd",
+      "contenido": "A simplistic argument shows that our polynomial is irreducible.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "338fdc6c-deda-4d40-aaca-29a81317070d",
+      "contenido": "A simple argument shows that our polynomial is irreducible.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0c59c3c5-16d2-4029-8306-e4041545e167",
+      "contenido": "Do not use vague, general statements to lend credibility to your writing. Avoid emphatic statements.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5736c5c4-82c5-46dc-80c2-9bb9bd0e3516",
+      "contenido": "Differential equations are extremely important in modern mathematics.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2757d23f-b4cf-4e54-8e05-a682d3df98f8",
+      "contenido": "The proof is very easy, as it makes an elementary use of the triangle inequality.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f08da7aa-2cbc-4ae4-b599-7be4843cc4ed",
+      "contenido": "The proof uses the triangle inequality.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5646b0c4-06a8-4f06-9c39-146950208992",
+      "contenido": "Do not use jargon, or informal abbreviations: it looks immature rather than \u2018cool\u2019.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c1cd6ffe-0345-4fee-a2da-f822b4339d4a",
+      "contenido": "into T eq. Wot R T soltns?",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e0343f60-8db1-4015-ac74-32c0791f8cce",
+      "contenido": "Enclose side remarks within commas, which is very effective, or parentheses (get- ting them out of the way). To isolate a phrase, use hyphenation\u2014it really sticks",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d0ab085c-d64a-4a7f-8e21-0fd0205bd9d1",
+      "contenido": "don\u2019t",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e6dddc5d-f8f0-47a7-963b-8ac78a63d501",
+      "contenido": "change font",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8fdb6311-6327-4d6b-b23a-48c61660947e",
+      "contenido": "but",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2d34766b-e8a6-4874-b228-19f308986af5",
+      "contenido": "(",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0eb09753-c808-466b-92ad-fefe21e6a066",
+      "contenido": "overdo",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "225d7194-bfdc-4cd2-9bc4-ef3ac2c4e5ec",
+      "contenido": "Take punctuation seriously. To improve it, read [40] or [41].",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "98d90a95-da30-4e4d-8ab5-39b37b767817",
+      "contenido": "There are things one must keep in mind when preparing any document.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aee71f97-a619-4f09-9e31-301ec5ac5edc",
+      "contenido": "Begin by writing your document in draft form, or at least write down a list of key points. Few people are able to produce good writing at the \ufb01rst attempt.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2cf34f90-2dcf-413d-b103-48a4a798a12e",
+      "contenido": "Consider the background of your readers; are they familiar with the meaning of the words you use? It\u2019s easy to write a mathematics text that\u2019s too dif\ufb01cult; it\u2019s",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fe8ea7f2-0816-42d8-a640-7fe99ae788da",
+      "contenido": "Form each sentence in your head before writing it down. Then read carefully what you have written. Read it aloud: how does it sound? Have you written what you",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f0fc4c62-d249-496b-8316-6124b6ad848a",
+      "contenido": "intended to write? Is it clear? Don\u2019t hesitate to rewrite.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "69da89c2-4122-4c0d-88dc-40c4468affce",
+      "contenido": "Split the text into paragraphs. Each paragraph should be about one \u2018idea\u2019, and it should be clear how you are moving from one idea to the next. Be prepared to",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9380f274-5b10-4ba8-b234-217c72841e49",
+      "contenido": "re-arrange paragraphs. The \ufb01rst idea you thought of may not have been the best one; the sequence of arguments you have chosen may not be optimal.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2a531c31-4f09-45eb-a5f5-3753316f2162",
+      "contenido": "When you \ufb01nish writing, consider the opening and closing sentences of your document. The former should motivate the readers to keep reading, the latter",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d289cf9e-16b0-417d-af9d-a7274b3a15d6",
+      "contenido": "should mark a resting place, like the \ufb01nal bars in a piece of music.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da70548a-7484-497e-9c2b-b45cb2d03ab4",
+      "contenido": "it",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "087bcef0-ff3f-467a-9a33-c5ee12bde03a",
+      "contenido": ").",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "56012ab9-de05-42db-b5f5-1fcf0dd11e51",
+      "contenido": "1.4 Preparation and Structure 7",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3dfba985-7789-4d5e-8b61-00b848f790f3",
+      "contenido": "Word processing has changed the way we write, and often a document is the end- product of several successive approximations. After prolonged editing, one stops",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "223181cf-adcf-4963-8b79-2a910681df97",
+      "contenido": "seeing things. If you have time, leave your document to rest for a day or two, and then read it again.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3e2ecdee-704c-45ef-8b17-4d7da7c798e9",
+      "contenido": "Improve the writing, following the guidelines given in this chapter.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ab8121be-2cb3-4c36-bda4-4303220ca4aa",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a6c708db-e5e3-4c68-a7bc-cfb959b09396",
+      "contenido": "0, I can\u2019t divide by",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "700612c4-19a3-425f-b68e-9e6f8a350f0d",
+      "contenido": "<",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "28120eb1-a7bd-487a-bd7b-ffd5736b2c6c",
+      "contenido": "22. The de\ufb01nate integral is where you don\u2019t have integration limits. 23. The asyntotes of this hiperbola are othogonal.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cd4b864c-3240-45db-963b-df25fd9b70bf",
+      "contenido": "s",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "da81ae5f-8a1c-434a-8338-27aac96cae9c",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "186832f2-1072-4553-8aea-3a4f60bc6c76",
+      "contenido": "\u2022",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f5a7cd5d-bfb6-4f53-8283-00568a0ddfd7",
+      "contenido": "Exercise 1.2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fdcea7f0-ecd2-4900-b05d-3e0548827f9a",
+      "contenido": "1. There are 3 special cases. 2.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9ba337e3-1b5f-47ee-b331-fb8d1ccbbc86",
+      "contenido": "X",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e7f1bae9-6221-4623-ac2e-67983916c551",
+      "contenido": "is a \ufb01nite set. 3. It does not tend to in\ufb01naty.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b76fc2c3-0304-4c30-8a4b-1889ede78309",
+      "contenido": "4 . 5.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "073cbcc1-e29e-456d-b032-64b8c87b7e8b",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e902fd49-3c63-4a28-ab17-f05dabb56074",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ec8d2120-9225-47de-9575-c6fac067d4b6",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6e4325a3-9038-4f78-a9d2-d070d3550819",
+      "contenido": "y",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9e2b0131-bf98-4527-997f-d1d94a637fbd",
+      "contenido": "4. It follows",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a95e7b40-5c2e-446f-8337-899c38c512c5",
+      "contenido": "1",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6531e036-08cc-4884-982e-fea2306ccc26",
+      "contenido": "\u2212",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4d5eab5a-2cf0-416a-a9c0-e47661d257b2",
+      "contenido": "1 is unde\ufb01ned. 6. The product of 2 negatives is positive.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "574ff177-5074-4b30-952c-c7eef3ea7e82",
+      "contenido": "\u2234",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cd8a3036-f9f6-40c6-a694-04d423870547",
+      "contenido": "c",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "470f4450-daf2-42d8-8a9b-32b3baa8310a",
+      "contenido": "7. We square the equation. 8. We have less solutions than we had before.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5a3796ff-efd2-48f7-8899-3365ca46f026",
+      "contenido": "2",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b7566f94-f0b7-44f6-a380-f236f1ce16fb",
+      "contenido": "2 are two othogonal lines. 10. Let us device a strategy for a proof.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e7bfeaff-77cd-4167-a71a-c2256970d509",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8a8b97b0-44a6-488d-a763-bc065f3323ae",
+      "contenido": "y",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1832fb9e-c172-4f92-b3ed-58fd421ff9c6",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "cde4ada1-12df-42c9-831a-ffd9c518a767",
+      "contenido": "9.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6b22e9e7-f2c0-425a-90a6-3884f1c22df6",
+      "contenido": "11. This set of matrixs are all invertible. 12. If the integral",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "98df9f48-84a8-46fb-a85c-6a3be7baf05a",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "375bb955-f26d-47a5-8c6c-e92f9f52a148",
+      "contenido": "0 the function is unde\ufb01ned. 13. Purely imaginary is when the real part is zero.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c766da9e-f8d8-4930-bdd4-cf2902d7a889",
+      "contenido": "14. Construct the set of vertex of triangles. 15. From the fact that",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c8e27b7d-a091-495d-ab21-01e5f79c35d0",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "57caee35-73b0-4c5c-a9ee-6437204e117c",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8252216e-e1d8-42d0-8947-211f59d11841",
+      "contenido": ". 16. A circle is when major and minor axis are the same.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b8f826d7-5d75-4b17-91ea-5e64d8f0d80d",
+      "contenido": "f",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8a9f0833-ecac-40e1-aa0d-9c93774638d0",
+      "contenido": "17. The function",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a2343911-2236-4fec-92e7-57db929799ed",
+      "contenido": "is not discontinuous. 18. Plug-in that expression in the other equation.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d56ecff5-52ae-469a-b793-7eedcaa767e3",
+      "contenido": "19. I found less solutions than I expected. 20. When the discriminant is",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "96c53fb6-5f6f-4486-9d60-5d64187113e0",
+      "contenido": "0, you get complex. 21. We prove Euler theorom.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3316cba2-865a-400b-b9d0-1e227c5c4789",
+      "contenido": "24. A quadratic function has 1 stationery point. 25. The solution is not independent of",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "317249b1-582a-484d-9b09-dcb9767f72ff",
+      "contenido": ". 26.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "eb75a8e9-168f-4476-a357-93ff28318ce0",
+      "contenido": "\u221a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "27e82298-ded7-4937-8a92-f2ecccd0e869",
+      "contenido": "\u2234",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1cf14df2-23cf-404d-9871-02c721666eab",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ce66c9c8-4fda-4665-a2db-72d8b0a48ee5",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4b8c2583-c9a6-4878-ad34-49611771b031",
+      "contenido": "is complex. 27. Thus",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b7e7c1cc-9cfb-430a-a7cc-f95cbab90c31",
+      "contenido": "is negative",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ec0f5892-7c8d-4de3-a56e-7aac76dcef3e",
+      "contenido": "=",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ec292f3-90e3-452e-9b16-8a5733be9b29",
+      "contenido": "x",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5bd191c9-4b0d-4d00-a022-a74206492559",
+      "contenido": "a",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "090deb3e-eb21-4b2e-a4a0-9c50c1aacc5d",
+      "contenido": ". (We assume that",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ab0432b-872b-4780-b45b-0d2d5fc08162",
+      "contenido": "is positive). 28. Each value is greater than their reciprical.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fba0df8d-aa27-40dc-95a6-81b156589830",
+      "contenido": "29. Remember to always check the sign. 30. Differentiate",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7a9157f0-8d23-4ad3-b93d-ee78b850bc9b",
+      "contenido": "f n",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "11616970-c50c-4eee-a87d-ab8a585d1a14",
+      "contenido": "times.",
+      "confianza_global": 0.95,
+      "micro_segmentos": 0,
+      "requiere_escalacion": false
+    }
+  ],
+  "estadisticas": {
+    "bloques_alta_confianza": 814,
+    "bloques_baja_confianza": 0,
+    "bloques_escalados": 0
+  }
+}

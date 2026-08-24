@@ -1,0 +1,62 @@
+{
+  "pdf": "c8.pdf",
+  "fecha": "2026-08-21T22:14:43.844655",
+  "documento": {
+    "documento_id": "06b812cf-7bc4-4f87-87db-164343a57a18",
+    "titulo": "c8",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 11,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          8
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          9,
+          9
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          10,
+          10
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.3",
+    "fecha_procesamiento": "2026-08-22 01:14:38.461689",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 2153,
+    "bloques_corregidos": 0,
+    "reparaciones_aplicadas": 0,
+    "inconsistencias": 0,
+    "bloques_escalados": 0
+  },
+  "muestras_correcciones": [],
+  "inconsistencias": []
+}

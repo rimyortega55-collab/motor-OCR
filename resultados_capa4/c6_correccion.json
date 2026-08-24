@@ -1,0 +1,102 @@
+{
+  "pdf": "c6.pdf",
+  "fecha": "2026-08-21T22:14:25.521525",
+  "documento": {
+    "documento_id": "76565ac0-8dd2-47f5-ad0a-deba9345b2b9",
+    "titulo": "c6",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 19,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          3
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          4,
+          4
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          5,
+          12
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          13,
+          13
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          14,
+          14
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          15,
+          15
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          16,
+          16
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          17,
+          18
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.3",
+    "fecha_procesamiento": "2026-08-22 01:14:05.403292",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 2285,
+    "bloques_corregidos": 0,
+    "reparaciones_aplicadas": 0,
+    "inconsistencias": 0,
+    "bloques_escalados": 0
+  },
+  "muestras_correcciones": [],
+  "inconsistencias": []
+}

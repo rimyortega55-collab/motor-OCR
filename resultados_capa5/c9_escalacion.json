@@ -1,0 +1,100 @@
+{
+  "pdf": "c9.pdf",
+  "fecha": "2026-08-21T22:24:31.852333",
+  "documento": {
+    "documento_id": "65c7fe76-e3ad-42e7-a50b-beb97e551644",
+    "titulo": "c9",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 14,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          0
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          1,
+          2
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          3,
+          4
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          5,
+          5
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          6,
+          6
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          7,
+          13
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.4",
+    "fecha_procesamiento": "2026-08-22 01:24:20.532411",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 2369,
+    "inconsistencias": 0,
+    "escalaciones_micro": 0,
+    "escalaciones_inconsistencias": 0,
+    "bloques_revision_humana": 0
+  },
+  "inconsistencias_detectadas": [],
+  "escalaciones": [],
+  "costo": {
+    "total_llamadas": 1,
+    "tokens_entrada_total": 0,
+    "tokens_salida_total": 0,
+    "costo_estimado_usd": 0.0,
+    "por_tipo_cola": {
+      "inconsistencia_documental": {
+        "llamadas": 1,
+        "tokens_entrada": 0,
+        "tokens_salida": 0,
+        "costo_estimado_usd": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\".venv/Scripts/python.exe\" -c \"import easyocr; print\\('easyocr OK'\\)\")",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install python-doctr -q)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(\".venv/Scripts/python.exe\" -c \"import doctr; print\\('doctr OK', doctr.__version__\\)\")",
+      "Bash(winget install *)",
+      "Bash(py -0p)",
+      "Bash(rm -rf .venv)",
+      "Bash(\"/c/Users/RimyAlbertOrtega/AppData/Local/Programs/Python/Python312/python.exe\" -m venv .venv)",
+      "Bash(\".venv/Scripts/python.exe\" --version)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install --upgrade pip -q)",
+      "Bash(rm -rf motor_ocr)",
+      "Bash(mkdir -p ocr_engine/config ocr_engine/models ocr_engine/triage ocr_engine/segmentation ocr_engine/ocr_specialized/engines ocr_engine/correction ocr_engine/escalation ocr_engine/metadata ocr_engine/tests/fixtures)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install -e \".[dev]\")",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(grep -v \"^$\")",
+      "Bash(\".venv/Scripts/python.exe\" -m pip show paddlepaddle)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip show numpy)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install \"paddlepaddle==2.6.2\" -q)",
+      "Bash(\".venv/Scripts/python.exe\" -c \"import paddle; print\\('OK', paddle.__version__\\)\")",
+      "Bash(powershell -NoProfile -Command \"Get-CimInstance Win32_Processor | Select-Object Name, Manufacturer, NumberOfCores, VirtualizationFirmwareEnabled\")",
+      "Bash(powershell -NoProfile -Command \"\\(Get-CimInstance Win32_ComputerSystem\\).Model\")",
+      "Bash(systeminfo)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip uninstall -y paddlepaddle paddleocr -q)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install easyocr python-doctr -q)",
+      "Bash(\".venv/Scripts/python.exe\" -m pip install -e \".[dev]\" -q)",
+      "Bash(python test_capa3.py)",
+      "Bash(python -c \"import json; data = json.load\\(open\\('resultados_capa3/c1_ocr.json'\\)\\); print\\(json.dumps\\(data['ocr_results'][:3], indent=2\\)\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(python test_capa4.py)",
+      "Bash(python test_capa5.py)",
+      "Bash(python test_capa6.py)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501)",
+      "Bash(break)",
+      "Bash(curl -s http://localhost:8501)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8501)",
+      "Bash(python -c \"import playwright\")",
+      "mcp__codebase-memory-mcp__list_projects",
+      "mcp__codebase-memory-mcp__index_repository",
+      "mcp__codebase-memory-mcp__index_status",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(python -c \"import json; d=json.load\\(open\\(r'C:\\\\Users\\\\RimyAlbertOrtega\\\\Documents\\\\motor OCR\\\\.claude\\\\settings.local.json'\\)\\); print\\(json.dumps\\(d['hooks'], indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\(r'C:\\\\Users\\\\RimyAlbertOrtega\\\\Documents\\\\motor OCR\\\\.claude\\\\settings.local.json'\\)\\); print\\(json.dumps\\(d['hooks'], indent=2\\)\\)\")",
+      "Bash(netstat -ano)",
+      "Read(//c/Users/RimyAlbertOrtega/.claude/skills/graphify/**)",
+      "Read(//c/Users/RimyAlbertOrtega/.claude/**)",
+      "Bash(tasklist /FI \"PID eq 8552\")",
+      "Bash(tasklist /FI \"PID eq 7908\")",
+      "Bash(wmic process *)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"ProcessId=8552\")",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"ProcessId=7908\")",
+      "Bash(curl -s -o /tmp/graph_response.html -w \"HTTP_STATUS:%{http_code}\\\\n\" \"http://localhost:9749/?tab=graph&project=C-Users-RimyAlbertOrtega-Documents-motor-OCR\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"http://localhost:9749/assets/index-DK5W7ax6.js\" -o \"C:\\\\Users\\\\RIMYAL~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-RimyAlbertOrtega-Documents-motor-OCR\\\\7533c0ec-8508-4361-89bb-717250591c6a\\\\scratchpad\\\\index.js\")"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "mcp_tool",
+            "server": "codebase-memory-mcp",
+            "tool": "index_repository",
+            "input": {
+              "repo_path": "c:\\Users\\RimyAlbertOrtega\\Documents\\motor OCR",
+              "mode": "fast"
+            },
+            "timeout": 180,
+            "statusMessage": "Reindexando motor OCR en codebase-memory..."
+          }
+        ]
+      }
+    ]
+  }
+}

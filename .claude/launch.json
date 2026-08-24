@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "motor-ocr-streamlit",
+      "runtimeExecutable": ".venv/Scripts/streamlit.exe",
+      "runtimeArgs": ["run", "app_streamlit.py", "--server.headless", "true"],
+      "port": 8501
+    }
+  ]
+}

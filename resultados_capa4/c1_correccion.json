@@ -1,0 +1,86 @@
+{
+  "pdf": "c1.pdf",
+  "fecha": "2026-08-21T22:13:13.704677",
+  "documento": {
+    "documento_id": "78bcdbb9-dbd4-4202-8c13-2250ae05f825",
+    "titulo": "c1",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 21,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          13
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          14,
+          14
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          15,
+          16
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          17,
+          17
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          18,
+          19
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          20,
+          20
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.3",
+    "fecha_procesamiento": "2026-08-22 01:13:08.795881",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 814,
+    "bloques_corregidos": 0,
+    "reparaciones_aplicadas": 0,
+    "inconsistencias": 0,
+    "bloques_escalados": 0
+  },
+  "muestras_correcciones": [],
+  "inconsistencias": []
+}

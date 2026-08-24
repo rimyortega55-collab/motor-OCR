@@ -1,0 +1,469 @@
+{
+  "pdf": "c4.pdf",
+  "total_paginas": 25,
+  "paginas": [
+    {
+      "pagina": 0,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 1,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSAM10"
+      ]
+    },
+    {
+      "pagina": 2,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 1.0,
+        "formula_ratio": 0.0,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 200,
+      "requiere_ocr": false,
+      "fuentes_detectadas": []
+    },
+    {
+      "pagina": 3,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSAM10",
+        "MSAM72"
+      ]
+    },
+    {
+      "pagina": 4,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 1.0,
+        "formula_ratio": 0.0,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 200,
+      "requiere_ocr": false,
+      "fuentes_detectadas": []
+    },
+    {
+      "pagina": 5,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 1.0,
+        "formula_ratio": 0.0,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 200,
+      "requiere_ocr": false,
+      "fuentes_detectadas": []
+    },
+    {
+      "pagina": 6,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 7,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSAM10",
+        "MSBM72"
+      ]
+    },
+    {
+      "pagina": 8,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSBM72"
+      ]
+    },
+    {
+      "pagina": 9,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSAM10"
+      ]
+    },
+    {
+      "pagina": 10,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 11,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 12,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 13,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 14,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSBM72"
+      ]
+    },
+    {
+      "pagina": 15,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSBM72"
+      ]
+    },
+    {
+      "pagina": 16,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 17,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 1.0,
+        "formula_ratio": 0.0,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 200,
+      "requiere_ocr": false,
+      "fuentes_detectadas": []
+    },
+    {
+      "pagina": 18,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 19,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 1.0,
+        "formula_ratio": 0.0,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 200,
+      "requiere_ocr": false,
+      "fuentes_detectadas": []
+    },
+    {
+      "pagina": 20,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSAM10"
+      ]
+    },
+    {
+      "pagina": 21,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 1.0,
+        "formula_ratio": 0.0,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 200,
+      "requiere_ocr": false,
+      "fuentes_detectadas": []
+    },
+    {
+      "pagina": 22,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    },
+    {
+      "pagina": 23,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10",
+        "MSAM10"
+      ]
+    },
+    {
+      "pagina": 24,
+      "origen": "nativo_digital",
+      "perfil_contenido": {
+        "texto_ratio": 0.7,
+        "formula_ratio": 0.3,
+        "tabla_ratio": 0.0,
+        "figura_ratio": 0.0
+      },
+      "dpi_objetivo": 300,
+      "requiere_ocr": true,
+      "fuentes_detectadas": [
+        "MSBM10"
+      ]
+    }
+  ],
+  "zonas": [
+    {
+      "paginas": [
+        0,
+        1
+      ],
+      "dpi": 300,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        2,
+        2
+      ],
+      "dpi": 200,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        3,
+        3
+      ],
+      "dpi": 300,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        4,
+        5
+      ],
+      "dpi": 200,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        6,
+        16
+      ],
+      "dpi": 300,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        17,
+        17
+      ],
+      "dpi": 200,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        18,
+        18
+      ],
+      "dpi": 300,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        19,
+        19
+      ],
+      "dpi": 200,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        20,
+        20
+      ],
+      "dpi": 300,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        21,
+        21
+      ],
+      "dpi": 200,
+      "perfil_dominante": "texto"
+    },
+    {
+      "paginas": [
+        22,
+        24
+      ],
+      "dpi": 300,
+      "perfil_dominante": "texto"
+    }
+  ]
+}

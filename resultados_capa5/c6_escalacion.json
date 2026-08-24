@@ -1,0 +1,109 @@
+{
+  "pdf": "c6.pdf",
+  "fecha": "2026-08-21T22:23:58.551738",
+  "documento": {
+    "documento_id": "f489d93e-54ac-4a7e-ad13-3555d8951629",
+    "titulo": "c6",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 19,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          3
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          4,
+          4
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          5,
+          12
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          13,
+          13
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          14,
+          14
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          15,
+          15
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          16,
+          16
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          17,
+          18
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.4",
+    "fecha_procesamiento": "2026-08-22 01:23:47.746711",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas": {
+    "bloques_totales": 2285,
+    "inconsistencias": 0,
+    "escalaciones_micro": 0,
+    "escalaciones_inconsistencias": 0,
+    "bloques_revision_humana": 0
+  },
+  "inconsistencias_detectadas": [],
+  "escalaciones": [],
+  "costo": {
+    "total_llamadas": 0,
+    "tokens_entrada_total": 0,
+    "tokens_salida_total": 0,
+    "costo_estimado_usd": 0.0,
+    "por_tipo_cola": {}
+  }
+}

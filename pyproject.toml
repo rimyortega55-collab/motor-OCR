@@ -1,0 +1,26 @@
+[project]
+name = "motor-ocr"
+version = "0.1.0"
+description = "Pipeline OCR de 5 capas con salida indexable por Graphify"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "pymupdf",
+    "easyocr",
+    "python-doctr",
+    "pix2tex",
+    "pytesseract",
+    "transformers",
+    "sentencepiece",
+    "sacremoses",
+    "jinja2",
+    "langgraph",
+    "anthropic",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["ocr_engine*"]

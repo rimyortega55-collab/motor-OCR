@@ -1,0 +1,148 @@
+{
+  "pdf": "c7.pdf",
+  "fecha": "2026-08-21T22:33:13.083103",
+  "documento": {
+    "documento_id": "b61ab7bc-febc-4625-8a88-af955d0da920",
+    "titulo": "c7",
+    "origen": "nativo_digital",
+    "idioma_original": "es",
+    "idiomas_traduccion": [],
+    "total_paginas": 25,
+    "zonas_dpi": [
+      {
+        "paginas": [
+          0,
+          4
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          5,
+          5
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          6,
+          7
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          8,
+          8
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          9,
+          11
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          12,
+          15
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          16,
+          17
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          18,
+          18
+        ],
+        "dpi": 200,
+        "perfil_dominante": "texto"
+      },
+      {
+        "paginas": [
+          19,
+          24
+        ],
+        "dpi": 300,
+        "perfil_dominante": "texto"
+      }
+    ],
+    "version_pipeline": "0.5",
+    "fecha_procesamiento": "2026-08-22 01:33:05.366138",
+    "costo_total": {
+      "tokens_entrada": 0,
+      "tokens_salida": 0,
+      "modelo_usado": []
+    },
+    "indice_estructural": {
+      "capitulos": [],
+      "teoremas": [],
+      "lemas": [],
+      "definiciones": [],
+      "ecuaciones_numeradas": []
+    },
+    "inconsistencias_no_resueltas": []
+  },
+  "estadisticas_revision": {
+    "total": 3,
+    "por_decision": {
+      "aceptar": 1,
+      "editar": 1,
+      "escalar": 1
+    },
+    "por_tipo_bloque": {
+      "parrafo": 2,
+      "formula_inline": 1
+    },
+    "tasa_cambio": 33.333333333333336,
+    "confianza_promedio_usuario": 0.61
+  },
+  "patrones_detectados": {
+    "tipos_rechazados_frecuentemente": [],
+    "tipos_escalados_frecuentemente": [
+      [
+        "parrafo",
+        1
+      ]
+    ],
+    "confianza_engines_baja": []
+  },
+  "recomendaciones": [
+    {
+      "tipo_bloque": "parrafo",
+      "capa": 4,
+      "umbral_actual": 0.8,
+      "umbral_recomendado": 0.7,
+      "razon": "Alta tasa de escalaci\u00f3n (50.0%)",
+      "impacto": "Mejorar capacidad de reparaci\u00f3n autom\u00e1tica"
+    }
+  ],
+  "resumen_mejoras": {
+    "potencial_automatizacion": 33.33333333333333,
+    "tipos_problematicos": [
+      {
+        "tipo": "formula_inline",
+        "tasa_problema": 1.0
+      },
+      {
+        "tipo": "parrafo",
+        "tasa_problema": 0.5
+      }
+    ]
+  }
+}
