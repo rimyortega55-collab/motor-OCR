@@ -1,8 +1,8 @@
 {
   "pdf": "c6.pdf",
-  "fecha": "2026-08-24T16:55:42.130571",
+  "fecha": "2026-08-24T17:54:18.226852",
   "documento": {
-    "documento_id": "2955e078-6cc2-4627-baf2-cb59d88e31b3",
+    "documento_id": "e3994240-c998-459b-a6eb-59ab952429ef",
     "titulo": "c6",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -75,7 +75,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 19:55:32.677840",
+    "fecha_procesamiento": "2026-08-24 20:54:07.680813",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

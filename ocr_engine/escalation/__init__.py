@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from ocr_engine.config.settings import settings
 from ocr_engine.models import (
     Documento, Bloque, Inconsistencia, MicroSegmento
 )
@@ -46,9 +47,58 @@ def procesar_escalaciones(
     bloques_revision_humana = []
 
     # ========== Cola 1: Micro-segmentos de baja confianza ==========
-    # (Serían encolados desde Capa 3 si la confianza fuera < 0.6)
-    # Por ahora: los test PDFs no tienen baja confianza, así que la cola estaría vacía
-    # En producción, esto se activaría durante Capa 3 OCR
+    # Los bloques llegan de Capa 3 con sus micro-segmentos y confianzas en
+    # `bloque.ocr`. Sin imagen de página no se puede escalar: el LLM necesita ver
+    # el recorte, que es justamente lo que el engine determinista no supo leer.
+    if imagen_pagina_por_num:
+        paginas_encoladas = set()
+
+        for bloque in bloques:
+            micro_segmentos = getattr(bloque.ocr, "micro_segmentos", None) or []
+            if not micro_segmentos:
+                continue
+
+            imagen_pagina = imagen_pagina_por_num.get(bloque.pagina)
+            if imagen_pagina is None:
+                continue
+
+            for idx, micro_segmento in enumerate(micro_segmentos):
+                if micro_segmento.confianza_estructural >= settings.umbral_escalacion_micro_segmento:
+                    continue
+
+                recorte = _recortar_bloque(bloque, imagen_pagina)
+                if recorte is None:
+                    continue
+
+                encolar_micro_segmento(
+                    bloque_id=bloque.id,
+                    micro_segmento_idx=idx,
+                    pagina=bloque.pagina,
+                    micro_segmento=micro_segmento,
+                    imagen_recorte=recorte,
+                    contexto_texto=_contexto_de_bloque(bloque),
+                )
+                paginas_encoladas.add(bloque.pagina)
+
+        for pagina in sorted(paginas_encoladas):
+            resultados_pagina = resolver_lote_pagina(
+                pagina, imagen_pagina_por_num.get(pagina)
+            )
+            escalaciones_micro.extend(resultados_pagina)
+
+            for escalacion in resultados_pagina:
+                registrar_costo(
+                    documento_id=documento.documento_id,
+                    bloque_id=escalacion.bloque_id,
+                    costo=escalacion.costo,
+                    razon_escalacion=escalacion.razon_escalacion,
+                    tipo_cola="micro_segmento",
+                )
+
+                if escalacion.requiere_revision_humana and escalacion.bloque_id:
+                    bloque_id = str(escalacion.bloque_id)
+                    if bloque_id not in bloques_revision_humana:
+                        bloques_revision_humana.append(bloque_id)
 
     # ========== Cola 2: Inconsistencias documentales ==========
     if resultado_correccion.inconsistencias_detectadas:
@@ -97,6 +147,34 @@ def procesar_escalaciones(
         "estadisticas_costo": estadisticas,
         "bloques_requieren_revision_humana": bloques_revision_humana
     }
+
+
+def _recortar_bloque(bloque: Bloque, imagen_pagina):
+    """Recorta de la página la región del bloque, o None si el bbox no es válido."""
+
+    if imagen_pagina is None:
+        return None
+
+    alto, ancho = imagen_pagina.shape[:2]
+    x0, y0, x1, y1 = [int(c) for c in bloque.layout.bbox]
+
+    x0 = max(0, min(x0, ancho))
+    x1 = max(0, min(x1, ancho))
+    y0 = max(0, min(y0, alto))
+    y1 = max(0, min(y1, alto))
+
+    if x1 <= x0 or y1 <= y0:
+        return None
+
+    recorte = imagen_pagina[y0:y1, x0:x1]
+    return recorte if recorte.size else None
+
+
+def _contexto_de_bloque(bloque: Bloque, limite: int = 300) -> str:
+    """Texto del bloque que acompaña al recorte, para que el LLM corrija con contexto."""
+
+    texto = getattr(bloque.contenido, "texto_plano", "") or ""
+    return texto[:limite]
 
 
 def escalar_lote_micro_segmentos(

@@ -73,3 +73,8 @@ class EscalationResult(BaseModel):
     requiere_revision_humana: bool
     costo: Costo
     razon_escalacion: str
+    # Trazabilidad: a qué micro-segmento corresponde la corrección. Necesario para
+    # poder aplicarla al bloque y para mostrarla en la interfaz de revisión.
+    # Vacíos en la cola de inconsistencias, que es a nivel documento.
+    bloque_id: UUID | None = None
+    micro_segmento_idx: int | None = None

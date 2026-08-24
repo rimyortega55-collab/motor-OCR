@@ -26,7 +26,13 @@ class Settings(BaseSettings):
 
     # Escalación (Capa 5)
     limite_concurrencia_llm: int = 4
-    modelo_escalacion: str = "claude-sonnet-5"
+    # El valor del producto es la precisión de la corrección, así que por defecto
+    # se usa el modelo más capaz. La diferencia frente a modelos más baratos es de
+    # centavos por documento (ver pruebas/estimar_costo_escalacion.py) y se puede
+    # cambiar sin tocar código con MOTOR_OCR_MODELO_ESCALACION.
+    modelo_escalacion: str = "claude-opus-5"
+    # Micro-segmentos por debajo de esta confianza se escalan al LLM (Cola 1)
+    umbral_escalacion_micro_segmento: float = 0.6
 
     model_config = {"env_prefix": "MOTOR_OCR_"}
 

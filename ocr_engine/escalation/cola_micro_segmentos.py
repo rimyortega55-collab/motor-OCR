@@ -95,7 +95,8 @@ def resolver_lote_pagina(pagina: int, imagen_pagina=None) -> list[EscalationResu
             tipo_segmento=elemento.micro_segmento.tipo
         )
 
-        # Agregar metadatos de trazabilidad
+        # Agregar metadatos de trazabilidad (campos declarados en EscalationResult;
+        # asignarlos sobre un modelo que no los define lanza ValueError en pydantic)
         resultado.bloque_id = elemento.bloque_id
         resultado.micro_segmento_idx = elemento.micro_segmento_idx
 

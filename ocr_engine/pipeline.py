@@ -60,16 +60,20 @@ class Pipeline:
 
         # Capa 3: OCR especializado (solo bloques que no traen texto nativo)
         dpi_por_pagina = {t.pagina: t.dpi_objetivo for t in resultados_triage}
-        self._ejecutar_ocr(ruta_pdf, bloques, dpi_por_pagina)
+        imagenes_pagina = self._ejecutar_ocr(ruta_pdf, bloques, dpi_por_pagina)
 
         # Capa 4: Corrección determinista
         resultado_correccion = corregir_documento(documento, bloques)
         self.ultima_correccion = resultado_correccion
 
         # Capa 5: Escalación LLM (best-effort: sin credenciales de Anthropic
-        # configuradas, las colas simplemente no producen resultados)
+        # configuradas, las colas simplemente no producen resultados).
+        # Las imágenes de página son necesarias para la cola de micro-segmentos:
+        # sin ellas no hay recorte que mandarle al modelo con visión.
         try:
-            procesar_escalaciones(documento, bloques, resultado_correccion)
+            procesar_escalaciones(
+                documento, bloques, resultado_correccion, imagenes_pagina
+            )
         except Exception:
             pass
 
@@ -80,7 +84,8 @@ class Pipeline:
         ruta_pdf: str,
         bloques: list[Bloque],
         dpi_por_pagina: dict[int, int],
-    ) -> None:
+    ) -> dict[int, np.ndarray]:
+        """Ejecuta Capa 3 y devuelve las páginas renderizadas, que Capa 5 reutiliza."""
         doc = fitz.open(ruta_pdf)
         imagenes_pagina: dict[int, np.ndarray] = {}
 
@@ -106,6 +111,8 @@ class Pipeline:
                 bloque.ocr.confianza_global = resultado_ocr.confianza_global
         finally:
             doc.close()
+
+        return imagenes_pagina
 
     @staticmethod
     def _renderizar_pagina(doc: fitz.Document, pagina_num: int, dpi: int) -> np.ndarray:

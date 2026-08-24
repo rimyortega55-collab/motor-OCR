@@ -13,6 +13,7 @@ import base64
 import json
 from uuid import uuid4
 
+from ocr_engine.config.settings import settings
 from ocr_engine.models import EscalationResult, Costo
 
 _client = None
@@ -98,7 +99,7 @@ Devuelve un JSON con:
 
         # Construir mensaje con imagen
         message = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model=settings.modelo_escalacion,
             max_tokens=1024,
             messages=[
                 {
@@ -151,7 +152,7 @@ Devuelve un JSON con:
             costo=Costo(
                 tokens_entrada=tokens_entrada,
                 tokens_salida=tokens_salida,
-                modelo_usado=["claude-3-5-sonnet-20241022"]
+                modelo_usado=[settings.modelo_escalacion]
             ),
             razon_escalacion=respuesta_json.get("razon", "")
         )
@@ -225,7 +226,7 @@ Devuelve un JSON con:
 IMPORTANTE: No generes contenido nuevo. Solo analiza lo que existe."""
 
         message = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model=settings.modelo_escalacion,
             max_tokens=1024,
             messages=[
                 {
@@ -261,7 +262,7 @@ IMPORTANTE: No generes contenido nuevo. Solo analiza lo que existe."""
             costo=Costo(
                 tokens_entrada=tokens_entrada,
                 tokens_salida=tokens_salida,
-                modelo_usado=["claude-3-5-sonnet-20241022"]
+                modelo_usado=[settings.modelo_escalacion]
             ),
             razon_escalacion=respuesta_json.get("sugerencia", "")
         )

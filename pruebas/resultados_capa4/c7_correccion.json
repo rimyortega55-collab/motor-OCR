@@ -1,8 +1,8 @@
 {
   "pdf": "c7.pdf",
-  "fecha": "2026-08-24T16:53:51.964627",
+  "fecha": "2026-08-24T17:52:44.172156",
   "documento": {
-    "documento_id": "b7694514-d9c9-4de7-b61c-8967945455ea",
+    "documento_id": "08eebe6f-3c4b-415d-8b74-9c6eced3363d",
     "titulo": "c7",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -83,7 +83,7 @@
       }
     ],
     "version_pipeline": "0.3",
-    "fecha_procesamiento": "2026-08-24 19:53:35.982108",
+    "fecha_procesamiento": "2026-08-24 20:52:30.480565",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
@@ -107,52 +107,52 @@
   },
   "muestras_correcciones": [
     {
-      "bloque_id": "4dc84430-0125-411f-baf8-a86e0d17586e",
+      "bloque_id": "ddf5a063-ac86-4190-ac22-2e0f0ad89e56",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "1ba80638-a9cd-4469-ba1f-abf10d4ba622",
+      "bloque_id": "cc1b554d-ff29-4d75-b0b5-990a8bca58d7",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "3c258dc5-6ff8-4dd6-a8ce-1a657143e034",
+      "bloque_id": "afac5a08-62f2-4e47-a169-e5df528bc90d",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "35495678-3732-4b47-b031-2c1720b1e24a",
+      "bloque_id": "76006797-5dab-4b6d-bb49-6dc25bf3e267",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "470ae597-fb0f-4742-b02c-689e3d35e2a4",
+      "bloque_id": "c526f61a-83cd-40bb-94c2-ecd7930e37ed",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "67e90d7f-b5f0-4144-acf0-044775accf59",
+      "bloque_id": "a7cf95d5-6bc3-45eb-b310-7b8f36391d56",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "a470819a-05e9-4168-a477-baefaff2d489",
+      "bloque_id": "fe7ac5c3-3118-4bd7-80e2-829d166372fb",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "b5c93247-9129-46d5-b801-ecab2849afbd",
+      "bloque_id": "cd1e719e-db72-4e98-a466-6bd056531a75",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "bf04be71-ac8a-4bf7-9d61-1282438ec204",
+      "bloque_id": "c5655233-f638-45f9-830a-ac7b1fef33a6",
       "reparaciones": [],
       "total_reparaciones": 0
     },
     {
-      "bloque_id": "4dc6aab6-ba16-4c41-ad95-9669238ac28f",
+      "bloque_id": "f40bc249-885b-436a-b742-c451f4e936af",
       "reparaciones": [],
       "total_reparaciones": 0
     }
