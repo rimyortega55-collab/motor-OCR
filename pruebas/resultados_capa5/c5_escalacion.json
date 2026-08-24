@@ -1,8 +1,8 @@
 {
   "pdf": "c5.pdf",
-  "fecha": "2026-08-21T22:23:46.694962",
+  "fecha": "2026-08-24T16:55:32.009299",
   "documento": {
-    "documento_id": "7f4f5fc4-d81b-405e-8bec-4b1bfce4820b",
+    "documento_id": "3c641faa-6adf-4465-b233-01ab1b7ccc15",
     "titulo": "c5",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -35,7 +35,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-22 01:23:35.631067",
+    "fecha_procesamiento": "2026-08-24 19:55:25.207472",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

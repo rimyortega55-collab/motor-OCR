@@ -216,14 +216,19 @@ def _procesar_bloque_texto_con_formulas(
     contenido_final = []
     confianzas = []
 
-    for tipo_seg, _ in segmentos:
-        # Extraer región (simplificado: todo el recorte por ahora)
+    for tipo_seg, region in segmentos:
+        # En escaneado la sub-segmentación devuelve el recorte de la región; en
+        # nativo-digital devuelve texto, y ahí se cae al recorte del bloque.
+        # Pasarle a pix2tex el bloque entero en vez de la región es la diferencia
+        # entre ~0,3s y varios minutos por llamada.
+        imagen_seg = region if isinstance(region, np.ndarray) and region.size else recorte
+
         if tipo_seg == "texto":
-            texto, conf_engine = ocr_texto(recorte)
+            texto, conf_engine = ocr_texto(imagen_seg)
             engine = EngineOcr.EASYOCR
 
         else:  # formula_inline
-            texto, conf_engine = ocr_formula(recorte)
+            texto, conf_engine = ocr_formula(imagen_seg)
             # Envolver en $...$
             if texto and not texto.startswith('$'):
                 texto = f"${texto}$"

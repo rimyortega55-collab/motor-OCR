@@ -1,8 +1,8 @@
 {
   "pdf": "c9.pdf",
-  "fecha": "2026-08-21T22:24:31.852333",
+  "fecha": "2026-08-24T16:56:13.752189",
   "documento": {
-    "documento_id": "65c7fe76-e3ad-42e7-a50b-beb97e551644",
+    "documento_id": "69080869-8ce3-433e-9ac2-281e7311439c",
     "titulo": "c9",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -59,7 +59,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-22 01:24:20.532411",
+    "fecha_procesamiento": "2026-08-24 19:56:06.575016",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

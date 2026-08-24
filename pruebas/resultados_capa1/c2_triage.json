@@ -71,8 +71,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSBM10",
-        "MSBM7"
+        "MSBM7",
+        "MSBM10"
       ]
     },
     {

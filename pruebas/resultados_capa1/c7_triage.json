@@ -29,8 +29,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSAM104",
-        "MSBM102"
+        "MSBM102",
+        "MSAM104"
       ]
     },
     {
@@ -45,8 +45,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSAM104",
-        "MSBM102"
+        "MSBM102",
+        "MSAM104"
       ]
     },
     {
@@ -61,8 +61,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSAM104",
-        "MSBM102"
+        "MSBM102",
+        "MSAM104"
       ]
     },
     {
@@ -120,8 +120,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSAM104",
-        "MSBM102"
+        "MSBM102",
+        "MSAM104"
       ]
     },
     {
@@ -289,8 +289,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSAM104",
-        "MSBM102"
+        "MSBM102",
+        "MSAM104"
       ]
     },
     {
@@ -305,8 +305,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "CMEX10",
-        "MSBM102"
+        "MSBM102",
+        "CMEX10"
       ]
     },
     {
@@ -337,9 +337,9 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
+        "MSBM102",
         "MSAM104",
-        "CMEX10",
-        "MSBM102"
+        "CMEX10"
       ]
     },
     {
@@ -354,8 +354,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "CMEX10",
-        "MSBM102"
+        "MSBM102",
+        "CMEX10"
       ]
     },
     {
@@ -370,8 +370,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "CMEX10",
-        "MSBM102"
+        "MSBM102",
+        "CMEX10"
       ]
     }
   ],

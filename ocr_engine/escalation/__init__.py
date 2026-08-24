@@ -59,7 +59,14 @@ def procesar_escalaciones(
         )
 
         # Registrar costos
-        for escalacion in escalaciones_inconsistencias:
+        # resolver_inconsistencias devuelve un EscalationResult por inconsistencia,
+        # en el mismo orden que la lista de entrada, así que se pueden aparear.
+        vistos: set[str] = set()
+
+        for escalacion, inconsistencia in zip(
+            escalaciones_inconsistencias,
+            resultado_correccion.inconsistencias_detectadas
+        ):
             registrar_costo(
                 documento_id=documento.documento_id,
                 bloque_id=None,  # Inconsistencias no son de un bloque específico
@@ -68,10 +75,18 @@ def procesar_escalaciones(
                 tipo_cola="inconsistencia_documental"
             )
 
-            # Marcar para revisión humana si confianza LLM es baja
+            # Marcar para revisión humana si confianza LLM es baja.
+            # Se acota a la página donde se ubica la inconsistencia: mandar el
+            # documento entero a la cola la vuelve inservible para el revisor
+            # (un solo problema arrastraba miles de bloques).
             if escalacion.requiere_revision_humana:
-                # Agregar todos los bloques a revisión (conservador)
-                bloques_revision_humana.extend([str(b.id) for b in bloques])
+                for bloque in bloques:
+                    if bloque.pagina != inconsistencia.ubicacion_pagina:
+                        continue
+                    if str(bloque.id) in vistos:
+                        continue
+                    vistos.add(str(bloque.id))
+                    bloques_revision_humana.append(str(bloque.id))
 
     # ========== Estadísticas finales ==========
     estadisticas = obtener_estadisticas()

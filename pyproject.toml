@@ -1,12 +1,18 @@
 [project]
 name = "motor-ocr"
 version = "0.1.0"
-description = "Pipeline OCR de 5 capas con salida indexable por Graphify"
+description = "Pipeline OCR de 7 capas con salida indexable por Graphify"
 requires-python = ">=3.11"
 dependencies = [
+    # Modelos y configuración
     "pydantic>=2",
     "pydantic-settings>=2",
+    # Lectura de PDF e imagen
     "pymupdf",
+    "numpy",
+    "opencv-python",
+    "pillow",
+    # Motores OCR (Capa 3)
     "easyocr",
     "python-doctr",
     "pix2tex",
@@ -14,9 +20,17 @@ dependencies = [
     "transformers",
     "sentencepiece",
     "sacremoses",
+    # Escalación LLM (Capa 5)
+    "anthropic",
     "jinja2",
     "langgraph",
-    "anthropic",
+    # Interfaz web y API (Capa 7)
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
+    "streamlit",
+    "pandas",
+    "plotly",
 ]
 
 [project.optional-dependencies]

@@ -1,8 +1,8 @@
 {
   "pdf": "c7.pdf",
-  "fecha": "2026-08-21T22:24:16.048523",
+  "fecha": "2026-08-24T16:56:01.810223",
   "documento": {
-    "documento_id": "6c394244-1ef0-4903-a997-ba21da9fdf01",
+    "documento_id": "741f384c-f8b4-4a0f-b2ce-04412029f7cf",
     "titulo": "c7",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -83,7 +83,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-22 01:23:59.588096",
+    "fecha_procesamiento": "2026-08-24 19:55:42.868666",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
@@ -103,7 +103,7 @@
     "inconsistencias": 1,
     "escalaciones_micro": 0,
     "escalaciones_inconsistencias": 1,
-    "bloques_revision_humana": 4200
+    "bloques_revision_humana": 120
   },
   "inconsistencias_detectadas": [
     {

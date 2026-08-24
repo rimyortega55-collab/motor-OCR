@@ -34,6 +34,10 @@ ocr_engine/ocr_specialized/engines/doctr_engine.py
 ocr_engine/ocr_specialized/engines/easyocr_engine.py
 ocr_engine/ocr_specialized/engines/pix2tex_engine.py
 ocr_engine/ocr_specialized/engines/tesseract_fallback.py
+ocr_engine/revision/__init__.py
+ocr_engine/revision/feedback_umbrales.py
+ocr_engine/revision/gestor_decisiones.py
+ocr_engine/revision/vista_bloques.py
 ocr_engine/segmentation/__init__.py
 ocr_engine/segmentation/escaneado.py
 ocr_engine/segmentation/nativo_digital.py
@@ -50,3 +54,6 @@ ocr_engine/triage/deteccion_fuentes.py
 ocr_engine/triage/deteccion_origen.py
 ocr_engine/triage/perfil_visual.py
 ocr_engine/triage/zonificacion.py
+ocr_engine/web_interface/__init__.py
+ocr_engine/web_interface/ajuste_umbrales.py
+ocr_engine/web_interface/api.py

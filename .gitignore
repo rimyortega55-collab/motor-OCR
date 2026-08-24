@@ -1,3 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
+
+# Resultados de corridas de prueba (se regeneran)
+pruebas/pdfs_escaneados/

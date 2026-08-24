@@ -1,8 +1,8 @@
 {
   "pdf": "c7.pdf",
-  "fecha": "2026-08-21T22:14:38.061091",
+  "fecha": "2026-08-24T16:53:51.964627",
   "documento": {
-    "documento_id": "e0bb7f74-c44d-4d44-a05f-f472aacd8dad",
+    "documento_id": "b7694514-d9c9-4de7-b61c-8967945455ea",
     "titulo": "c7",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -83,7 +83,7 @@
       }
     ],
     "version_pipeline": "0.3",
-    "fecha_procesamiento": "2026-08-22 01:14:27.130250",
+    "fecha_procesamiento": "2026-08-24 19:53:35.982108",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
@@ -100,12 +100,63 @@
   },
   "estadisticas": {
     "bloques_totales": 4200,
-    "bloques_corregidos": 0,
-    "reparaciones_aplicadas": 0,
+    "bloques_corregidos": 4,
+    "reparaciones_aplicadas": 4,
     "inconsistencias": 1,
     "bloques_escalados": 0
   },
-  "muestras_correcciones": [],
+  "muestras_correcciones": [
+    {
+      "bloque_id": "4dc84430-0125-411f-baf8-a86e0d17586e",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "1ba80638-a9cd-4469-ba1f-abf10d4ba622",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "3c258dc5-6ff8-4dd6-a8ce-1a657143e034",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "35495678-3732-4b47-b031-2c1720b1e24a",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "470ae597-fb0f-4742-b02c-689e3d35e2a4",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "67e90d7f-b5f0-4144-acf0-044775accf59",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "a470819a-05e9-4168-a477-baefaff2d489",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "b5c93247-9129-46d5-b801-ecab2849afbd",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "bf04be71-ac8a-4bf7-9d61-1282438ec204",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    },
+    {
+      "bloque_id": "4dc6aab6-ba16-4c41-ad95-9669238ac28f",
+      "reparaciones": [],
+      "total_reparaciones": 0
+    }
+  ],
   "inconsistencias": [
     {
       "tipo": "salto_numeracion",
