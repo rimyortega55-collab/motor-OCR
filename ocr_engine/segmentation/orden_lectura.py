@@ -4,11 +4,24 @@ En una sola columna es trivial (arriba hacia abajo). En dos columnas (común
 en libros de matemática) se requiere agrupar por columna antes de asignar el
 índice — de lo contrario el texto sale desordenado y ninguna corrección
 posterior lo repara bien.
+
+La detección de columnas busca una *calle*: una banda vertical que ningún
+bloque cruza. Es la señal que define a un layout de dos columnas y no aparece
+en uno de una sola. La versión anterior comparaba huecos entre los bordes
+izquierdos (`max_gap > avg_gap * 2`), lo que con muchos bloques por página se
+cumple casi siempre por sangrías y títulos centrados: activaba el modo
+multi-columna en documentos de una columna y reordenaba el texto por grupos,
+dejándolo ilegible.
 """
 
 from __future__ import annotations
 
 from ocr_engine.models import Bloque
+
+# Una calle creíble cae en la franja central de la página.
+_BANDA_BUSQUEDA = (0.35, 0.65)
+# Ambos lados tienen que tener contenido real para hablar de dos columnas.
+_MIN_PROPORCION_POR_LADO = 0.2
 
 
 def resolver_orden_lectura(bloques: list[Bloque]) -> list[Bloque]:
@@ -16,72 +29,85 @@ def resolver_orden_lectura(bloques: list[Bloque]) -> list[Bloque]:
     if not bloques:
         return bloques
 
-    # Detect if multi-column layout
-    bboxes = [b.layout.bbox for b in bloques]
-    x_positions = [b[0] for b in bboxes]
-    x_min = min(x_positions)
-    x_max = max(x_positions)
+    calle = _detectar_calle(bloques)
 
-    # Calculate gap in X distribution
-    x_positions_sorted = sorted(set(x_positions))
-    if len(x_positions_sorted) > 1:
-        gaps = [
-            x_positions_sorted[i + 1] - x_positions_sorted[i]
-            for i in range(len(x_positions_sorted) - 1)
-        ]
-        max_gap = max(gaps) if gaps else 0
-        avg_gap = sum(gaps) / len(gaps) if gaps else 0
+    if calle is None:
+        return _ordenar_una_columna(bloques)
 
-        # If there's a significant gap, likely multi-column
-        is_multicolumn = max_gap > avg_gap * 2
-    else:
-        is_multicolumn = False
+    return _ordenar_dos_columnas(bloques, calle)
 
-    if not is_multicolumn:
-        # Single column: sort by Y position (top to bottom)
-        bloques_sorted = sorted(bloques, key=lambda b: b.layout.bbox[1])
-        for i, b in enumerate(bloques_sorted):
-            b.layout.orden_lectura = i
-        return bloques_sorted
 
-    # Multi-column: group by column position
-    page_width = x_max - x_min
-    column_threshold = page_width * 0.3  # blocks > 30% of page width apart are different columns
+def _detectar_calle(bloques: list[Bloque]) -> float | None:
+    """Devuelve la x de la calle entre columnas, o None si es una sola columna."""
 
-    # Find column centers
-    column_groups = []
-    for bloque in bloques:
-        x_center = (bloque.layout.bbox[0] + bloque.layout.bbox[2]) / 2
-        placed = False
+    if len(bloques) < 4:
+        return None
 
-        for group in column_groups:
-            group_x = sum(
-                (b.layout.bbox[0] + b.layout.bbox[2]) / 2 for b in group
-            ) / len(group)
-            if abs(x_center - group_x) < column_threshold:
-                group.append(bloque)
-                placed = True
-                break
+    izquierdas = [b.layout.bbox[0] for b in bloques]
+    derechas = [b.layout.bbox[2] for b in bloques]
 
-        if not placed:
-            column_groups.append([bloque])
+    x_min, x_max = min(izquierdas), max(derechas)
+    ancho = x_max - x_min
+    if ancho <= 0:
+        return None
 
-    # Sort each column by Y, then merge columns left to right
-    column_groups.sort(key=lambda g: min(b.layout.bbox[0] for b in g))
+    inicio = x_min + ancho * _BANDA_BUSQUEDA[0]
+    fin = x_min + ancho * _BANDA_BUSQUEDA[1]
 
-    for col_idx, group in enumerate(column_groups):
-        group.sort(key=lambda b: b.layout.bbox[1])
+    mejor_x = None
+    mejor_equilibrio = 0.0
 
-    # Assign reading order: column by column, top to bottom
-    orden = 0
-    for group in column_groups:
-        for bloque in group:
-            bloque.layout.orden_lectura = orden
-            orden += 1
+    # Se prueban cortes dentro de la franja central y se conserva el que deja
+    # los dos lados más parejos sin que ningún bloque lo cruce.
+    pasos = 30
+    for i in range(pasos + 1):
+        x = inicio + (fin - inicio) * i / pasos
 
-    # Merge all groups preserving order
-    result = []
-    for group in column_groups:
-        result.extend(group)
+        cruzan = sum(1 for b in bloques if b.layout.bbox[0] < x < b.layout.bbox[2])
+        if cruzan:
+            continue
 
-    return result
+        izquierda = sum(1 for b in bloques if b.layout.bbox[2] <= x)
+        derecha = len(bloques) - izquierda
+
+        proporcion_menor = min(izquierda, derecha) / len(bloques)
+        if proporcion_menor < _MIN_PROPORCION_POR_LADO:
+            continue
+
+        if proporcion_menor > mejor_equilibrio:
+            mejor_equilibrio = proporcion_menor
+            mejor_x = x
+
+    return mejor_x
+
+
+def _ordenar_una_columna(bloques: list[Bloque]) -> list[Bloque]:
+    """Arriba hacia abajo y, a igual altura, de izquierda a derecha.
+
+    El desempate por x importa cuando el detector devuelve varias líneas con
+    coordenadas verticales casi idénticas: sin él el orden queda a merced de
+    cómo vinieran en la lista.
+    """
+    ordenados = sorted(bloques, key=lambda b: (b.layout.bbox[1], b.layout.bbox[0]))
+
+    for i, bloque in enumerate(ordenados):
+        bloque.layout.orden_lectura = i
+
+    return ordenados
+
+
+def _ordenar_dos_columnas(bloques: list[Bloque], calle: float) -> list[Bloque]:
+    """Columna izquierda completa y después la derecha, cada una de arriba abajo."""
+
+    izquierda = [b for b in bloques if b.layout.bbox[2] <= calle]
+    derecha = [b for b in bloques if b.layout.bbox[2] > calle]
+
+    ordenados = []
+    for columna in (izquierda, derecha):
+        columna.sort(key=lambda b: (b.layout.bbox[1], b.layout.bbox[0]))
+        ordenados.extend(columna)
+
+    for i, bloque in enumerate(ordenados):
+        bloque.layout.orden_lectura = i
+
+    return ordenados

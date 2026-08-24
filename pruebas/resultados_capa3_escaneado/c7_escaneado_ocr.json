@@ -1,455 +1,1085 @@
 {
   "pdf": "c7_escaneado.pdf",
-  "fecha": "2026-08-24T16:51:23.359219",
-  "total_bloques_procesados": 49,
-  "bloques_via_ocr_real": 49,
+  "fecha": "2026-08-24T20:16:08.216657",
+  "total_bloques_procesados": 119,
+  "bloques_via_ocr_real": 119,
   "ocr_results": [
     {
-      "bloque_id": "2926872f-4805-495a-ad3d-07a12f482621",
+      "bloque_id": "c31aaf5f-a194-40b2-b2f0-eb0c776060a0",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Chapter 7",
-      "confianza_global": 0.8499417175261988,
+      "confianza_global": 0.9742203950881958,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "c96c4096-f7d8-4642-9141-38612770fabf",
+      "bloque_id": "fa42e32a-a68b-4105-9fce-7e863c9a5120",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": " f Forms of Argument orms OI Ar",
-      "confianza_global": 0.5963049510665757,
-      "micro_segmentos": 4,
-      "requiere_escalacion": true
+      "contenido": "Forms of Argument",
+      "confianza_global": 0.8513409694035848,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
     },
     {
-      "bloque_id": "0b6f32de-0c45-41ae-9508-062d4ba674eb",
+      "bloque_id": "4b66fe52-f84b-41a5-9375-bdf67da0771c",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "A mathematical theory begins with a collection of axioms or postulates. These are",
+      "confianza_global": 0.9709823269110459,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e18761b0-8a88-4e8e-867a-c3c4db3dd9ff",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "statements that are assumed to be true- -no verification or justification is required.",
+      "confianza_global": 0.9454963161395147,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2c5175d2-a315-4068-88e1-755dd950a89d",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "The axioms are the building blocks of a theory: from them we deduce other true",
+      "confianza_global": 0.9553297877311706,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "510ecb67-7a04-4640-bc6d-8c6adef5bb36",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "statements called theorems, and a proof is the process of deduction that establishes",
+      "confianza_global": 0.983756633905264,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ca26e891-6bb0-4088-a795-db6698036590",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "a theorem. As more and more theorems are proved, the theory is enriched by a",
+      "confianza_global": 0.9531175335248311,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "76670fb7-60d0-4984-9a5e-4d1d32f4bbf9",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "growing list of true statements.",
+      "confianza_global": 0.9284087896347046,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "65a1676f-a1b3-402d-888e-dd143922d07c",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "When we develop a mathematical argument, we need to organise sentences SO that",
+      "confianza_global": 0.9615326432081369,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "39ce98b7-c7cc-4b96-bc04-46fb9e336aca",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "every sentence is either an axiom or a true statement derived from axioms or earlier",
+      "confianza_global": 0.9498599012692769,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3b38696a-4a99-44e8-835c-5b9b61a4d2d1",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "statements. In practice only significant statements deserve to be called theorems. In",
+      "confianza_global": 0.9694423625866572,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5f5bff33-a92d-42e1-be65-00618830c71b",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "the proof of a theorem many true statements may be derived, but these fragments are",
+      "confianza_global": 0.9671451727549235,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "048052d1-3e64-41fc-bbae-9795659ab313",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "not usually assigned any formal label. Sometimes a proof rests on statements which,",
+      "confianza_global": 0.9799195757279029,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f683b3d7-f70e-40c8-bf36-698f492d38ae",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "if substantial, are not of independent significance: they are called lemmas. Finally,",
+      "confianza_global": 0.9911728451649348,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fb7dc698-ce66-4d45-a06f-4613580ef4b7",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "a proposition is a statement which deserves attention, but which is not sufficiently",
+      "confianza_global": 0.9682730803122888,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d4d674d6-d50f-47f1-97bf-1bf156acd166",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "general or significant to be called a theorem.",
+      "confianza_global": 0.9895161390304565,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3f8a1712-0f08-4d56-8418-6490af0e2f40",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "In this chapter we survey some methods to give shape to a mathematical argument.",
+      "confianza_global": 0.979873503957476,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3b85c925-8b1d-45e7-91f3-43f5b4e9f429",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Our survey will continue in Chap. 8, where we consider induction techniques.",
+      "confianza_global": 0.9908405393362045,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "138b5853-1034-44ed-bdb3-ee424a193d05",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "7.1 Anatomy of a Proof",
-      "confianza_global": 0.7636427104988125,
+      "confianza_global": 0.9637302279472351,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "ee910274-f6c5-4ae0-b306-ce275cb62d82",
+      "bloque_id": "0b5b142b-05c9-431d-860a-e6074b3fd1dc",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Springer-Verlag London 2014 F. Vivaldi, Mathematical Writing, Springer Undergraduate Mathematics Series; DOI 10.1007/978-1-4471-6527-9_7",
-      "confianza_global": 0.7857544212847638,
-      "micro_segmentos": 2,
+      "contenido": "A first analysis course begins with a list of axioms defining the real number system.",
+      "confianza_global": 0.9801254749298096,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "038a9afd-941c-4fe0-b0db-935ab51fe1d1",
+      "bloque_id": "48553fd8-760b-44db-a92f-3d2888029c1b",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "A mathematical theory begins with a collection of axioms or postulates. These are statements that are assumed to be true no verification or justification is required. The axioms are the building block",
-      "confianza_global": 0.7571123507927843,
-      "micro_segmentos": 5,
+      "contenido": "Then one may be asked to prove that",
+      "confianza_global": 0.9377324655652046,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "7559b014-ff97-414d-9329-f3dcee5aca4a",
+      "bloque_id": "6e0c289b-6c2c-4f74-8734-c6f524510900",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "growing list of true statements When we develop a mathematical argument, we need to organise sentences so that every sentence is either an axiom or a true statement derived from axioms or earlier",
-      "confianza_global": 0.7446154850086479,
-      "micro_segmentos": 3,
+      "contenido": "Hx E R, (-x) = X.",
+      "confianza_global": 0.7136605481306711,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "78f622ec-2877-46fa-bd07-764a321d6dc7",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "statements. In practice only significant statements deserve to be called theorems. In the of a theorem many true statements may be derived, but these fragments are proof not usually assigned any forma",
-      "confianza_global": 0.7649339490265694,
-      "micro_segmentos": 8,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "b9d8cf03-9ffa-45e7-a0fa-ebc08717e1e6",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "A first analysis course begins with a list of axioms defining the real number system. Then one may be asked to prove that",
-      "confianza_global": 0.7976232710848581,
-      "micro_segmentos": 2,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "981ed15b-d4e8-4b8f-827d-3f6230226e92",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Vx € R, = (=x) $\\scriptstyle{\\frac{\\mu_{\\mathrm{emenon}}}{\\sin\\ln\\theta n}}$ X",
-      "confianza_global": 0.7736244466796603,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "b1d8f8bd-b369-462e-9387-6a472c1094e4",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "But isn't this statement obvious? In recognising the truth of this assertion we make implicit use of knowledge derived from experience, which is not part of the axioms. A from the axioms requires eras",
-      "confianza_global": 0.7818938443968642,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "a5d29702-a521-43a6-99b5-5c8143ed3ba9",
+      "bloque_id": "54f87f0d-3250-4abe-a3aa-c41ad50ce496",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "(7.1)",
-      "confianza_global": 0.8481783926522865,
+      "confianza_global": 0.8274511694908142,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "24d25061-d850-4af1-a4af-52cb75fcb76d",
+      "bloque_id": "d2b0c561-656f-4947-b399-9d6940c14b05",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "But isn't this statement obvious? In recognising the truth of this assertion we make",
+      "confianza_global": 0.9346115035670144,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "abf66b06-d67d-4031-8c7c-032beae7bf0c",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "implicit use of knowledge derived from experience, which is not part of the axioms.",
+      "confianza_global": 0.9681593520300729,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "2ff40cd2-310d-49f8-9ca7-92dd81a1004e",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "A proof from the axioms requires erasing all previous knowledge.",
+      "confianza_global": 0.9819224357604981,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a6c95292-38ad-49f7-8b29-9b2786718c40",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "113",
-      "confianza_global": 0.8495178473883068,
+      "confianza_global": 0.9994422793388367,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "190802ff-1945-4293-940d-aa87071589b8",
+      "bloque_id": "51584b8e-9108-441a-9f19-1bf823410246",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "114",
-      "confianza_global": 0.8488468174298843,
+      "contenido": "O Springer-Verlag London 2014",
+      "confianza_global": 0.9194023162126541,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "0de832f8-524c-4074-9e82-10597e9138d6",
+      "bloque_id": "63dae9c5-87c1-4d6d-8bec-f12b73312eb1",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "erties:",
-      "confianza_global": 0.7424032305585537,
+      "contenido": "F. Vivaldi, Mathematical Writing, Springer Undergraduate Mathematics Series,",
+      "confianza_global": 0.9461779519915581,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "b91e94a1-e776-406d-b3c3-727ecd8f4331",
+      "bloque_id": "6ab878be-fdee-4555-85b6-a117e867edf0",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "1 . Theorem",
-      "confianza_global": 0.7519236669548073,
+      "contenido": "DOI 10.1007/978-1-4471-6527-9_7",
+      "confianza_global": 0.877220518887043,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "259cde20-2a5f-4843-aa1e-5a6aa96f6ee7",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "2 Vx € S 4 $\\longrightarrow\\longrightarrow$ X ",
-      "confianza_global": 0.7214282437887335,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "2b2ced0d-b556-4831-aa3e-583316552d6f",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "3 PROOF",
-      "confianza_global": 0.8009062349373048,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "a8815144-1f66-4cec-bd21-1faabe2ea3ab",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "4 Let x € $2 be given; 5 then (b 6 let a $\\overline{{}$ y G4) € ß; = (x @ x') @ x'  , b 47 $\\overline{{}$ x @ (x' @x' ')",
-      "confianza_global": 0.7216562976385857,
-      "micro_segmentos": 6,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "db7d997f-d65d-446d-baee-725263c2686c",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "7 hence (by Gl and 5) a 8 then (by G3 and G4) a $\\overline{{}$ b € 8 , and 7/ =< @ x $\\overline{{}$ (by G2) a X $\\scriptstyle{\\frac{\\mu_{\\mathrm{esonons}}}{\\sin\\theta_{\\mathrm{eson}}}}$ b; 9 then (by ",
-      "confianza_global": 0.769534870617209,
-      "micro_segmentos": 15,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "a6c1d6f1-1370-40e0-9ea2-a603eb480c71",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "",
-      "confianza_global": 0.15,
-      "micro_segmentos": 1,
-      "requiere_escalacion": true
-    },
-    {
-      "bloque_id": "06c84a5b-6139-4b47-bed8-7a0a805bee68",
-      "tipo": "TipoBloque.ENCABEZADO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "",
-      "confianza_global": 0.15,
-      "micro_segmentos": 1,
-      "requiere_escalacion": true
-    },
-    {
-      "bloque_id": "9fd2292c-fda3-49a5-a5de-a60d10c583ef",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "We now introduce some axioms, state a theorem equivalent to 7.1), and then prove it from the axioms. We the proof under X-ray. Our purpose is to dissect a put mathematical argument articulating every ",
-      "confianza_global": 0.7607350245648863,
-      "micro_segmentos": 5,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "b877954f-6e7c-43f8-b5ea-e72ad16dabc1",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "We are given a set $ and a binary operator 0 on S2 , with the following prop-",
-      "confianza_global": 0.7512928375528833,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "adf3db31-1575-48e3-911b-e8fdb64c42c2",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "GI: € Q , x @ y € $ Vx, y G2: Vx, y, z € $ (x @ y) @ z $\\longrightarrow{\\frac{}{\\longrightarrow}}$ x @ (y @ z) G3: Hv € $ , Vx € S x 0 < G4: Vx € S , Ix' € S . x @ x $\\scriptstyle{\\frac{\\mu_{\\mathrm{e",
-      "confianza_global": 0.6938760910038373,
-      "micro_segmentos": 9,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "83f1185f-c435-40dd-9f9e-bfeb8e39ee92",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "(These axioms define a general object: a group.) Setting ß $\\overline{{}$ R, and 0 $\\overline{{}$  one recognises that represents 0 and x' represents =X We are to state and ready prove our theorem.",
-      "confianza_global": 0.6342987345983303,
-      "micro_segmentos": 7,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "0aabc3ca-6e11-457d-98ec-8771f02e6954",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Items 1,3, 11 are logical expressions or symbols that say about the tags things text. announce the statement of the theorem; and the beginning and the end of They the proof, respectively. The symbol i",
-      "confianza_global": 0.8163319650852813,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "98ff0d71-cba1-4341-abd1-b5fc74a64088",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Items 5, 8, 9 begin with the logical then used here to mean that what comes tag after is deduced from the axioms. Formally; item 5 is our first theorem; being a true statement deduced from the axioms.",
-      "confianza_global": 0.7559482246306977,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "bcdcc8d7-f83a-4a9a-b193-1c0299214c87",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "different nature, and we have flagged them with the hence  These items use not tag only axioms but also facts assembled from previous statements. Items 4 and 6 are not statements but instructions . It",
-      "confianza_global": 0.7445784765861091,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "45561994-7f0d-473a-9786-76c4717aa7ec",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "that x is an arbitrary element of a set. This is a standard opening sentence which mirrors the expression Vx € S in the theorem. Item 6 instructs us to define two new quantities. Many different instru",
-      "confianza_global": 0.7357839478973874,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "3aa552ab-ae95-439f-ab3c-43b898b5e397",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Abbreviation for the Latin erat demonstrandum; meaning which had to be demonstrated quod",
-      "confianza_global": 0.8187515951916686,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "228a18c4-22bb-4420-9659-0916769b117d",
+      "bloque_id": "cacfa70c-f59d-48ae-af03-5375686ade90",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "7 Forms of Argument",
-      "confianza_global": 0.8228930155582584,
+      "confianza_global": 0.9620134681463242,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "6f5c1c73-f2aa-4fa5-9fe5-8d1b714e4313",
+      "bloque_id": "5c4d175f-ae0d-40b5-ae03-882511999c5f",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "7.1 Anatomy of a Proof",
-      "confianza_global": 0.7659643160990337,
+      "contenido": "114",
+      "confianza_global": 0.998607337474823,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "e5a83733-53b3-4a5d-b18a-d00ca19aef16",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "1 . Theorem 2 V2 is irrational",
-      "confianza_global": 0.7892527255482663,
-      "micro_segmentos": 2,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "868ce6b0-65c9-4100-937d-42229f4e43d4",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "3 PROOF. 4 Suppose v2 is rational; 5 then Em, n € Z such that $\\overline{{}$ m / n",
-      "confianza_global": 0.7588813508827523,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "02fb115d-c7e0-4085-9cbf-aac35aa9208e",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "6 Choose m 7 . Since 2 8. then 2 9 then 2n2 10 then \"? $\\overline{{}$ 2 m V2 = 12 2 is $\\longrightarrow\\longrightarrow$ m $\\longrightarrow\\longrightarrow$ n in 5 so that are co-prime. = m In, 12 / n2 ",
-      "confianza_global": 0.7720100769580908,
-      "micro_segmentos": 7,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "4cdce1dd-3687-47cd-960b-aae5caec40d7",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "11 hence (by 10 and Theorem A2 m is even; 12. then m 13 . hence 14. then 15. then 72 2? $\\scriptstyle{\\frac{1{\\frac{1}{2}}{\\frac{(0)(\\mathrm{{out}})\\omega}{\\sin\\omega}}}}$  $\\longrightarrow\\longrighta",
-      "confianza_global": 0.7159167446478978,
-      "micro_segmentos": 8,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "89892328-c79e-44cc-a3b6-6ad6608460b1",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "16. hence (by 15 and theorem A) n is even; 17. hence (by 11 and 16) m and n are not co-prime; 18 hence (by 6 and 17) assumption 4 is false; 19 then its negation is true.",
-      "confianza_global": 0.7869252264329655,
-      "micro_segmentos": 4,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "e3841b41-2b78-4022-a528-3169ed26a8b6",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "20",
-      "confianza_global": 0.7732414226668723,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "4428a26b-15b4-45cd-89ce-aee8c8e4ae6e",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "A fair amount of mathematics is assumed in the proof:",
-      "confianza_global": 0.7779323721484422,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "95b3a41f-5768-4a5c-932b-c90bdca73f54",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "the definition of the rational numbers and of v2 (items 2,4, 5);",
-      "confianza_global": 0.7698178283120826,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "5fc89c40-dc9b-4b34-9627-9f3ce5b53037",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "the definition of co-primality (item 6); some properties of equations (items 8, 9); the definition of an even integer (items 12, 17); a theorem of arithmetic , referred to as Theorem A (items 11, 16)",
-      "confianza_global": 0.7764415491884146,
-      "micro_segmentos": 3,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "aeee042f-2598-4c32-8d49-22199bd9b3eb",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "The argument contains novelelements. Thecoreofthe proofis item 4,the assump- n that '2 is rational . This is puzzling: how can we assume that 2 is rational tion that 2 is rational. This is puzzling: h",
-      "confianza_global": 0.7848027364690434,
-      "micro_segmentos": 4,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "2d8ec743-4ee7-4d22-a594-0bce4c762bf0",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "what numbers m and n are? This is not so strange; assumptions belong very much",
-      "confianza_global": 0.7849894638001252,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "28049b87-beb8-45b5-943a-24f48f31daee",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "to common reasoning",
-      "confianza_global": 0.7840036130224464,
-      "micro_segmentos": 1,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "3a0535cc-65e9-448a-a113-91750fb3b346",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Suppose that I meet Einstein on of Mount Everest. top Suppose that people walk laterally.",
-      "confianza_global": 0.8197842581268389,
-      "micro_segmentos": 2,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "6ea52a61-4b06-42fa-b686-fd341381711c",
+      "bloque_id": "89d5148d-ebec-406e-bf7d-e90809a3cfa1",
       "tipo": "TipoBloque.ENCABEZADO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "",
-      "confianza_global": 0.15,
+      "contenido": "We now introduce some axioms, state a theorem equivalent to (7.1), and then",
+      "confianza_global": 0.9765346967256986,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "a1c7be81-b37a-42b4-aca4-40e9249d7353",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "prove it from the axioms. We put the proof under X-ray. Our purpose is to dissect a",
+      "confianza_global": 0.9660824537277222,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "764192d4-ad4a-4fff-b546-1206cc5dd151",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "mathematical argument articulating every step; we use the language mechanically,",
+      "confianza_global": 0.932325255870819,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fe718af4-f1a2-4638-a269-e7c0f91ddcf3",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "to facilitate the identification of the logical elements of the proof. To avoid making",
+      "confianza_global": 0.9564398058823177,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "f5b100ea-679b-448c-906b-dc16bbb0caaa",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "implicit assumptions, we represent familiar objects with an unfamiliar notation.",
+      "confianza_global": 0.9694634735584259,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "022455f1-e3b3-4c56-98e9-c83527362f6b",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "We are given a set S2 and a binary operator 'O' on S2, with the following prop-",
+      "confianza_global": 0.9132823803845573,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b7b9dd91-8855-45de-92da-35525bb01a15",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "erties:",
+      "confianza_global": 0.9766072630882263,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fa1eae71-0e33-42f9-8add-eaba212a04a0",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "G1: Vx,y,E2, - XOyER",
+      "confianza_global": 0.569956049323082,
       "micro_segmentos": 1,
       "requiere_escalacion": true
     },
     {
-      "bloque_id": "0e270c48-9c6a-4f53-898f-de41c867c3ef",
+      "bloque_id": "79790222-28f6-47cf-b048-af19e9383e60",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "2 If a prime divides the product of two integers, then it divides one of the factors",
-      "confianza_global": 0.8061264375319074,
+      "contenido": "G2: Vx,y,2E2, (x - y) 2=X0(02)",
+      "confianza_global": 0.7158120572566986,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "58ba2501-4cf6-41e2-926e-1afeb68455c6",
+      "bloque_id": "f733646f-8d2d-42d2-a778-f0434a6cb7ee",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "In item 10 we use implicitly the transitivity of the equality operator (if x $\\scriptstyle{\\frac{n(n o)(n o w)}{n(n o w}}$ y and V $\\scriptstyle{\\frac{n(n o m a x)}{\\frac{(n o m o n)}{4}}}$ 2, then x ",
-      "confianza_global": 0.7586486469985613,
-      "micro_segmentos": 12,
+      "contenido": "G3: 3 E S2, Vx E S2. X",
+      "confianza_global": 0.838136836886406,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "d2b21b70-e214-4cd2-ae5e-10925a2596d8",
+      "bloque_id": "943b35e6-e990-4088-a674-cb47f753166d",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "( Dx=X",
+      "confianza_global": 0.7485054135322571,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c531bbab-cbb4-4e85-8db6-048fb61e6965",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "G4: Wx E S2, 3x' E S2, X",
+      "confianza_global": 0.8080452643334866,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c4bd1386-3c4d-4968-b554-346338161e7b",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "x'",
+      "confianza_global": 0.7354147434234619,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d2aab4b3-9d9e-4a00-aae8-0417fcd7a766",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "(These axioms define a general object: a group.) Setting S2 il R, and O'",
+      "confianza_global": 0.9007409385272435,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c39b7659-4e6e-44ea-ae40-84b0d941155e",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "one recognises that - represents 0 and x' represents - X. We are ready to state and",
+      "confianza_global": 0.9669731469715342,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "20e3320a-6a7f-4c4e-8751-9bbe15544534",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "prove our theorem.",
+      "confianza_global": 0.9897871216138204,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d1cad343-5d90-4ff2-93e5-98cdc25a29e1",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "1. Theorem.",
+      "confianza_global": 0.9982354044914246,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "665b3942-6fb6-43a6-a1c0-8ff6a6793e87",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "2. Vx E S2, r\"=X.",
+      "confianza_global": 0.8656707406044006,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6f582a19-d31b-45b9-9810-2d0db0bee7f5",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "3. PROOF.",
+      "confianza_global": 0.9515462815761566,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "aacb7f6d-e6fa-4cb6-b8e7-fde60c254541",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "4. Let x E S be given;",
+      "confianza_global": 0.9033965298107692,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "92077900-a839-4468-8e5e-19bff1c092f7",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "5. then (by G4) x\" E S2;",
+      "confianza_global": 0.9551379595484052,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e56afff8-9b52-4090-bf80-5b924cb89656",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "6. let a = (x Or)Or\", b:=xo (r'Ox\");",
+      "confianza_global": 0.827589213848114,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e72e249e-6ed1-43e5-b055-7455a9bf55d1",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "7. hence (by G1 and 5) a,b, E S2,and (by G2)a=b;",
+      "confianza_global": 0.962329468943856,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "50b99aa5-73a3-49e4-ac5c-582a727dafbf",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "8. then (by G3 and G4) a =< POr\"=x\";",
+      "confianza_global": 0.894749555322859,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "76235791-6eb2-4c2f-ac81-49b3c71bc645",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "9. then (by G3 and G4) b EXODEX;",
+      "confianza_global": 0.905914943665266,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c04d7ed7-b73a-493b-8c4c-610534b055be",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "10. hence (by 7, 8, 9)x\"=x.",
+      "confianza_global": 0.9239708085854849,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9b6b82a9-7945-4ee0-ad08-fa21bd0aced7",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "11.",
+      "confianza_global": 0.9899075031280518,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "746d3f88-8010-43bf-a8c3-d525d01f69ea",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Items 1,3, 11 are logical tags expressions or symbols that say things about the",
+      "confianza_global": 0.9651881967272077,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "de164544-a5ea-4342-b147-d0022989ea99",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "text. They announce the statement of the theorem, and the beginning and the end of",
+      "confianza_global": 0.9853108127911886,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "de98bc62-aaea-4239-969d-e9e5f83c3602",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "the proof, respectively. The symbol D' in item 11 may be replaced by the acronym",
+      "confianza_global": 0.9354141513506572,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "8a4167c6-9140-4e7e-a977-7907f6c70807",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Q.E.D.'",
+      "confianza_global": 0.5695684552192688,
+      "micro_segmentos": 1,
+      "requiere_escalacion": true
+    },
+    {
+      "bloque_id": "c38dd838-b254-4a59-b797-8d5f9e6fdc5b",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Items 5, 8, 9 begin with the logical tag 'then',used here to mean that what comes",
+      "confianza_global": 0.9768123030662537,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "62efa15e-b7ae-40ed-a17c-1feca7e9dcf5",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "after is deduced from the axioms. Formally, item 5 is our first theorem, being a true",
+      "confianza_global": 0.9617698006331921,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ca6536fa-f259-4590-b25b-8f150818af74",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "statement deduced from the axioms. Items 7 and 10 are deductions of a slightly",
+      "confianza_global": 0.9698275668280465,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1cdcf1f5-64d7-44b3-9a8f-2e4977b44db0",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "different nature, and we have flagged them with the tag 'hence'. These items use not",
+      "confianza_global": 0.9580178459485372,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c9ee9acf-a2d8-4958-98ba-68f11e2d4702",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "only axioms but also facts assembled from previous statements.",
+      "confianza_global": 0.9760724703470866,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1bb30fd1-9168-45ff-9206-27be8f965a39",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Items 4 and 6 are not statements but instructions. Item 4 instructs us to assume",
+      "confianza_global": 0.9906437635421753,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "629eee8b-2dbd-42f6-bb24-b7c4037ac32d",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "that X is an arbitrary element of a set. This is a standard opening sentence which",
+      "confianza_global": 0.9735600687563419,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "659d4649-47d5-4f26-a9d8-2b5ca4e2cb1a",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "mirrors the expression Hx E S2 in the theorem. Item 6 instructs us to define two new",
+      "confianza_global": 0.926124302779927,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "99ac2950-cecf-4135-a279-5f5da52eb973",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "quantities. Many different instructions may be found in proofs, such as the instruction",
+      "confianza_global": 0.9885475314580477,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4a15c64e-4556-4a6b-8ce2-95f1ef55aa66",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "to draw a picture.",
+      "confianza_global": 0.9966411888599396,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d3b3495e-046b-409d-9727-cb083b4b4fa5",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "1 Abbreviation for the Latin quod erat demonstrandum, meaning 'which had to be demonstrated'.",
+      "confianza_global": 0.9653553153787341,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "71ca7b22-ad89-4894-a2f0-ed1b7d00e286",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "7.1 Anatomy of a Proof",
+      "confianza_global": 0.9875341653823853,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "6565dfce-6726-4085-96bc-13f79f5e765a",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "115",
-      "confianza_global": 0.8493912591145473,
+      "confianza_global": 0.9975637197494507,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fd8b6e9a-2d1e-4de9-9bbd-19193bc9641d",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "In item 10 we use implicitly the transitivity of the equality operator (if x = y",
+      "confianza_global": 0.9619820304214954,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "95eeef2c-a8cb-4267-a8a2-14745632528a",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "and y i Z, then X = z), which depends on the fact that equality is an equivalence",
+      "confianza_global": 0.97460409005483,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9704f915-93e7-4217-ae61-6dac575564e4",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "relation (see Sect. 4.6).",
+      "confianza_global": 0.9913971424102783,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d28cb6c3-2d20-45ec-992c-f90b2b035217",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Proofs from axioms are necessarily rare. Ouri next proof the irrationality of V2",
+      "confianza_global": 0.8827540140885574,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4510278b-9026-4dc2-a046-4aeeaf15a828",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "is quite removed from the axioms of arithmetic, as it relies on several definitions and",
+      "confianza_global": 0.9364004174868266,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "0a0f5ff7-4a81-438d-8503-6646836ba77e",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "facts without justification. In this respect this proof is more typical than the previous",
+      "confianza_global": 0.9657128623553685,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "272bed7c-ef71-4aeb-8d3a-ed7900dbddf9",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "one, even though the style and conventions are the same.",
+      "confianza_global": 0.9776560962200165,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "06c774ca-41b5-4054-81cb-4067fb44fc45",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "1. Theorem.",
+      "confianza_global": 0.9969928860664368,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "eaf20ab1-2486-48b4-9a34-05b2e20ded3a",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "2. V2 is irrational.",
+      "confianza_global": 0.989490732550621,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3b166145-d60c-454c-94aa-d999ef85c5ea",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "3. PROOF.",
+      "confianza_global": 0.923352986574173,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b6d258c9-204e-406c-b0e6-79e15cd03217",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "4. Suppose V2 is rational;",
+      "confianza_global": 0.995922589302063,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "303d0d53-e40b-4c5f-a3a8-5bf34d974730",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "5. then Jm,n E Z such that V2 = m/n.",
+      "confianza_global": 0.9116338431835175,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "4d06dd4f-9b9f-460b-a290-08c1f45a0541",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "6. Choose m, n in 5 SO that they are co-prime.",
+      "confianza_global": 0.9837563904848966,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "53caa195-07ba-4c9b-817c-c0be91b3822c",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "7. Since V2 = m/n,",
+      "confianza_global": 0.857064425945282,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "25709c29-a246-4273-865e-19a9302e6da3",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "8. then 2",
+      "confianza_global": 0.9630602995554606,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "68643342-c677-4c7a-81bf-af68eb19466d",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "m2 ne;",
+      "confianza_global": 0.7160707712173462,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e3f1c097-0bdc-49b2-8083-efe731977d16",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "9. then 2n2",
+      "confianza_global": 0.881074051062266,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "fb0701f5-ca4d-41e8-a329-2c313a2cd874",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "m2;",
+      "confianza_global": 0.9619439244270325,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7881975d-9a91-4ea5-ae44-38f5320cd947",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "10. then m2 is even;",
+      "confianza_global": 0.9724825978279114,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "c5fec1e8-4192-4987-beeb-5b60630f703f",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "11. hence (by 10 and Theorem A2) m is even;",
+      "confianza_global": 0.9375691264867783,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "33653b39-8a6b-47b8-812f-7abb0398a235",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "12. then m = 2h for some integer h;",
+      "confianza_global": 0.9846616188685099,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "543d1b1f-e426-4665-a192-a3b7f343e201",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "13. hence (by 9 and 12) 2n2 = 4h2;",
+      "confianza_global": 0.9732683102289835,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "dd9a57d9-6466-4521-8e60-6931f546acc3",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "14. then n2 = 2h2;",
+      "confianza_global": 0.8715403437614441,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "80a08251-5f29-45ed-9c18-c38249d09868",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "15. then n2 is even;",
+      "confianza_global": 0.9635197401046753,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "7a3d0728-761f-46a8-97f9-5ee0df7af4fb",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "16. hence (by 15 and theorem A) n is even;",
+      "confianza_global": 0.9944317936897278,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e561860d-eb0b-451d-83be-ad361f96986e",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "17. hence (by 11 and 16) m and n are not co-prime;",
+      "confianza_global": 0.967160607377688,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "895e8ccd-19fe-47d5-bb7e-faeaec830e79",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "18. hence (by 6 and 17) assumption 4 is false;",
+      "confianza_global": 0.9969699382781982,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "474bacd1-3e58-47c8-9051-52122cc881e3",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "19. then its negation is true.",
+      "confianza_global": 0.9800896147886912,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "43057851-4a9f-4d59-ae1c-189a852427fe",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "20.",
+      "confianza_global": 0.993740975856781,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "19db28da-5bac-4357-94d7-dc71eeedb9d5",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "A fair amount of mathematics is assumed in the proof:",
+      "confianza_global": 0.9491418182849884,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "07edbbee-9b3e-4313-91e2-9acdf5226c9c",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "the definition of the rational numbers and of V2 (items 2, 4, 5);",
+      "confianza_global": 0.9836167555588943,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "9404f164-fbdf-41c6-8445-c5d2701545a1",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "the definition of co-primality (item 6);",
+      "confianza_global": 0.9855076273282369,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "86e6a68c-0c45-4c84-879f-3d2eff401d06",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "some properties of equations (items 8, 9);",
+      "confianza_global": 0.8875116109848022,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e447514f-e2b1-4aab-b317-46b4d327d71c",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "the definition of an even integer (items 12, 17);",
+      "confianza_global": 0.9392940203348795,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b8aad749-ecc5-4f2d-94a6-1e5ce9e6eaf3",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "a theorem of arithmetic, referred to as Theorem A (items 11, 16).",
+      "confianza_global": 0.992704764008522,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "e84bc5af-a5e5-4d73-af45-746df625f940",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "The argument contains novel elements. The core of the proofisi item 4, the assump-",
+      "confianza_global": 0.9468300640583038,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "b60f1da4-b4a8-4dee-a51c-a847a42a91b9",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "tion that V2 is rational. This is puzzling: how can we assume that V2 is rational",
+      "confianza_global": 0.9784143194556236,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "5678d774-c87e-4c71-98b5-2e6506cbe1f3",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "when we know it isn't? How can we let V2 = m/n when we haven't been told",
+      "confianza_global": 0.9319884812130648,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "135de10e-a99f-4c16-9487-6f9b41cb4312",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "what numbers m and n are? This is not SO strange; assumptions belong very much",
+      "confianza_global": 0.9885628978411357,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "523f9aae-fd64-4510-a290-0a062e51755f",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "to common reasoning.",
+      "confianza_global": 0.9955421090126038,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "689df8f7-b9c9-465f-a53b-f9af961f8bf8",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Suppose that I meet Einstein on top ofMount Everest.",
+      "confianza_global": 0.9844033122062683,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "1b4ff4fd-36ec-4dda-8bb4-274f3c4f83a2",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Suppose that people walk laterally.",
+      "confianza_global": 0.9599103927612305,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "211efdc5-4509-4891-8770-00f14b919c97",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "2 If a prime divides the product of two integers, then it divides one of the factors.",
+      "confianza_global": 0.9570147710687974,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     }
   ],
   "estadisticas": {
-    "confianza_min": 0.15,
-    "confianza_max": 0.8499417175261988,
-    "confianza_media": 0.7332339324479396,
-    "bloques_escalados": 4
+    "confianza_min": 0.5695684552192688,
+    "confianza_max": 0.9994422793388367,
+    "confianza_media": 0.9375944512554732,
+    "bloques_escalados": 2
   }
 }

@@ -69,6 +69,30 @@ def enrutar_bloque(
             requiere_escalacion=False
         )
 
+    # Escaneado ya reconocido por docTR en Capa 2: su predictor detecta y
+    # transcribe en la misma pasada, así que volver a correr un engine sobre el
+    # mismo recorte sería pagar dos veces por el mismo texto.
+    if (
+        bloque.provenance.creado_por_capa == "segmentation_escaneado_doctr"
+        and bloque.contenido.texto_plano
+    ):
+        confianza = bloque.layout.confianza_layout
+        return BlockOcrResult(
+            id=bloque.id,
+            contenido=bloque.contenido.texto_plano,
+            micro_segmentos=[
+                MicroSegmentoOcr(
+                    tipo="texto",
+                    contenido=bloque.contenido.texto_plano,
+                    engine_usado=EngineOcr.DOCTR,
+                    confianza_engine=confianza,
+                    confianza_estructural=confianza,
+                )
+            ],
+            confianza_global=confianza,
+            requiere_escalacion=confianza < 0.6,
+        )
+
     # Bloques que requieren OCR
     if bloque.tipo == TipoBloque.FORMULA_DISPLAY:
         return _procesar_formula_display(bloque, imagen_pagina)

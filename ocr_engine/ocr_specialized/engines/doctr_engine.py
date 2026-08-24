@@ -28,7 +28,17 @@ def _get_predictor():
     return _predictor
 
 def detectar_layout(imagen_pagina) -> list[dict]:
-    """Devuelve regiones detectadas: bbox, tipo aproximado, orden."""
+    """Devuelve una región por línea detectada: bbox en píxeles, texto, tipo y orden.
+
+    El bbox sale en píxeles absolutos de la imagen recibida. docTR entrega sus
+    geometrías en coordenadas relativas (0-1), así que hay que desnormalizarlas:
+    devolverlas tal cual daría cajas de menos de un píxel, y el fallback
+    heurístico de más abajo ya trabaja en píxeles.
+
+    Como el predictor de docTR hace detección y reconocimiento en la misma
+    pasada, se aprovecha y se devuelve también el texto: volver a pasarle un
+    engine encima al mismo recorte sería pagar dos veces por lo mismo.
+    """
     if imagen_pagina is None or imagen_pagina.size == 0:
         return []
 
@@ -38,40 +48,63 @@ def detectar_layout(imagen_pagina) -> list[dict]:
             # Fallback a heurística simple: detectar líneas y regiones
             return _detectar_layout_heuristico(imagen_pagina)
 
-        # Ensure uint8
-        if imagen_pagina.dtype != np.uint8:
-            if imagen_pagina.max() <= 1.0:
-                imagen_pagina = (imagen_pagina * 255).astype(np.uint8)
-            else:
-                imagen_pagina = imagen_pagina.astype(np.uint8)
+        imagen = _preparar_imagen(imagen_pagina)
+        alto, ancho = imagen.shape[:2]
 
-        # doctr works with file-like or PIL Image
-        from PIL import Image
-        if len(imagen_pagina.shape) == 2:
-            pil_image = Image.fromarray(imagen_pagina)
-        else:
-            pil_image = Image.fromarray(cv2.cvtColor(imagen_pagina, cv2.COLOR_BGR2RGB))
-
-        # Predict
-        doc = predictor([pil_image])
+        # docTR espera arrays numpy (H, W, 3) en RGB. Pasarle un PIL.Image falla
+        # con "'Image' object has no attribute 'ndim'".
+        doc = predictor([imagen])
         pages = doc.pages
 
         regiones = []
         if pages:
-            page = pages[0]
-            for block_idx, block in enumerate(page.blocks):
-                bbox = block.geometry
-                regiones.append({
-                    "bbox": (bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1]),
-                    "tipo": "texto",  # doctr no distingue tipos
-                    "orden": block_idx
-                })
+            # Se recorren las líneas y no los bloques de docTR: su agrupación en
+            # párrafos devuelve la página entera como una sola región, lo que
+            # borraría toda la estructura que las capas siguientes necesitan.
+            orden = 0
+            for block in pages[0].blocks:
+                for linea in block.lines:
+                    palabras = list(linea.words)
+                    if not palabras:
+                        continue
+
+                    (x0, y0), (x1, y1) = linea.geometry
+                    texto = " ".join(palabra.value for palabra in palabras).strip()
+                    if not texto:
+                        continue
+
+                    confianzas = [palabra.confidence for palabra in palabras]
+
+                    regiones.append({
+                        "bbox": (x0 * ancho, y0 * alto, x1 * ancho, y1 * alto),
+                        "texto": texto,
+                        "confianza": float(np.mean(confianzas)),
+                        "tipo": "texto",  # doctr no distingue tipos
+                        "orden": orden,
+                    })
+                    orden += 1
 
         return regiones
 
     except Exception as e:
         print(f"[docTR] Error en detectar_layout: {e}")
         return _detectar_layout_heuristico(imagen_pagina)
+
+
+def _preparar_imagen(imagen) -> np.ndarray:
+    """Normaliza a uint8 RGB de 3 canales, que es lo que consume docTR."""
+
+    if imagen.dtype != np.uint8:
+        imagen = (
+            (imagen * 255).astype(np.uint8)
+            if imagen.max() <= 1.0
+            else imagen.astype(np.uint8)
+        )
+
+    if imagen.ndim == 2:
+        return cv2.cvtColor(imagen, cv2.COLOR_GRAY2RGB)
+
+    return imagen
 
 def _detectar_layout_heuristico(imagen):
     """Fallback: detección simple de regiones conectadas."""

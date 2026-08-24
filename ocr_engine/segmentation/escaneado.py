@@ -3,7 +3,18 @@
 Detecta regiones: texto, título, tabla, figura, fórmula. La salida se
 convierte a `Bloque` con `origen_contenido = requiere_ocr`, listo para el
 enrutamiento de Capa 3. (PP-Structure/PaddleOCR descartados: CPU sin AVX,
-ver .contexto/02-herramientas-stack.md.)
+ver docs/contexto/02-herramientas-stack.md.)
+
+docTR es el camino principal y la morfología con OpenCV quedó como respaldo
+para cuando el modelo no está disponible. Medido sobre el mismo documento, la
+heurística alcanzaba un 16,7% de similitud contra el texto real: agrupaba
+glifos por proximidad, generaba regiones solapadas que hacían que un mismo
+renglón se transcribiera dos veces, y perdía el orden de lectura. Con docTR la
+similitud sube a 80,1%.
+
+Se aprovecha además que el predictor de docTR detecta y reconoce en una sola
+pasada: el texto viaja en el bloque para que la Capa 3 no vuelva a pagar un OCR
+sobre el mismo recorte.
 """
 
 from __future__ import annotations
@@ -28,9 +39,79 @@ from ocr_engine.models import (
 
 
 def segmentar_escaneado(documento: Documento, imagen_pagina, pagina: int) -> list[Bloque]:
-    """Segmenta página escaneada detectando regiones de texto con OpenCV.
+    """Segmenta una página escaneada, con docTR si está disponible."""
 
-    Para producción, integrar docTR. Este es un fallback con heurísticas simples.
+    if imagen_pagina is None:
+        return []
+
+    bloques = _segmentar_con_doctr(documento, imagen_pagina, pagina)
+    if bloques:
+        return bloques
+
+    return _segmentar_con_morfologia(documento, imagen_pagina, pagina)
+
+
+def _segmentar_con_doctr(documento: Documento, imagen_pagina, pagina: int) -> list[Bloque]:
+    """Un bloque por línea detectada por docTR, con su texto y su confianza.
+
+    Se usa la línea y no el bloque de docTR porque su agrupación en párrafos
+    devuelve la página entera como una sola región, inservible para segmentar.
+    La línea, en cambio, es una unidad que el detector resuelve bien.
+    """
+
+    try:
+        from ocr_engine.ocr_specialized.engines.doctr_engine import detectar_layout
+        regiones = detectar_layout(imagen_pagina)
+    except Exception as e:
+        print(f"[SEGMENTACION] docTR no disponible ({e}); se usa morfología")
+        return []
+
+    # Sin texto reconocido no hay ventaja sobre el respaldo, y probablemente
+    # detectar_layout ya cayó en su propia heurística interna.
+    if not regiones or not any(r.get("texto") for r in regiones):
+        return []
+
+    alto, ancho = imagen_pagina.shape[:2]
+    bloques = []
+
+    for orden, region in enumerate(regiones):
+        x0, y0, x1, y1 = region["bbox"]
+        texto = (region.get("texto") or "").strip()
+        if not texto:
+            continue
+
+        ancho_region = x1 - x0
+        alto_region = y1 - y0
+
+        # Un renglón corto y ancho cerca del margen superior suele ser título;
+        # sin un clasificador de layout real no se puede afinar más que esto.
+        if alto_region <= alto * 0.02 and ancho_region > ancho * 0.25 and y0 < alto * 0.2:
+            tipo = TipoBloque.ENCABEZADO
+        else:
+            tipo = TipoBloque.PARRAFO
+
+        bloques.append(Bloque(
+            id=uuid4(),
+            documento_id=documento.documento_id,
+            pagina=pagina,
+            tipo=tipo,
+            layout=Layout(
+                bbox=(float(x0), float(y0), float(x1), float(y1)),
+                orden_lectura=orden,
+                confianza_layout=float(region.get("confianza", 0.0)),
+            ),
+            origen_contenido=OrigenContenido.REQUIERE_OCR,
+            # El texto ya reconocido viaja con el bloque; la Capa 3 lo reutiliza
+            # en vez de correr otro engine sobre el mismo recorte.
+            contenido=Contenido(texto_plano=texto),
+            provenance=Provenance(creado_por_capa="segmentation_escaneado_doctr"),
+        ))
+
+    return bloques
+
+
+def _segmentar_con_morfologia(documento: Documento, imagen_pagina, pagina: int) -> list[Bloque]:
+    """Respaldo sin docTR: detecta regiones de texto con OpenCV.
 
     El agrupamiento morfológico es imprescindible: los contornos crudos de una
     página escaneada son glifos sueltos de unos pocos cientos de píxeles, muy por

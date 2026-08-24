@@ -1,77 +1,122 @@
 {
   "pdf": "c1_escaneado.pdf",
-  "fecha": "2026-08-24T16:42:46.484686",
-  "total_bloques_procesados": 7,
-  "bloques_via_ocr_real": 7,
+  "fecha": "2026-08-24T20:10:14.211595",
+  "total_bloques_procesados": 12,
+  "bloques_via_ocr_real": 12,
   "ocr_results": [
     {
-      "bloque_id": "7b7d90f5-fb12-4f26-b831-e409aadb4ed6",
+      "bloque_id": "3054187a-036c-44ce-aff3-cfdc13eaafd6",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "Seri Springer Undergraduate Mathemati h M d d Undergraduate Mathemat t graduate Mathematics Series ger Under: prın Inger Unaergraauate Mathematcs serı",
-      "confianza_global": 0.803553453272727,
-      "micro_segmentos": 12,
+      "contenido": "Springer Undergraduate Mathematics Series",
+      "confianza_global": 0.9426200836896896,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "b595a56d-5210-47ae-bcca-c1682ad3f395",
+      "bloque_id": "d97c4ca4-ade8-4305-b04d-e2baeef15e23",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Advisory Board",
-      "confianza_global": 0.8197227836532656,
+      "confianza_global": 0.9997952282428741,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "1350df29-5d95-4e33-a41d-204718aa82be",
-      "tipo": "TipoBloque.PARRAFO",
+      "bloque_id": "6906bf67-d396-41d8-b51e-e93747e039e6",
+      "tipo": "TipoBloque.ENCABEZADO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "MAJ. Chaplain, University of Dundee; Dundee, Scotland, UK K. Erdmann; University of Oxford, Oxford, England, UK A MacIntyre, Queen University of London; London, England, UK Mary E Süli, University of ",
-      "confianza_global": 0.7237135879511849,
-      "micro_segmentos": 5,
-      "requiere_escalacion": false
-    },
-    {
-      "bloque_id": "0546bbe8-a484-4a7e-96ba-a9a572f9a5ba",
-      "tipo": "TipoBloque.PARRAFO",
-      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "More information about this series at http:/lwww.springer.comlseries/3423",
-      "confianza_global": 0.6381481647170435,
+      "contenido": "M.A.J. Chaplain, University of Dundee, Dundee, Scotland, UK",
+      "confianza_global": 0.9792893677949905,
       "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "1e8f36fc-9cc1-4faa-856d-47c82810d2bc",
+      "bloque_id": "c3257f0a-58f9-4578-a020-7904868fd115",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "ivaldi 1  Franco Vivaldi",
-      "confianza_global": 0.6650251339150157,
-      "micro_segmentos": 4,
+      "contenido": "K. Erdmann, University of Oxford, Oxford, England, UK",
+      "confianza_global": 0.9884499683976173,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "177002d3-a623-4c34-b3ae-61732e57740f",
+      "bloque_id": "857d1099-090f-4916-8c0c-372de6c61e15",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "1 Writi hemati W M t t tıcal Wrıtıng n 1 1 r a C 1 a m e 9",
-      "confianza_global": 0.782453490125674,
-      "micro_segmentos": 18,
+      "contenido": "A. MacIntyre, Queen Mary, University of London, London, England, UK",
+      "confianza_global": 0.9945226609706879,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "e10ba21b-2b00-4bff-86d2-976e3cbf97b6",
+      "bloque_id": "3ba9dd68-423f-4687-a72a-2a482e1310de",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
-      "contenido": "S inger prın 1 ",
-      "confianza_global": 0.6966903589269462,
-      "micro_segmentos": 5,
+      "contenido": "E. Suli, University of Oxford, Oxford, England, UK",
+      "confianza_global": 0.9845326840877533,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "d845630c-27c6-462f-aec0-9c1046ed9ed6",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "M.R. Tehranchi, University of Cambridge, Cambridge, England, UK",
+      "confianza_global": 0.95159712433815,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "98710416-49cc-4595-929c-055a2648f736",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "J.F. Toland, University of Cambridge, Cambridge, England, UK",
+      "confianza_global": 0.9808833375573158,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "09f97bfc-50ff-4a83-9cff-ccb99d6b93ee",
+      "tipo": "TipoBloque.ENCABEZADO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "More information about this series at http://www.springer.com/series/3423",
+      "confianza_global": 0.9482182775224958,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "70cf0f0e-e571-4370-a9b7-0fbd56bd46d6",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Franco Vivaldi",
+      "confianza_global": 0.9681321978569031,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "3b8a0fe0-ce60-4c19-84b7-b7f9631e3dcf",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Mathematical Writing",
+      "confianza_global": 0.8948784172534943,
+      "micro_segmentos": 1,
+      "requiere_escalacion": false
+    },
+    {
+      "bloque_id": "ac202b20-b25f-46f6-9225-cc5cbc89ed61",
+      "tipo": "TipoBloque.PARRAFO",
+      "origen_contenido": "OrigenContenido.REQUIERE_OCR",
+      "contenido": "Springer",
+      "confianza_global": 0.9917215704917908,
+      "micro_segmentos": 1,
       "requiere_escalacion": false
     }
   ],
   "estadisticas": {
-    "confianza_min": 0.6381481647170435,
-    "confianza_max": 0.8197227836532656,
-    "confianza_media": 0.732758138937408,
+    "confianza_min": 0.8948784172534943,
+    "confianza_max": 0.9997952282428741,
+    "confianza_media": 0.9687200765169802,
     "bloques_escalados": 0
   }
 }
