@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from ocr_engine.config.settings import settings
 from ocr_engine.models import (
-    Documento, Bloque, Inconsistencia, MicroSegmento
+    ColaOrigen, Documento, Bloque, Inconsistencia, MicroSegmento
 )
 from ocr_engine.models.results import DocumentPostCorrection
+
+from ocr_engine.segmentation.bbox import desnormalizar_bbox
 
 from .cola_micro_segmentos import encolar_micro_segmento, resolver_lote_pagina
 from .cola_inconsistencias import resolver_inconsistencias
@@ -80,6 +82,8 @@ def procesar_escalaciones(
                 )
                 paginas_encoladas.add(bloque.pagina)
 
+        por_id = {str(b.id): b for b in bloques}
+
         for pagina in sorted(paginas_encoladas):
             resultados_pagina = resolver_lote_pagina(
                 pagina, imagen_pagina_por_num.get(pagina)
@@ -87,6 +91,11 @@ def procesar_escalaciones(
             escalaciones_micro.extend(resultados_pagina)
 
             for escalacion in resultados_pagina:
+                # Sin esto el resultado del modelo se perdía apenas terminaba el
+                # pipeline: quedaba el costo registrado, pero no la corrección ni
+                # la razón, que es lo que el revisor necesita ver.
+                _aplicar_al_bloque(por_id.get(str(escalacion.bloque_id)), escalacion)
+
                 registrar_costo(
                     documento_id=documento.documento_id,
                     bloque_id=escalacion.bloque_id,
@@ -151,19 +160,33 @@ def procesar_escalaciones(
     }
 
 
+def _aplicar_al_bloque(bloque, escalacion) -> None:
+    """Vuelca el resultado de la Capa 5 sobre el bloque que lo originó."""
+
+    if bloque is None:
+        return
+
+    bloque.escalacion.requirio_escalacion = True
+    bloque.escalacion.cola_origen = ColaOrigen.MICRO_SEGMENTO
+    bloque.escalacion.contenido_llm = escalacion.contenido_final
+    bloque.escalacion.confianza_llm = escalacion.confianza_llm
+    bloque.escalacion.requiere_revision_humana = escalacion.requiere_revision_humana
+    bloque.escalacion.razon_escalacion = escalacion.razon_escalacion
+    bloque.escalacion.costo = escalacion.costo
+
+
 def _recortar_bloque(bloque: Bloque, imagen_pagina):
     """Recorta de la página la región del bloque, o None si el bbox no es válido."""
 
     if imagen_pagina is None:
         return None
 
+    # El bbox está normalizado, así que este recorte ya no depende de si el
+    # bloque vino del camino nativo (puntos) o del escaneado (píxeles): antes,
+    # un bloque nativo se recortaba a ~36 % de su tamaño real sobre una página
+    # renderizada a 200 dpi.
     alto, ancho = imagen_pagina.shape[:2]
-    x0, y0, x1, y1 = [int(c) for c in bloque.layout.bbox]
-
-    x0 = max(0, min(x0, ancho))
-    x1 = max(0, min(x1, ancho))
-    y0 = max(0, min(y0, alto))
-    y1 = max(0, min(y1, alto))
+    x0, y0, x1, y1 = desnormalizar_bbox(bloque.layout.bbox, (ancho, alto))
 
     if x1 <= x0 or y1 <= y0:
         return None

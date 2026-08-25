@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin:0; font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; background:#FBFAF7; color:#26231F; }
+    a { color:#5A57E8; } a:hover { color:#3E3BC4; }
+    .wf { border:1.5px solid #26231F; border-radius:3px 7px 4px 6px; background:#FFFDF9; }
+    .soft { border:1.5px dashed #A8A198; border-radius:4px 8px 5px 7px; }
+    .note { font-family:'Caveat', cursive; font-size:18px; color:#BD6320; line-height:1.2; }
+    .lbl { font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; color:#8C867C; }
+    .pill { border:1.5px solid #26231F; border-radius:20px; padding:2px 9px; font-size:10px; }
+    .route { border:1.5px solid #26231F; border-radius:3px 7px 4px 6px; background:#FFFDF9; padding:11px 13px; display:flex; flex-direction:column; gap:5px; }
+    .route-key { border-width:2.5px; border-color:#5A57E8; background:#F1F0FC; }
+    .route-pub { background:#F5F2EC; }
+    .rt { font-size:11.5px; font-weight:600; }
+    .rd { font-size:10px; color:#8C867C; line-height:1.45; }
+    .arrow { display:flex; align-items:center; justify-content:center; flex:0 0 40px; }
+    th { font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; color:#8C867C; text-align:left; font-weight:500; padding:0 0 9px; }
+    td { font-size:11px; padding:9px 0; border-top:1.5px dashed #DED9D1; vertical-align:top; }
+    .tag-ok { border:1.5px solid #26231F; border-radius:20px; padding:1px 8px; font-size:9.5px; }
+    .tag-new { border:1.5px solid #BD6320; color:#BD6320; border-radius:20px; padding:1px 8px; font-size:9.5px; }
+  </style>
+</helmet>
+
+<div style="width:1600px; height:1180px; padding:32px 36px; display:flex; flex-direction:column; gap:24px; overflow:hidden;">
+
+  <div style="display:flex; align-items:baseline; gap:16px;">
+    <h1 style="margin:0; font-size:22px; font-weight:600;">Mapa de navegación y contrato con la API</h1>
+    <span style="font-size:11.5px; color:#8C867C;">React Router sobre FastAPI · lo marcado en ámbar todavía no existe en el backend</span>
+  </div>
+
+  <div style="display:flex; align-items:stretch; gap:0;">
+
+    <div style="flex:0 0 210px; display:flex; flex-direction:column; gap:12px; justify-content:center;">
+      <span class="lbl">Público</span>
+      <div class="route route-pub"><span class="rt">/login</span><span class="rd">Email y contraseña, o API key</span></div>
+      <div class="route route-pub"><span class="rt">/registro</span><span class="rd">Alta + primera API key</span></div>
+      <div class="route route-pub" style="opacity:0.6;"><span class="rt">/recuperar</span><span class="rd">[PLACEHOLDER: email de reset]</span></div>
+    </div>
+
+    <div class="arrow"><svg width="26" height="16" viewBox="0 0 26 16" fill="none" stroke="#8C867C" stroke-width="1.6"><path d="M0 8h22M17 3l5 5-5 5"/></svg></div>
+
+    <div style="flex:0 0 232px; display:flex; flex-direction:column; gap:12px; justify-content:center;">
+      <span class="lbl">Sesión iniciada</span>
+      <div class="route" style="border-width:2.5px;"><span class="rt">/documentos</span><span class="rd">Hub: KPIs, filtros, tabla y subida. Es la ruta por defecto.</span></div>
+      <div class="soft" style="padding:9px 11px; display:flex; flex-direction:column; gap:4px; background:#F7F4EF;">
+        <span style="font-size:10.5px; font-weight:600;">Layout con barra lateral</span>
+        <span class="rd">Envuelve todo lo autenticado y hace de guard de sesión.</span>
+      </div>
+    </div>
+
+    <div class="arrow"><svg width="26" height="16" viewBox="0 0 26 16" fill="none" stroke="#8C867C" stroke-width="1.6"><path d="M0 8h22M17 3l5 5-5 5"/></svg></div>
+
+    <div style="flex:0 0 258px; display:flex; flex-direction:column; gap:11px; justify-content:center;">
+      <span class="lbl">Trabajo con documentos</span>
+      <div class="route"><span class="rt">/subir</span><span class="rd">Dropzone, opciones y progreso por capa</span></div>
+      <div class="route"><span class="rt">/documentos/:id</span><span class="rd">Resumen, bloques, índice, costos, exportar</span></div>
+      <div class="route"><span class="rt">/consumo</span><span class="rd">Plan, gasto por día y por documento</span></div>
+      <div class="route"><span class="rt">/umbrales</span><span class="rd">Umbrales activos y auto-ajuste</span></div>
+      <div class="route"><span class="rt">/cuenta</span><span class="rd">Perfil, API keys, plan, webhook</span></div>
+    </div>
+
+    <div class="arrow"><svg width="26" height="16" viewBox="0 0 26 16" fill="none" stroke="#5A57E8" stroke-width="1.8"><path d="M0 8h22M17 3l5 5-5 5"/></svg></div>
+
+    <div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; justify-content:center;">
+      <span class="lbl" style="color:#5A57E8;">El núcleo del producto</span>
+      <div class="route route-key">
+        <span class="rt" style="color:#5A57E8;">/documentos/:id/revision</span>
+        <span class="rd">Visor a pantalla completa: cola de bloques, página con overlay de bboxes, panel de decisión. Cada decisión hace POST y avanza al siguiente bloque sin recargar.</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; padding-top:4px;">
+          <span class="pill" style="border-color:#5A57E8; color:#5A57E8; font-size:9.5px;">atajos A / E / R / X</span>
+          <span class="pill" style="border-color:#5A57E8; color:#5A57E8; font-size:9.5px;">borrador local</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <svg width="16" height="26" viewBox="0 0 16 26" fill="none" stroke="#8C867C" stroke-width="1.6"><path d="M8 0v20M3 15l5 5 5-5"/></svg>
+        <span class="rd" style="flex-grow:1;">Al terminar la cola vuelve a <span style="color:#26231F;">/documentos/:id</span> y las decisiones alimentan <span style="color:#26231F;">/umbrales</span>.</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:26px; flex-grow:1; overflow:hidden;">
+
+    <div class="wf" style="flex-grow:1; padding:18px 22px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="lbl">Contrato con la API</span>
+        <div style="flex-grow:1;"></div>
+        <span class="tag-ok">ya existe</span>
+        <span class="tag-new">hay que agregarlo</span>
+      </div>
+
+      <table style="width:100%; border-collapse:collapse;">
+        <tr><th style="width:30%;">Endpoint</th><th style="width:12%;">Estado</th><th style="width:22%;">Pantalla</th><th>Nota</th></tr>
+
+        <tr><td>POST /auth/login<br>POST /auth/registro</td><td><span class="tag-new">nuevo</span></td><td>/login · /registro</td><td>Hoy sólo hay <span style="color:#8C867C;">X-API-Key</span>. Un SPA necesita sesión con cookie httpOnly; la API key queda para máquinas.</td></tr>
+
+        <tr><td>POST /procesar</td><td><span class="tag-ok">existe</span></td><td>/subir</td><td>Es <span style="color:#BD6320;">síncrono</span>: bloquea el request ~15 s por PDF. Pasarlo a job en segundo plano que devuelva el id al instante.</td></tr>
+
+        <tr><td>GET /documentos/:id/estado</td><td><span class="tag-new">nuevo</span></td><td>/subir</td><td>Capa actual, bloques procesados y gasto parcial. Polling o SSE — es lo que hace posible la barra por capas.</td></tr>
+
+        <tr><td>GET /documentos</td><td><span class="tag-ok">existe</span></td><td>/documentos</td><td>Falta paginación real, búsqueda por título y filtro por estado.</td></tr>
+
+        <tr><td>GET /documentos/:id</td><td><span class="tag-ok">existe</span></td><td>/documentos/:id</td><td>Devuelve el resumen. Sirve tal cual para la pestaña Resumen.</td></tr>
+
+        <tr><td>GET /documentos/:id/bloques</td><td><span class="tag-new">nuevo</span></td><td>/…/revision · pestaña Bloques</td><td>Filtros por página, tipo y confianza máxima. Cada bloque con contenido, bbox, motor usado y corrección del LLM. <span style="color:#BD6320;">Sin esto no hay visor.</span></td></tr>
+
+        <tr><td>GET /documentos/:id/paginas/:n</td><td><span class="tag-new">nuevo</span></td><td>/…/revision</td><td>PNG de la página renderizada al DPI del triage, para dibujar el overlay encima.</td></tr>
+
+        <tr><td>POST /revision/:id/decision</td><td><span class="tag-ok">existe</span></td><td>/…/revision</td><td>Falta que la decisión actualice el contenido final del bloque, no sólo que quede registrada.</td></tr>
+
+        <tr><td>GET /consumo · GET /metricas</td><td><span class="tag-ok">existe</span></td><td>/consumo</td><td>Falta la serie por día y el desglose por documento y por cola.</td></tr>
+
+        <tr><td>GET /umbrales · POST /auto-ajuste</td><td><span class="tag-ok">existe</span></td><td>/umbrales</td><td>Falta un GET que liste los ajustes recomendados sin aplicarlos.</td></tr>
+
+        <tr><td>GET/POST/DELETE /api-keys</td><td><span class="tag-new">nuevo</span></td><td>/cuenta</td><td>Hoy las claves se crean por CLI. La clave en claro se devuelve una sola vez.</td></tr>
+
+        <tr><td>GET /documentos/:id/export</td><td><span class="tag-new">nuevo</span></td><td>/documentos/:id</td><td>JSON de bloques para Graphify, Markdown+LaTeX, .ipynb.</td></tr>
+      </table>
+    </div>
+
+    <div style="flex:0 0 330px; display:flex; flex-direction:column; gap:15px; overflow:hidden;">
+
+      <div class="wf" style="padding:15px 17px; display:flex; flex-direction:column; gap:11px;">
+        <span class="lbl">Stack del frontend</span>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; align-items:center; gap:9px;"><span style="font-size:11px;">React 19 + Vite + TypeScript</span></div>
+          <div style="display:flex; align-items:center; gap:9px;"><span style="font-size:11px;">React Router · rutas de arriba</span></div>
+          <div style="display:flex; align-items:center; gap:9px;"><span style="font-size:11px;">TanStack Query para la API</span></div>
+          <div style="display:flex; align-items:center; gap:9px;"><span style="font-size:11px;">Tipos generados del OpenAPI de FastAPI</span></div>
+          <div style="display:flex; align-items:center; gap:9px;"><span style="font-size:11px;">KaTeX para previsualizar LaTeX</span></div>
+        </div>
+        <span style="font-size:10px; color:#8C867C; line-height:1.5; border-top:1.5px dashed #DED9D1; padding-top:10px;">El build estático se sirve desde el mismo FastAPI, así no hay CORS ni un segundo despliegue.</span>
+      </div>
+
+      <div class="wf" style="border-color:#5A57E8; padding:15px 17px; display:flex; flex-direction:column; gap:11px;">
+        <span class="lbl" style="color:#5A57E8;">Orden sugerido de construcción</span>
+        <div style="display:flex; flex-direction:column; gap:9px;">
+          <div style="display:flex; gap:10px;"><span style="font-size:11px; color:#5A57E8; font-weight:600;">1</span><span style="font-size:10.5px; line-height:1.5;">Sesión, layout y <span style="color:#26231F;">/documentos</span> contra la API que ya existe.</span></div>
+          <div style="display:flex; gap:10px;"><span style="font-size:11px; color:#5A57E8; font-weight:600;">2</span><span style="font-size:10.5px; line-height:1.5;">Jobs en segundo plano + <span style="color:#26231F;">/subir</span> con progreso por capa.</span></div>
+          <div style="display:flex; gap:10px;"><span style="font-size:11px; color:#5A57E8; font-weight:600;">3</span><span style="font-size:10.5px; line-height:1.5;">Endpoints de bloques e imagen de página, y el visor de revisión.</span></div>
+          <div style="display:flex; gap:10px;"><span style="font-size:11px; color:#5A57E8; font-weight:600;">4</span><span style="font-size:10.5px; line-height:1.5;">Consumo, umbrales y gestión de API keys.</span></div>
+        </div>
+      </div>
+
+      <span class="note">El paso 3 es el que<br>justifica todo: sin visor,<br>la capa 6 sigue siendo<br>una CLI.</span>
+
+      <div style="flex-grow:1;"></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

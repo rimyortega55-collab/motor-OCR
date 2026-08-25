@@ -113,6 +113,10 @@ class Correccion(BaseModel):
 class Escalacion(BaseModel):
     requirio_escalacion: bool = False
     cola_origen: ColaOrigen | None = None
+    # Lo que devolvió el modelo, aparte del contenido del bloque. El panel de
+    # revisión compara "lo que leyó el motor" contra "lo que corrigió el modelo";
+    # sin guardar las dos versiones esa comparación no se puede mostrar.
+    contenido_llm: str | None = None
     confianza_llm: float | None = None
     requiere_revision_humana: bool = False
     razon_escalacion: str | None = None

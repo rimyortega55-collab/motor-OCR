@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin:0; font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; background:#FBFAF7; color:#26231F; }
+    a { color:#5A57E8; } a:hover { color:#3E3BC4; }
+    .wf { border:1.5px solid #26231F; border-radius:3px 7px 4px 6px; background:#FFFDF9; }
+    .soft { border:1.5px dashed #A8A198; border-radius:4px 8px 5px 7px; }
+    .bar { background:#DED9D1; border-radius:3px; height:9px; }
+    .note { font-family:'Caveat', cursive; font-size:18px; color:#BD6320; line-height:1.2; }
+    .lbl { font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; color:#8C867C; }
+    .btn { border:1.5px solid #26231F; border-radius:3px 7px 4px 6px; padding:11px 14px; font-size:11.5px; background:#FFFDF9; display:inline-flex; align-items:center; justify-content:center; gap:7px; }
+    .btn-primary { background:#5A57E8; color:#FFFDF9; }
+    .field { border:1.5px solid #26231F; border-radius:3px 7px 4px 6px; background:#FFFDF9; padding:11px 12px; font-size:11.5px; color:#A8A198; }
+    .pill { border:1.5px solid #26231F; border-radius:20px; padding:2px 9px; font-size:10px; }
+  </style>
+</helmet>
+
+<div style="display:flex; width:1440px; height:900px; overflow:hidden;">
+
+  <section style="flex:0 0 560px; background:#26231F; color:#F5F2EC; display:flex; flex-direction:column; padding:52px 48px; overflow:hidden;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5F2EC" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>
+      <span style="font-size:14px; font-weight:600;">motor-OCR</span>
+    </div>
+
+    <div style="flex-grow:1; display:flex; flex-direction:column; justify-content:center; gap:26px;">
+      <h1 style="margin:0; font-size:30px; font-weight:600; line-height:1.32; text-wrap:pretty;">OCR para documentos matemáticos, con la revisión humana incluida.</h1>
+      <p style="margin:0; font-size:12.5px; line-height:1.75; color:#B8B2A8; max-width:400px;">Siete capas deterministas: triage, segmentación, OCR especializado por tipo de bloque, corrección, escalación selectiva al LLM y feedback loop de umbrales. Vos sólo revisás lo que el motor no pudo resolver.</p>
+
+      <div style="display:flex; flex-direction:column; gap:11px; padding-top:6px;">
+        <div style="display:flex; align-items:center; gap:11px;">
+          <div style="width:22px; height:22px; border:1.5px solid #6B655C; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5px;">1</div>
+          <span style="font-size:11.5px; color:#D6D0C6;">Fórmulas a LaTeX con pix2tex, tablas con docTR</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:11px;">
+          <div style="width:22px; height:22px; border:1.5px solid #6B655C; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5px;">2</div>
+          <span style="font-size:11.5px; color:#D6D0C6;">El LLM sólo entra en lo ambiguo — costo medido por bloque</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:11px;">
+          <div style="width:22px; height:22px; border:1.5px solid #6B655C; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5px;">3</div>
+          <span style="font-size:11.5px; color:#D6D0C6;">Salida indexable como grafo de bloques</span>
+        </div>
+      </div>
+    </div>
+
+    <span style="font-size:10px; color:#6B655C;">[PLACEHOLDER: dominio y aviso legal]</span>
+  </section>
+
+  <section style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:40px; overflow:hidden;">
+
+    <div class="wf" style="width:372px; padding:28px 30px; display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <h2 style="margin:0; font-size:17px; font-weight:600;">Entrar</h2>
+        <span style="font-size:11px; color:#8C867C;">Sesión de navegador · la API key es para máquinas</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span class="lbl">Email</span>
+        <div class="field">rimyortega.55@gmail.com</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:center;">
+          <span class="lbl">Contraseña</span>
+          <div style="flex-grow:1;"></div>
+          <span style="font-size:10px; color:#5A57E8;">¿La olvidaste?</span>
+        </div>
+        <div class="field" style="display:flex; align-items:center; gap:9px;">
+          <span style="letter-spacing:2px; color:#26231F;">••••••••••</span>
+          <div style="flex-grow:1;"></div>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8A198" stroke-width="1.6"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>
+        </div>
+      </div>
+
+      <div class="btn btn-primary" style="width:100%;">Entrar</div>
+
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="flex-grow:1; border-top:1.5px dashed #DED9D1;"></div>
+        <span class="lbl">o</span>
+        <div style="flex-grow:1; border-top:1.5px dashed #DED9D1;"></div>
+      </div>
+
+      <div class="btn" style="width:100%;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3"/></svg>
+        Entrar con una API key
+      </div>
+
+      <span style="font-size:11px; color:#8C867C; text-align:center;">¿No tenés cuenta? <span style="color:#5A57E8;">Crear una</span></span>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:16px; width:372px;">
+      <span class="note" style="flex:0 0 auto;">Variante ▸</span>
+      <div class="soft" style="flex-grow:1; padding:16px 18px; display:flex; flex-direction:column; gap:11px; background:#F7F4EF;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:12.5px; font-weight:600;">Crear cuenta</span>
+          <span class="pill" style="border-color:#A8A198; color:#8C867C;">plan libre</span>
+        </div>
+        <div class="field" style="border-style:dashed; padding:8px 11px;">Nombre</div>
+        <div class="field" style="border-style:dashed; padding:8px 11px;">Email</div>
+        <div class="field" style="border-style:dashed; padding:8px 11px;">Contraseña (mín. 12 caracteres)</div>
+        <div class="btn btn-primary" style="width:100%; padding:8px 12px;">Crear cuenta y generar mi primera API key</div>
+        <span style="font-size:10px; color:#8C867C; line-height:1.45;">Al crearla se muestra la clave <span style="color:#26231F;">moc_…</span> una única vez: en la base sólo queda su hash.</span>
+      </div>
+    </div>
+
+    <div style="width:372px; display:flex; align-items:center; gap:12px;">
+      <span class="note" style="flex:0 0 auto;">Error ▸</span>
+      <div class="wf" style="flex-grow:1; border-color:#BD6320; background:#FBF1E8; padding:9px 12px; display:flex; align-items:center; gap:9px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BD6320" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
+        <span style="font-size:11px; color:#8A4A16;">Email o contraseña incorrectos</span>
+      </div>
+    </div>
+
+  </section>
+</div>
+</x-dc>
+</body>
+</html>

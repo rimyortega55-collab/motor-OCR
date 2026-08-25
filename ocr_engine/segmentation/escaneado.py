@@ -37,6 +37,8 @@ from ocr_engine.models import (
     Provenance,
 )
 
+from .bbox import normalizar_bbox
+
 
 def segmentar_escaneado(documento: Documento, imagen_pagina, pagina: int) -> list[Bloque]:
     """Segmenta una página escaneada, con docTR si está disponible."""
@@ -96,7 +98,7 @@ def _segmentar_con_doctr(documento: Documento, imagen_pagina, pagina: int) -> li
             pagina=pagina,
             tipo=tipo,
             layout=Layout(
-                bbox=(float(x0), float(y0), float(x1), float(y1)),
+                bbox=normalizar_bbox((x0, y0, x1, y1), (ancho, alto)),
                 orden_lectura=orden,
                 confianza_layout=float(region.get("confianza", 0.0)),
             ),
@@ -191,7 +193,7 @@ def _segmentar_con_morfologia(documento: Documento, imagen_pagina, pagina: int) 
             pagina=pagina,
             tipo=tipo,
             layout=Layout(
-                bbox=(float(x0), float(y0), float(x1), float(y1)),
+                bbox=normalizar_bbox((x0, y0, x1, y1), (ancho_pagina, alto_pagina)),
                 orden_lectura=orden_lectura,
                 confianza_layout=0.6,  # lower confidence for scanned
             ),

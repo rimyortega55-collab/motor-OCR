@@ -36,10 +36,21 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False
 
 
 def init_db() -> None:
-    """Crea las tablas que falten. Idempotente."""
+    """Crea las tablas que falten y migra las que existan. Idempotente."""
     from . import models  # noqa: F401  (registra los modelos en la metadata)
+    from .migraciones import migrar
 
+    # create_all primero: sólo crea las tablas que faltan y no toca las que ya
+    # están, así que es seguro sobre una base vieja. La migración necesita este
+    # orden porque el backfill de claves escribe en `api_keys`, que en una base
+    # anterior a la sesión de navegador todavía no existe; al revés, arrancar
+    # contra datos ya desplegados fallaba con "no such table: api_keys".
     Base.metadata.create_all(engine)
+
+    # Y después migrar, que es lo que create_all no hace: agregar columnas a
+    # tablas existentes, aflojar restricciones y mover datos.
+    for cambio in migrar(engine):
+        print(f"[MIGRACION] {cambio}")
 
 
 def get_session() -> Session:

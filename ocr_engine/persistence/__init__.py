@@ -14,7 +14,15 @@ sin tocar código.
 """
 
 from .db import Base, get_session, init_db, session_scope
-from .models import CostoRegistrado, DecisionAlmacenada, DocumentoAlmacenado, Usuario
+from .models import (
+    ApiKey,
+    BloqueAlmacenado,
+    CostoRegistrado,
+    DecisionAlmacenada,
+    DocumentoAlmacenado,
+    Sesion,
+    Usuario,
+)
 
 __all__ = [
     "Base",
@@ -22,6 +30,9 @@ __all__ = [
     "init_db",
     "session_scope",
     "Usuario",
+    "ApiKey",
+    "BloqueAlmacenado",
+    "Sesion",
     "DocumentoAlmacenado",
     "CostoRegistrado",
     "DecisionAlmacenada",

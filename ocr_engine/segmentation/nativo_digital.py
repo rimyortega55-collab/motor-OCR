@@ -21,6 +21,7 @@ from ocr_engine.models import (
     Contenido,
     Provenance,
 )
+from .bbox import normalizar_bbox
 from .taxonomia import clasificar_bloque
 
 import pymupdf as fitz
@@ -34,6 +35,10 @@ def segmentar_nativo_digital(documento: Documento, ruta_pdf: str, pagina: int) -
 
     page = doc[pagina]
     text_dict = page.get_text("dict")
+    # PyMuPDF da los bbox en puntos PDF (72 dpi). Se guardan normalizados a la
+    # caja de la página para que el bbox de un bloque signifique lo mismo venga
+    # de acá o del camino escaneado, donde sale en píxeles del render.
+    caja = (page.rect.width or 1.0, page.rect.height or 1.0)
     doc.close()
 
     bloques = []
@@ -67,6 +72,7 @@ def segmentar_nativo_digital(documento: Documento, ruta_pdf: str, pagina: int) -
                     # Save previous block if exists
                     if current_block_spans:
                         bloque = _crear_bloque(
+                            caja,
                             documento,
                             pagina,
                             current_block_spans,
@@ -91,6 +97,7 @@ def segmentar_nativo_digital(documento: Documento, ruta_pdf: str, pagina: int) -
     # Save final block
     if current_block_spans:
         bloque = _crear_bloque(
+            caja,
             documento,
             pagina,
             current_block_spans,
@@ -102,6 +109,7 @@ def segmentar_nativo_digital(documento: Documento, ruta_pdf: str, pagina: int) -
 
 
 def _crear_bloque(
+    caja: tuple[float, float],
     documento: Documento,
     pagina: int,
     spans: list,
@@ -129,7 +137,7 @@ def _crear_bloque(
         pagina=pagina,
         tipo=tipo_bloque,
         layout=Layout(
-            bbox=(x0, y0, x1, y1),
+            bbox=normalizar_bbox((x0, y0, x1, y1), caja),
             orden_lectura=orden_lectura,
             confianza_layout=0.95,  # high confidence for native-digital
         ),

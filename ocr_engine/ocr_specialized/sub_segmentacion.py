@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import cv2
 import numpy as np
+
+from ocr_engine.segmentation.bbox import desnormalizar_bbox
 import re
 from uuid import uuid4
 
@@ -97,8 +99,8 @@ def _sub_segmentar_nativo_digital(bloque: Bloque) -> list[tuple[str, str]]:
 def _sub_segmentar_escaneado(bloque: Bloque, imagen_pagina, dpi_objetivo: int) -> list[tuple[str, str]]:
     """Detecta regiones de fórmula en imagen usando características visuales."""
 
-    bbox = bloque.layout.bbox
-    x0, y0, x1, y1 = [int(c) for c in bbox]
+    alto, ancho = imagen_pagina.shape[:2]
+    x0, y0, x1, y1 = desnormalizar_bbox(bloque.layout.bbox, (ancho, alto))
 
     # Recorte de la región
     recorte = imagen_pagina[y0:y1, x0:x1]

@@ -13,6 +13,7 @@ de conectarse acá.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
 
 import numpy as np
@@ -37,13 +38,30 @@ class Pipeline:
     necesite reintentos/branching real.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, al_progresar: Callable[..., None] | None = None) -> None:
+        """`al_progresar(capa, estado, **datos)` se llama al entrar y salir de cada capa.
+
+        Es lo que permite mostrar una barra por capas mientras el documento se
+        procesa: el pipeline tarda minutos y hasta ahora no reportaba nada hasta
+        terminar. Es opcional, y si el callback falla no se corta el
+        procesamiento: informar el progreso nunca puede costar el trabajo hecho.
+        """
         self.ultima_correccion: DocumentPostCorrection | None = None
+        self._al_progresar = al_progresar
+
+    def _avisar(self, capa: int, estado: str, **datos) -> None:
+        if self._al_progresar is None:
+            return
+        try:
+            self._al_progresar(capa, estado, **datos)
+        except Exception:
+            pass
 
     def ejecutar(self, ruta_pdf: str) -> tuple[Documento, list[Bloque]]:
         titulo = Path(ruta_pdf).name
 
         # Capa 1: Triage
+        self._avisar(1, "en_curso")
         resultados_triage, zonas = procesar_triage(ruta_pdf)
 
         documento = Documento(
@@ -55,27 +73,62 @@ class Pipeline:
             zonas_dpi=zonas,
         )
 
+        origenes = {t.origen for t in resultados_triage}
+        self._avisar(
+            1,
+            "completada",
+            total_paginas=len(resultados_triage),
+            detalle=(
+                f"{len(resultados_triage)} páginas · "
+                f"{'/'.join(sorted(origenes)) or 'sin clasificar'} · "
+                f"{len(zonas)} zonas de DPI"
+            ),
+        )
+
         # Capa 2: Segmentación
+        self._avisar(2, "en_curso")
         bloques = segmentar_documento(documento, ruta_pdf, resultados_triage)
+
+        tipos = {b.tipo.value if hasattr(b.tipo, "value") else str(b.tipo) for b in bloques}
+        self._avisar(
+            2,
+            "completada",
+            total_bloques=len(bloques),
+            detalle=f"{len(bloques)} bloques · {len(tipos)} tipos",
+        )
 
         # Capa 3: OCR especializado (solo bloques que no traen texto nativo)
         dpi_por_pagina = {t.pagina: t.dpi_objetivo for t in resultados_triage}
         imagenes_pagina = self._ejecutar_ocr(ruta_pdf, bloques, dpi_por_pagina)
 
         # Capa 4: Corrección determinista
+        self._avisar(4, "en_curso")
         resultado_correccion = corregir_documento(documento, bloques)
         self.ultima_correccion = resultado_correccion
+        self._avisar(
+            4,
+            "completada",
+            detalle=(
+                f"{len(resultado_correccion.bloques_corregidos)} bloques corregidos · "
+                f"{len(resultado_correccion.inconsistencias_detectadas)} inconsistencias"
+            ),
+        )
 
         # Capa 5: Escalación LLM (best-effort: sin credenciales de Anthropic
         # configuradas, las colas simplemente no producen resultados).
         # Las imágenes de página son necesarias para la cola de micro-segmentos:
         # sin ellas no hay recorte que mandarle al modelo con visión.
+        self._avisar(5, "en_curso")
         try:
             procesar_escalaciones(
                 documento, bloques, resultado_correccion, imagenes_pagina
             )
-        except Exception:
-            pass
+            self._avisar(5, "completada")
+        except Exception as e:
+            # La escalación es best-effort, pero el estado tiene que decir que se
+            # omitió: mostrarla como completada haría creer que el modelo revisó
+            # bloques que en realidad nunca vio.
+            self._avisar(5, "omitida", detalle=str(e)[:200])
 
         return documento, bloques
 
@@ -88,6 +141,15 @@ class Pipeline:
         """Ejecuta Capa 3 y devuelve las páginas renderizadas, que Capa 5 reutiliza."""
         doc = fitz.open(ruta_pdf)
         imagenes_pagina: dict[int, np.ndarray] = {}
+
+        pendientes = [b for b in bloques if b.origen_contenido != OrigenContenido.TEXTO_NATIVO]
+        self._avisar(3, "en_curso", hechos=0, total=len(pendientes))
+
+        # Avisar bloque por bloque satura la base en documentos de 30 000
+        # bloques; cada 1 % la barra igual se mueve con fluidez.
+        paso = max(1, len(pendientes) // 100)
+        engines: dict[str, int] = {}
+        hechos = 0
 
         try:
             for bloque in bloques:
@@ -109,9 +171,30 @@ class Pipeline:
                 bloque.contenido.texto_plano = resultado_ocr.contenido
                 bloque.ocr.micro_segmentos = resultado_ocr.micro_segmentos
                 bloque.ocr.confianza_global = resultado_ocr.confianza_global
+
+                for micro in resultado_ocr.micro_segmentos:
+                    nombre = getattr(micro.engine_usado, "value", str(micro.engine_usado))
+                    engines[nombre] = engines.get(nombre, 0) + 1
+
+                hechos += 1
+                if hechos % paso == 0:
+                    self._avisar(
+                        3, "en_curso", hechos=hechos, total=len(pendientes), engines=dict(engines)
+                    )
         finally:
             doc.close()
 
+        self._avisar(
+            3,
+            "completada",
+            hechos=hechos,
+            total=len(pendientes),
+            engines=dict(engines),
+            detalle=(
+                ", ".join(f"{k}: {v}" for k, v in sorted(engines.items()))
+                or "sin bloques que requirieran OCR"
+            ),
+        )
         return imagenes_pagina
 
     @staticmethod

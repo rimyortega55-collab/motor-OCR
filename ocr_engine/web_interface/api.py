@@ -21,18 +21,20 @@ Endpoints:
 
 from __future__ import annotations
 
-import tempfile
+import base64
+import binascii
 from datetime import datetime, timezone
-from pathlib import Path
 from uuid import UUID, uuid4
 
-from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from sqlalchemy import func
+from sqlalchemy import and_, func, or_
 from sqlalchemy.orm import Session
 
 from ocr_engine.escalation.costo_tracking import limpiar_registro, obtener_registros
 from ocr_engine.persistence import (
+    BloqueAlmacenado,
     CostoRegistrado,
     DecisionAlmacenada,
     DocumentoAlmacenado,
@@ -43,12 +45,21 @@ from ocr_engine.pipeline import Pipeline
 from ocr_engine.revision import AnalizadorFeedback, DecisionRevision, GestorDecisiones
 from .ajuste_umbrales import AjustadorUmbrales
 from .auth import obtener_sesion, usuario_actual
+from .estaticos import INDICE, hay_build, montar_spa
+from .rutas_bloques import router as router_bloques
+from .rutas_cuenta import router as router_cuenta
+from .trabajos import encolar, marcar_colgados, progreso_inicial
 
 app = FastAPI(
     title="OCR Pipeline API",
     description="7 capas con persistencia y autenticación",
-    version="0.8"
+    version="0.9"
 )
+
+# Toda la API cuelga de /api. Sin ese prefijo, `GET /documentos` es a la vez el
+# endpoint de datos y la ruta principal del SPA: el navegador recibe JSON en vez
+# de la aplicacion.
+router_api = APIRouter(prefix="/api")
 
 ajustador = AjustadorUmbrales()
 gestor_decisiones = GestorDecisiones()
@@ -57,6 +68,11 @@ gestor_decisiones = GestorDecisiones()
 @app.on_event("startup")
 def _preparar_base() -> None:
     init_db()
+    # Si el proceso se reinició, los trabajos que estaban corriendo murieron con
+    # él: sin esto quedan en "procesando" para siempre.
+    colgados = marcar_colgados()
+    if colgados:
+        print(f"[TRABAJOS] {colgados} documentos colgados marcados como error")
 
 
 # ============================================================================
@@ -95,18 +111,26 @@ class EstadisticasGlobales(BaseModel):
 # ENDPOINTS PÚBLICOS
 # ============================================================================
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 async def root():
-    """Health check."""
+    """El SPA si esta compilado; si no, un health check.
+
+    En desarrollo el frontend lo sirve Vite en su propio puerto, asi que este
+    endpoint responde el JSON y sirve para verificar que la API esta viva.
+    """
+    if hay_build():
+        return FileResponse(INDICE, headers={"Cache-Control": "no-cache"})
+
     return {
         "status": "ok",
-        "version": "0.8",
+        "version": "0.9",
+        "spa": "sin compilar (corre `npm run build` en frontend/)",
         "capas": [1, 2, 3, 4, 5, 6, 7],
         "features": ["triage", "segmentacion", "ocr", "correccion", "llm", "revision", "web"]
     }
 
 
-@app.get("/salud")
+@router_api.get("/salud")
 async def health_check(sesion: Session = Depends(obtener_sesion)):
     """Health check con métricas. No expone datos de ningún usuario."""
     return {
@@ -121,110 +145,177 @@ async def health_check(sesion: Session = Depends(obtener_sesion)):
 # ENDPOINTS AUTENTICADOS
 # ============================================================================
 
-@app.post("/procesar")
+class TrabajoEncolado(BaseModel):
+    documento_id: str
+    estado: str
+    titulo: str
+
+
+@router_api.post("/procesar", status_code=202)
 async def procesar_pdf(
     file: UploadFile = File(...),
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
-):
-    """Procesa un PDF a través de las Capas 1-5."""
+) -> TrabajoEncolado:
+    """Encola un PDF y devuelve enseguida.
+
+    Antes corría las cinco capas dentro del request. Un PDF de 92 páginas tarda
+    minutos: el navegador cortaba por timeout mucho antes y el usuario no tenía
+    forma de saber si había pasado algo. Ahora el pipeline corre aparte y el
+    avance se consulta en `GET /documentos/{id}/estado`.
+    """
+
+    contenido = await file.read()
+    if not contenido:
+        raise HTTPException(
+            status_code=400,
+            detail={"codigo": "archivo_vacio", "detail": "El archivo llegó vacío"},
+        )
 
     documento_id = str(uuid4())
-    # tempfile en vez de "/tmp" fijo: esa ruta no existe en Windows y hacía
-    # fallar el endpoint antes siquiera de abrir el PDF.
-    ruta_temporal = Path(tempfile.gettempdir()) / f"ocr_{documento_id}.pdf"
-
     registro = DocumentoAlmacenado(
         id=documento_id,
         usuario_id=usuario.id,
         titulo=file.filename or "sin-nombre.pdf",
-        estado="procesando",
+        estado="en_cola",
+        progreso=progreso_inicial(),
     )
     sesion.add(registro)
     sesion.commit()
 
-    try:
-        ruta_temporal.write_bytes(await file.read())
+    # Se pasa el contenido en memoria y no la ruta: el archivo temporal lo crea
+    # el worker, así no depende de que el request siga vivo.
+    encolar(documento_id, contenido, usuario.id)
 
-        # Pipeline completo. Antes se llamaba a las capas sueltas y quedaban
-        # afuera la 3 (OCR) y la 5 (escalación).
-        documento, bloques = Pipeline().ejecutar(str(ruta_temporal))
-
-        inconsistencias = len(documento.inconsistencias_no_resueltas)
-        baja_confianza = [
-            b for b in bloques
-            if (b.ocr.confianza_global is not None and b.ocr.confianza_global < 0.7)
-        ]
-
-        costo_total = _persistir_costos(
-            sesion, usuario, registro, documento.documento_id
-        )
-
-        registro.estado = "completado"
-        registro.total_paginas = documento.total_paginas
-        registro.total_bloques = len(bloques)
-        registro.inconsistencias = inconsistencias
-        registro.necesita_revision = bool(baja_confianza or inconsistencias)
-        registro.resultado = _resumir_documento(documento, bloques)
-        registro.actualizado_en = datetime.now(timezone.utc)
-        sesion.commit()
-
-        return ResultadoOCR(
-            documento_id=documento_id,
-            titulo=registro.titulo,
-            total_paginas=documento.total_paginas,
-            total_bloques=len(bloques),
-            bloques_con_baja_confianza=len(baja_confianza),
-            inconsistencias=inconsistencias,
-            necesita_revision=registro.necesita_revision,
-            costo_usd=costo_total,
-        )
-
-    except Exception as e:
-        # El documento queda registrado como fallido en vez de desaparecer: el
-        # usuario necesita poder ver que su envío se procesó y con qué error.
-        registro.estado = "error"
-        registro.error = str(e)
-        registro.actualizado_en = datetime.now(timezone.utc)
-        sesion.commit()
-        raise HTTPException(status_code=400, detail=str(e))
-
-    finally:
-        ruta_temporal.unlink(missing_ok=True)
-        limpiar_registro(documento_id)
+    return TrabajoEncolado(
+        documento_id=documento_id, estado="en_cola", titulo=registro.titulo
+    )
 
 
-@app.get("/documentos")
+@router_api.get("/documentos/{documento_id}/estado")
+async def estado_documento(
+    documento_id: str,
+    usuario: Usuario = Depends(usuario_actual),
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Progreso por capa. Es lo que hace posible la barra de la pantalla de subida."""
+
+    documento = _documento_del_usuario(sesion, usuario, documento_id)
+    progreso = documento.progreso or progreso_inicial()
+
+    costo_parcial = (
+        sesion.query(func.coalesce(func.sum(CostoRegistrado.costo_usd), 0.0))
+        .filter(CostoRegistrado.documento_id == documento_id)
+        .scalar()
+    )
+
+    return {
+        "documento_id": documento.id,
+        "titulo": documento.titulo,
+        "estado": documento.estado,
+        "capa_actual": progreso.get("capa_actual"),
+        "capas": progreso.get("capas", []),
+        "total_paginas": documento.total_paginas,
+        "total_bloques": documento.total_bloques,
+        "costo_usd_parcial": float(costo_parcial or 0.0),
+        "error": documento.error,
+        "actualizado_en": (
+            documento.actualizado_en.isoformat() if documento.actualizado_en else None
+        ),
+    }
+
+
+@router_api.get("/documentos")
 async def listar_documentos(
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
     limite: int = 50,
+    cursor: str | None = None,
+    estado: str | None = None,
+    buscar: str | None = None,
+    necesita_revision: bool | None = None,
 ):
-    """Documentos del usuario, del más reciente al más viejo."""
+    """Documentos del usuario, del más reciente al más viejo.
 
+    Pagina por cursor y no por OFFSET: con miles de documentos, saltear filas
+    obliga a la base a recorrer todo lo salteado en cada página.
+    """
+
+    limite = max(1, min(limite, 200))
+
+    consulta = sesion.query(DocumentoAlmacenado).filter(
+        DocumentoAlmacenado.usuario_id == usuario.id
+    )
+
+    if estado:
+        consulta = consulta.filter(DocumentoAlmacenado.estado == estado)
+
+    if buscar:
+        # `ilike` con comodines a los dos lados: el usuario busca por un pedazo
+        # del nombre del archivo, no por su prefijo.
+        patron = f"%{buscar.strip()}%"
+        consulta = consulta.filter(DocumentoAlmacenado.titulo.ilike(patron))
+
+    if necesita_revision is not None:
+        consulta = consulta.filter(
+            DocumentoAlmacenado.necesita_revision.is_(necesita_revision)
+        )
+
+    # El total se cuenta antes del cursor: es "cuántos hay en este filtro", no
+    # "cuántos quedan", que es lo que la interfaz muestra junto a los chips.
+    total = consulta.count()
+
+    if cursor:
+        fecha_corte, id_corte = _descifrar_cursor(cursor)
+        consulta = consulta.filter(
+            or_(
+                DocumentoAlmacenado.creado_en < fecha_corte,
+                and_(
+                    DocumentoAlmacenado.creado_en == fecha_corte,
+                    DocumentoAlmacenado.id < id_corte,
+                ),
+            )
+        )
+
+    # El id desempata: dos documentos subidos en el mismo instante harían que el
+    # cursor saltee o repita filas si el orden no fuera total.
     documentos = (
-        sesion.query(DocumentoAlmacenado)
-        .filter(DocumentoAlmacenado.usuario_id == usuario.id)
-        .order_by(DocumentoAlmacenado.creado_en.desc())
-        .limit(min(limite, 200))
+        consulta.order_by(
+            DocumentoAlmacenado.creado_en.desc(), DocumentoAlmacenado.id.desc()
+        )
+        .limit(limite + 1)
         .all()
     )
 
-    return [
-        {
-            "documento_id": d.id,
-            "titulo": d.titulo,
-            "estado": d.estado,
-            "total_paginas": d.total_paginas,
-            "total_bloques": d.total_bloques,
-            "necesita_revision": d.necesita_revision,
-            "creado_en": d.creado_en.isoformat() if d.creado_en else None,
-        }
-        for d in documentos
-    ]
+    hay_mas = len(documentos) > limite
+    documentos = documentos[:limite]
+
+    siguiente = (
+        _cifrar_cursor(documentos[-1].creado_en, documentos[-1].id)
+        if hay_mas and documentos
+        else None
+    )
+
+    return {
+        "items": [
+            {
+                "documento_id": d.id,
+                "titulo": d.titulo,
+                "estado": d.estado,
+                "total_paginas": d.total_paginas,
+                "total_bloques": d.total_bloques,
+                "inconsistencias": d.inconsistencias,
+                "necesita_revision": d.necesita_revision,
+                "creado_en": d.creado_en.isoformat() if d.creado_en else None,
+            }
+            for d in documentos
+        ],
+        "siguiente_cursor": siguiente,
+        "total": total,
+    }
 
 
-@app.get("/documentos/{documento_id}")
+@router_api.get("/documentos/{documento_id}")
 async def obtener_documento(
     documento_id: str,
     usuario: Usuario = Depends(usuario_actual),
@@ -255,59 +346,122 @@ async def obtener_documento(
     }
 
 
-@app.post("/revision/{documento_id}/decision")
+@router_api.post("/revision/{documento_id}/decision")
 async def registrar_decision(
     documento_id: str,
     decision: DecisionUsuario,
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
 ):
-    """Registra una decisión de revisión humana."""
+    """Registra una decisión de revisión humana y la aplica al bloque.
+
+    El cliente manda sólo la decisión y el contenido: el tipo de bloque, la
+    página y la confianza del motor los completa el servidor leyendo el bloque.
+    Antes se guardaban vacíos porque el cliente no los mandaba, y el auto-ajuste
+    de umbrales agrupa las decisiones justamente por tipo de bloque, así que el
+    feedback loop no podía aprender nada.
+    """
 
     documento = _documento_del_usuario(sesion, usuario, documento_id)
 
-    try:
-        almacenada = DecisionAlmacenada(
-            documento_id=documento.id,
-            bloque_id=decision.bloque_id,
-            tipo_bloque="",
+    bloque = (
+        sesion.query(BloqueAlmacenado)
+        .filter(
+            BloqueAlmacenado.id == decision.bloque_id,
+            BloqueAlmacenado.documento_id == documento.id,
+        )
+        .one_or_none()
+    )
+
+    if bloque is None:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "codigo": "bloque_no_pertenece_al_documento",
+                "detail": "Ese bloque no es de este documento",
+            },
+        )
+
+    contenido_original = bloque.contenido_final or bloque.latex or bloque.texto_plano or ""
+
+    almacenada = DecisionAlmacenada(
+        documento_id=documento.id,
+        bloque_id=bloque.id,
+        pagina=bloque.pagina,
+        tipo_bloque=bloque.tipo,
+        decision=decision.decision,
+        contenido_original=contenido_original,
+        contenido_final=decision.contenido_final,
+        confianza_engine=bloque.confianza_global or 0.0,
+        confianza_usuario=decision.confianza_usuario,
+        comentarios=decision.comentarios,
+        revisor=usuario.nombre,
+    )
+    sesion.add(almacenada)
+
+    # La decisión se escribe en el bloque: sin esto quedaba registrada pero la
+    # exportación seguía entregando el texto sin corregir.
+    if decision.decision != "escalar":
+        bloque.contenido_final = decision.contenido_final
+        bloque.estado_revision = "resuelto"
+
+    # La sesión se crea con autoflush=False, así que sin esto las consultas de
+    # abajo verían el bloque todavía pendiente y devolverían un conteo de más.
+    sesion.flush()
+
+    # El gestor en memoria alimenta el analizador de feedback y el auto-ajuste.
+    gestor_decisiones.registrar_decision(
+        DecisionRevision(
+            bloque_id=UUID(bloque.id),
+            documento_id=UUID(documento.id),
+            pagina=bloque.pagina,
+            tipo_bloque=bloque.tipo,
             decision=decision.decision,
+            contenido_original=contenido_original,
             contenido_final=decision.contenido_final,
+            confianza_engine=bloque.confianza_global or 0.0,
             confianza_usuario=decision.confianza_usuario,
             comentarios=decision.comentarios,
             revisor=usuario.nombre,
         )
-        sesion.add(almacenada)
+    )
 
-        # Se mantiene el gestor en memoria porque el analizador de feedback y el
-        # auto-ajuste de umbrales (Capa 7) consumen su caché.
-        gestor_decisiones.registrar_decision(
-            DecisionRevision(
-                bloque_id=UUID(decision.bloque_id),
-                documento_id=UUID(documento.id),
-                pagina=0,
-                tipo_bloque="",
-                decision=decision.decision,
-                contenido_original="",
-                contenido_final=decision.contenido_final,
-                confianza_engine=0.0,
-                confianza_usuario=decision.confianza_usuario,
-                comentarios=decision.comentarios,
-                revisor=usuario.nombre,
-            )
+    siguiente = (
+        sesion.query(BloqueAlmacenado)
+        .filter(
+            BloqueAlmacenado.documento_id == documento.id,
+            BloqueAlmacenado.estado_revision == "pendiente",
+            BloqueAlmacenado.id != bloque.id,
         )
+        .order_by(
+            BloqueAlmacenado.confianza_global.is_(None),
+            BloqueAlmacenado.confianza_global.asc(),
+        )
+        .first()
+    )
 
-        sesion.commit()
-        return {"status": "ok", "decision_id": almacenada.id}
+    # Quedan pendientes: si ya no hay ninguno, la revisión terminó.
+    pendientes = (
+        sesion.query(func.count(BloqueAlmacenado.id))
+        .filter(
+            BloqueAlmacenado.documento_id == documento.id,
+            BloqueAlmacenado.estado_revision == "pendiente",
+        )
+        .scalar()
+    ) or 0
 
-    except HTTPException:
-        raise
-    except Exception as e:
-        sesion.rollback()
-        raise HTTPException(status_code=400, detail=str(e))
+    documento.necesita_revision = pendientes > 0
+    sesion.commit()
+
+    return {
+        "decision_id": almacenada.id,
+        # Evita un round-trip: el visor avanza sin volver a pedir la cola.
+        "siguiente_bloque_id": siguiente.id if siguiente else None,
+        "pendientes": pendientes,
+    }
 
 
-@app.get("/consumo")
+@router_api.get("/consumo")
 async def obtener_consumo(
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
@@ -349,7 +503,7 @@ async def obtener_consumo(
     }
 
 
-@app.get("/metricas")
+@router_api.get("/metricas")
 async def obtener_metricas(
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
@@ -387,7 +541,7 @@ async def obtener_metricas(
     )
 
 
-@app.post("/auto-ajuste")
+@router_api.post("/auto-ajuste")
 async def aplicar_auto_ajuste(usuario: Usuario = Depends(usuario_actual)):
     """Aplica auto-ajuste de umbrales basado en feedback."""
 
@@ -416,7 +570,7 @@ async def aplicar_auto_ajuste(usuario: Usuario = Depends(usuario_actual)):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@app.get("/umbrales")
+@router_api.get("/umbrales")
 async def obtener_umbrales(usuario: Usuario = Depends(usuario_actual)):
     """Obtiene la configuración actual de umbrales."""
     return ajustador.obtener_resumen_umbrales()
@@ -425,6 +579,31 @@ async def obtener_umbrales(usuario: Usuario = Depends(usuario_actual)):
 # ============================================================================
 # AUXILIARES
 # ============================================================================
+
+def _cifrar_cursor(creado_en: datetime | None, documento_id: str) -> str:
+    """Empaqueta la última fila de la página como cursor opaco.
+
+    Se codifica en base64 para que el frontend no lo interprete ni lo arme a
+    mano: si mañana el orden cambia, el contenido del cursor cambia sin romper
+    a nadie.
+    """
+    marca = creado_en.isoformat() if creado_en else ""
+    crudo = f"{marca}|{documento_id}".encode("utf-8")
+    return base64.urlsafe_b64encode(crudo).decode("ascii")
+
+
+def _descifrar_cursor(cursor: str) -> tuple[datetime, str]:
+    try:
+        crudo = base64.urlsafe_b64decode(cursor.encode("ascii")).decode("utf-8")
+        marca, documento_id = crudo.split("|", 1)
+        return datetime.fromisoformat(marca), documento_id
+    except (ValueError, TypeError, binascii.Error):
+        # Un cursor inválido es un pedido mal formado, no un error del servidor.
+        raise HTTPException(
+            status_code=400,
+            detail={"codigo": "cursor_invalido", "detail": "El cursor no es válido"},
+        )
+
 
 def _documento_del_usuario(
     sesion: Session, usuario: Usuario, documento_id: str
@@ -450,51 +629,13 @@ def _documento_del_usuario(
     return documento
 
 
-def _persistir_costos(
-    sesion: Session,
-    usuario: Usuario,
-    registro: DocumentoAlmacenado,
-    documento_interno_id,
-) -> float:
-    """Vuelca a la base los costos que la Capa 5 acumuló para este documento."""
+# ============================================================================
+# CABLEADO
+# ============================================================================
 
-    total = 0.0
-    for r in obtener_registros(documento_interno_id):
-        total += r.costo_usd
-        sesion.add(
-            CostoRegistrado(
-                usuario_id=usuario.id,
-                documento_id=registro.id,
-                bloque_id=r.bloque_id,
-                tipo_cola=r.tipo_cola,
-                modelo=r.modelo,
-                tokens_entrada=r.tokens_entrada,
-                tokens_salida=r.tokens_salida,
-                costo_usd=r.costo_usd,
-                razon_escalacion=r.razon_escalacion,
-            )
-        )
-
-    return total
-
-
-def _resumir_documento(documento, bloques) -> dict:
-    """Resumen serializable del resultado, para devolverlo sin reprocesar."""
-
-    por_tipo: dict[str, int] = {}
-    for bloque in bloques:
-        clave = bloque.tipo.value if hasattr(bloque.tipo, "value") else str(bloque.tipo)
-        por_tipo[clave] = por_tipo.get(clave, 0) + 1
-
-    confianzas = [
-        b.ocr.confianza_global for b in bloques if b.ocr.confianza_global is not None
-    ]
-
-    return {
-        "bloques_por_tipo": por_tipo,
-        "confianza_media": (sum(confianzas) / len(confianzas)) if confianzas else None,
-        "inconsistencias": [
-            {"tipo": i.tipo, "detalle": i.detalle, "pagina": i.ubicacion_pagina}
-            for i in documento.inconsistencias_no_resueltas
-        ],
-    }
+app.include_router(router_api)
+app.include_router(router_cuenta, prefix="/api")
+app.include_router(router_bloques, prefix="/api")
+# Al final del modulo a proposito: el catch-all del SPA tiene que registrarse
+# despues de todas las rutas de la API para no taparlas.
+montar_spa(app)

@@ -5,7 +5,7 @@ description = "Pipeline OCR de 7 capas con salida indexable por Graphify"
 requires-python = ">=3.11"
 dependencies = [
     # Modelos y configuración
-    "pydantic>=2",
+    "pydantic[email]>=2",
     "pydantic-settings>=2",
     # Lectura de PDF e imagen
     "pymupdf",

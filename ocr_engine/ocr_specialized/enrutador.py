@@ -21,6 +21,8 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
+from ocr_engine.segmentation.bbox import desnormalizar_bbox
+
 from ocr_engine.models import (
     Bloque, TipoBloque, OrigenContenido, MicroSegmento, EngineOcr
 )
@@ -115,14 +117,10 @@ def _extraer_recorte_bloque(bloque: Bloque, imagen_pagina) -> np.ndarray | None:
     if imagen_pagina is None:
         return None
 
-    bbox = bloque.layout.bbox
-    x0, y0, x1, y1 = [int(c) for c in bbox]
-
-    # Asegurar que está dentro de los límites
-    x0 = max(0, x0)
-    y0 = max(0, y0)
-    x1 = min(imagen_pagina.shape[1], x1)
-    y1 = min(imagen_pagina.shape[0], y1)
+    # El bbox viene normalizado a la caja de la página; acá hacen falta píxeles
+    # de esta imagen en particular, que depende del DPI con que se renderizó.
+    alto, ancho = imagen_pagina.shape[:2]
+    x0, y0, x1, y1 = desnormalizar_bbox(bloque.layout.bbox, (ancho, alto))
 
     if x0 >= x1 or y0 >= y1:
         return None

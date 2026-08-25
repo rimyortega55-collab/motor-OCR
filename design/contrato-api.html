@@ -1,0 +1,526 @@
+<title>Contrato de API motor-OCR</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+  :root {
+    --ground:#FBFAF7; --surface:#FFFDF9; --surface-2:#F4F1EB;
+    --ink:#26231F; --ink-soft:#4A453E; --muted:#6B655C; --faint:#948D83;
+    --rule:#E2DDD4; --rule-soft:#EDE9E1;
+    --accent:#4F4CDE; --accent-soft:#EEEDFB; --accent-line:#C7C5F2;
+    --warn:#A8551A; --warn-soft:#FAEFE5; --warn-line:#E4C4A5;
+    --code-bg:#F4F1EB;
+    --shadow:0 1px 2px rgba(38,35,31,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#161513; --surface:#1E1C1A; --surface-2:#26241F;
+      --ink:#EFEBE4; --ink-soft:#D2CCC2; --muted:#A29B90; --faint:#7C756B;
+      --rule:#37342E; --rule-soft:#2A2723;
+      --accent:#A6A3FF; --accent-soft:#232236; --accent-line:#3E3C63;
+      --warn:#E0A06B; --warn-soft:#2C2119; --warn-line:#5A4227;
+      --code-bg:#232120;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#161513; --surface:#1E1C1A; --surface-2:#26241F;
+    --ink:#EFEBE4; --ink-soft:#D2CCC2; --muted:#A29B90; --faint:#7C756B;
+    --rule:#37342E; --rule-soft:#2A2723;
+    --accent:#A6A3FF; --accent-soft:#232236; --accent-line:#3E3C63;
+    --warn:#E0A06B; --warn-soft:#2C2119; --warn-line:#5A4227;
+    --code-bg:#232120;
+    --shadow:none;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size:15.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  code, pre, .mono { font-family:'IBM Plex Mono', ui-monospace, 'Courier New', monospace; }
+
+  .wrap { display:grid; grid-template-columns:236px minmax(0,1fr); gap:56px; max-width:1180px; margin:0 auto; padding:56px 32px 120px; }
+  @media (max-width:920px) { .wrap { grid-template-columns:minmax(0,1fr); gap:0; padding:36px 20px 80px; } nav.toc { position:static; margin-bottom:44px; } }
+
+  /* ---- rail ---- */
+  nav.toc { position:sticky; top:36px; align-self:start; display:flex; flex-direction:column; gap:3px; font-size:13px; }
+  nav.toc .eyebrow { font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--faint); margin-bottom:11px; }
+  nav.toc a { display:flex; gap:9px; text-decoration:none; color:var(--muted); padding:4px 0; border-radius:3px; }
+  nav.toc a:hover { color:var(--accent); }
+  nav.toc a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  nav.toc a .n { font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--faint); min-width:14px; }
+  nav.toc .sep { height:1px; background:var(--rule); margin:12px 0; }
+
+  /* ---- masthead ---- */
+  header.mast { margin-bottom:52px; }
+  .kicker { font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+  h1 { font-size:38px; line-height:1.16; font-weight:600; letter-spacing:-.017em; margin:14px 0 0; text-wrap:balance; }
+  .dek { font-size:17px; line-height:1.6; color:var(--muted); margin:16px 0 0; max-width:62ch; text-wrap:pretty; }
+  .mast-meta { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+
+  h2 { font-size:23px; font-weight:600; letter-spacing:-.012em; margin:0; text-wrap:balance; }
+  h3 { font-size:16.5px; font-weight:600; margin:0 0 10px; }
+  section { margin-bottom:56px; scroll-margin-top:28px; }
+  .sec-head { display:flex; align-items:baseline; gap:13px; padding-bottom:13px; border-bottom:1px solid var(--rule); margin-bottom:26px; }
+  .sec-head .n { font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--faint); }
+  p { margin:0 0 15px; max-width:70ch; text-wrap:pretty; }
+  p:last-child { margin-bottom:0; }
+  ul { margin:0 0 15px; padding-left:20px; max-width:70ch; }
+  li { margin-bottom:7px; }
+  strong { font-weight:600; }
+  a { color:var(--accent); text-underline-offset:2px; }
+
+  code:not(pre code) { font-size:.88em; background:var(--code-bg); border-radius:3px; padding:1.5px 5px; color:var(--ink-soft); }
+  pre { background:var(--code-bg); border:1px solid var(--rule-soft); border-radius:6px; padding:15px 17px; overflow-x:auto; font-size:13px; line-height:1.62; margin:0 0 16px; color:var(--ink-soft); }
+  pre .c { color:var(--faint); }
+  pre .k { color:var(--accent); }
+
+  /* ---- badges ---- */
+  .badge { display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:20px; border:1px solid var(--rule); color:var(--muted); background:var(--surface); white-space:nowrap; }
+  .badge.nuevo { color:var(--warn); border-color:var(--warn-line); background:var(--warn-soft); }
+  .badge.existe { color:var(--muted); }
+  .badge.mod { color:var(--accent); border-color:var(--accent-line); background:var(--accent-soft); }
+  .badge.blocker { color:var(--warn); border-color:var(--warn-line); background:var(--warn-soft); }
+  .badge.listo { color:var(--ground); border-color:var(--ink); background:var(--ink); }
+
+  /* ---- endpoint card ---- */
+  .ep { border:1px solid var(--rule); border-radius:7px; background:var(--surface); box-shadow:var(--shadow); padding:18px 20px; margin-bottom:18px; }
+  .ep-head { display:flex; flex-wrap:wrap; align-items:center; gap:11px; margin-bottom:12px; }
+  .verb { font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600; letter-spacing:.05em; padding:3px 8px; border-radius:4px; background:var(--ink); color:var(--ground); }
+  .verb.get { background:var(--accent); color:var(--surface); }
+  .verb.del { background:var(--warn); color:var(--surface); }
+  .path { font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:500; color:var(--ink); word-break:break-all; }
+  .ep p { font-size:14.5px; }
+  .ep pre { margin-bottom:12px; }
+  .ep > :last-child { margin-bottom:0; }
+
+  /* ---- callout ---- */
+  .note { border:1px solid var(--rule); border-radius:7px; background:var(--surface-2); padding:15px 18px; margin:0 0 18px; }
+  .note.warn { border-color:var(--warn-line); background:var(--warn-soft); }
+  .note .lab { font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:8px; }
+  .note.warn .lab { color:var(--warn); }
+  .note p { font-size:14.5px; }
+
+  /* ---- tables ---- */
+  .tw { overflow-x:auto; margin:0 0 18px; border:1px solid var(--rule); border-radius:7px; background:var(--surface); }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  th { text-align:left; font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); font-weight:500; padding:11px 15px; border-bottom:1px solid var(--rule); white-space:nowrap; }
+  td { padding:11px 15px; border-bottom:1px solid var(--rule-soft); vertical-align:top; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
+  tr:last-child td { border-bottom:none; }
+  td.mono, th.mono { font-family:'IBM Plex Mono', monospace; font-size:12.5px; }
+
+  /* ---- steps ---- */
+  ol.steps { list-style:none; margin:0; padding:0; counter-reset:s; display:flex; flex-direction:column; gap:13px; max-width:70ch; }
+  ol.steps li { counter-increment:s; display:flex; gap:15px; margin:0; }
+  ol.steps li::before { content:counter(s); flex:0 0 26px; height:26px; border-radius:50%; border:1px solid var(--rule); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); }
+
+  footer { border-top:1px solid var(--rule); padding-top:22px; margin-top:8px; font-size:13.5px; color:var(--muted); max-width:70ch; }
+</style>
+
+<div class="wrap">
+
+<nav class="toc">
+  <span class="eyebrow">Secciones</span>
+  <a href="#s1"><span class="n">1</span>Prerrequisitos</a>
+  <a href="#s2"><span class="n">2</span>Convenciones</a>
+  <a href="#s3"><span class="n">3</span>Sesión</a>
+  <a href="#s4"><span class="n">4</span>Procesamiento</a>
+  <a href="#s5"><span class="n">5</span>Bloques y páginas</a>
+  <a href="#s6"><span class="n">6</span>Revisión</a>
+  <a href="#s7"><span class="n">7</span>Umbrales</a>
+  <a href="#s8"><span class="n">8</span>API keys</a>
+  <a href="#s9"><span class="n">9</span>Consumo</a>
+  <a href="#s10"><span class="n">10</span>Exportación</a>
+  <div class="sep"></div>
+  <a href="#s11"><span class="n">11</span>Resumen y orden</a>
+</nav>
+
+<main>
+
+<header class="mast">
+  <span class="kicker">Propuesta · motor-OCR</span>
+  <h1>Contrato de API para el frontend</h1>
+  <p class="dek">Lo que el SPA de React necesita del FastAPI. Los pasos 1, 2 y 3 —&nbsp;sesión, API keys, listado, procesamiento asíncrono y los bloques que hacen posible el visor de revisión&nbsp;— ya están implementados y con pruebas. Falta el paso 4 (umbrales por usuario) y el 5 (consumo y exportación).</p>
+  <div class="mast-meta">
+    <span class="badge listo">15 implementados</span>
+    <span class="badge nuevo">4 pendientes</span>
+    <span class="badge listo">3 prerrequisitos resueltos</span>
+  </div>
+</header>
+
+<section id="s1">
+  <div class="sec-head"><span class="n">01</span><h2>Tres prerrequisitos de almacenamiento</h2><span class="badge listo">resueltos</span></div>
+  <p>No son endpoints, pero sin ellos la mitad del contrato no se puede implementar. Los tres salieron de leer el pipeline, no de suponer.</p>
+
+  <h3>1.1 &nbsp;Los bloques no se persisten</h3>
+  <p><code>POST /procesar</code> calcula miles de <code>Bloque</code> y los tira. <code>_resumir_documento</code> guarda en <code>documentos.resultado</code> sólo conteos por tipo, confianza media y la lista de inconsistencias. El visor de revisión necesita los bloques uno por uno, así que hace falta una tabla <code>bloques</code>:</p>
+
+  <div class="tw"><table>
+    <tr><th class="mono">columna</th><th class="mono">tipo</th><th>nota</th></tr>
+    <tr><td class="mono">id</td><td class="mono">String(36) PK</td><td>el <code>Bloque.id</code></td></tr>
+    <tr><td class="mono">documento_id</td><td class="mono">FK CASCADE</td><td>indexado</td></tr>
+    <tr><td class="mono">pagina</td><td class="mono">Integer</td><td>0-based, como en el pipeline</td></tr>
+    <tr><td class="mono">orden_lectura</td><td class="mono">Integer</td><td>de <code>Layout.orden_lectura</code></td></tr>
+    <tr><td class="mono">tipo</td><td class="mono">String(30)</td><td>valor de <code>TipoBloque</code></td></tr>
+    <tr><td class="mono">origen_contenido</td><td class="mono">String(20)</td><td><code>texto_nativo</code> / <code>requiere_ocr</code></td></tr>
+    <tr><td class="mono">bbox</td><td class="mono">JSON</td><td><strong>normalizado</strong>, ver 1.3</td></tr>
+    <tr><td class="mono">confianza_layout</td><td class="mono">Float</td><td></td></tr>
+    <tr><td class="mono">confianza_global</td><td class="mono">Float?</td><td><code>Ocr.confianza_global</code></td></tr>
+    <tr><td class="mono">texto_plano · latex</td><td class="mono">Text?</td><td></td></tr>
+    <tr><td class="mono">contenido_final</td><td class="mono">Text?</td><td>lo que dejó la revisión humana</td></tr>
+    <tr><td class="mono">micro_segmentos</td><td class="mono">JSON</td><td>lista de <code>MicroSegmento</code></td></tr>
+    <tr><td class="mono">escalacion</td><td class="mono">JSON?</td><td>el <code>Escalacion</code> del bloque</td></tr>
+    <tr><td class="mono">estado_revision</td><td class="mono">String(20)</td><td><code>pendiente</code> / <code>resuelto</code> / <code>no_requiere</code></td></tr>
+  </table></div>
+
+  <p>Índices: <code>(documento_id, pagina, orden_lectura)</code> para el visor y <code>(documento_id, estado_revision, confianza_global)</code> para armar la cola. Una fila por bloque en vez de un JSON gigante en <code>documentos.resultado</code>, porque la cola filtra y pagina sobre 31 000 bloques: deserializar el documento entero en cada request no escala.</p>
+
+  <h3>1.2 &nbsp;El PDF original se borra</h3>
+  <p><code>api.py</code> hace <code>ruta_temporal.unlink(missing_ok=True)</code> en el <code>finally</code>. Para servir la imagen de una página hay dos caminos: guardar el PDF y renderizar a demanda con caché, o guardar los PNG ya renderizados de las páginas con bloques en la cola.</p>
+  <p><strong>Recomendación:</strong> guardar el PDF y renderizar a demanda. El visor sólo pide las páginas que el revisor abre, que son pocas. Esto obliga a una política de retención explícita: hay que decir por cuánto tiempo queda el PDF y borrarlo al borrar la cuenta.</p>
+
+  <h3>1.3 &nbsp;El <code>bbox</code> no tiene un espacio de coordenadas único</h3>
+  <div class="note warn">
+    <span class="lab">Bug latente</span>
+    <p><code>segmentation/nativo_digital.py</code> toma el bbox de PyMuPDF, en <strong>puntos PDF</strong> a 72 dpi. <code>segmentation/escaneado.py</code> lo toma de docTR, en <strong>píxeles al DPI de render</strong>. <code>escalation/_recortar_bloque</code> indexa la imagen renderizada con el bbox crudo, lo cual sólo es correcto para el segundo caso.</p>
+    <p>Hoy no falla porque los bloques nativos son <code>TEXTO_NATIVO</code>, la Capa 3 los saltea y nunca tienen micro-segmentos que escalar. El overlay del visor sí los dibuja a todos: un bloque nativo se dibujaría a ~36 % de su tamaño real sobre una página a 200 dpi.</p>
+  </div>
+  <p><strong>Decisión del contrato:</strong> la API devuelve <code>bbox</code> siempre normalizado a la caja de la página, cuatro flotantes en <code>[0, 1]</code>.</p>
+  <pre>"bbox": { "x0": 0.128, "y0": 0.442, "x1": 0.871, "y1": 0.509 }</pre>
+  <p>El frontend multiplica por el tamaño en píxeles de la imagen que recibió y no necesita saber el DPI ni qué camino de segmentación produjo el bloque. La conversión se hace una vez al persistir: dividir por <code>page.rect</code> en el camino nativo y por <code>(ancho_px, alto_px)</code> en el escaneado. Conviene arreglar <code>_recortar_bloque</code> en la misma pasada.</p>
+</section>
+
+<section id="s2">
+  <div class="sec-head"><span class="n">02</span><h2>Convenciones</h2></div>
+
+  <h3>Autenticación</h3>
+  <p>Dos credenciales que resuelven al mismo <code>Usuario</code>:</p>
+  <ul>
+    <li><strong>Navegador:</strong> cookie <code>motor_ocr_sesion</code>, <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Lax</code>. No se guarda la API key en <code>localStorage</code>: es un secreto de larga vida y cualquier XSS se la lleva.</li>
+    <li><strong>Máquinas:</strong> cabecera <code>X-API-Key</code>, como hoy.</li>
+  </ul>
+  <p>La dependencia <code>usuario_actual</code> pasa a aceptar cualquiera de las dos. Los endpoints de sesión sólo aceptan cookie; los de datos aceptan ambas.</p>
+
+  <h3>Errores</h3>
+  <p>Cuerpo uniforme, para ramificar sin parsear texto. <code>404</code> y no <code>403</code> para recursos de otro usuario, como ya hace <code>_documento_del_usuario</code>.</p>
+  <pre>{ "codigo": "limite_plan_superado", "detail": "El plan libre permite 200 páginas por mes" }</pre>
+
+  <h3>Prefijo</h3>
+  <p>Toda la API cuelga de <code>/api</code>. Las rutas de esta página se escriben sin él por brevedad: <code>GET /documentos</code> es <code>GET /api/documentos</code>.</p>
+  <div class="note">
+    <span class="lab">Por qué</span>
+    <p>Sin el prefijo, <code>/documentos</code> sería a la vez el endpoint de datos y la ruta principal del SPA, y un navegador que entrara ahí recibiría JSON en vez de la aplicación. Todo lo que no empiece con <code>/api</code> lo resuelve el router de React.</p>
+  </div>
+
+  <h3>Paginación</h3>
+  <p><code>?limite=</code> y <code>?cursor=</code>, keyset sobre <code>(pagina, orden_lectura)</code>. Con 31 000 bloques por documento, <code>OFFSET</code> profundo obliga a la base a recorrer todo lo salteado.</p>
+  <pre>{ "items": [...], "siguiente_cursor": "14:0042", "total": 4812 }</pre>
+  <p>Fechas en ISO 8601 UTC con <code>Z</code>. Páginas 0-based en toda la API, igual que en el pipeline; la interfaz muestra 1-based y convierte.</p>
+</section>
+
+<section id="s3">
+  <div class="sec-head"><span class="n">03</span><h2>Sesión</h2><span class="badge listo">implementado</span></div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/auth/registro</span><span class="badge listo">implementado</span></div>
+<pre>{ "nombre": "Rimy Ortega", "email": "…", "password": "…" }
+<span class="c">→ 201</span> { "usuario": Usuario, "api_key": "moc_…" }  + Set-Cookie
+<span class="c">→ 409</span> codigo=email_ya_registrado</pre>
+    <p><code>api_key</code> es la primera clave del usuario y se devuelve <strong>una sola vez</strong>: en la base queda su hash SHA-256, igual que hoy en <code>auth.crear_usuario</code>.</p>
+    <p>Hace falta agregar <code>password_hash</code> a <code>Usuario</code>. Acá sí corresponde un hash lento — bcrypt o argon2: una contraseña elegida por una persona es atacable por diccionario, a diferencia de la API key aleatoria de 256 bits que justifica el SHA-256 actual.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/auth/login</span><span class="badge listo">implementado</span></div>
+<pre>{ "email": "…", "password": "…" }
+<span class="c">→ 200</span> { "usuario": Usuario }  + Set-Cookie
+<span class="c">→ 401</span> codigo=credenciales_invalidas</pre>
+    <p>Mismo mensaje para email inexistente y contraseña incorrecta.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/auth/logout</span><span class="badge listo">implementado</span></div>
+    <p><code>204</code>, invalida la cookie.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/auth/yo</span><span class="badge listo">implementado</span></div>
+<pre><span class="c">→ 200</span> Usuario
+<span class="c">→ 401</span> codigo=sin_sesion</pre>
+    <p>Lo llama el SPA al montar, para decidir entre el layout autenticado y <code>/login</code>.</p>
+<pre>type <span class="k">Usuario</span> = {
+  id: string; nombre: string; email: string | null
+  plan: string; creado_en: string
+}</pre>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="sec-head"><span class="n">04</span><h2>Procesamiento asíncrono</h2><span class="badge listo">implementado</span></div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/procesar</span><span class="badge listo">implementado · sin opciones</span></div>
+    <p>Hoy corre el pipeline completo dentro del request y devuelve el resultado. Un PDF de 92 páginas tarda minutos: el navegador corta por timeout mucho antes.</p>
+<pre>multipart/form-data: file=&lt;pdf&gt;, opciones=&lt;json&gt;
+<span class="c">→ 202</span> { "documento_id": "…", "estado": "en_cola" }
+
+type <span class="k">OpcionesProceso</span> = {
+  idioma_original?: string    <span class="c">// "es"</span>
+  dpi?: number | "auto"       <span class="c">// "auto" = lo que decida el triage</span>
+  escalar_llm?: boolean       <span class="c">// default true</span>
+  tope_gasto_usd?: number     <span class="c">// corta la Capa 5, el resto va a revisión humana</span>
+}</pre>
+    <p><code>tope_gasto_usd</code> no existe en el motor: hay que chequearlo en el bucle de <code>escalation.procesar_escalaciones</code> antes de cada llamada y, al alcanzarlo, marcar los bloques restantes como <code>estado_revision="pendiente"</code> en vez de escalarlos.</p>
+    <div class="note">
+      <span class="lab">Dónde corre el pipeline</span>
+      <p>Para una instancia alcanza <code>BackgroundTasks</code> de FastAPI. Para varias hace falta una cola real — RQ, Celery, <code>arq</code> — porque <code>BackgroundTasks</code> muere con el proceso y el documento queda en <code>procesando</code> para siempre. En los dos casos hace falta un barrido que marque como <code>error</code> lo que lleve demasiado tiempo en ese estado.</p>
+    </div>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/documentos/{id}/estado</span><span class="badge listo">implementado</span></div>
+<pre>{
+  "documento_id": "…", "estado": "procesando", "capa_actual": 3,
+  "capas": [
+    { "capa": 1, "nombre": "triage",       "estado": "completada",
+      "detalle": "92 páginas · nativo digital · 3 zonas de DPI" },
+    { "capa": 2, "nombre": "segmentacion", "estado": "completada",
+      "detalle": "11940 bloques · 12 tipos" },
+    { "capa": 3, "nombre": "ocr",          "estado": "en_curso",
+      "progreso": { "hechos": 4892, "total": 11940 },
+      "detalle_engines": { "easyocr": 4210, "pix2tex": 512, "doctr": 170 } },
+    { "capa": 4, "nombre": "correccion",   "estado": "pendiente" },
+    { "capa": 5, "nombre": "escalacion",   "estado": "pendiente" }
+  ],
+  "costo_usd_parcial": 0.0,
+  "segundos_estimados_restantes": 240,
+  "error": null
+}</pre>
+    <p>Estado del documento: <code>en_cola</code> · <code>procesando</code> · <code>completado</code> · <code>error</code>. De cada capa: <code>pendiente</code> · <code>en_curso</code> · <code>completada</code> · <code>omitida</code>.</p>
+    <p>El pipeline hoy no reporta nada mientras corre: hace falta que <code>Pipeline.ejecutar</code> acepte un callback de progreso y que el worker lo vuelque a la fila del documento. Se puede considerar SSE en <code>/documentos/{id}/eventos</code>, pero polling cada 2 s alcanza para empezar y es mucho más simple de operar.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/documentos</span><span class="badge listo">implementado</span></div>
+    <p>Acepta <code>?estado=</code>, <code>?buscar=</code> por título (sin distinguir mayúsculas), <code>?necesita_revision=</code>, <code>?limite=</code> y <code>?cursor=</code>. Devuelve <code>{items, siguiente_cursor, total}</code>, un cambio de forma respecto de la lista suelta anterior.</p>
+    <p>El orden es <code>(creado_en DESC, id DESC)</code>. El <code>id</code> desempata a propósito: dos documentos subidos en el mismo instante harían que el cursor saltee o repita filas si el orden no fuera total.</p>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="sec-head"><span class="n">05</span><h2>Bloques y páginas</h2><span class="badge listo">implementado</span></div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/documentos/{id}/bloques</span><span class="badge listo">implementado</span></div>
+    <p>El endpoint que hace posible el visor.</p>
+<pre>?pagina= · ?tipo= <span class="c">(repetible)</span> · ?confianza_max= · ?estado_revision=
+?limite= · ?cursor= · ?incluir=escalacion,micro_segmentos</pre>
+    <p>Por defecto <strong>no</strong> incluye <code>micro_segmentos</code> ni <code>escalacion</code>: son pesados y la tabla de bloques no los necesita. El visor los pide explícitamente.</p>
+<pre>type <span class="k">Bloque</span> = {
+  id: string; pagina: number; orden_lectura: number
+  tipo: TipoBloque                 <span class="c">// los 17 valores del enum del motor</span>
+  origen_contenido: "texto_nativo" | "requiere_ocr"
+  bbox: { x0: number; y0: number; x1: number; y1: number }   <span class="c">// 0–1</span>
+  confianza_layout: number
+  confianza_global: number | null
+  texto_plano: string | null
+  latex: string | null
+  contenido_final: string | null
+  estado_revision: "pendiente" | "resuelto" | "no_requiere"
+
+  micro_segmentos?: MicroSegmento[]
+  escalacion?: Escalacion | null
+}
+
+type <span class="k">MicroSegmento</span> = {
+  tipo: string; contenido: string
+  engine_usado: "easyocr" | "pix2tex" | "doctr" | "tesseract"
+  confianza_engine: number; confianza_estructural: number
+}
+
+type <span class="k">Escalacion</span> = {
+  requirio_escalacion: boolean
+  cola_origen: "micro_segmento" | "inconsistencia_documental" | null
+  contenido_llm: string | null     <span class="c">// lo que devolvió el modelo</span>
+  confianza_llm: number | null
+  razon_escalacion: string | null
+  requiere_revision_humana: boolean
+  costo_usd: number; tokens_entrada: number; tokens_salida: number
+}</pre>
+    <div class="note">
+      <span class="lab">Falta guardar la corrección del modelo</span>
+      <p><code>contenido_llm</code> no existe hoy en el modelo <code>Escalacion</code> del motor: <code>EscalationResult</code> trae <code>contenido_final</code> pero se pierde al aplicarse. El panel de revisión compara «motor» contra «corrección del modelo», así que hay que guardar los dos.</p>
+    </div>
+    <p><strong>La cola de revisión no es un endpoint aparte</strong>, es este mismo con <code>?estado_revision=pendiente&amp;orden=confianza</code>. Uno separado duplicaría los filtros.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/documentos/{id}/paginas</span><span class="badge listo">implementado</span></div>
+<pre>{ "total_paginas": 34,
+  "paginas": [ { "pagina": 0, "ancho_px": 1654, "alto_px": 2339,
+                 "dpi": 200, "bloques": 141 } ] }</pre>
+    <p>El frontend necesita <code>ancho_px</code>/<code>alto_px</code> para desnormalizar los bbox antes de que cargue la imagen, y así reservar el espacio sin saltos de layout.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/documentos/{id}/paginas/{n}</span><span class="badge listo">implementado</span></div>
+<pre><span class="c">→ 200</span> image/png
+    Cache-Control: private, max-age=86400
+    ETag: "&lt;documento_id&gt;:&lt;n&gt;:&lt;dpi&gt;"
+<span class="c">→ 404</span> si la página no existe o el documento no es del usuario</pre>
+    <p>Query opcional <code>?ancho=</code> para pedir una versión reescalada — el visor a 86 % no necesita 1654 px. Sirve la página completa, no el recorte: el overlay se dibuja encima en el cliente, y así una misma imagen sirve para todos los bloques de la página.</p>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="sec-head"><span class="n">06</span><h2>Revisión</h2><span class="badge listo">implementado</span></div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/revision/{documento_id}/decision</span><span class="badge listo">implementado</span></div>
+    <div class="note warn">
+      <span class="lab">El feedback loop está cortado acá</span>
+      <p>El cuerpo actual no manda <code>tipo_bloque</code>, <code>pagina</code> ni <code>confianza_engine</code>, así que se guardan como <code>""</code>, <code>0</code> y <code>0.0</code>. Y <code>AjustadorUmbrales.calcular_umbrales_optimos</code> agrupa las decisiones por <code>d['tipo_bloque']</code>, que siempre vale <code>""</code>. El auto-ajuste no puede aprender nada.</p>
+    </div>
+    <p><strong>El servidor los completa desde el bloque</strong>, no el cliente:</p>
+<pre>{ "bloque_id": "…", "decision": "aceptar"|"rechazar"|"editar"|"escalar",
+  "contenido_final": "…", "confianza_usuario": 0.9, "comentarios": "" }
+<span class="c">→ 200</span> { "decision_id": 12, "siguiente_bloque_id": "…" | null }
+<span class="c">→ 422</span> codigo=bloque_no_pertenece_al_documento</pre>
+    <p>Además la decisión debe <strong>escribirse en el bloque</strong>: <code>contenido_final</code> y <code>estado_revision="resuelto"</code>. Hoy sólo se registra en <code>decisiones</code> y el bloque queda igual, con lo que la exportación seguiría entregando el texto sin corregir.</p>
+    <p><code>siguiente_bloque_id</code> evita un round-trip: el visor avanza sin volver a pedir la cola.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/revision/{documento_id}/decisiones</span><span class="badge nuevo">nuevo</span></div>
+    <p>Lote, mismo cuerpo en una lista. Para «aceptar todo lo que quedó arriba de 0.9».</p>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="sec-head"><span class="n">07</span><h2>Umbrales</h2></div>
+
+  <div class="note warn">
+    <span class="lab">Los umbrales son globales y viven en un archivo</span>
+    <p><code>AjustadorUmbrales</code> lee y escribe <code>umbrales_config.json</code> con <strong>ruta relativa</strong> y <strong>sin usuario</strong>. Es la misma trampa que ya se corrigió en <code>persistence</code> — el archivo se escribe en el cwd y se pierde en cada despliegue — y además haría que un usuario le cambiara los umbrales a todos los demás. Pasan a una tabla <code>umbrales</code> con <code>usuario_id</code>.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/umbrales</span><span class="badge mod">existe · por usuario</span></div>
+<pre>{ "capa3": { "parrafo": 0.75, "formula_display": 0.70, … },
+  "capa4": { "estructura_rota": 0.80, "inconsistencia": 1.00 },
+  "globales": { "umbral_confianza_engine": 0.75,
+                "umbral_escalacion_micro_segmento": 0.6,
+                "umbral_confianza_global_escalacion": 0.70 },
+  "actualizado_en": "2026-08-24T18:00:00Z" }</pre>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">PUT</span><span class="path">/umbrales</span><span class="badge nuevo">nuevo</span></div>
+    <p>Los sliders de la pantalla. Acepta un objeto parcial con la misma forma, valida <code>0 ≤ v ≤ 1</code> y devuelve el estado completo resultante.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/umbrales/recomendaciones</span><span class="badge nuevo">nuevo</span></div>
+    <p>Los calcula <strong>sin aplicarlos</strong>. Hoy <code>POST /auto-ajuste</code> calcula y aplica en un solo paso, así que la pantalla no puede mostrar la propuesta antes de decidir.</p>
+<pre>{ "decisiones_analizadas": 47,
+  "recomendaciones": [
+    { "ambito": "capa3", "clave": "formula_display",
+      "actual": 0.60, "propuesto": 0.68, "confianza": 0.82,
+      "razon": "62 % de rechazos sobre lo que el motor daba por bueno",
+      "aplicable": true } ] }</pre>
+    <p><code>aplicable</code> reproduce <code>UmbralOptimo.aplicable()</code>: confianza &gt; 0.7 y cambio &gt; 0.02.</p>
+  </div>
+
+  <div class="ep">
+    <div class="ep-head"><span class="verb">POST</span><span class="path">/umbrales/aplicar</span><span class="badge mod">reemplaza /auto-ajuste</span></div>
+    <p>Recibe las claves a aplicar (o todas las aplicables), guarda un backup y devuelve el resultado de la validación.</p>
+    <div class="note warn">
+      <span class="lab">La validación hoy es simulada</span>
+      <p><code>AjustadorUmbrales.validar_cambios</code> devuelve valores fijos, con <code>"razon": "Simulado - requiere validación real"</code>. La pantalla muestra «revertido automáticamente porque la confianza bajó 4.1 %», que sería inventado. O se implementa la validación contra un lote real, o el endpoint devuelve <code>validacion: null</code> y la interfaz no promete lo que no hace.</p>
+      <p>Y <code>GestorDecisiones._decisiones_cache</code> es un diccionario de módulo: se vacía en cada reinicio, así que el auto-ajuste sólo ve las decisiones de la sesión actual. Debe leer de la tabla <code>decisiones</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="sec-head"><span class="n">08</span><h2>API keys</h2><span class="badge listo">implementado</span></div>
+  <p>Hoy se crean por CLI, con <code>gestion_usuarios.py</code>.</p>
+  <div class="ep">
+    <div class="ep-head"><span class="badge listo">implementados</span></div>
+<pre><span class="k">GET</span>    /api-keys       <span class="c">→ [ { id, nombre, prefijo: "moc_8kQ2vf",
+                          creada_en, ultimo_uso_en, revocada_en } ]</span>
+<span class="k">POST</span>   /api-keys       { "nombre": "notebook local" }
+                       <span class="c">→ 201 { …, "api_key": "moc_…" }   ← una sola vez</span>
+<span class="k">DELETE</span> /api-keys/{id}  <span class="c">→ 204</span></pre>
+    <p>Requiere mover la clave de la fila <code>usuarios</code> a una tabla <code>api_keys</code> con <code>usuario_id</code>, para que un usuario pueda tener varias y revocar una sin perder las demás.</p>
+    <p><code>ultimo_uso_en</code> obliga a un <code>UPDATE</code> por request autenticado con clave. Con SQLite conviene escribirlo con granularidad de minutos, para no serializar la base en cada llamada.</p>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="sec-head"><span class="n">09</span><h2>Consumo</h2></div>
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/consumo</span><span class="badge mod">modifica el existente</span></div>
+    <p>Hoy devuelve totales. La pantalla necesita además la serie diaria y el desglose. Acepta <code>?desde=</code> y <code>?hasta=</code>.</p>
+<pre>{ "usuario": "Rimy Ortega", "plan": "libre",
+  "limites": { "paginas_mes": 200, "gasto_llm_mes_usd": 2.0 },
+  "totales": { "documentos": 11, "paginas": 228, "llamadas_llm": 16,
+               "tokens_entrada": 20640, "tokens_salida": 3432,
+               "costo_llm_usd": 0.0204 },
+  "serie_diaria": [ { "fecha": "2026-08-24",
+                      "micro_segmento_usd": 0.0031,
+                      "inconsistencia_documental_usd": 0.0006 } ],
+  "por_documento": [ { "documento_id": "…", "titulo": "c7.pdf",
+                       "llamadas": 14, "tokens_entrada": 18420,
+                       "tokens_salida": 3106, "costo_usd": 0.0182 } ] }</pre>
+    <p><code>limites</code> no existe todavía: los planes están sólo como el string <code>usuarios.plan</code>. Hay que definirlos en algún lado para poder mostrar la barra de consumo y para poder rechazar con <code>402</code>.</p>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="sec-head"><span class="n">10</span><h2>Exportación</h2></div>
+  <div class="ep">
+    <div class="ep-head"><span class="verb get">GET</span><span class="path">/documentos/{id}/export</span><span class="badge nuevo">nuevo</span></div>
+    <p><code>?formato=graphify|markdown|ipynb</code>. Devuelve el documento con <code>contenido_final</code> aplicado donde la revisión humana lo haya dejado, cayendo a <code>latex</code> o <code>texto_plano</code> cuando no. <code>graphify</code> es el JSON de bloques que consume el indexador; los otros dos son archivos.</p>
+    <p>Para documentos grandes conviene generarlo como job y devolver <code>202</code> con una URL de descarga, en vez de armar 31 000 bloques dentro del request.</p>
+  </div>
+</section>
+
+<section id="s11">
+  <div class="sec-head"><span class="n">11</span><h2>Resumen y orden de construcción</h2></div>
+  <div class="tw"><table>
+    <tr><th>Endpoint</th><th>Estado</th></tr>
+    <tr><td class="mono">POST /auth/registro · /auth/login · /auth/logout · GET /auth/yo</td><td><span class="badge listo">implementados</span></td></tr>
+    <tr><td class="mono">POST /procesar</td><td><span class="badge listo">asíncrono, 202</span></td></tr>
+    <tr><td class="mono">GET /documentos/{id}/estado</td><td><span class="badge listo">implementado</span></td></tr>
+    <tr><td class="mono">GET /documentos</td><td><span class="badge listo">filtros y cursor</span></td></tr>
+    <tr><td class="mono">GET /documentos/{id}</td><td><span class="badge existe">sin cambios</span></td></tr>
+    <tr><td class="mono">GET /documentos/{id}/bloques</td><td><span class="badge listo">implementado</span></td></tr>
+    <tr><td class="mono">GET /documentos/{id}/paginas · /paginas/{n}</td><td><span class="badge listo">implementados</span></td></tr>
+    <tr><td class="mono">POST /revision/{id}/decision</td><td><span class="badge listo">completa campos y escribe el bloque</span></td></tr>
+    <tr><td class="mono">POST /revision/{id}/decisiones</td><td><span class="badge nuevo">nuevo</span></td></tr>
+    <tr><td class="mono">GET /umbrales</td><td><span class="badge mod">por usuario</span></td></tr>
+    <tr><td class="mono">PUT /umbrales · GET /umbrales/recomendaciones</td><td><span class="badge nuevo">nuevos</span></td></tr>
+    <tr><td class="mono">POST /umbrales/aplicar</td><td><span class="badge mod">reemplaza /auto-ajuste</span></td></tr>
+    <tr><td class="mono">GET/POST/DELETE /api-keys</td><td><span class="badge listo">implementados</span></td></tr>
+    <tr><td class="mono">GET /consumo</td><td><span class="badge mod">serie diaria y desglose</span></td></tr>
+    <tr><td class="mono">GET /documentos/{id}/export</td><td><span class="badge nuevo">nuevo</span></td></tr>
+  </table></div>
+
+  <p>El orden importa porque el paso 4 depende del 3, y el 3 es el caro:</p>
+  <ol class="steps">
+    <li><strong>Sesión y lista.</strong> <span class="badge listo">hecho</span> <code>auth/*</code>, <code>api-keys/*</code> y <code>GET /documentos</code> con filtros y cursor, con pruebas en <code>test_auth_api.py</code>. El SPA ya puede arrancar contra esto.</li>
+    <li><strong>Jobs.</strong> <span class="badge listo">hecho</span> <code>POST /procesar</code> asíncrono y <code>GET /estado</code>, con el callback de progreso en <code>Pipeline</code>. Falta <code>opciones</code> y los límites de plan.</li>
+    <li><strong>Bloques.</strong> <span class="badge listo">hecho</span> Tabla <code>bloques</code>, retención del PDF, bbox normalizado, <code>GET /bloques</code> y <code>/paginas/{n}</code>. El visor de revisión ya funciona.</li>
+    <li><strong>Umbrales.</strong> Falta: umbrales por usuario en la base y <code>GestorDecisiones</code> leyendo de la tabla <code>decisiones</code> en vez de su caché en memoria. La decisión ya escribe el bloque y guarda el tipo, que era lo que tenía cortado el loop.</li>
+    <li><strong>Consumo y exportación.</strong></li>
+  </ol>
+</section>
+
+<footer>
+  El texto fuente de este contrato vive en <code>docs/CONTRATO_API_FRONTEND.md</code>, versionado junto al código que lo tiene que implementar. Los wireframes de las pantallas que lo consumen están en <code>design/wireframes/</code>.
+</footer>
+
+</main>
+</div>
