@@ -9,3 +9,7 @@ pruebas/pdfs_escaneados/
 datos/
 .datos_prueba/
 *.db
+
+# Artefactos que el motor escribe en ruta relativa al correr
+decisiones_revision.jsonl
+umbrales_config.json
