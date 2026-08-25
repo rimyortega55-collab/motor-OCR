@@ -13,3 +13,8 @@ datos/
 # Artefactos que el motor escribe en ruta relativa al correr
 decisiones_revision.jsonl
 umbrales_config.json
+
+# Credenciales: nunca al repositorio
+.env
+.env.*
+!.env.example
