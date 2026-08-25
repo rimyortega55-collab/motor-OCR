@@ -30,6 +30,21 @@ def _get_client():
             return None
     return _client
 
+
+def _texto_de_respuesta(message) -> str:
+    """Concatena los bloques de texto de la respuesta.
+
+    No se puede tomar `message.content[0].text`: en los modelos con thinking
+    adaptativo -que en Claude Opus 5 viene activado por omisión- el primer bloque
+    es un `ThinkingBlock` sin atributo `text`, y la llamada moría con
+    "'ThinkingBlock' object has no attribute 'text'" antes de registrar ningún
+    costo. Recorrer y filtrar por tipo funciona con thinking y sin él.
+    """
+    return "".join(
+        bloque.text for bloque in message.content if getattr(bloque, "type", None) == "text"
+    ).strip()
+
+
 def llamar_llm_micro_segmento(
     imagen_recorte,
     contexto_texto: str,
@@ -100,7 +115,7 @@ Devuelve un JSON con:
         # Construir mensaje con imagen
         message = client.messages.create(
             model=settings.modelo_escalacion,
-            max_tokens=1024,
+            max_tokens=8192,
             messages=[
                 {
                     "role": "user",
@@ -123,7 +138,7 @@ Devuelve un JSON con:
         )
 
         # Parsear respuesta
-        respuesta_texto = message.content[0].text
+        respuesta_texto = _texto_de_respuesta(message)
 
         try:
             # Extraer JSON de la respuesta
@@ -227,7 +242,7 @@ IMPORTANTE: No generes contenido nuevo. Solo analiza lo que existe."""
 
         message = client.messages.create(
             model=settings.modelo_escalacion,
-            max_tokens=1024,
+            max_tokens=8192,
             messages=[
                 {
                     "role": "user",
@@ -236,7 +251,7 @@ IMPORTANTE: No generes contenido nuevo. Solo analiza lo que existe."""
             ],
         )
 
-        respuesta_texto = message.content[0].text
+        respuesta_texto = _texto_de_respuesta(message)
 
         try:
             start_idx = respuesta_texto.find('{')
