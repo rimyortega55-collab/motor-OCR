@@ -88,6 +88,30 @@ def hashear_password(password: str) -> str:
     return f"scrypt${_SCRYPT_N}${_SCRYPT_R}${_SCRYPT_P}${sal.hex()}${derivada.hex()}"
 
 
+# Hash de descarte contra el que verificar cuando el usuario no existe. Se calcula
+# una sola vez al importar, no en cada intento fallido.
+_HASH_SENUELO: str | None = None
+
+
+def _hash_senuelo() -> str:
+    global _HASH_SENUELO
+    if _HASH_SENUELO is None:
+        _HASH_SENUELO = hashear_password(secrets.token_urlsafe(32))
+    return _HASH_SENUELO
+
+
+def gastar_tiempo_de_verificacion() -> None:
+    """Corre un scrypt de descarte para que un email inexistente tarde lo mismo.
+
+    El mensaje de error ya era el mismo para email inexistente y contraseña
+    incorrecta, pero el tiempo delataba la diferencia: sin usuario,
+    `verificar_password` volvía de inmediato sin derivar nada. Medido, eran 6 ms
+    contra 110 ms, con lo que enumerar qué emails están registrados era trivial
+    pese al mensaje uniforme.
+    """
+    verificar_password("descarte", _hash_senuelo())
+
+
 def verificar_password(password: str, almacenado: str | None) -> bool:
     if not almacenado:
         return False

@@ -34,6 +34,7 @@ from ocr_engine.persistence import (  # noqa: E402
 )
 from ocr_engine.segmentation.bbox import desnormalizar_bbox, normalizar_bbox  # noqa: E402
 from ocr_engine.web_interface import almacen  # noqa: E402
+from ocr_engine.web_interface import limites  # noqa: E402
 from ocr_engine.web_interface.api import app  # noqa: E402
 
 PASSWORD = "una-contrasena-larga"
@@ -43,6 +44,9 @@ PDF_PRUEBA = Path("pruebas/pdfs_de_prueba/c1.pdf")
 @pytest.fixture(autouse=True)
 def base_limpia():
     init_db()
+    # El limitador de tasa cuenta por proceso: sin resetearlo, una suite que crea
+    # varios usuarios agota la cuota y las pruebas siguientes reciben 429.
+    limites.limpiar()
     with session_scope() as sesion:
         for modelo in (Sesion, ApiKey, DecisionAlmacenada, BloqueAlmacenado,
                        DocumentoAlmacenado, Usuario):

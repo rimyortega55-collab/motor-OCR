@@ -21,6 +21,7 @@ from .models import (
     DecisionAlmacenada,
     DocumentoAlmacenado,
     Sesion,
+    UmbralesUsuario,
     Usuario,
 )
 
@@ -36,4 +37,5 @@ __all__ = [
     "DocumentoAlmacenado",
     "CostoRegistrado",
     "DecisionAlmacenada",
+    "UmbralesUsuario",
 ]

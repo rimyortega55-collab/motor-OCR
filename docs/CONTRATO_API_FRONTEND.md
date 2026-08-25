@@ -1,11 +1,15 @@
 # Contrato de API para el frontend
 
-**Estado: pasos 1, 2 y 3 implementados.** Sesión de navegador (§3), gestión de
+**Estado: los cinco pasos implementados.** Sesión de navegador (§3), gestión de
 API keys (§8), listado con filtros y cursor y procesamiento asíncrono con
-progreso por capa (§4), y bloques, páginas y decisiones que escriben el bloque
-(§1, §5, §6). Pruebas en `test_auth_api.py`, `test_trabajos.py` y
-`test_bloques.py`. Falta el paso 4 (umbrales por usuario) y el 5 (consumo y
-exportación).
+progreso por capa (§4), bloques, páginas y decisiones que escriben el bloque
+(§1, §5, §6), umbrales por usuario (§7), y consumo con desglose y exportación
+(§9, §10). Pruebas en `test_auth_api.py`, `test_trabajos.py`, `test_bloques.py`
+y `test_umbrales_consumo.py`: 81 pasan.
+
+Quedan sueltos: las `opciones` de `POST /procesar`,
+`segundos_estimados_restantes`, el lote de decisiones, la política de retención
+del PDF y el rechazo con `402` al superar el límite del plan.
 
 **Los tres prerrequisitos de §1 están resueltos**: hay tabla `bloques`, el PDF se
 conserva y el bbox se guarda normalizado.
@@ -564,13 +568,13 @@ de descarga, en vez de armar 31 000 bloques dentro del request.
 | `GET /documentos/{id}/paginas/{n}` | nuevo |
 | `POST /revision/{id}/decision` | **implementado** · completa campos y escribe el bloque |
 | `POST /revision/{id}/decisiones` | nuevo |
-| `GET /umbrales` | existe · por usuario |
-| `PUT /umbrales` | nuevo |
-| `GET /umbrales/recomendaciones` | nuevo |
-| `POST /umbrales/aplicar` | reemplaza `POST /auto-ajuste` |
+| `GET /umbrales` | **implementado** · por usuario |
+| `PUT /umbrales` | **implementado** |
+| `GET /umbrales/recomendaciones` | **implementado** · calcula sin aplicar |
+| `POST /umbrales/aplicar` | **implementado** · reemplaza a `POST /auto-ajuste`, que se eliminó |
 | `GET/POST/DELETE /api-keys` | **implementados** |
-| `GET /consumo` | existe · serie diaria y desglose |
-| `GET /documentos/{id}/export` | nuevo |
+| `GET /consumo` | **implementado** · rango, serie diaria y desglose |
+| `GET /documentos/{id}/export` | **implementado** · graphify, markdown, ipynb |
 
 ### Orden de construcción
 
@@ -580,9 +584,12 @@ de descarga, en vez de armar 31 000 bloques dentro del request.
    de progreso en `Pipeline`. Falta `opciones` y los límites de plan.
 3. ~~**Bloques.**~~ Hecho: tabla `bloques`, retención del PDF, bbox normalizado,
    `GET /bloques` y `/paginas/{n}`. El visor de revisión ya funciona.
-4. **Umbrales.** Falta: umbrales por usuario en la base y `GestorDecisiones`
-   leyendo de la tabla `decisiones` en vez de su caché en memoria. La decisión ya
-   escribe el bloque y guarda el tipo, que era lo que tenía cortado el loop.
-5. **Consumo y exportación.**
+4. ~~**Umbrales.**~~ Hecho: tabla `umbrales` por usuario, recomendaciones
+   calculadas desde la tabla `decisiones` y separadas de la aplicación.
+   `validar_cambios` sigue devolviendo valores fijos, así que el endpoint
+   responde `validacion: null` en vez de mostrar un número inventado.
+5. ~~**Consumo y exportación.**~~ Hecho: `GET /consumo` con rango, serie diaria
+   y desglose por documento, y `GET /export` en los tres formatos con
+   `contenido_final` aplicado.
 
 Los pasos 1 y 2 se pueden hacer en paralelo. El 4 depende del 3.

@@ -31,6 +31,7 @@ from ocr_engine.persistence import (  # noqa: E402
 )
 from ocr_engine.persistence.db import engine  # noqa: E402
 from ocr_engine.web_interface import auth  # noqa: E402
+from ocr_engine.web_interface import limites  # noqa: E402
 from ocr_engine.web_interface.api import app  # noqa: E402
 
 PASSWORD = "una-contrasena-larga"
@@ -40,6 +41,9 @@ PASSWORD = "una-contrasena-larga"
 def base_limpia():
     """Base vacía en cada prueba, para que el orden no las acople."""
     init_db()
+    # El limitador de tasa cuenta por proceso, así que sin esto una suite que
+    # crea varios usuarios agota la cuota y las siguientes reciben 429.
+    limites.limpiar()
     with session_scope() as sesion:
         for modelo in (Sesion, ApiKey, DocumentoAlmacenado, Usuario):
             sesion.query(modelo).delete()

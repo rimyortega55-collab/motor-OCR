@@ -288,3 +288,33 @@ class DecisionAlmacenada(Base):
     registrado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_ahora)
 
     documento: Mapped[DocumentoAlmacenado] = relationship(back_populates="decisiones")
+
+
+class UmbralesUsuario(Base):
+    """Umbrales de confianza de un usuario (Capa 7).
+
+    Antes vivían en `umbrales_config.json`, escrito en ruta relativa: se perdía
+    en cada despliegue y, al no tener dueño, un usuario le cambiaba los umbrales
+    a todos los demás. Es la misma trampa que ya se había corregido para los
+    documentos y los costos.
+
+    Los tres ámbitos se guardan como JSON en vez de una columna por umbral
+    porque las claves son los tipos de bloque del motor, que todavía cambian:
+    agregar un tipo no debería pedir una migración de esquema.
+    """
+
+    __tablename__ = "umbrales"
+
+    usuario_id: Mapped[str] = mapped_column(
+        ForeignKey("usuarios.id", ondelete="CASCADE"), primary_key=True
+    )
+
+    capa3: Mapped[dict] = mapped_column(JSON, default=dict)
+    capa4: Mapped[dict] = mapped_column(JSON, default=dict)
+    globales: Mapped[dict] = mapped_column(JSON, default=dict)
+
+    actualizado_en: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=_ahora, onupdate=_ahora
+    )
+
+    usuario: Mapped[Usuario] = relationship()

@@ -26,7 +26,7 @@ import binascii
 from datetime import datetime, timezone
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sqlalchemy import and_, func, or_
@@ -45,9 +45,12 @@ from ocr_engine.pipeline import Pipeline
 from ocr_engine.revision import AnalizadorFeedback, DecisionRevision, GestorDecisiones
 from .ajuste_umbrales import AjustadorUmbrales
 from .auth import obtener_sesion, usuario_actual
+from .limites import exigir_limite
 from .estaticos import INDICE, hay_build, montar_spa
 from .rutas_bloques import router as router_bloques
+from .rutas_consumo import router as router_consumo
 from .rutas_cuenta import router as router_cuenta
+from .rutas_umbrales import router as router_umbrales
 from .trabajos import encolar, marcar_colgados, progreso_inicial
 
 app = FastAPI(
@@ -153,6 +156,7 @@ class TrabajoEncolado(BaseModel):
 
 @router_api.post("/procesar", status_code=202)
 async def procesar_pdf(
+    request: Request,
     file: UploadFile = File(...),
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
@@ -164,6 +168,10 @@ async def procesar_pdf(
     forma de saber si había pasado algo. Ahora el pipeline corre aparte y el
     avance se consulta en `GET /documentos/{id}/estado`.
     """
+
+    # Cada documento cuesta cómputo y, si escala, llamadas al modelo: sin tope,
+    # una cuenta puede vaciar el crédito de Anthropic del despliegue.
+    exigir_limite(request, "procesar")
 
     contenido = await file.read()
     if not contenido:
@@ -461,48 +469,6 @@ async def registrar_decision(
     }
 
 
-@router_api.get("/consumo")
-async def obtener_consumo(
-    usuario: Usuario = Depends(usuario_actual),
-    sesion: Session = Depends(obtener_sesion),
-):
-    """Consumo acumulado del usuario. Es la base para facturar."""
-
-    documentos = (
-        sesion.query(func.count(DocumentoAlmacenado.id))
-        .filter(DocumentoAlmacenado.usuario_id == usuario.id)
-        .scalar()
-    ) or 0
-
-    paginas = (
-        sesion.query(func.coalesce(func.sum(DocumentoAlmacenado.total_paginas), 0))
-        .filter(DocumentoAlmacenado.usuario_id == usuario.id)
-        .scalar()
-    ) or 0
-
-    fila = (
-        sesion.query(
-            func.coalesce(func.sum(CostoRegistrado.costo_usd), 0.0),
-            func.coalesce(func.sum(CostoRegistrado.tokens_entrada), 0),
-            func.coalesce(func.sum(CostoRegistrado.tokens_salida), 0),
-            func.count(CostoRegistrado.id),
-        )
-        .filter(CostoRegistrado.usuario_id == usuario.id)
-        .one()
-    )
-
-    return {
-        "usuario": usuario.nombre,
-        "plan": usuario.plan,
-        "documentos_procesados": documentos,
-        "paginas_procesadas": paginas,
-        "llamadas_llm": fila[3],
-        "tokens_entrada": fila[1],
-        "tokens_salida": fila[2],
-        "costo_llm_usd": round(float(fila[0]), 6),
-    }
-
-
 @router_api.get("/metricas")
 async def obtener_metricas(
     usuario: Usuario = Depends(usuario_actual),
@@ -539,41 +505,6 @@ async def obtener_metricas(
         confianza_promedio=stats.get("confianza_promedio_usuario", 0),
         ajustes_pendientes=0,
     )
-
-
-@router_api.post("/auto-ajuste")
-async def aplicar_auto_ajuste(usuario: Usuario = Depends(usuario_actual)):
-    """Aplica auto-ajuste de umbrales basado en feedback."""
-
-    try:
-        ajustes = ajustador.calcular_umbrales_optimos(gestor_decisiones._decisiones_cache)
-        ajustes_aplicables = [a for a in ajustes if a.aplicable()]
-
-        if not ajustes_aplicables:
-            return {
-                "status": "no_cambios",
-                "razon": "No hay cambios significativos recomendados"
-            }
-
-        cantidad = ajustador.aplicar_ajustes(ajustes_aplicables)
-        validacion = ajustador.validar_cambios([])
-
-        return {
-            "status": "ok" if validacion["mejora"] else "revertido",
-            "cambios_aplicados": cantidad,
-            "mejora": validacion["mejora"],
-            "cambio_porcentaje": validacion["cambio_porcentaje"],
-            "detalles": [str(a) for a in ajustes_aplicables]
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
-@router_api.get("/umbrales")
-async def obtener_umbrales(usuario: Usuario = Depends(usuario_actual)):
-    """Obtiene la configuración actual de umbrales."""
-    return ajustador.obtener_resumen_umbrales()
 
 
 # ============================================================================
@@ -636,6 +567,8 @@ def _documento_del_usuario(
 app.include_router(router_api)
 app.include_router(router_cuenta, prefix="/api")
 app.include_router(router_bloques, prefix="/api")
+app.include_router(router_umbrales, prefix="/api")
+app.include_router(router_consumo, prefix="/api")
 # Al final del modulo a proposito: el catch-all del SPA tiene que registrarse
 # despues de todas las rutas de la API para no taparlas.
 montar_spa(app)

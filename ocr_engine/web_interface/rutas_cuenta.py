@@ -9,11 +9,13 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Cookie, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Cookie, Depends, HTTPException, Request, Response, status
 from pydantic import BaseModel, EmailStr, Field
 from sqlalchemy.orm import Session
 
 from ocr_engine.persistence import ApiKey, Usuario
+
+from .limites import exigir_limite
 
 from .auth import (
     COOKIE_SESION,
@@ -22,6 +24,7 @@ from .auth import (
     cookie_segura,
     crear_api_key,
     crear_sesion,
+    gastar_tiempo_de_verificacion,
     crear_usuario,
     obtener_sesion,
     purgar_sesiones_vencidas,
@@ -144,12 +147,17 @@ def _error(codigo: str, detalle: str, http: int) -> HTTPException:
 async def registrar(
     alta: AltaUsuario,
     respuesta: Response,
+    request: Request,
     sesion: Session = Depends(obtener_sesion),
 ) -> RespuestaAlta:
     """Crea la cuenta, abre sesión y devuelve la primera API key.
 
     La clave se devuelve acá y nunca más: en la base sólo queda su hash.
     """
+
+    # Antes que nada: sin tope, crear cuentas en masa sale gratis y cada una
+    # puede gastar credito de Anthropic, que es plata real del despliegue.
+    exigir_limite(request, "registro")
 
     existente = sesion.query(Usuario).filter(Usuario.email == alta.email).one_or_none()
     if existente is not None:
@@ -173,9 +181,12 @@ async def registrar(
 async def login(
     credenciales: Credenciales,
     respuesta: Response,
+    request: Request,
     sesion: Session = Depends(obtener_sesion),
 ) -> RespuestaSesion:
     """Abre sesión de navegador."""
+
+    exigir_limite(request, "login")
 
     usuario = (
         sesion.query(Usuario).filter(Usuario.email == credenciales.email).one_or_none()
@@ -183,6 +194,11 @@ async def login(
 
     # Mismo error para email inexistente, contraseña incorrecta y cuenta sin
     # contraseña: distinguirlos le confirmaría a quien prueba qué emails existen.
+    # El señuelo iguala también el tiempo, que era lo que filtraba la diferencia
+    # aunque el mensaje fuera idéntico.
+    if usuario is None:
+        gastar_tiempo_de_verificacion()
+
     if usuario is None or not verificar_password(credenciales.password, usuario.password_hash):
         raise _error(
             "credenciales_invalidas",
