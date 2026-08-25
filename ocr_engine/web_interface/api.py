@@ -45,6 +45,7 @@ from ocr_engine.pipeline import Pipeline
 from ocr_engine.revision import AnalizadorFeedback, DecisionRevision, GestorDecisiones
 from .ajuste_umbrales import AjustadorUmbrales
 from .auth import obtener_sesion, usuario_actual
+from .cuotas import exigir_cuota, validar_archivo
 from .limites import exigir_limite
 from .estaticos import INDICE, hay_build, montar_spa
 from .rutas_bloques import router as router_bloques
@@ -174,11 +175,11 @@ async def procesar_pdf(
     exigir_limite(request, "procesar")
 
     contenido = await file.read()
-    if not contenido:
-        raise HTTPException(
-            status_code=400,
-            detail={"codigo": "archivo_vacio", "detail": "El archivo llegó vacío"},
-        )
+
+    # Validar antes de crear la fila: si el archivo no sirve, no tiene sentido
+    # dejar un documento en la base ni ocupar un hilo del worker.
+    paginas = validar_archivo(contenido)
+    exigir_cuota(sesion, usuario, paginas)
 
     documento_id = str(uuid4())
     registro = DocumentoAlmacenado(
@@ -186,6 +187,7 @@ async def procesar_pdf(
         usuario_id=usuario.id,
         titulo=file.filename or "sin-nombre.pdf",
         estado="en_cola",
+        total_paginas=paginas,
         progreso=progreso_inicial(),
     )
     sesion.add(registro)

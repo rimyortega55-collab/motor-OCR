@@ -7,9 +7,16 @@ progreso por capa (§4), bloques, páginas y decisiones que escriben el bloque
 (§9, §10). Pruebas en `test_auth_api.py`, `test_trabajos.py`, `test_bloques.py`
 y `test_umbrales_consumo.py`: 81 pasan.
 
-Quedan sueltos: las `opciones` de `POST /procesar`,
-`segundos_estimados_restantes`, el lote de decisiones, la política de retención
-del PDF y el rechazo con `402` al superar el límite del plan.
+`POST /procesar` valida el archivo antes de encolar (`413` por tamaño o exceso
+de páginas, `415` si no es un PDF, `400` si está corrupto) y rechaza con `402`
+al superar la cuota del plan. Registro, login y procesado tienen límite de tasa
+(`429`). El gasto en LLM por documento tiene techo
+(`MOTOR_OCR_TOPE_GASTO_DOCUMENTO_USD`, 1 USD por defecto): al alcanzarlo, las
+páginas que faltan van a revisión humana en vez de seguir escalando.
+
+Quedan sueltos: el resto de las `opciones` de `POST /procesar` (idioma y DPI),
+`segundos_estimados_restantes`, el lote de decisiones y la política de retención
+del PDF.
 
 **Los tres prerrequisitos de §1 están resueltos**: hay tabla `bloques`, el PDF se
 conserva y el bbox se guarda normalizado.

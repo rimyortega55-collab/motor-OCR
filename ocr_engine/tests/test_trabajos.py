@@ -36,7 +36,25 @@ from ocr_engine.web_interface import limites  # noqa: E402
 from ocr_engine.web_interface.api import app  # noqa: E402
 
 PASSWORD = "una-contrasena-larga"
-PDF_MINIMO = b"%PDF-1.4\n%%EOF\n"
+def _pdf_minimo() -> bytes:
+    """Un PDF de una página, de verdad.
+
+    Antes acá había una cadena con la cabecera `%PDF-` y nada más, que pasaba
+    porque nadie validaba la subida. Desde que `/procesar` abre el archivo para
+    contar sus páginas antes de encolar, hace falta uno real. Las pruebas de este
+    archivo reemplazan el `Pipeline`, así que el contenido da igual mientras el
+    documento sea válido.
+    """
+    import pymupdf
+
+    doc = pymupdf.open()
+    doc.new_page()
+    datos = doc.tobytes()
+    doc.close()
+    return datos
+
+
+PDF_MINIMO = _pdf_minimo()
 
 
 @pytest.fixture(autouse=True)

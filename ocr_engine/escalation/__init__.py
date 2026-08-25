@@ -12,7 +12,7 @@ from ocr_engine.segmentation.bbox import desnormalizar_bbox
 
 from .cola_micro_segmentos import encolar_micro_segmento, resolver_lote_pagina
 from .cola_inconsistencias import resolver_inconsistencias
-from .costo_tracking import registrar_costo, obtener_estadisticas
+from .costo_tracking import calcular_costo_usd, registrar_costo, obtener_estadisticas
 from .cliente_llm import llamar_llm_micro_segmento, llamar_llm_inconsistencia
 
 
@@ -84,13 +84,32 @@ def procesar_escalaciones(
 
         por_id = {str(b.id): b for b in bloques}
 
+        gastado = 0.0
+        tope = settings.tope_gasto_documento_usd
+
         for pagina in sorted(paginas_encoladas):
+            # Se comprueba entre páginas y no dentro del lote: cortar a mitad de
+            # una página dejaría micro-segmentos de la misma línea resueltos por
+            # el modelo y otros sin resolver, que es peor que no escalarla.
+            if tope and gastado >= tope:
+                for bloque in bloques:
+                    if bloque.pagina != pagina:
+                        continue
+                    if str(bloque.id) not in bloques_revision_humana:
+                        bloques_revision_humana.append(str(bloque.id))
+                continue
+
             resultados_pagina = resolver_lote_pagina(
                 pagina, imagen_pagina_por_num.get(pagina)
             )
             escalaciones_micro.extend(resultados_pagina)
 
             for escalacion in resultados_pagina:
+                gastado += calcular_costo_usd(
+                    escalacion.costo.tokens_entrada,
+                    escalacion.costo.tokens_salida,
+                    (escalacion.costo.modelo_usado or [settings.modelo_escalacion])[0],
+                )
                 # Sin esto el resultado del modelo se perdía apenas terminaba el
                 # pipeline: quedaba el costo registrado, pero no la corrección ni
                 # la razón, que es lo que el revisor necesita ver.

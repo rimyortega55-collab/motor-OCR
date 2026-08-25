@@ -33,6 +33,12 @@ class Settings(BaseSettings):
     modelo_escalacion: str = "claude-opus-5"
     # Micro-segmentos por debajo de esta confianza se escalan al LLM (Cola 1)
     umbral_escalacion_micro_segmento: float = 0.6
+    # Techo de gasto en LLM por documento. Un PDF con mucho ruido puede generar
+    # cientos de micro-segmentos de baja confianza, y sin tope cada uno se
+    # convierte en una llamada paga sin que nadie lo haya decidido. Al llegar al
+    # tope el resto queda para revisión humana, que es la degradación honesta:
+    # no se inventa contenido ni se sigue gastando en silencio.
+    tope_gasto_documento_usd: float = 1.0
 
     model_config = {"env_prefix": "MOTOR_OCR_"}
 
