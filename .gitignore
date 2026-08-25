@@ -18,3 +18,4 @@ umbrales_config.json
 .env
 .env.*
 !.env.example
+*.log
