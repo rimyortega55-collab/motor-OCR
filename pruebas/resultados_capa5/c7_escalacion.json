@@ -1,8 +1,8 @@
 {
   "pdf": "c7.pdf",
-  "fecha": "2026-08-24T18:14:00.918818",
+  "fecha": "2026-08-25T10:06:03.852083",
   "documento": {
-    "documento_id": "1b74d61d-982a-4827-8d50-4fdc0c320586",
+    "documento_id": "e1d7951f-c72b-417f-a0d0-ed7d212a82dd",
     "titulo": "c7",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -83,7 +83,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 21:13:33.249395",
+    "fecha_procesamiento": "2026-08-25 13:05:34.757297",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

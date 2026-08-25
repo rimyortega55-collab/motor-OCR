@@ -1,8 +1,8 @@
 {
   "pdf": "c10.pdf",
-  "fecha": "2026-08-24T18:12:31.087909",
+  "fecha": "2026-08-25T10:04:27.439434",
   "documento": {
-    "documento_id": "89690513-414a-453a-bf12-26b053dd1e6b",
+    "documento_id": "3d5c4c30-cf34-471b-afb5-16bbd5430426",
     "titulo": "c10",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -59,7 +59,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 21:12:19.602614",
+    "fecha_procesamiento": "2026-08-25 13:04:14.485637",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

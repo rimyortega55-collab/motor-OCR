@@ -1,8 +1,8 @@
 {
   "pdf": "c7.pdf",
-  "fecha": "2026-08-24T18:14:33.224904",
+  "fecha": "2026-08-25T10:06:38.295049",
   "documento": {
-    "documento_id": "a853f88e-3c5e-44e0-b512-f6c4ab983e2b",
+    "documento_id": "803c6f81-7386-434c-aca6-b27412f61e0a",
     "titulo": "c7",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -83,7 +83,7 @@
       }
     ],
     "version_pipeline": "0.5",
-    "fecha_procesamiento": "2026-08-24 21:14:22.163087",
+    "fecha_procesamiento": "2026-08-25 13:06:21.572576",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
@@ -106,8 +106,9 @@
       "escalar": 1
     },
     "por_tipo_bloque": {
-      "parrafo": 2,
-      "formula_inline": 1
+      "parrafo": 1,
+      "formula_inline": 1,
+      "encabezado": 1
     },
     "tasa_cambio": 33.333333333333336,
     "confianza_promedio_usuario": 0.61
@@ -118,17 +119,34 @@
       [
         "parrafo",
         5
+      ],
+      [
+        "encabezado",
+        1
       ]
     ],
-    "confianza_engines_baja": []
+    "confianza_engines_baja": [
+      [
+        "encabezado",
+        0.45
+      ]
+    ]
   },
   "recomendaciones": [
+    {
+      "tipo_bloque": "encabezado",
+      "capa": 4,
+      "umbral_actual": 0.8,
+      "umbral_recomendado": 0.7,
+      "razon": "Alta tasa de escalaci\u00f3n (100.0%)",
+      "impacto": "Mejorar capacidad de reparaci\u00f3n autom\u00e1tica"
+    },
     {
       "tipo_bloque": "parrafo",
       "capa": 4,
       "umbral_actual": 0.8,
       "umbral_recomendado": 0.7,
-      "razon": "Alta tasa de escalaci\u00f3n (50.0%)",
+      "razon": "Alta tasa de escalaci\u00f3n (45.5%)",
       "impacto": "Mejorar capacidad de reparaci\u00f3n autom\u00e1tica"
     }
   ],
@@ -140,8 +158,12 @@
         "tasa_problema": 1.0
       },
       {
+        "tipo": "encabezado",
+        "tasa_problema": 1.0
+      },
+      {
         "tipo": "parrafo",
-        "tasa_problema": 0.5
+        "tasa_problema": 0.45454545454545453
       }
     ]
   }

@@ -1,11 +1,11 @@
 {
   "pdf": "c1_escaneado.pdf",
-  "fecha": "2026-08-24T20:10:14.211595",
+  "fecha": "2026-08-25T10:09:44.275053",
   "total_bloques_procesados": 12,
   "bloques_via_ocr_real": 12,
   "ocr_results": [
     {
-      "bloque_id": "3054187a-036c-44ce-aff3-cfdc13eaafd6",
+      "bloque_id": "85546242-90ca-4dc4-b265-0ecefa6b2874",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Springer Undergraduate Mathematics Series",
@@ -14,7 +14,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "d97c4ca4-ade8-4305-b04d-e2baeef15e23",
+      "bloque_id": "9774112a-5d21-498f-8d26-da2eb1a964a9",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Advisory Board",
@@ -23,7 +23,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "6906bf67-d396-41d8-b51e-e93747e039e6",
+      "bloque_id": "54e90110-67e6-4b59-908e-d17d6627e0e2",
       "tipo": "TipoBloque.ENCABEZADO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "M.A.J. Chaplain, University of Dundee, Dundee, Scotland, UK",
@@ -32,7 +32,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "c3257f0a-58f9-4578-a020-7904868fd115",
+      "bloque_id": "3324297b-36ae-4ba7-91f9-216f5fbd15a6",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "K. Erdmann, University of Oxford, Oxford, England, UK",
@@ -41,7 +41,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "857d1099-090f-4916-8c0c-372de6c61e15",
+      "bloque_id": "6882a485-7c40-4aca-af4c-11428b39e922",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "A. MacIntyre, Queen Mary, University of London, London, England, UK",
@@ -50,7 +50,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "3ba9dd68-423f-4687-a72a-2a482e1310de",
+      "bloque_id": "f61314be-824a-4b79-89ad-140449ab1b69",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "E. Suli, University of Oxford, Oxford, England, UK",
@@ -59,7 +59,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "d845630c-27c6-462f-aec0-9c1046ed9ed6",
+      "bloque_id": "460d25b5-681c-434a-8c96-8295880d6761",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "M.R. Tehranchi, University of Cambridge, Cambridge, England, UK",
@@ -68,7 +68,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "98710416-49cc-4595-929c-055a2648f736",
+      "bloque_id": "981587bd-2ec8-4a2c-9347-5e4326b1c452",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "J.F. Toland, University of Cambridge, Cambridge, England, UK",
@@ -77,7 +77,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "09f97bfc-50ff-4a83-9cff-ccb99d6b93ee",
+      "bloque_id": "f0c6cecb-cc00-4c55-99aa-f82832529a5f",
       "tipo": "TipoBloque.ENCABEZADO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "More information about this series at http://www.springer.com/series/3423",
@@ -86,7 +86,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "70cf0f0e-e571-4370-a9b7-0fbd56bd46d6",
+      "bloque_id": "2b54e573-74b4-44d2-9fb0-01f16623dbca",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Franco Vivaldi",
@@ -95,7 +95,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "3b8a0fe0-ce60-4c19-84b7-b7f9631e3dcf",
+      "bloque_id": "2f3ed097-194b-4b88-a446-a9f8db03a04b",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Mathematical Writing",
@@ -104,7 +104,7 @@
       "requiere_escalacion": false
     },
     {
-      "bloque_id": "ac202b20-b25f-46f6-9225-cc5cbc89ed61",
+      "bloque_id": "6268f618-928b-4d02-8bf6-a5435ee39c81",
       "tipo": "TipoBloque.PARRAFO",
       "origen_contenido": "OrigenContenido.REQUIERE_OCR",
       "contenido": "Springer",

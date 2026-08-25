@@ -104,8 +104,8 @@
       "dpi_objetivo": 300,
       "requiere_ocr": true,
       "fuentes_detectadas": [
-        "MSBM10",
-        "CMSY10"
+        "CMSY10",
+        "MSBM10"
       ]
     },
     {
@@ -137,8 +137,8 @@
       "requiere_ocr": true,
       "fuentes_detectadas": [
         "MSBM10",
-        "MSAM107",
-        "MSAM73"
+        "MSAM73",
+        "MSAM107"
       ]
     },
     {

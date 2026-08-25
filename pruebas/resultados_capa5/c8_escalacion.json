@@ -1,8 +1,8 @@
 {
   "pdf": "c8.pdf",
-  "fecha": "2026-08-24T18:14:07.992961",
+  "fecha": "2026-08-25T10:06:10.719426",
   "documento": {
-    "documento_id": "91ff622b-83f5-4db8-bab4-88606a984454",
+    "documento_id": "86f5e30f-4ccc-4e71-b0fc-69f310761a9e",
     "titulo": "c8",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -35,7 +35,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 21:14:01.499436",
+    "fecha_procesamiento": "2026-08-25 13:06:04.239452",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,

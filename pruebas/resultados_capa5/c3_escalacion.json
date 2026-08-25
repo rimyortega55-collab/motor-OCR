@@ -1,8 +1,8 @@
 {
   "pdf": "c3.pdf",
-  "fecha": "2026-08-24T18:13:02.195405",
+  "fecha": "2026-08-25T10:05:03.322485",
   "documento": {
-    "documento_id": "d5b5952e-6b18-4b94-83c5-7c6157c35171",
+    "documento_id": "7049442e-b245-40e9-9e10-81cc543b152d",
     "titulo": "c3",
     "origen": "nativo_digital",
     "idioma_original": "es",
@@ -67,7 +67,7 @@
       }
     ],
     "version_pipeline": "0.4",
-    "fecha_procesamiento": "2026-08-24 21:12:54.969051",
+    "fecha_procesamiento": "2026-08-25 13:04:53.976859",
     "costo_total": {
       "tokens_entrada": 0,
       "tokens_salida": 0,
