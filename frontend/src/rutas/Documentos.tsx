@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useDocumentos } from '../api/consultas'
+import { useDocumentos, useEliminarDocumento, useExportar } from '../api/consultas'
 import type { DocumentoResumen, EstadoDocumento, FiltrosDocumentos } from '../api/tipos'
 import { IconoAlerta, IconoBuscar, IconoDocumento, IconoSubir } from '../componentes/Iconos'
 
@@ -41,6 +41,68 @@ function FilaEsqueleto() {
         </td>
       ))}
     </tr>
+  )
+}
+
+/** Descarga rápida en los dos formatos principales, y borrado.
+ *
+ * Los formatos secundarios y la explicación de cada uno viven en el panel de
+ * revisión: acá la fila tiene que quedar legible, así que sólo van LaTeX y
+ * Markdown, que es lo que la mayoría se lleva.
+ */
+function AccionesDocumento({ documentoId, titulo }: { documentoId: string; titulo: string }) {
+  const exportar = useExportar()
+  const eliminar = useEliminarDocumento()
+  const [confirmando, setConfirmando] = useState(false)
+
+  if (confirmando) {
+    return (
+      <div className="fila" style={{ gap: 6, alignItems: 'center' }}>
+        <span className="chico apagado">¿Borrar?</span>
+        <button
+          type="button"
+          className="boton boton-chico boton-peligro"
+          disabled={eliminar.isPending}
+          onClick={() => eliminar.mutate(documentoId)}
+        >
+          {eliminar.isPending ? 'Borrando…' : 'Sí'}
+        </button>
+        <button type="button" className="boton boton-chico" onClick={() => setConfirmando(false)}>
+          No
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        className="boton boton-chico"
+        disabled={exportar.isPending}
+        title="Descargar en LaTeX"
+        onClick={() => exportar.mutate({ documentoId, titulo, formato: 'latex' })}
+      >
+        .tex
+      </button>
+      <button
+        type="button"
+        className="boton boton-chico"
+        disabled={exportar.isPending}
+        title="Descargar en Markdown"
+        onClick={() => exportar.mutate({ documentoId, titulo, formato: 'markdown' })}
+      >
+        .md
+      </button>
+      <button
+        type="button"
+        className="boton boton-chico"
+        title="Borrar el documento y su PDF"
+        onClick={() => setConfirmando(true)}
+      >
+        Borrar
+      </button>
+    </>
   )
 }
 
@@ -215,15 +277,23 @@ export default function Documentos() {
                         </td>
                         <td className="apagado num">{fecha(d.creado_en)}</td>
                         <td style={{ textAlign: 'right' }}>
-                          {d.necesita_revision && d.estado === 'completado' && (
-                            <Link
-                              to={`/documentos/${d.documento_id}/revision`}
-                              className="boton boton-chico"
-                              style={{ borderColor: 'var(--alerta-linea)', color: 'var(--alerta)' }}
-                            >
-                              Revisar
-                            </Link>
-                          )}
+                          <div
+                            className="fila"
+                            style={{ gap: 6, justifyContent: 'flex-end', flexWrap: 'wrap' }}
+                          >
+                            {d.necesita_revision && d.estado === 'completado' && (
+                              <Link
+                                to={`/documentos/${d.documento_id}/revision`}
+                                className="boton boton-chico"
+                                style={{ borderColor: 'var(--alerta-linea)', color: 'var(--alerta)' }}
+                              >
+                                Revisar
+                              </Link>
+                            )}
+                            {d.estado === 'completado' && (
+                              <AccionesDocumento documentoId={d.documento_id} titulo={d.titulo} />
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}

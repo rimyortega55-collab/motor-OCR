@@ -59,6 +59,7 @@ def _columnas_de_progreso(engine: Engine, inspector) -> list[str]:
         ("progreso", "JSON"),
         ("latido_en", "DATETIME"),
         ("ruta_pdf", "VARCHAR(500)"),
+        ("paginas_origen", "JSON"),
     ]
 
     hechos = []

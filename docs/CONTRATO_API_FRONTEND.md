@@ -14,9 +14,21 @@ al superar la cuota del plan. Registro, login y procesado tienen límite de tasa
 (`MOTOR_OCR_TOPE_GASTO_DOCUMENTO_USD`, 1 USD por defecto): al alcanzarlo, las
 páginas que faltan van a revisión humana en vez de seguir escalando.
 
+`POST /procesar` acepta `paginas` ("1-5, 8, 11-13"): las elegidas se extraen a un
+PDF nuevo y `documentos.paginas_origen` guarda el mapeo para que la interfaz
+muestre el número que el usuario reconoce. La cuota cuenta las páginas elegidas,
+así que elegir un rango abarata de verdad.
+
+La retención del PDF ya existe: se borra a los `MOTOR_OCR_DIAS_RETENCION_PDF`
+días (30 por defecto) y el documento sobrevive sin su imagen de página.
+`DELETE /documentos/{id}` borra el documento con sus archivos.
+
+`GET /export` suma **`latex`**, que junto con `markdown` son los formatos
+principales; `ipynb` queda como opción para quien escribe código y `graphify`
+para el indexador.
+
 Quedan sueltos: el resto de las `opciones` de `POST /procesar` (idioma y DPI),
-`segundos_estimados_restantes`, el lote de decisiones y la política de retención
-del PDF.
+`segundos_estimados_restantes` y el lote de decisiones.
 
 **Los tres prerrequisitos de §1 están resueltos**: hay tabla `bloques`, el PDF se
 conserva y el bbox se guarda normalizado.
@@ -581,7 +593,8 @@ de descarga, en vez de armar 31 000 bloques dentro del request.
 | `POST /umbrales/aplicar` | **implementado** · reemplaza a `POST /auto-ajuste`, que se eliminó |
 | `GET/POST/DELETE /api-keys` | **implementados** |
 | `GET /consumo` | **implementado** · rango, serie diaria y desglose |
-| `GET /documentos/{id}/export` | **implementado** · graphify, markdown, ipynb |
+| `GET /documentos/{id}/export` | **implementado** · latex, markdown, ipynb, graphify |
+| `DELETE /documentos/{id}` | **implementado** · borra el documento y sus archivos |
 
 ### Orden de construcción
 

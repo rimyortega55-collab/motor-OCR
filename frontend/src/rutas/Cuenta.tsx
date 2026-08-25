@@ -266,10 +266,10 @@ export default function Cuenta() {
               ) : (
                 <div className="columna" style={{ gap: 9 }}>
                   {[
-                    ['Documentos', consumo.data?.documentos_procesados ?? 0],
-                    ['Páginas', consumo.data?.paginas_procesadas ?? 0],
-                    ['Llamadas al modelo', consumo.data?.llamadas_llm ?? 0],
-                    ['Costo', `$${(consumo.data?.costo_llm_usd ?? 0).toFixed(4)}`],
+                    ['Documentos', consumo.data?.totales.documentos ?? 0],
+                    ['Páginas', consumo.data?.totales.paginas ?? 0],
+                    ['Llamadas al modelo', consumo.data?.totales.llamadas_llm ?? 0],
+                    ['Costo', `$${(consumo.data?.totales.costo_llm_usd ?? 0).toFixed(4)}`],
                   ].map(([etiqueta, valor]) => (
                     <div className="fila" key={etiqueta as string}>
                       <span className="chico">{etiqueta}</span>

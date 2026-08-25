@@ -28,6 +28,7 @@ from ocr_engine.persistence import (
 )
 
 from .auth import obtener_sesion, usuario_actual
+from .exportador_latex import renderizar as renderizar_latex
 
 router = APIRouter(tags=["consumo"])
 
@@ -323,7 +324,15 @@ def _a_graphify(documento: DocumentoAlmacenado, bloques: list[BloqueAlmacenado])
     return json.dumps(salida, ensure_ascii=False, indent=2)
 
 
+def _a_latex(documento: DocumentoAlmacenado, bloques: list[BloqueAlmacenado]) -> str:
+    return renderizar_latex(documento.titulo, bloques, _contenido)
+
+
+# LaTeX y Markdown son los formatos principales del producto. ipynb queda como
+# opcion para quien escribe codigo sobre lo convertido, y graphify es la salida
+# que consume el indexador.
 _FORMATOS = {
+    "latex": (_a_latex, "application/x-tex", "tex"),
     "graphify": (_a_graphify, "application/json", "json"),
     "markdown": (_a_markdown, "text/markdown; charset=utf-8", "md"),
     "ipynb": (_a_ipynb, "application/x-ipynb+json", "ipynb"),

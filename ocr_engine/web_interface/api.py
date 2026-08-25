@@ -26,7 +26,8 @@ import binascii
 from datetime import datetime, timezone
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, Depends, FastAPI, File, HTTPException, Request, UploadFile
+from fastapi import APIRouter, Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi import Response
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sqlalchemy import and_, func, or_
@@ -47,6 +48,8 @@ from .ajuste_umbrales import AjustadorUmbrales
 from .auth import obtener_sesion, usuario_actual
 from .cuotas import exigir_cuota, validar_archivo
 from .limites import exigir_limite
+from .retencion import DIAS_RETENCION_PDF, borrar_documento, purgar_pdfs_vencidos
+from .seleccion import extraer_paginas, interpretar_rango
 from .estaticos import INDICE, hay_build, montar_spa
 from .rutas_bloques import router as router_bloques
 from .rutas_consumo import router as router_consumo
@@ -77,6 +80,14 @@ def _preparar_base() -> None:
     colgados = marcar_colgados()
     if colgados:
         print(f"[TRABAJOS] {colgados} documentos colgados marcados como error")
+
+    # El PDF sólo hace falta mientras alguien vaya a mirar sus páginas. Sin esto
+    # el directorio de datos crecía sin techo y el archivo de un usuario quedaba
+    # guardado para siempre.
+    purgados = purgar_pdfs_vencidos()
+    if purgados:
+        print(f"[RETENCION] {purgados} PDF borrados por antigüedad "
+              f"(> {DIAS_RETENCION_PDF} días)")
 
 
 # ============================================================================
@@ -159,6 +170,7 @@ class TrabajoEncolado(BaseModel):
 async def procesar_pdf(
     request: Request,
     file: UploadFile = File(...),
+    paginas: str = Form(default=""),
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
 ) -> TrabajoEncolado:
@@ -178,8 +190,17 @@ async def procesar_pdf(
 
     # Validar antes de crear la fila: si el archivo no sirve, no tiene sentido
     # dejar un documento en la base ni ocupar un hilo del worker.
-    paginas = validar_archivo(contenido)
-    exigir_cuota(sesion, usuario, paginas)
+    total_paginas = validar_archivo(contenido)
+
+    # Elegir el rango antes de procesar es la forma más directa de que el usuario
+    # no pague por lo que no va a leer: cada página escaneada son segundos de
+    # docTR y, si sale con baja confianza, llamadas al modelo.
+    elegidas = interpretar_rango(paginas, total_paginas)
+    seleccion_parcial = len(elegidas) < total_paginas
+    if seleccion_parcial:
+        contenido = extraer_paginas(contenido, elegidas)
+
+    exigir_cuota(sesion, usuario, len(elegidas))
 
     documento_id = str(uuid4())
     registro = DocumentoAlmacenado(
@@ -187,7 +208,8 @@ async def procesar_pdf(
         usuario_id=usuario.id,
         titulo=file.filename or "sin-nombre.pdf",
         estado="en_cola",
-        total_paginas=paginas,
+        total_paginas=len(elegidas),
+        paginas_origen=elegidas if seleccion_parcial else None,
         progreso=progreso_inicial(),
     )
     sesion.add(registro)
@@ -354,6 +376,26 @@ async def obtener_documento(
         "creado_en": documento.creado_en.isoformat() if documento.creado_en else None,
         "resumen": documento.resultado,
     }
+
+
+@router_api.delete("/documentos/{documento_id}", status_code=204)
+async def eliminar_documento(
+    documento_id: str,
+    usuario: Usuario = Depends(usuario_actual),
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Borra un documento con sus bloques, costos, decisiones y archivos.
+
+    Hasta ahora no había forma de borrar nada: el PDF de un usuario quedaba en
+    disco para siempre y él no podía hacer nada al respecto. Los archivos se
+    borran a mano porque viven fuera de la base y el cascade no los alcanza.
+    """
+
+    documento = _documento_del_usuario(sesion, usuario, documento_id)
+    borrar_documento(sesion, documento)
+    sesion.commit()
+
+    return Response(status_code=204)
 
 
 @router_api.post("/revision/{documento_id}/decision")

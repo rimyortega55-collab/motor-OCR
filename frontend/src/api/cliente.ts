@@ -114,9 +114,14 @@ export function esNoAutenticado(error: unknown): boolean {
 }
 
 /** Sube un archivo. Va aparte de `pedir` porque el cuerpo es multipart y no JSON. */
-export async function subir<T>(ruta: string, archivo: File): Promise<T> {
+export async function subir<T>(
+  ruta: string,
+  archivo: File,
+  campos: Record<string, string> = {},
+): Promise<T> {
   const formulario = new FormData()
   formulario.append('file', archivo)
+  for (const [clave, valor] of Object.entries(campos)) formulario.append(clave, valor)
 
   let respuesta: Response
   try {
@@ -140,4 +145,45 @@ export async function subir<T>(ruta: string, archivo: File): Promise<T> {
   if (!respuesta.ok) throw new FalloApi(interpretarError(respuesta.status, cuerpo))
 
   return cuerpo as T
+}
+
+/** Descarga un archivo de la API y dispara el guardado en el navegador.
+ *
+ * No alcanza con un `<a href>`: la ruta necesita la cookie de sesión y devuelve
+ * un 404 si el documento no es del usuario, así que hay que pedirla por fetch
+ * para poder mostrar el error en vez de abrir una pestaña con un JSON de error.
+ */
+export async function descargar(ruta: string, nombreSugerido: string): Promise<void> {
+  let respuesta: Response
+  try {
+    respuesta = await fetch(BASE + ruta, { credentials: 'same-origin' })
+  } catch {
+    throw new FalloApi({
+      codigo: 'sin_conexion',
+      mensaje: 'No se pudo contactar al motor. ¿Está corriendo la API?',
+      estado: 0,
+    })
+  }
+
+  if (!respuesta.ok) {
+    const texto = await respuesta.text()
+    throw new FalloApi(interpretarError(respuesta.status, texto ? JSON.parse(texto) : null))
+  }
+
+  // El nombre real lo manda el servidor en Content-Disposition; el sugerido es
+  // el respaldo para cuando la cabecera no viaja.
+  const disposicion = respuesta.headers.get('content-disposition') ?? ''
+  const coincidencia = disposicion.match(/filename="([^"]+)"/)
+  const nombre = coincidencia ? coincidencia[1] : nombreSugerido
+
+  const blob = await respuesta.blob()
+  const url = URL.createObjectURL(blob)
+  const enlace = document.createElement('a')
+  enlace.href = url
+  enlace.download = nombre
+  document.body.appendChild(enlace)
+  enlace.click()
+  enlace.remove()
+  // Liberar en el mismo tick cancela la descarga en algunos navegadores.
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
 }

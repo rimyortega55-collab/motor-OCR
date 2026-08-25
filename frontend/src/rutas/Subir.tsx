@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 import { FalloApi } from '../api/cliente'
 import { useEstadoDocumento, useProcesar } from '../api/consultas'
+import Exportar from '../componentes/Exportar'
 import type { CapaProgreso } from '../api/tipos'
 import { IconoAlerta, IconoDocumento, IconoSubir } from '../componentes/Iconos'
 
@@ -183,6 +184,14 @@ function Progreso({ documentoId }: { documentoId: string }) {
           )}
         </div>
       </div>
+
+      {/* Descargar acá y no sólo en el listado: recién terminado es cuando la
+          persona quiere llevarse el resultado, sin tener que ir a buscarlo. */}
+      {data.estado === 'completado' && (
+        <div style={{ marginTop: 12 }}>
+          <Exportar documentoId={documentoId} titulo={data.titulo} listo />
+        </div>
+      )}
     </div>
   )
 }
@@ -190,6 +199,9 @@ function Progreso({ documentoId }: { documentoId: string }) {
 export default function Subir() {
   const [arrastrando, setArrastrando] = useState(false)
   const [encolados, setEncolados] = useState<string[]>([])
+  // Vacío = documento entero. Se conserva entre subidas: quien procesa varios
+  // capítulos del mismo libro suele querer el mismo rango.
+  const [paginas, setPaginas] = useState('')
   const entrada = useRef<HTMLInputElement>(null)
   const procesar = useProcesar()
 
@@ -197,10 +209,13 @@ export default function Subir() {
     if (!archivos) return
 
     for (const archivo of Array.from(archivos)) {
-      procesar.mutate(archivo, {
-        // Se agrega adelante para que el último subido quede arriba.
-        onSuccess: ({ documento_id }) => setEncolados((previos) => [documento_id, ...previos]),
-      })
+      procesar.mutate(
+        { archivo, paginas: paginas.trim() || undefined },
+        {
+          // Se agrega adelante para que el último subido quede arriba.
+          onSuccess: ({ documento_id }) => setEncolados((previos) => [documento_id, ...previos]),
+        },
+      )
     }
   }
 
@@ -275,16 +290,57 @@ export default function Subir() {
             </div>
           )}
 
+          <div className="tarjeta" style={{ padding: '16px 18px' }}>
+            <div className="columna" style={{ gap: 10 }}>
+              <div className="columna" style={{ gap: 3 }}>
+                <span className="etiqueta">Qué páginas procesar</span>
+                <span className="chico apagado">
+                  Dejalo vacío para el documento entero. Procesar de más cuesta
+                  tiempo y, en escaneados, llamadas al modelo.
+                </span>
+              </div>
+
+              <input
+                className="campo"
+                type="text"
+                inputMode="numeric"
+                placeholder="Todo el documento"
+                aria-label="Páginas a procesar"
+                value={paginas}
+                onChange={(e) => setPaginas(e.target.value)}
+              />
+
+              <div className="fila" style={{ gap: 8, flexWrap: 'wrap' }}>
+                <span className="chico apagado">Por ejemplo</span>
+                {['1-10', '5', '1-3, 7, 12-20'].map((ejemplo) => (
+                  <button
+                    key={ejemplo}
+                    type="button"
+                    className="boton boton-chico"
+                    onClick={() => setPaginas(ejemplo)}
+                  >
+                    {ejemplo}
+                  </button>
+                ))}
+                {paginas && (
+                  <button type="button" className="boton boton-chico" onClick={() => setPaginas('')}>
+                    Todo
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="aviso">
             <span className="tenue" style={{ display: 'flex', flexShrink: 0 }}>
               <IconoAlerta />
             </span>
             <div className="columna" style={{ gap: 5 }}>
-              <strong style={{ fontSize: 13 }}>Las opciones todavía no están</strong>
+              <strong style={{ fontSize: 13 }}>El idioma y el DPI todavía no se eligen</strong>
               <span className="apagado chico">
-                El idioma, el DPI y el tope de gasto por documento están en el contrato
-                pero no implementados: por ahora el motor usa el DPI que decide el triage
-                y escala al modelo sin límite de gasto.
+                Están en el contrato pero no implementados: el motor usa el DPI que
+                decide el triage. El gasto por documento sí tiene tope, configurado en
+                el servidor.
               </span>
             </div>
           </div>

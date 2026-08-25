@@ -163,6 +163,12 @@ class DocumentoAlmacenado(Base):
     # apenas terminaba el pipeline y no había forma de volver a mirarlas.
     ruta_pdf: Mapped[str | None] = mapped_column(String(500))
 
+    # Qué páginas del archivo original se procesaron, 0-based. Nulo = todas.
+    # Al procesar una selección, el PDF se recorta y la numeración interna queda
+    # re-basada; esto es lo que permite que la interfaz muestre el número de
+    # página que el usuario reconoce de su documento.
+    paginas_origen: Mapped[list | None] = mapped_column(JSON)
+
     usuario: Mapped[Usuario] = relationship(back_populates="documentos")
     costos: Mapped[list["CostoRegistrado"]] = relationship(
         back_populates="documento", cascade="all, delete-orphan"

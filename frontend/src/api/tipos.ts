@@ -143,13 +143,77 @@ export type ResultadoDecision = {
   pendientes: number
 }
 
-export type Consumo = {
-  usuario: string
-  plan: string
-  documentos_procesados: number
-  paginas_procesadas: number
+export type LimitesPlan = {
+  paginas_mes: number | null
+  gasto_llm_mes_usd: number | null
+}
+
+export type TotalesConsumo = {
+  documentos: number
+  paginas: number
   llamadas_llm: number
   tokens_entrada: number
   tokens_salida: number
   costo_llm_usd: number
+}
+
+export type DiaConsumo = {
+  fecha: string
+  micro_segmento_usd: number
+  inconsistencia_documental_usd: number
+}
+
+export type ConsumoDocumento = {
+  documento_id: string
+  titulo: string
+  llamadas: number
+  tokens_entrada: number
+  tokens_salida: number
+  costo_usd: number
+}
+
+export type Consumo = {
+  usuario: string
+  plan: string
+  desde: string
+  hasta: string
+  limites: LimitesPlan
+  totales: TotalesConsumo
+  serie_diaria: DiaConsumo[]
+  por_documento: ConsumoDocumento[]
+}
+
+/** Los cuatro formatos de exportación. LaTeX y Markdown son los principales. */
+export type FormatoExport = 'latex' | 'markdown' | 'ipynb' | 'graphify'
+
+export type Umbrales = {
+  capa3: Record<string, number>
+  capa4: Record<string, number>
+  globales: Record<string, number>
+  actualizado_en: string | null
+}
+
+export type Recomendacion = {
+  ambito: string
+  clave: string
+  actual: number
+  propuesto: number
+  confianza: number
+  razon: string
+  aplicable: boolean
+}
+
+export type Recomendaciones = {
+  decisiones_analizadas: number
+  recomendaciones: Recomendacion[]
+}
+
+export type ResultadoAplicar = {
+  status: string
+  razon?: string
+  cambios_aplicados: number
+  umbrales: Umbrales
+  detalles?: { clave: string; de: number; a: number; razon: string }[]
+  /** Viaja en null hasta que exista validación contra un lote real. */
+  validacion: null
 }

@@ -6,7 +6,7 @@ import Consumo from './rutas/Consumo'
 import Cuenta from './rutas/Cuenta'
 import Documentos from './rutas/Documentos'
 import Entrar from './rutas/Entrar'
-import Pendiente from './rutas/Pendiente'
+import Umbrales from './rutas/Umbrales'
 import Revision from './rutas/Revision'
 import Subir from './rutas/Subir'
 
@@ -29,21 +29,7 @@ export default function App() {
           <Route path="/cuenta" element={<Cuenta />} />
 
 
-          <Route
-            path="/umbrales"
-            element={
-              <Pendiente
-                titulo="Umbrales y auto-ajuste"
-                paso="Paso 4 del contrato"
-                descripcion="Los umbrales que deciden qué se escala al modelo y qué va a revisión humana, más los ajustes que el motor recomienda a partir de tus decisiones. Hoy los umbrales son globales y viven en un archivo de ruta relativa, así que un usuario se los cambiaría a todos."
-                bloqueadoPor={[
-                  'PUT /umbrales',
-                  'GET /umbrales/recomendaciones',
-                  'tabla umbrales por usuario',
-                ]}
-              />
-            }
-          />
+          <Route path="/umbrales" element={<Umbrales />} />
 
         </Route>
 

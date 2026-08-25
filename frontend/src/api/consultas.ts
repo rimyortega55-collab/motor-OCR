@@ -7,12 +7,16 @@ import {
   useQueryClient,
 } from '@tanstack/react-query'
 
-import { esNoAutenticado, pedir, subir } from './cliente'
+import { descargar, esNoAutenticado, pedir, subir } from './cliente'
 import type {
   ApiKey,
   ApiKeyCreada,
   Consumo,
   Bloque,
+  FormatoExport,
+  Recomendaciones,
+  ResultadoAplicar,
+  Umbrales,
   Decision,
   DocumentoResumen,
   EstadoProceso,
@@ -34,6 +38,8 @@ export const claves = {
   bloque: (doc: string, id: string) => ['bloque', doc, id] as const,
   bloquesPagina: (doc: string, pagina: number) => ['bloques-pagina', doc, pagina] as const,
   paginas: (id: string) => ['paginas', id] as const,
+  umbrales: ['umbrales'] as const,
+  recomendaciones: ['umbrales', 'recomendaciones'] as const,
 }
 
 // ============================================================================
@@ -110,7 +116,10 @@ export function useDocumentos(filtros: FiltrosDocumentos) {
 export function useProcesar() {
   const cliente = useQueryClient()
   return useMutation({
-    mutationFn: (archivo: File) => subir<TrabajoEncolado>('/procesar', archivo),
+    // `paginas` viaja vacío cuando se quiere el documento entero; el servidor lo
+    // interpreta como "todas" y evita recortar el PDF sin necesidad.
+    mutationFn: ({ archivo, paginas }: { archivo: File; paginas?: string }) =>
+      subir<TrabajoEncolado>('/procesar', archivo, paginas ? { paginas } : {}),
     // El documento aparece en la lista apenas se encola, en estado "en cola".
     onSuccess: () => cliente.invalidateQueries({ queryKey: ['documentos'] }),
   })
@@ -237,5 +246,95 @@ export function useConsumo() {
   return useQuery({
     queryKey: claves.consumo,
     queryFn: () => pedir<Consumo>('/consumo'),
+  })
+}
+
+// ============================================================================
+// UMBRALES
+// ============================================================================
+
+export function useUmbrales() {
+  return useQuery({
+    queryKey: claves.umbrales,
+    queryFn: () => pedir<Umbrales>('/umbrales'),
+  })
+}
+
+export function useGuardarUmbrales() {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (cambios: Partial<Omit<Umbrales, 'actualizado_en'>>) =>
+      pedir<Umbrales>('/umbrales', { metodo: 'PUT', cuerpo: cambios }),
+    onSuccess: (datos) => {
+      cliente.setQueryData(claves.umbrales, datos)
+      // Las recomendaciones se calculan contra los umbrales vigentes.
+      cliente.invalidateQueries({ queryKey: claves.recomendaciones })
+    },
+  })
+}
+
+export function useRecomendaciones() {
+  return useQuery({
+    queryKey: claves.recomendaciones,
+    queryFn: () => pedir<Recomendaciones>('/umbrales/recomendaciones'),
+  })
+}
+
+export function useAplicarRecomendaciones() {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (clavesAplicar: string[]) =>
+      pedir<ResultadoAplicar>('/umbrales/aplicar', {
+        metodo: 'POST',
+        cuerpo: { claves: clavesAplicar },
+      }),
+    onSuccess: (datos) => {
+      cliente.setQueryData(claves.umbrales, datos.umbrales)
+      cliente.invalidateQueries({ queryKey: claves.recomendaciones })
+    },
+  })
+}
+
+// ============================================================================
+// EXPORTACIÓN
+// ============================================================================
+
+const EXTENSION: Record<FormatoExport, string> = {
+  latex: 'tex',
+  markdown: 'md',
+  ipynb: 'ipynb',
+  graphify: 'json',
+}
+
+export function useExportar() {
+  return useMutation({
+    mutationFn: ({
+      documentoId,
+      titulo,
+      formato,
+    }: {
+      documentoId: string
+      titulo: string
+      formato: FormatoExport
+    }) => {
+      const base = titulo.replace(/\.pdf$/i, '') || 'documento'
+      return descargar(
+        `/documentos/${documentoId}/export?formato=${formato}`,
+        `${base}.${EXTENSION[formato]}`,
+      )
+    },
+  })
+}
+
+// ============================================================================
+// BORRADO
+// ============================================================================
+
+export function useEliminarDocumento() {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (documentoId: string) =>
+      pedir<void>(`/documentos/${documentoId}`, { metodo: 'DELETE' }),
+    onSuccess: () => cliente.invalidateQueries({ queryKey: ['documentos'] }),
   })
 }
