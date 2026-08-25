@@ -217,3 +217,40 @@ export type ResultadoAplicar = {
   /** Viaja en null hasta que exista validación contra un lote real. */
   validacion: null
 }
+
+// ============================================================================
+// TRADUCCIÓN
+// ============================================================================
+
+export type TerminoSugerido = {
+  termino: string
+  apariciones: number
+  traduccion: string
+}
+
+export type SeleccionTraduccion = {
+  paginas: number[]
+  tipos: string[]
+}
+
+export type PedidoTraduccion = {
+  idioma: string
+  descripcion?: string
+  tono?: 'academico' | 'accesible'
+  glosario?: Record<string, string>
+  seleccion?: SeleccionTraduccion
+}
+
+export type Traduccion = {
+  id: string
+  idioma: string
+  descripcion: string
+  tono: string
+  glosario: Record<string, string>
+  seleccion: Partial<SeleccionTraduccion>
+  estado: 'en_cola' | 'traduciendo' | 'completada' | 'error'
+  bloques_totales: number
+  bloques_traducidos: number
+  costo_usd: number
+  error: string | null
+}

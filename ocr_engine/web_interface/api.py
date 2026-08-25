@@ -54,6 +54,7 @@ from .estaticos import INDICE, hay_build, montar_spa
 from .rutas_bloques import router as router_bloques
 from .rutas_consumo import router as router_consumo
 from .rutas_cuenta import router as router_cuenta
+from .rutas_traduccion import router as router_traduccion
 from .rutas_umbrales import router as router_umbrales
 from .trabajos import encolar, marcar_colgados, progreso_inicial
 
@@ -613,6 +614,7 @@ app.include_router(router_cuenta, prefix="/api")
 app.include_router(router_bloques, prefix="/api")
 app.include_router(router_umbrales, prefix="/api")
 app.include_router(router_consumo, prefix="/api")
+app.include_router(router_traduccion, prefix="/api")
 # Al final del modulo a proposito: el catch-all del SPA tiene que registrarse
 # despues de todas las rutas de la API para no taparlas.
 montar_spa(app)

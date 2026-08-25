@@ -27,6 +27,25 @@ días (30 por defecto) y el documento sobrevive sin su imagen de página.
 principales; `ipynb` queda como opción para quien escribe código y `graphify`
 para el indexador.
 
+**Traducción (§ nuevo).** Se traduce al exportar y no dentro del pipeline: el
+contenido ya tiene aplicadas las correcciones humanas, se paga sólo si alguien la
+pide, y de un mismo procesamiento salen todos los idiomas. Y se traduce bloque a
+bloque, no sobre el archivo renderizado: pasarle el `.tex` terminado al modelo
+haría que tradujera dentro de `egin{equation}`.
+
+```
+GET    /documentos/{id}/glosario/sugerencias   términos frecuentes, por frecuencia
+GET    /documentos/{id}/traducciones           las pedidas, con su avance y costo
+POST   /documentos/{id}/traducciones           202, encola; el contexto va en el cuerpo
+DELETE /documentos/{id}/traducciones/{idioma}  204
+GET    /documentos/{id}/export?idioma=…        exporta en ese idioma
+```
+
+El contexto lo decide el usuario: `descripcion` (qué es y para quién), `tono`
+(academico | accesible), `glosario` (término → traducción, respetado en todo el
+documento) y `seleccion` (páginas y tipos de bloque). Las fórmulas, el código y
+las tablas nunca se traducen.
+
 Quedan sueltos: el resto de las `opciones` de `POST /procesar` (idioma y DPI),
 `segundos_estimados_restantes` y el lote de decisiones.
 

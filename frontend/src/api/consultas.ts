@@ -14,8 +14,11 @@ import type {
   Consumo,
   Bloque,
   FormatoExport,
+  PedidoTraduccion,
   Recomendaciones,
   ResultadoAplicar,
+  TerminoSugerido,
+  Traduccion,
   Umbrales,
   Decision,
   DocumentoResumen,
@@ -40,6 +43,8 @@ export const claves = {
   paginas: (id: string) => ['paginas', id] as const,
   umbrales: ['umbrales'] as const,
   recomendaciones: ['umbrales', 'recomendaciones'] as const,
+  traducciones: (id: string) => ['traducciones', id] as const,
+  glosario: (id: string) => ['glosario', id] as const,
 }
 
 // ============================================================================
@@ -312,15 +317,20 @@ export function useExportar() {
       documentoId,
       titulo,
       formato,
+      idioma,
     }: {
       documentoId: string
       titulo: string
       formato: FormatoExport
+      /** Sin idioma se descarga el original. */
+      idioma?: string
     }) => {
       const base = titulo.replace(/\.pdf$/i, '') || 'documento'
+      const sufijo = idioma ? `.${idioma}` : ''
+      const parametro = idioma ? `&idioma=${encodeURIComponent(idioma)}` : ''
       return descargar(
-        `/documentos/${documentoId}/export?formato=${formato}`,
-        `${base}.${EXTENSION[formato]}`,
+        `/documentos/${documentoId}/export?formato=${formato}${parametro}`,
+        `${base}${sufijo}.${EXTENSION[formato]}`,
       )
     },
   })
@@ -336,5 +346,57 @@ export function useEliminarDocumento() {
     mutationFn: (documentoId: string) =>
       pedir<void>(`/documentos/${documentoId}`, { metodo: 'DELETE' }),
     onSuccess: () => cliente.invalidateQueries({ queryKey: ['documentos'] }),
+  })
+}
+
+// ============================================================================
+// TRADUCCIÓN
+// ============================================================================
+
+export function useTraducciones(documentoId: string) {
+  return useQuery({
+    queryKey: claves.traducciones(documentoId),
+    queryFn: () => pedir<Traduccion[]>(`/documentos/${documentoId}/traducciones`),
+    // Mientras alguna esté en curso conviene sondear; traducir son minutos.
+    refetchInterval: (consulta) => {
+      const datos = consulta.state.data
+      const enCurso = datos?.some((t) => t.estado === 'en_cola' || t.estado === 'traduciendo')
+      return enCurso ? 3000 : false
+    },
+  })
+}
+
+/** Términos frecuentes del documento, para fijar antes de traducir. */
+export function useSugerenciasGlosario(documentoId: string, activo: boolean) {
+  return useQuery({
+    queryKey: claves.glosario(documentoId),
+    queryFn: () =>
+      pedir<{ sugerencias: TerminoSugerido[] }>(
+        `/documentos/${documentoId}/glosario/sugerencias`,
+      ),
+    enabled: activo,
+  })
+}
+
+export function usePedirTraduccion(documentoId: string) {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (pedido: PedidoTraduccion) =>
+      pedir<Traduccion>(`/documentos/${documentoId}/traducciones`, {
+        metodo: 'POST',
+        cuerpo: pedido,
+      }),
+    onSuccess: () => cliente.invalidateQueries({ queryKey: claves.traducciones(documentoId) }),
+  })
+}
+
+export function useBorrarTraduccion(documentoId: string) {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (idioma: string) =>
+      pedir<void>(`/documentos/${documentoId}/traducciones/${encodeURIComponent(idioma)}`, {
+        metodo: 'DELETE',
+      }),
+    onSuccess: () => cliente.invalidateQueries({ queryKey: claves.traducciones(documentoId) }),
   })
 }

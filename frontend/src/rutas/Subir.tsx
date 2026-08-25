@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { FalloApi } from '../api/cliente'
 import { useEstadoDocumento, useProcesar } from '../api/consultas'
 import Exportar from '../componentes/Exportar'
+import Traducir from '../componentes/Traducir'
 import type { CapaProgreso } from '../api/tipos'
 import { IconoAlerta, IconoDocumento, IconoSubir } from '../componentes/Iconos'
 
@@ -188,8 +189,11 @@ function Progreso({ documentoId }: { documentoId: string }) {
       {/* Descargar acá y no sólo en el listado: recién terminado es cuando la
           persona quiere llevarse el resultado, sin tener que ir a buscarlo. */}
       {data.estado === 'completado' && (
-        <div style={{ marginTop: 12 }}>
+        <div className="columna" style={{ gap: 12, marginTop: 12 }}>
           <Exportar documentoId={documentoId} titulo={data.titulo} listo />
+          {/* Traducir va después de exportar: primero se ve el resultado, y
+              recién con eso a la vista tiene sentido decidir el contexto. */}
+          <Traducir documentoId={documentoId} titulo={data.titulo} />
         </div>
       )}
     </div>

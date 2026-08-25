@@ -324,3 +324,80 @@ class UmbralesUsuario(Base):
     )
 
     usuario: Mapped[Usuario] = relationship()
+
+
+class TraduccionDocumento(Base):
+    """Un pedido de traducción de un documento a un idioma, con su contexto.
+
+    Una fila por (documento, idioma): el mismo documento puede traducirse a
+    varios idiomas sin reprocesar el OCR, que es la razón por la que traducir se
+    hace al exportar y no dentro del pipeline.
+
+    El contexto lo decide el usuario y es lo que separa una traducción técnica
+    utilizable de una literal: describir que es un libro de álgebra de posgrado
+    cambia cómo se traduce "ring", y un glosario propio evita que el mismo término
+    aparezca de tres formas distintas a lo largo de 200 páginas.
+    """
+
+    __tablename__ = "traducciones"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    documento_id: Mapped[str] = mapped_column(
+        ForeignKey("documentos.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+
+    idioma: Mapped[str] = mapped_column(String(12), nullable=False)
+
+    # Qué es el documento y para quién. Viaja en cada llamada al modelo.
+    descripcion: Mapped[str | None] = mapped_column(Text)
+    # "academico" | "accesible"
+    tono: Mapped[str] = mapped_column(String(20), default="academico")
+    # {"eigenvalue": "autovalor", ...}. El motor propone y el usuario corrige.
+    glosario: Mapped[dict] = mapped_column(JSON, default=dict)
+    # Qué se traduce: {"paginas": [0,1,2], "tipos": ["parrafo","teorema"]}.
+    # Vacío = todo lo traducible.
+    seleccion: Mapped[dict] = mapped_column(JSON, default=dict)
+
+    # en_cola | traduciendo | completada | error
+    estado: Mapped[str] = mapped_column(String(20), default="en_cola")
+    bloques_totales: Mapped[int] = mapped_column(Integer, default=0)
+    bloques_traducidos: Mapped[int] = mapped_column(Integer, default=0)
+    costo_usd: Mapped[float] = mapped_column(Float, default=0.0)
+    error: Mapped[str | None] = mapped_column(Text)
+
+    creada_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_ahora)
+    actualizada_en: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=_ahora, onupdate=_ahora
+    )
+
+    documento: Mapped["DocumentoAlmacenado"] = relationship()
+
+
+class TraduccionBloque(Base):
+    """El texto traducido de un bloque.
+
+    Tabla aparte y no una columna en `bloques` porque un bloque tiene tantas
+    traducciones como idiomas se hayan pedido. Guardarlo por bloque además deja
+    rehacer la traducción de uno solo cuando el usuario corrige su texto, sin
+    volver a pagar las otras 27 000.
+    """
+
+    __tablename__ = "traducciones_bloque"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    traduccion_id: Mapped[str] = mapped_column(
+        ForeignKey("traducciones.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    bloque_id: Mapped[str] = mapped_column(String(36), nullable=False, index=True)
+
+    contenido: Mapped[str] = mapped_column(Text)
+    confianza: Mapped[float] = mapped_column(Float, default=0.0)
+    # Lo que el revisor dejó, si tocó la traducción.
+    contenido_final: Mapped[str | None] = mapped_column(Text)
+
+    traduccion: Mapped[TraduccionDocumento] = relationship()
+
+
+# El exportador pide todos los bloques de una traducción para recomponer el
+# documento; sin índice recorre la tabla entera de todos los idiomas.
+Index("ix_traduccion_bloque", TraduccionBloque.traduccion_id, TraduccionBloque.bloque_id)

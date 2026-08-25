@@ -339,14 +339,37 @@ _FORMATOS = {
 }
 
 
+def _adjunto(nombre: str) -> str:
+    """Cabecera Content-Disposition que tolera acentos en el nombre.
+
+    Las cabeceras HTTP se codifican en latin-1, así que un título con "ñ" o el
+    sufijo del idioma rompían la respuesta con UnicodeDecodeError antes de
+    llegar al navegador. Se manda el nombre dos veces, como pide la RFC 5987:
+    una versión ASCII para clientes viejos y la real en `filename*`.
+    """
+    from urllib.parse import quote
+
+    ascii_seguro = nombre.encode("ascii", "replace").decode("ascii").replace("?", "_")
+    return (
+        f'attachment; filename="{ascii_seguro}"; '
+        f"filename*=UTF-8''{quote(nombre, safe='')}"
+    )
+
+
 @router.get("/documentos/{documento_id}/export")
 async def exportar(
     documento_id: str,
     formato: str = Query(default="graphify"),
+    idioma: str | None = Query(default=None),
     usuario: Usuario = Depends(usuario_actual),
     sesion: Session = Depends(obtener_sesion),
 ):
-    """Descarga el documento con las correcciones humanas aplicadas."""
+    """Descarga el documento con las correcciones humanas aplicadas.
+
+    Con `idioma`, entrega la traducción a ese idioma. Es acá y no antes donde la
+    traducción tiene sentido: el contenido ya está corregido, se paga sólo si
+    alguien la pide, y de un mismo procesamiento salen todos los idiomas.
+    """
 
     if formato not in _FORMATOS:
         raise HTTPException(
@@ -372,14 +395,36 @@ async def exportar(
             },
         )
 
+    if idioma:
+        from .rutas_traduccion import mapa_traducido
+
+        traducciones = mapa_traducido(sesion, documento_id, idioma)
+        if not traducciones:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail={
+                    "codigo": "sin_traduccion",
+                    "detail": f"No hay una traducción a {idioma} para este documento",
+                },
+            )
+
+        # Se sustituye el contenido en memoria, sin tocar la base: el bloque
+        # conserva su texto original y la traducción es una vista sobre él.
+        for bloque in bloques:
+            traducido = traducciones.get(bloque.id)
+            if traducido:
+                bloque.contenido_final = traducido
+
     render, tipo_mime, extension = _FORMATOS[formato]
     cuerpo = render(documento, bloques)
 
     base = documento.titulo.rsplit(".", 1)[0] or "documento"
+    if idioma:
+        base = f"{base}.{idioma}"
     # Se transmite en vez de devolverlo entero: un documento de 30 000 bloques
     # son varios megabytes de texto que no conviene armar en memoria dos veces.
     return StreamingResponse(
         io.BytesIO(cuerpo.encode("utf-8")),
         media_type=tipo_mime,
-        headers={"Content-Disposition": f'attachment; filename="{base}.{extension}"'},
+        headers={"Content-Disposition": _adjunto(f"{base}.{extension}")},
     )
