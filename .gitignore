@@ -40,7 +40,9 @@ entrenamiento/evaluacion_real/
 
 # Material de trabajo interno: no se publica en el repositorio open source.
 # Sigue viviendo en el filesystem local para continuar el desarrollo; ver
-# CONTRIBUTING.md para el porque de cada exclusion.
+# POLITICA_PUBLICACION.md para el porque de cada exclusion y el
+# procedimiento a seguir antes de volver a hacer publico el repositorio.
+POLITICA_PUBLICACION.md
 TRASPASO.md
 install.ps1
 .claude/
