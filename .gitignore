@@ -36,3 +36,21 @@ entrenamiento/dataset_prueba/
 entrenamiento/dataset_validacion/
 entrenamiento/checkpoints_validacion/
 entrenamiento/outputs_validacion/
+entrenamiento/evaluacion_real/
+
+# Material de trabajo interno: no se publica en el repositorio open source.
+# Sigue viviendo en el filesystem local para continuar el desarrollo; ver
+# CONTRIBUTING.md para el porque de cada exclusion.
+TRASPASO.md
+install.ps1
+.claude/
+design/
+pruebas/
+docs/06-funciones-avanzadas-interfaz.md
+docs/07-prioridad-funciones-avanzadas.md
+docs/ARQUITECTURA_COMPLETA.md
+docs/CONTRATO_API_FRONTEND.md
+docs/PIPELINE_COMPLETO.md
+docs/REPORTE_CAPA*.md
+docs/SISTEMA_COMPLETO_7_CAPAS.md
+docs/contexto/

@@ -1,32 +1,37 @@
-# React + TypeScript + Vite
+# motor-OCR — frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+SPA en React + TypeScript + Vite: la interfaz para usuarios que no programan
+del proyecto [motor-OCR](../README.md). Subida de documentos, seguimiento de
+estados, revisión de bloques de baja confianza, traducción y administración
+de cuenta.
 
-Currently, two official plugins are available:
+## Desarrollo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Levanta Vite en `:5173` y proxea `/api` hacia el backend FastAPI en `:8000`
+(ver [`vite.config.ts`](vite.config.ts)). Con el backend corriendo
+(`uvicorn motor_ocr_api.api:app --reload` desde la raíz del repo), la app
+queda funcional en `http://localhost:5173`.
+
+## Build
+
+```bash
+npm run build
+```
+
+El resultado en `dist/` es servido directamente por FastAPI
+([`motor_ocr_api/estaticos.py`](../packages/motor_ocr_api/estaticos.py)), así
+que en producción la API y el frontend cuelgan de un solo origen.
+
+## Estructura
+
+```
+src/
+  api/          cliente HTTP y tipos de la API
+  componentes/  piezas reutilizables (armazón, guards de ruta, íconos, exportar)
+  rutas/        una pantalla por ruta (subida, documentos, revisión, umbrales, ...)
+```

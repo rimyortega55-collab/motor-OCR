@@ -50,8 +50,7 @@ packages/
 frontend/              SPA en React + TypeScript + Vite
 entrenamiento/         fine-tuning y evaluación de pix2tex
 tests/                 pruebas de pytest del núcleo y la API
-docs/                  arquitectura, contrato de API, reportes por capa
-design/                wireframes de las pantallas del frontend
+docs/                  arquitectura del pipeline
 ```
 
 El núcleo (`motor_ocr`) se instala solo, sin arrastrar un framework web: quien
@@ -106,9 +105,14 @@ Variables de entorno relevantes:
 | `MOTOR_OCR_COOKIE_SEGURA=0` | Apaga el flag `Secure` de la cookie de sesión, para servir por HTTP plano (no hace falta en `localhost`) |
 | `MOTOR_OCR_UMBRAL_CONFIANZA_GLOBAL_ESCALACION` | Ajusta el umbral de confianza que decide qué bloques entran a la cola de revisión humana |
 
-Documentación más detallada en [`docs/`](docs/), en particular
-[`docs/ARQUITECTURA_COMPLETA.md`](docs/ARQUITECTURA_COMPLETA.md) y
-[`docs/CONTRATO_API_FRONTEND.md`](docs/CONTRATO_API_FRONTEND.md).
+Documentación más detallada en [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md).
+La API no tiene un contrato estático: FastAPI genera documentación
+interactiva en `/docs` (Swagger UI) con el servidor corriendo.
+
+## Contribuir
+
+Ver [`CONTRIBUTING.md`](CONTRIBUTING.md) para el entorno de desarrollo, cómo
+correr las pruebas y las convenciones del proyecto.
 
 ## Licencia
 
