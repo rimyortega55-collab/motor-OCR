@@ -1,0 +1,66 @@
+[project]
+name = "motor-ocr"
+version = "0.2.0"
+description = "Motor hibrido de OCR: de PDF de matematica a LaTeX y Markdown"
+requires-python = ">=3.11"
+license = { text = "AGPL-3.0-or-later" }
+dependencies = [
+    # Modelos y configuracion
+    "pydantic[email]>=2",
+    "pydantic-settings>=2",
+    # Lectura de PDF e imagen. PyMuPDF es AGPL-3.0 y es la razon por la que el
+    # proyecto entero lleva esa licencia.
+    "pymupdf",
+    "numpy",
+    "opencv-python",
+    "pillow",
+    # Motores de reconocimiento
+    "easyocr",
+    "python-doctr",
+    "pix2tex",
+    "pytesseract",
+    "transformers",
+    # Tokenizadores que transformers necesita en ejecucion para NLLB/Opus-MT
+    "sentencepiece",
+    "sacremoses",
+    # Escalacion a LLM
+    "anthropic",
+]
+
+# El nucleo se instala solo: quien quiera convertir un PDF desde un script no
+# tiene que arrastrar un framework web ni una base de datos.
+[project.optional-dependencies]
+api = [
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
+    "sqlalchemy>=2",
+]
+ui = [
+    "streamlit",
+    "pandas",
+    "plotly",
+]
+dev = [
+    "pytest",
+]
+# Fine-tuning de pix2tex (entrenamiento/). pix2tex no declara estas como
+# dependencias propias pero su train.py/eval.py las importan sin condicion.
+# torchtext queda fuera: su extension nativa no es compatible en binario con
+# versiones recientes de torch, y entrenamiento/_compat.py ya sustituye la
+# unica funcion que se usaba de ahi (bleu_score) por una implementacion propia.
+train = [
+    "wandb",
+    "python-Levenshtein",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["packages"]
+include = ["motor_ocr*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

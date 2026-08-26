@@ -1,0 +1,60 @@
+# Config de validacion end-to-end del fine-tuning: mismos hiperparametros de
+# arquitectura que checkpoints/weights.pth (pix2tex preentrenado) para poder
+# cargarlo con load_chkpt, pero con dataset y epocas reducidas: el objetivo
+# es solo comprobar que el bucle de entrenamiento corre y guarda checkpoints,
+# no lograr convergencia real.
+gpu_devices: null
+backbone_layers:
+- 2
+- 3
+- 7
+betas:
+- 0.9
+- 0.999
+batchsize: 4
+bos_token: 1
+channels: 1
+data: entrenamiento/dataset_validacion/train.pkl
+debug: true
+decoder_args:
+  attn_on_attn: true
+  cross_attend: true
+  ff_glu: true
+  rel_pos_bias: false
+  use_scalenorm: false
+dim: 256
+encoder_depth: 4
+eos_token: 2
+epochs: 1
+gamma: 0.9995
+heads: 8
+id: null
+load_chkpt: .venv/Lib/site-packages/pix2tex/model/checkpoints/weights.pth
+lr: 0.001
+lr_step: 30
+max_height: 192
+max_seq_len: 512
+max_width: 672
+micro_batchsize: 2
+min_height: 32
+min_width: 32
+model_path: entrenamiento/checkpoints_validacion
+name: pix2tex_val
+num_layers: 4
+num_tokens: 8000
+optimizer: Adam
+output_path: entrenamiento/outputs_validacion
+pad: false
+pad_token: 0
+patch_size: 16
+sample_freq: 5
+save_freq: 1
+scheduler: StepLR
+seed: 42
+encoder_structure: hybrid
+temperature: 0.2
+test_samples: 2
+testbatchsize: 4
+tokenizer: .venv/Lib/site-packages/pix2tex/model/dataset/tokenizer.json
+valbatches: 5
+valdata: entrenamiento/dataset_validacion/val.pkl

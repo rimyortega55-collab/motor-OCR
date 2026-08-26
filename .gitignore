@@ -1,0 +1,56 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Resultados de corridas de prueba (se regeneran)
+pruebas/pdfs_escaneados/
+
+# Base de datos y datos de ejecucion
+datos/
+.datos_prueba/
+*.db
+
+# Artefactos que el motor escribe en ruta relativa al correr
+decisiones_revision.jsonl
+umbrales_config.json
+
+# Credenciales: nunca al repositorio
+.env
+.env.*
+!.env.example
+*.log
+
+# Compilacion de LaTeX (el PDF se regenera desde el .tex)
+build/
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.toc
+
+# Datasets sinteticos generados (se regeneran con entrenamiento/generar_dataset_sintetico.py)
+entrenamiento/dataset_sintetico/
+entrenamiento/dataset_prueba/
+entrenamiento/dataset_validacion/
+entrenamiento/checkpoints_validacion/
+entrenamiento/outputs_validacion/
+entrenamiento/evaluacion_real/
+
+# Material de trabajo interno: no se publica en el repositorio open source.
+# Sigue viviendo en el filesystem local para continuar el desarrollo; ver
+# CONTRIBUTING.md para el porque de cada exclusion.
+TRASPASO.md
+install.ps1
+.claude/
+design/
+pruebas/
+docs/06-funciones-avanzadas-interfaz.md
+docs/07-prioridad-funciones-avanzadas.md
+docs/ARQUITECTURA_COMPLETA.md
+docs/CONTRATO_API_FRONTEND.md
+docs/PIPELINE_COMPLETO.md
+docs/REPORTE_CAPA*.md
+docs/SISTEMA_COMPLETO_7_CAPAS.md
+docs/contexto/

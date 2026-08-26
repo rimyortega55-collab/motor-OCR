@@ -1,0 +1,36 @@
+{
+  "name": "motor-OCR",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+
+  // Tesseract y las librerias de sistema que OpenCV y PyMuPDF necesitan;
+  // sin libGL el import de cv2 falla en imagenes slim.
+  "postCreateCommand": "bash .devcontainer/preparar.sh",
+
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb",
+    "storage": "32gb"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  },
+
+  "remoteEnv": {
+    "MOTOR_OCR_DATA_DIR": "/workspaces/motor-OCR/datos"
+  },
+
+  "forwardPorts": [8000, 8501],
+  "portsAttributes": {
+    "8000": { "label": "API FastAPI" },
+    "8501": { "label": "Dashboard Streamlit" }
+  }
+}
