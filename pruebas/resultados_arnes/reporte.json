@@ -1,0 +1,22 @@
+[
+  {
+    "pdf": "c1",
+    "ok": true,
+    "segundos": 1621.2,
+    "total_paginas": 21,
+    "total_bloques": 321,
+    "bloques_por_tipo": {
+      "encabezado": 13,
+      "parrafo": 120,
+      "ruido": 15,
+      "lista": 172,
+      "formula_inline": 1
+    },
+    "bloques_por_engine": {
+      "pix2tex": 50
+    },
+    "bloques_vacios": 0,
+    "porcentaje_matematica": 0.47,
+    "latex_compila": true
+  }
+]

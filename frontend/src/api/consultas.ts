@@ -9,14 +9,16 @@ import {
 
 import { descargar, esNoAutenticado, pedir, subir } from './cliente'
 import type {
-  ApiKey,
-  ApiKeyCreada,
+  ActualizacionMotorIA,
   Consumo,
   Bloque,
+  ConfiguracionMotorIA,
+  EstadoAcceso,
   FormatoExport,
   PedidoTraduccion,
   Recomendaciones,
   ResultadoAplicar,
+  ResumenAdmin,
   TerminoSugerido,
   Traduccion,
   Umbrales,
@@ -28,12 +30,10 @@ import type {
   FiltrosDocumentos,
   Pagina,
   TrabajoEncolado,
-  Usuario,
 } from './tipos'
 
 export const claves = {
-  yo: ['yo'] as const,
-  apiKeys: ['api-keys'] as const,
+  acceso: ['acceso'] as const,
   consumo: ['consumo'] as const,
   documentos: (filtros: FiltrosDocumentos) => ['documentos', filtros] as const,
   estado: (id: string) => ['documento-estado', id] as const,
@@ -45,53 +45,43 @@ export const claves = {
   recomendaciones: ['umbrales', 'recomendaciones'] as const,
   traducciones: (id: string) => ['traducciones', id] as const,
   glosario: (id: string) => ['glosario', id] as const,
+  motorIA: ['admin', 'motor-ia'] as const,
+  resumenAdmin: ['admin', 'resumen'] as const,
 }
 
 // ============================================================================
-// SESIÓN
+// ACCESO
 // ============================================================================
 
-export function useSesion() {
+/** Sin cuentas: sólo hay que saber si esta instancia pide clave y si ya se
+ * destrabó. Sin `MOTOR_OCR_CLAVE_ACCESO` en el servidor, esto siempre da
+ * `desbloqueado: true` y la pantalla de clave no llega a mostrarse. */
+export function useEstadoAcceso() {
   return useQuery({
-    queryKey: claves.yo,
-    queryFn: () => pedir<Usuario>('/auth/yo'),
-    // Un 401 es la respuesta correcta cuando no hay sesión, no una falla de red:
-    // reintentarlo sólo demora la pantalla de login.
+    queryKey: claves.acceso,
+    queryFn: () => pedir<EstadoAcceso>('/acceso'),
+    // Un 401 no debería pasar acá — este endpoint es público — pero si el
+    // servidor cambia de idea, reintentarlo sólo demora la pantalla.
     retry: (intentos, error) => !esNoAutenticado(error) && intentos < 2,
     staleTime: 5 * 60 * 1000,
   })
 }
 
-export function useEntrar() {
+export function useDesbloquear() {
   const cliente = useQueryClient()
   return useMutation({
-    mutationFn: (credenciales: { email: string; password: string }) =>
-      pedir<{ usuario: Usuario }>('/auth/login', {
-        metodo: 'POST',
-        cuerpo: credenciales,
-      }),
-    onSuccess: ({ usuario }) => cliente.setQueryData(claves.yo, usuario),
-  })
-}
-
-export function useRegistrar() {
-  const cliente = useQueryClient()
-  return useMutation({
-    mutationFn: (alta: { nombre: string; email: string; password: string }) =>
-      pedir<{ usuario: Usuario; api_key: string }>('/auth/registro', {
-        metodo: 'POST',
-        cuerpo: alta,
-      }),
-    onSuccess: ({ usuario }) => cliente.setQueryData(claves.yo, usuario),
+    mutationFn: (clave: string) =>
+      pedir<EstadoAcceso>('/acceso', { metodo: 'POST', cuerpo: { clave } }),
+    onSuccess: (estado) => cliente.setQueryData(claves.acceso, estado),
   })
 }
 
 export function useSalir() {
   const cliente = useQueryClient()
   return useMutation({
-    mutationFn: () => pedir<void>('/auth/logout', { metodo: 'POST' }),
-    // Se limpia todo y no sólo la sesión: cualquier dato en caché es del
-    // usuario que se acaba de ir.
+    mutationFn: () => pedir<void>('/salir', { metodo: 'POST' }),
+    // Se limpia todo y no sólo el acceso: cualquier dato en caché quedó
+    // obsoleto apenas se cierra el acceso a la instancia.
     onSuccess: () => cliente.clear(),
   })
 }
@@ -212,34 +202,6 @@ export function useDecidir(documentoId: string) {
       cliente.invalidateQueries({ queryKey: ['documentos'] })
       cliente.invalidateQueries({ queryKey: ['bloques-pagina', documentoId] })
     },
-  })
-}
-
-// ============================================================================
-// API KEYS
-// ============================================================================
-
-export function useApiKeys() {
-  return useQuery({
-    queryKey: claves.apiKeys,
-    queryFn: () => pedir<ApiKey[]>('/api-keys'),
-  })
-}
-
-export function useCrearApiKey() {
-  const cliente = useQueryClient()
-  return useMutation({
-    mutationFn: (nombre: string) =>
-      pedir<ApiKeyCreada>('/api-keys', { metodo: 'POST', cuerpo: { nombre } }),
-    onSuccess: () => cliente.invalidateQueries({ queryKey: claves.apiKeys }),
-  })
-}
-
-export function useRevocarApiKey() {
-  const cliente = useQueryClient()
-  return useMutation({
-    mutationFn: (id: string) => pedir<void>(`/api-keys/${id}`, { metodo: 'DELETE' }),
-    onSuccess: () => cliente.invalidateQueries({ queryKey: claves.apiKeys }),
   })
 }
 
@@ -398,5 +360,32 @@ export function useBorrarTraduccion(documentoId: string) {
         metodo: 'DELETE',
       }),
     onSuccess: () => cliente.invalidateQueries({ queryKey: claves.traducciones(documentoId) }),
+  })
+}
+
+// ============================================================================
+// ADMINISTRACIÓN
+// ============================================================================
+
+export function useResumenAdmin() {
+  return useQuery({
+    queryKey: claves.resumenAdmin,
+    queryFn: () => pedir<ResumenAdmin>('/admin/resumen'),
+  })
+}
+
+export function useConfiguracionMotorIA() {
+  return useQuery({
+    queryKey: claves.motorIA,
+    queryFn: () => pedir<ConfiguracionMotorIA>('/admin/motor-ia'),
+  })
+}
+
+export function useGuardarMotorIA() {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (cambios: ActualizacionMotorIA) =>
+      pedir<ConfiguracionMotorIA>('/admin/motor-ia', { metodo: 'PUT', cuerpo: cambios }),
+    onSuccess: (datos) => cliente.setQueryData(claves.motorIA, datos),
   })
 }

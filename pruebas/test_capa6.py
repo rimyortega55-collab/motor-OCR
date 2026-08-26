@@ -12,15 +12,15 @@ if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-from ocr_engine.triage import procesar_triage
-from ocr_engine.segmentation import segmentar_documento
-from ocr_engine.correction import corregir_documento
-from ocr_engine.revision import (
+from motor_ocr.triage import procesar_triage
+from motor_ocr.layout import segmentar_documento
+from motor_ocr.correccion import corregir_documento
+from motor_ocr_api.revision import (
     GestorDecisiones,
     DecisionRevision,
     AnalizadorFeedback
 )
-from ocr_engine.models import Documento, Origen
+from motor_ocr.modelos import Documento, Origen
 
 test_pdf_dir = Path(__file__).parent / "pdfs_de_prueba"
 output_dir = Path(__file__).parent / "resultados_capa6"

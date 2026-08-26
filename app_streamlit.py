@@ -16,7 +16,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-from ocr_engine.pipeline import Pipeline
+from motor_ocr.escalacion.cliente_llm import configurar_proveedor
+from motor_ocr.pipeline import Pipeline
 
 # Configuración Streamlit
 st.set_page_config(
@@ -135,11 +136,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Tabs principales
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📤 Procesar PDF",
     "👁️ Revisar Bloques",
     "📊 Métricas",
-    "⚙️ Auto-Ajuste"
+    "⚙️ Auto-Ajuste",
+    "🤖 Motor IA"
 ])
 
 # ============================================================================
@@ -230,7 +232,7 @@ with tab2:
     if "documento_actual" not in st.session_state:
         st.warning("⚠️ Primero procesa un PDF en la pestaña 'Procesar PDF'")
     else:
-        from ocr_engine.revision import GestorDecisiones, DecisionRevision
+        from motor_ocr_api.revision import GestorDecisiones, DecisionRevision
 
         doc = st.session_state.documento_actual
         documento_obj = st.session_state.documento_obj
@@ -312,7 +314,7 @@ with tab2:
 with tab3:
     st.header("📊 Dashboard de Métricas")
 
-    from ocr_engine.revision import GestorDecisiones
+    from motor_ocr_api.revision import GestorDecisiones
 
     _gestor_metricas = GestorDecisiones("decisiones_revision.jsonl")
     _stats = _gestor_metricas.obtener_estadisticas()
@@ -455,6 +457,69 @@ with tab4:
 
     val_df = pd.DataFrame(validacion)
     st.dataframe(val_df, use_container_width=True)
+
+# ============================================================================
+# TAB 5: MOTOR IA
+# ============================================================================
+
+with tab5:
+    st.header("🤖 Proveedor de IA (Capa 5, escalación)")
+
+    st.markdown("""
+    A dónde se manda un bloque cuando el OCR determinista no llega a la
+    confianza mínima. Este panel corre en el mismo proceso que el pipeline
+    (esta app importa `Pipeline` directamente), así que el cambio aplica de
+    inmediato a los documentos que proceses después de guardarlo — no hace
+    falta reiniciar Streamlit.
+    """)
+
+    proveedor = st.radio(
+        "Proveedor",
+        options=["anthropic", "openai_compatible", "local"],
+        format_func=lambda p: {
+            "anthropic": "API de Anthropic",
+            "openai_compatible": "Cualquier API compatible con OpenAI (por URL y clave)",
+            "local": "Modelo local propio — pendiente",
+        }[p],
+        key="motor_ia_proveedor",
+    )
+
+    if proveedor == "local":
+        st.warning(
+            "Todavía no existe un modelo propio entrenado para OCR matemático. "
+            "Con esta opción la escalación queda deshabilitada: los bloques de "
+            "baja confianza van directo a revisión humana, sin gastar en ningún "
+            "proveedor externo."
+        )
+        modelo = base_url = api_key = None
+    else:
+        modelo = st.text_input(
+            "Modelo",
+            value="claude-opus-5" if proveedor == "anthropic" else "gpt-4o",
+            key="motor_ia_modelo",
+        )
+        base_url = None
+        if proveedor == "openai_compatible":
+            base_url = st.text_input(
+                "URL base",
+                placeholder="https://api.midominio.com/v1",
+                key="motor_ia_base_url",
+            )
+        api_key = st.text_input(
+            "Clave de API",
+            type="password",
+            help="Sin esto, anthropic usa la variable de entorno ANTHROPIC_API_KEY.",
+            key="motor_ia_api_key",
+        )
+
+    if st.button("Aplicar configuración", use_container_width=True):
+        configurar_proveedor(
+            proveedor=proveedor,
+            modelo=modelo or None,
+            base_url=base_url or None,
+            api_key=api_key or None,
+        )
+        st.success(f"Proveedor configurado: {proveedor}")
 
 # ============================================================================
 # SIDEBAR

@@ -86,3 +86,20 @@ export const IconoMas = ({ tam = 16 }: Props) => (
     <path d="M12 5v14M5 12h14" />
   </svg>
 )
+
+export const IconoEngranaje = ({ tam = 16 }: Props) => (
+  <svg {...base(tam)}>
+    <circle cx="12" cy="12" r="3.2" />
+    <path d="M12 3v2.4M12 18.6V21M4.5 7.5l2 1.2M17.5 15.3l2 1.2M3 12h2.4M18.6 12H21M4.5 16.5l2-1.2M17.5 8.7l2-1.2M7.5 4.5l1.2 2M15.3 17.5l1.2 2M16.5 4.5l-1.2 2M8.7 17.5l-1.2 2" />
+  </svg>
+)
+
+export const IconoRobot = ({ tam = 16 }: Props) => (
+  <svg {...base(tam)}>
+    <rect x="5" y="9" width="14" height="10" rx="2" />
+    <path d="M12 5.5V9M9.5 3.5h5" />
+    <circle cx="9.5" cy="14" r="1" fill="currentColor" stroke="none" />
+    <circle cx="14.5" cy="14" r="1" fill="currentColor" stroke="none" />
+    <path d="M9 17h6M2.5 12v4M21.5 12v4" />
+  </svg>
+)

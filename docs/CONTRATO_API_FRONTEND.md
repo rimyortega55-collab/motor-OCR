@@ -1,11 +1,14 @@
 # Contrato de API para el frontend
 
-**Estado: los cinco pasos implementados.** Sesión de navegador (§3), gestión de
-API keys (§8), listado con filtros y cursor y procesamiento asíncrono con
-progreso por capa (§4), bloques, páginas y decisiones que escriben el bloque
-(§1, §5, §6), umbrales por usuario (§7), y consumo con desglose y exportación
-(§9, §10). Pruebas en `test_auth_api.py`, `test_trabajos.py`, `test_bloques.py`
-y `test_umbrales_consumo.py`: 81 pasan.
+**Estado: sin cuentas.** El proyecto pasó a ser open source de un solo
+operador: no hay usuarios, planes ni API keys por cuenta (§3, §8 quedaron como
+historial). Acceso por clave única opcional (§3), listado con filtros y cursor
+y procesamiento asíncrono con progreso por capa (§4), bloques, páginas y
+decisiones que escriben el bloque (§1, §5, §6), umbrales globales de la
+instancia (§7), consumo con desglose y exportación (§9, §10), y administración
+del proveedor de IA (§12). Pruebas en `test_trabajos.py`, `test_bloques.py`,
+`test_umbrales_consumo.py`, `test_traduccion.py`,
+`test_retencion_seleccion.py` y `test_validacion_subida.py`.
 
 `POST /procesar` valida el archivo antes de encolar (`413` por tamaño o exceso
 de páginas, `415` si no es un PDF, `400` si está corrupto) y rechaza con `402`
@@ -59,10 +62,10 @@ mismo FastAPI, así que no hay CORS ni un segundo despliegue.
 ```
 cd frontend && npm install
 npm run dev     # Vite en :5173, proxeando /api a :8000
-npm run build   # deja el build en ocr_engine/web_interface/estatico/
+npm run build   # deja el build en packages/motor_ocr_api/estatico/
 ```
 
-Con el build presente, `uvicorn ocr_engine.web_interface.api:app` sirve la
+Con el build presente, `uvicorn motor_ocr_api.api:app` sirve la
 aplicación y la API juntas. En desarrollo, sin build, `/` responde un health
 check en JSON.
 
@@ -120,8 +123,9 @@ Se eligió guardar el PDF y renderizar a demanda con caché en disco
 efectivamente abre, que son pocas, y un PDF pesa mucho menos que sus páginas
 renderizadas.
 
-Esto obliga a una política de retención explícita: el PDF de un usuario queda
-guardado, así que hay que decir por cuánto tiempo y borrarlo al borrar la cuenta.
+Esto obliga a una política de retención explícita: el PDF de cada documento
+queda guardado, así que hay que decir por cuánto tiempo y borrarlo al borrar
+el documento.
 
 ### 1.3 El `bbox` no tenía un espacio de coordenadas único
 
@@ -156,28 +160,22 @@ el overlay no necesita saber el DPI.
 
 ## 2. Convenciones
 
-**Autenticación.** Dos credenciales que resuelven al mismo `Usuario`:
+**Acceso.** Sin cuentas: una sola cookie posible, `motor_ocr_acceso`, `HttpOnly`,
+`Secure`, `SameSite=Lax`. Sólo existe si el operador configuró
+`MOTOR_OCR_CLAVE_ACCESO` — ver §3. El flag `Secure` se apaga con
+`MOTOR_OCR_COOKIE_SEGURA=0` para servir por HTTP plano; en `localhost` no hace
+falta, porque los navegadores lo tratan como contexto seguro.
 
-- **Navegador:** cookie de sesión `motor_ocr_sesion`, `HttpOnly`, `Secure`,
-  `SameSite=Lax`. Es lo que usa el SPA. No se guarda la API key en
-  `localStorage`: es un secreto de larga vida y cualquier XSS se la lleva.
-  El flag `Secure` se apaga con `MOTOR_OCR_COOKIE_SEGURA=0` para servir por HTTP
-  plano; en `localhost` no hace falta, porque los navegadores lo tratan como
-  contexto seguro.
-- **Máquinas:** cabecera `X-API-Key`, como hoy.
-
-La dependencia `usuario_actual` acepta cualquiera de las dos y la usan los
-endpoints de datos y `GET /auth/yo`. Los de **gestión de claves** (§8) usan
-`usuario_de_sesion`, que exige cookie: si una clave filtrada pudiera emitir
-claves nuevas, revocarla no serviría de nada.
+La dependencia `exigir_acceso` es un no-op cuando no hay clave configurada, y
+por eso cuelga de casi todos los routers salvo `/acceso` y `/salud`.
 
 **Errores.** Cuerpo uniforme, para que el frontend pueda ramificar sin parsear texto:
 
 ```json
-{ "codigo": "limite_plan_superado", "detail": "El plan libre permite 200 páginas por mes" }
+{ "codigo": "acceso_requerido", "detail": "Esta instancia requiere clave de acceso" }
 ```
 
-`404` y no `403` para recursos de otro usuario, como ya hace `_documento_del_usuario`.
+`404` para un `documento_id` inexistente, igual en cualquier endpoint que lo reciba.
 
 **Paginación.** `?limite=` y `?cursor=`, keyset sobre `(pagina, orden_lectura)`.
 Con 31 000 bloques por documento, `OFFSET` profundo obliga a la base a recorrer
@@ -204,58 +202,39 @@ en vez de la aplicación. Todo lo que no empiece con `/api` (ni con `/docs`,
 
 ---
 
-## 3. Sesión — implementado
+## 3. Acceso — implementado
 
-### `POST /auth/registro`
+El proyecto es open source y de un solo operador: **no hay cuentas, planes ni
+API keys por usuario**. Lo único que existe es una clave de acceso opcional a
+toda la instancia, `MOTOR_OCR_CLAVE_ACCESO`, para no dejarla completamente
+abierta si se expone en red. Sin esa variable configurada en el servidor, la
+API no pide nada y estos tres endpoints son casi un formalismo.
 
-```
-{ "nombre": "Rimy Ortega", "email": "…", "password": "…" }
-→ 201 { "usuario": Usuario, "api_key": "moc_…" }  + Set-Cookie
-```
-
-`api_key` es la primera clave del usuario y se devuelve **una sola vez**: en la base
-queda su hash SHA-256, igual que hoy en `auth.crear_usuario`.
-
-`409 codigo=email_ya_registrado` si el email existe.
-
-`Usuario` tiene ahora `password_hash`. Acá sí corresponde un hash lento: una
-contraseña elegida por una persona es atacable por diccionario, a diferencia de
-la API key aleatoria de 256 bits que justifica el SHA-256. Se usa
-`hashlib.scrypt` de la biblioteca estándar en vez de bcrypt o argon2, para no
-sumar una dependencia con extensiones en C que compilar; los parámetros viajan
-dentro del hash (`scrypt$n$r$p$sal$hash`) y se pueden subir sin invalidar las
-contraseñas ya guardadas.
-
-### `POST /auth/login`
+### `GET /acceso`
 
 ```
-{ "email": "…", "password": "…" }
-→ 200 { "usuario": Usuario }  + Set-Cookie
-→ 401 codigo=credenciales_invalidas
+→ 200 { "requiere_clave": boolean, "desbloqueado": boolean }
 ```
 
-Mismo mensaje para email inexistente y contraseña incorrecta.
+Lo llama el SPA al montar, para decidir entre el layout normal y la pantalla
+de clave. `requiere_clave: false` significa que el operador no configuró
+`MOTOR_OCR_CLAVE_ACCESO`; en ese caso `desbloqueado` siempre es `true`.
 
-### `POST /auth/logout` → `204`, invalida la cookie.
-
-### `GET /auth/yo`
+### `POST /acceso`
 
 ```
-→ 200 Usuario
-→ 401 codigo=sin_autenticacion
+{ "clave": "…" }
+→ 200 { "requiere_clave": true, "desbloqueado": true }  + Set-Cookie
+→ 401 codigo=clave_incorrecta
 ```
 
-Lo llama el SPA al montar, para decidir entre el layout autenticado y `/login`.
+La cookie (`motor_ocr_acceso`, HttpOnly) guarda un token generado una vez por
+proceso, no la clave: reiniciar el servidor invalida todo lo abierto, que es
+aceptable para una instancia sin cuentas que preservar. Sujeto al límite de
+tasa `acceso` (10 intentos cada 15 minutos por IP), igual que antes lo estaba
+el login.
 
-```ts
-type Usuario = {
-  id: string
-  nombre: string
-  email: string | null
-  plan: string
-  creado_en: string
-}
-```
+### `POST /salir` → `204`, invalida la cookie. Idempotente.
 
 ---
 
@@ -428,7 +407,7 @@ cargue la imagen, y así reservar el espacio sin saltos de layout.
 → 200 image/png
     Cache-Control: private, max-age=86400
     ETag: "<documento_id>:<n>:<dpi>"
-→ 404 si la página no existe o el documento no es del usuario
+→ 404 si la página o el documento no existen
 ```
 
 Query opcional `?ancho=` para pedir una versión reescalada (el visor a 86 % no
@@ -474,11 +453,10 @@ Lote, mismo cuerpo en una lista. Para "aceptar todo lo que quedó arriba de 0.9"
 
 ## 7. Umbrales
 
-Hoy `AjustadorUmbrales` lee y escribe `umbrales_config.json` con **ruta relativa**
-y **sin usuario**: es la misma trampa que ya se corrigió en `persistence` — el
-archivo se escribe en el cwd y se pierde en cada despliegue — y además haría que
-un usuario le cambiara los umbrales a todos los demás. Los umbrales pasan a una
-tabla `umbrales` con `usuario_id`.
+Los umbrales viven en la tabla `umbrales`, en una única fila global (`id =
+"global"`): sin cuentas no hay "los umbrales de quién", son los de esta
+instancia. Antes vivían en `umbrales_config.json` con **ruta relativa**, que se
+escribía en el cwd y se perdía en cada despliegue.
 
 ### `GET /umbrales`
 
@@ -528,44 +506,30 @@ Debe leer de la tabla `decisiones`.
 
 ---
 
-## 8. API keys — implementado
+## 8. API keys — eliminado
 
-Hoy se crean por CLI (`gestion_usuarios.py`).
-
-```
-GET    /api-keys        → [ { id, nombre, prefijo: "moc_8kQ2vf", creada_en, ultimo_uso_en, revocada_en } ]
-POST   /api-keys        { "nombre": "notebook local" } → 201 { …, "api_key": "moc_…" }   ← una sola vez
-DELETE /api-keys/{id}   → 204
-```
-
-`ultimo_uso_en` obliga a un `UPDATE` por request autenticado con clave. Con SQLite
-conviene escribirlo con granularidad de minutos para no serializar la base en cada
-llamada.
-
-La clave se movió de la fila `usuarios` a una tabla `api_keys` con `usuario_id`,
-para que un usuario pueda tener varias y revocar una sin perder las demás.
-`ocr_engine/persistence/migraciones.py` mueve las claves de una base ya
-desplegada, y es idempotente.
-
-Los tres endpoints exigen **cookie de sesión**, no API key: si una clave filtrada
-pudiera emitir claves nuevas, revocarla no serviría de nada.
+Existieron mientras el proyecto tuvo cuentas. Sin usuarios no hay a quién
+atribuirle una clave, así que `GET/POST/DELETE /api-keys` y las tablas
+`usuarios`, `sesiones` y `api_keys` se eliminaron (`migraciones.py` las borra de
+una base ya desplegada). Quien llama a la API por fuera del navegador usa la
+misma clave de acceso de la instancia que el SPA — ver §3 — o directamente
+nada, si el operador no configuró `MOTOR_OCR_CLAVE_ACCESO`.
 
 ---
 
 ## 9. Consumo
 
-### `GET /consumo` — **amplía el existente**
+### `GET /consumo` — **implementado**
 
-Hoy devuelve totales. La pantalla necesita además la serie diaria y el desglose.
+El consumo de toda la instancia (no hay cuentas entre las que repartirlo),
+con serie diaria y desglose por documento.
 
 ```
 ?desde=2026-08-01&hasta=2026-08-31
 ```
 
 ```json
-{ "usuario": "Rimy Ortega", "plan": "libre",
-  "limites": { "paginas_mes": 200, "gasto_llm_mes_usd": 2.0 },
-  "totales": { "documentos": 11, "paginas": 228, "llamadas_llm": 16,
+{ "totales": { "documentos": 11, "paginas": 228, "llamadas_llm": 16,
                "tokens_entrada": 20640, "tokens_salida": 3432, "costo_llm_usd": 0.0204 },
   "serie_diaria": [ { "fecha": "2026-08-24", "micro_segmento_usd": 0.0031,
                       "inconsistencia_documental_usd": 0.0006 } ],
@@ -573,9 +537,8 @@ Hoy devuelve totales. La pantalla necesita además la serie diaria y el desglose
                        "tokens_entrada": 18420, "tokens_salida": 3106, "costo_usd": 0.0182 } ] }
 ```
 
-`limites` no existe todavía: los planes están sólo como el string
-`usuarios.plan`. Hay que definirlos en algún lado para poder mostrar la barra de
-consumo y para poder rechazar con `402`.
+No hay `limites` ni `402`: sin planes no hay cuota que hacer cumplir. El único
+techo de gasto es `MOTOR_OCR_TOPE_GASTO_DOCUMENTO_USD`, por documento.
 
 ---
 
@@ -592,11 +555,58 @@ de descarga, en vez de armar 31 000 bloques dentro del request.
 
 ---
 
-## 11. Resumen
+## 12. Administración — **implementado**
+
+El proyecto es open source y se auto-hospeda: quien levanta su propia instancia
+necesita elegir de dónde sale la inteligencia de la Capa 5 (escalación) sin
+editar variables de entorno ni reiniciar el proceso. Sin cuentas no hay "quién
+puede tocar esto": estos endpoints quedan detrás del mismo `exigir_acceso` que
+el resto de la API (la clave única de la instancia, si el operador configuró
+una).
+
+### `GET /admin/motor-ia`
+
+```json
+{ "proveedor": "openai_compatible", "modelo": "gpt-4o",
+  "base_url": "https://api.midominio.com/v1",
+  "api_key_configurada": true, "api_key_sufijo": "c123",
+  "habilitado": true, "actualizado_en": "2026-08-25T21:00:00Z" }
+```
+
+La clave nunca vuelve en claro, igual que una API key propia: sólo se informa
+si hay una guardada y sus últimos 4 caracteres.
+
+### `PUT /admin/motor-ia`
+
+Actualización parcial. `proveedor` es uno de `anthropic` (SDK oficial),
+`openai_compatible` (cualquier endpoint por URL y clave: OpenAI, un gateway
+propio, vLLM, Ollama...) o `local` (modelo propio — **pendiente**: hasta que
+exista, se comporta como "sin LLM disponible" y los bloques de baja confianza
+van directo a revisión humana). `api_key` ausente no toca la clave guardada;
+`""` la borra. El cambio se aplica en caliente sobre el cliente en uso por el
+pipeline, sin reiniciar el proceso.
+
+```json
+{ "proveedor": "openai_compatible", "modelo": "gpt-4o",
+  "base_url": "https://api.midominio.com/v1", "api_key": "sk-..." }
+```
+
+### `GET /admin/resumen`
+
+```json
+{ "documentos_totales": 340, "costo_llm_usd_total": 4.21 }
+```
+
+Números de toda la instancia, para orientarse al entrar al panel.
+
+---
+
+## 13. Resumen
 
 | Endpoint | Estado |
 |---|---|
-| `POST /auth/registro`, `/auth/login`, `/auth/logout`, `GET /auth/yo` | **implementados** |
+| `GET/POST /acceso`, `POST /salir` | **implementados** · clave única, opcional |
+| `GET/PUT /admin/motor-ia`, `GET /admin/resumen` | **implementados** |
 | `POST /procesar` | **implementado** · asíncrono, `202` (sin `opciones`) |
 | `GET /documentos/{id}/estado` | **implementado** |
 | `GET /documentos` | **implementado** · filtros y cursor |
@@ -606,29 +616,32 @@ de descarga, en vez de armar 31 000 bloques dentro del request.
 | `GET /documentos/{id}/paginas/{n}` | nuevo |
 | `POST /revision/{id}/decision` | **implementado** · completa campos y escribe el bloque |
 | `POST /revision/{id}/decisiones` | nuevo |
-| `GET /umbrales` | **implementado** · por usuario |
+| `GET /umbrales` | **implementado** · global de la instancia |
 | `PUT /umbrales` | **implementado** |
 | `GET /umbrales/recomendaciones` | **implementado** · calcula sin aplicar |
 | `POST /umbrales/aplicar` | **implementado** · reemplaza a `POST /auto-ajuste`, que se eliminó |
-| `GET/POST/DELETE /api-keys` | **implementados** |
+| `GET/POST/DELETE /api-keys` | **eliminados** — no hay cuentas |
 | `GET /consumo` | **implementado** · rango, serie diaria y desglose |
 | `GET /documentos/{id}/export` | **implementado** · latex, markdown, ipynb, graphify |
 | `DELETE /documentos/{id}` | **implementado** · borra el documento y sus archivos |
 
 ### Orden de construcción
 
-1. ~~**Sesión y lista.**~~ Hecho: `auth/*`, `api-keys/*` y `GET /documentos` con
-   filtros y cursor. El SPA ya puede arrancar contra esto.
+1. ~~**Acceso y lista.**~~ Hecho: `acceso/*` y `GET /documentos` con filtros y
+   cursor. El SPA ya puede arrancar contra esto.
 2. ~~**Jobs.**~~ Hecho: `POST /procesar` asíncrono y `GET /estado`, con el callback
-   de progreso en `Pipeline`. Falta `opciones` y los límites de plan.
+   de progreso en `Pipeline`.
 3. ~~**Bloques.**~~ Hecho: tabla `bloques`, retención del PDF, bbox normalizado,
    `GET /bloques` y `/paginas/{n}`. El visor de revisión ya funciona.
-4. ~~**Umbrales.**~~ Hecho: tabla `umbrales` por usuario, recomendaciones
-   calculadas desde la tabla `decisiones` y separadas de la aplicación.
-   `validar_cambios` sigue devolviendo valores fijos, así que el endpoint
-   responde `validacion: null` en vez de mostrar un número inventado.
+4. ~~**Umbrales.**~~ Hecho: tabla `umbrales` global, recomendaciones calculadas
+   desde la tabla `decisiones` y separadas de la aplicación. `validar_cambios`
+   sigue devolviendo valores fijos, así que el endpoint responde
+   `validacion: null` en vez de mostrar un número inventado.
 5. ~~**Consumo y exportación.**~~ Hecho: `GET /consumo` con rango, serie diaria
    y desglose por documento, y `GET /export` en los tres formatos con
    `contenido_final` aplicado.
+6. ~~**Sin cuentas.**~~ Hecho: se eliminaron `usuarios`, `sesiones` y `api_keys`;
+   el acceso pasó a una clave única opcional de instancia (§3) y umbrales,
+   consumo y proveedor de IA pasaron a ser globales.
 
 Los pasos 1 y 2 se pueden hacer en paralelo. El 4 depende del 3.

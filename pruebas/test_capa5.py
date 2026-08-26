@@ -11,11 +11,11 @@ if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-from ocr_engine.triage import procesar_triage
-from ocr_engine.segmentation import segmentar_documento
-from ocr_engine.correction import corregir_documento
-from ocr_engine.escalation import procesar_escalaciones, obtener_estadisticas
-from ocr_engine.models import Documento, Origen
+from motor_ocr.triage import procesar_triage
+from motor_ocr.layout import segmentar_documento
+from motor_ocr.correccion import corregir_documento
+from motor_ocr.escalacion import procesar_escalaciones, obtener_estadisticas
+from motor_ocr.modelos import Documento, Origen
 
 import pymupdf as fitz
 import cv2

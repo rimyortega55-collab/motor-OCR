@@ -1,0 +1,16 @@
+{
+  // LaTeX Workshop: los .tex que exporta el motor se compilan a un subdirectorio
+  // `build/` para no llenar de .aux y .log la carpeta del documento.
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.clean.subfolder.enabled": true,
+
+  // El texto viene de un OCR: las lineas desbordadas son constantes y no dicen
+  // nada util, asi que no interrumpen con avisos.
+  "latex-workshop.message.badbox.show": false,
+
+  "[latex]": {
+    "editor.wordWrap": "on"
+  }
+}

@@ -1,20 +1,20 @@
-/** Layout autenticado: barra lateral y guard de sesión.
+/** Layout principal: barra lateral y guard de acceso.
  *
  * El guard vive acá y no en cada ruta para que exista un solo lugar donde se
- * decide si hay sesión: repartir esa decisión es lo que hace que una pantalla se
- * escape sin protección.
+ * decide si hay acceso: repartir esa decisión es lo que hace que una pantalla
+ * se escape sin protección.
  */
 
 import { NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
 
-import { useSalir, useSesion } from '../api/consultas'
+import { useEstadoAcceso, useSalir } from '../api/consultas'
 import { esNoAutenticado } from '../api/cliente'
 import {
   IconoAlerta,
   IconoDocumento,
+  IconoEngranaje,
   IconoGrafico,
   IconoDeslizadores,
-  IconoLlave,
   IconoSalir,
   IconoSubir,
 } from './Iconos'
@@ -30,14 +30,14 @@ function Cargando() {
 }
 
 export default function Armazon() {
-  const { data: usuario, isPending, error } = useSesion()
+  const { data: acceso, isPending, error } = useEstadoAcceso()
   const salir = useSalir()
   const ubicacion = useLocation()
 
   if (isPending) return <Cargando />
 
-  if (esNoAutenticado(error) || !usuario) {
-    // `state` guarda a dónde quería ir, para volver ahí después de entrar.
+  if (esNoAutenticado(error) || (acceso && !acceso.desbloqueado)) {
+    // `state` guarda a dónde quería ir, para volver ahí después de destrabarla.
     return <Navigate to="/entrar" replace state={{ destino: ubicacion.pathname }} />
   }
 
@@ -73,17 +73,17 @@ export default function Armazon() {
           <NavLink to="/umbrales" className={({ isActive }) => `pendiente ${isActive ? 'activo' : ''}`}>
             <IconoDeslizadores /> Umbrales
           </NavLink>
-          <NavLink to="/cuenta" className={({ isActive }) => (isActive ? 'activo' : '')}>
-            <IconoLlave /> Cuenta y API
+        </nav>
+
+        <span className="etiqueta etiqueta-menu">Administración</span>
+        <nav className="menu">
+          <NavLink to="/admin" className={({ isActive }) => (isActive ? 'activo' : '')}>
+            <IconoEngranaje /> Motor IA y resumen
           </NavLink>
         </nav>
 
-        <div className="pie-lateral">
-          <div className="columna" style={{ gap: 12 }}>
-            <div className="columna" style={{ gap: 2 }}>
-              <span style={{ fontSize: 13 }}>{usuario.nombre}</span>
-              <span className="etiqueta">plan {usuario.plan}</span>
-            </div>
+        {acceso?.requiere_clave && (
+          <div className="pie-lateral">
             <button
               type="button"
               className="boton boton-chico"
@@ -91,10 +91,10 @@ export default function Armazon() {
               disabled={salir.isPending}
             >
               <IconoSalir tam={14} />
-              {salir.isPending ? 'Saliendo…' : 'Salir'}
+              {salir.isPending ? 'Cerrando…' : 'Cerrar acceso'}
             </button>
           </div>
-        </div>
+        )}
       </aside>
 
       <main className="contenido">

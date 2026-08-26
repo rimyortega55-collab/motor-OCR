@@ -3,7 +3,7 @@
 
 import json
 from pathlib import Path
-from ocr_engine.triage import procesar_triage
+from motor_ocr.triage import procesar_triage
 
 test_pdf_dir = Path(__file__).parent / "pdfs_de_prueba"
 output_dir = Path(__file__).parent / "resultados_capa1"

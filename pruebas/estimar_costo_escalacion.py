@@ -23,11 +23,11 @@ import pymupdf
 
 sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
 
-from ocr_engine.triage import procesar_triage
-from ocr_engine.segmentation import segmentar_documento
-from ocr_engine.ocr_specialized import enrutar_bloque
-from ocr_engine.ocr_specialized.sub_segmentacion import sub_segmentar
-from ocr_engine.models import Documento, Origen
+from motor_ocr.triage import procesar_triage
+from motor_ocr.layout import segmentar_documento
+from motor_ocr.reconocimiento import enrutar_bloque
+from motor_ocr.reconocimiento.sub_segmentacion import sub_segmentar
+from motor_ocr.modelos import Documento, Origen
 
 # Precios por millón de tokens (Claude API, primera parte)
 TARIFAS = {

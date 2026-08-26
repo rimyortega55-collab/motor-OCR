@@ -6,9 +6,9 @@ from pathlib import Path
 from uuid import uuid4
 from datetime import datetime
 
-from ocr_engine.triage import procesar_triage
-from ocr_engine.segmentation import segmentar_documento
-from ocr_engine.models import Documento, Origen
+from motor_ocr.triage import procesar_triage
+from motor_ocr.layout import segmentar_documento
+from motor_ocr.modelos import Documento, Origen
 
 test_pdf_dir = Path(__file__).parent / "pdfs_de_prueba"
 output_dir = Path(__file__).parent / "resultados_capa2"

@@ -25,7 +25,7 @@ export default defineConfig({
   build: {
     // El build va adentro del paquete Python para que FastAPI lo sirva desde el
     // mismo origen: sin segundo despliegue y sin CORS.
-    outDir: '../ocr_engine/web_interface/estatico',
+    outDir: '../packages/motor_ocr_api/estatico',
     emptyOutDir: true,
   },
 })

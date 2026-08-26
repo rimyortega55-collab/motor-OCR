@@ -1,5 +1,15 @@
 # Estructura de Proyecto — Motor OCR
 
+> **Este es el diseño original, previo a la implementación.** La estructura real
+> vive en `packages/` (`motor_ocr`, `motor_ocr_api`, `motor_ocr_render`), con
+> nombres de módulo en castellano (`layout/`, `reconocimiento/`, `correccion/`,
+> `escalacion/`, `modelos/`) en vez de los propuestos acá. Este árbol quedó
+> desactualizado tras la reorganización de `ocr_engine/` a `packages/`. Para el
+> layout vigente, no lo edites a mano: consultá el grafo de codebase-memory-mcp
+> o `find packages -maxdepth 2`, que no se desactualizan con el próximo
+> refactor. El resto del documento (orden de capas, contratos) sigue siendo
+> válido como referencia de diseño.
+
 Estructura de carpetas y módulos propuesta, alineada 1:1 con las 5 capas definidas en `03-capas-pipeline.md`. Pensada para implementarse de forma incremental con Claude Code, capa por capa, con pruebas reales entre cada una.
 
 ```

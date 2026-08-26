@@ -5,25 +5,14 @@
  * Cuando el backend se estabilice conviene generarlos con openapi-typescript.
  */
 
-export type Usuario = {
-  id: string
-  nombre: string
-  email: string | null
-  plan: string
-  creado_en: string | null
+/** Sin cuentas: esto es lo único que hay que saber sobre el acceso a la
+ * instancia. `requiere_clave` es falso si el operador no configuró
+ * `MOTOR_OCR_CLAVE_ACCESO`, en cuyo caso la instancia está abierta y
+ * `desbloqueado` viaja en `true` sin que nadie haya tecleado nada. */
+export type EstadoAcceso = {
+  requiere_clave: boolean
+  desbloqueado: boolean
 }
-
-export type ApiKey = {
-  id: string
-  nombre: string
-  prefijo: string
-  creada_en: string | null
-  ultimo_uso_en: string | null
-  revocada_en: string | null
-}
-
-/** Sólo en la respuesta de creación: la clave en claro no vuelve a aparecer. */
-export type ApiKeyCreada = ApiKey & { api_key: string }
 
 export type EstadoDocumento = 'en_cola' | 'procesando' | 'completado' | 'error'
 
@@ -143,11 +132,6 @@ export type ResultadoDecision = {
   pendientes: number
 }
 
-export type LimitesPlan = {
-  paginas_mes: number | null
-  gasto_llm_mes_usd: number | null
-}
-
 export type TotalesConsumo = {
   documentos: number
   paginas: number
@@ -173,11 +157,8 @@ export type ConsumoDocumento = {
 }
 
 export type Consumo = {
-  usuario: string
-  plan: string
   desde: string
   hasta: string
-  limites: LimitesPlan
   totales: TotalesConsumo
   serie_diaria: DiaConsumo[]
   por_documento: ConsumoDocumento[]
@@ -253,4 +234,37 @@ export type Traduccion = {
   bloques_traducidos: number
   costo_usd: number
   error: string | null
+}
+
+// ============================================================================
+// ADMINISTRACIÓN
+// ============================================================================
+
+/** anthropic: API oficial. openai_compatible: cualquier endpoint por URL y clave
+ * (OpenAI, un gateway propio, vLLM, Ollama...). local: modelo propio, pendiente. */
+export type ProveedorMotorIA = 'anthropic' | 'openai_compatible' | 'local'
+
+export type ConfiguracionMotorIA = {
+  proveedor: ProveedorMotorIA
+  modelo: string
+  base_url: string | null
+  /** La clave nunca vuelve del servidor: sólo si hay una guardada y sus últimos 4 caracteres. */
+  api_key_configurada: boolean
+  api_key_sufijo: string | null
+  habilitado: boolean
+  actualizado_en: string | null
+}
+
+export type ActualizacionMotorIA = Partial<{
+  proveedor: ProveedorMotorIA
+  modelo: string
+  base_url: string | null
+  /** undefined = no tocar la clave guardada; '' = borrarla. */
+  api_key: string
+  habilitado: boolean
+}>
+
+export type ResumenAdmin = {
+  documentos_totales: number
+  costo_llm_usd_total: number
 }
