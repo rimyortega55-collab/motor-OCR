@@ -56,3 +56,10 @@ docs/PIPELINE_COMPLETO.md
 docs/REPORTE_CAPA*.md
 docs/SISTEMA_COMPLETO_7_CAPAS.md
 docs/contexto/
+
+# Datasets y configs que generan los notebooks de Colab (se regeneran)
+entrenamiento/dataset_real/
+entrenamiento/dataset_humo/
+entrenamiento/config_real.yaml
+entrenamiento/config_humo_colab.yaml
+entrenamiento/config_validacion_colab.yaml

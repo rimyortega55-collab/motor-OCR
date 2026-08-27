@@ -52,6 +52,9 @@ dev = [
 train = [
     "wandb",
     "python-Levenshtein",
+    # pix2tex.dataset.dataset lo importa para medir cada imagen al empaquetar
+    # el dataset; sin el, el empaquetado revienta con ModuleNotFoundError.
+    "imagesize",
 ]
 
 [build-system]

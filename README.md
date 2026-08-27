@@ -109,6 +109,32 @@ Documentación más detallada en [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md).
 La API no tiene un contrato estático: FastAPI genera documentación
 interactiva en `/docs` (Swagger UI) con el servidor corriendo.
 
+## Entrenar el modelo matemático en Google Colab
+
+El fine-tuning de pix2tex necesita GPU. Los dos notebooks de `entrenamiento/`
+están preparados para correr en Colab tal cual, sin subir nada a mano: clonan el
+repositorio desde GitHub, instalan las dependencias y generan su propio dataset.
+
+| Notebook | Para qué | Duración aproximada |
+|---|---|---|
+| [`colab_prueba_humo.ipynb`](https://colab.research.google.com/github/rimyortega55-collab/motor-OCR/blob/main/entrenamiento/colab_prueba_humo.ipynb) | Confirmar que el bucle de entrenamiento corre y guarda un checkpoint. 300 fórmulas, 1 época. No produce un modelo útil. | ~30 min |
+| [`colab_finetuning_real.ipynb`](https://colab.research.google.com/github/rimyortega55-collab/motor-OCR/blob/main/entrenamiento/colab_finetuning_real.ipynb) | El fine-tuning de verdad: dataset grande, varias épocas, checkpoints en Google Drive. | horas |
+
+Corre primero la prueba de humo. Ambos notebooks empiezan verificando que hay
+GPU asignada y cortan con un mensaje claro si no la hay (**Entorno de ejecución →
+Cambiar tipo de entorno de ejecución → GPU**).
+
+El notebook de fine-tuning real guarda los checkpoints y una copia del dataset
+en `MyDrive/motor-ocr-finetuning/`, porque el disco local de Colab se borra al
+desconectarse. Como Colab desconecta los entornos por tiempo y este
+entrenamiento dura horas, el notebook trae una celda de reanudación
+(`REANUDAR = True`) que retoma desde el último checkpoint guardado en Drive y
+restaura el dataset cacheado en segundos en vez de regenerarlo.
+
+Que el entrenamiento termine no significa que el modelo haya mejorado: hay que
+medirlo contra los pesos originales sobre fórmulas que el fine-tuning no vio.
+La última celda del notebook explica cómo.
+
 ## Contribuir
 
 Ver [`CONTRIBUTING.md`](CONTRIBUTING.md) para el entorno de desarrollo, cómo
