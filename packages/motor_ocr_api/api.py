@@ -15,7 +15,6 @@ Endpoints:
 - GET /documentos — Lista los documentos de la instancia
 - GET /documentos/<id> — Obtiene resultado de documento
 - POST /revision/<id>/decision — Registra decisión humana
-- GET /consumo — Consumo y costo acumulado de la instancia
 - GET /metricas — Dashboard de métricas
 """
 
@@ -34,6 +33,7 @@ from sqlalchemy import and_, func, or_
 from sqlalchemy.orm import Session
 
 from motor_ocr.escalacion.costo_tracking import limpiar_registro, obtener_registros
+from motor_ocr.modelos import ModoMotor
 from motor_ocr_api.persistencia import (
     BloqueAlmacenado,
     CostoRegistrado,
@@ -54,12 +54,14 @@ from .seleccion import extraer_paginas, interpretar_rango
 from .estaticos import INDICE, hay_build, montar_spa
 from .rutas_acceso import router as router_acceso
 from .rutas_admin import aplicar_configuracion, obtener_o_crear as obtener_config_motor_ia
+from .rutas_admin import aplicar_modelo_matematico, obtener_o_crear_modelo_matematico
+from .rutas_admin import obtener_o_crear_procesamiento
 from .rutas_admin import router as router_admin
 from .rutas_bloques import router as router_bloques
 from .rutas_consumo import router as router_consumo
 from .rutas_traduccion import router as router_traduccion
 from .rutas_umbrales import router as router_umbrales
-from .trabajos import encolar, marcar_colgados, progreso_inicial
+from .trabajos import aplicar_limite_paralelo, encolar, marcar_colgados, progreso_inicial
 
 app = FastAPI(
     title="Motor OCR",
@@ -91,6 +93,17 @@ def _preparar_base() -> None:
     # con Anthropic por variables de entorno sin que nadie lo pidiera.
     with session_scope() as sesion:
         aplicar_configuracion(obtener_config_motor_ia(sesion))
+
+    # Mismo motivo: cuánto paralelismo se configuró desde el panel antes del
+    # último reinicio no debería perderse y volver al default del entorno.
+    with session_scope() as sesion:
+        aplicar_limite_paralelo(obtener_o_crear_procesamiento(sesion).max_paralelo)
+
+    # Y qué checkpoint de pix2tex se eligió para reconocer fórmulas: sin esto,
+    # probar un fine-tuning duraría hasta el próximo reinicio y el motor volvía
+    # a los pesos base sin avisar.
+    with session_scope() as sesion:
+        aplicar_modelo_matematico(obtener_o_crear_modelo_matematico(sesion))
 
     # El PDF sólo hace falta mientras alguien vaya a mirar sus páginas. Sin esto
     # el directorio de datos crecía sin techo y el archivo quedaba guardado para
@@ -174,6 +187,62 @@ class TrabajoEncolado(BaseModel):
     documento_id: str
     estado: str
     titulo: str
+    modo_motor: str
+
+
+def _parsear_modo_motor(modo: str | None) -> ModoMotor:
+    """`None` o vacío = híbrido, que es como venía procesando el motor siempre.
+
+    Se valida acá y no más adentro para que un valor mal escrito devuelva 400
+    en el momento de subir, y no un documento que arranca a procesarse y muere
+    en el worker media hora después.
+    """
+    if modo is None or not modo.strip():
+        return ModoMotor.HIBRIDO
+
+    try:
+        return ModoMotor(modo.strip().lower())
+    except ValueError:
+        opciones = ", ".join(m.value for m in ModoMotor)
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "codigo": "modo_motor_invalido",
+                "detail": f"modo_motor debe ser uno de: {opciones}",
+            },
+        )
+
+
+# Por debajo de 72 (la resolución nativa del PDF, zoom=1) la imagen no alcanza
+# ni para texto; por encima de 600 el renderizado por página empieza a costar
+# memoria de sobra para lo que un motor de OCR aprovecha.
+DPI_MINIMO = 72
+DPI_MAXIMO = 600
+
+
+def _parsear_dpi(dpi: str | None) -> int | None:
+    """`None` o "auto" (default): DPI adaptativo por zona, como decide el triage."""
+    if dpi is None or dpi.strip() == "" or dpi.strip().lower() == "auto":
+        return None
+
+    try:
+        valor = int(dpi)
+    except ValueError:
+        raise HTTPException(
+            status_code=400,
+            detail={"codigo": "dpi_invalido", "detail": "dpi debe ser un entero o \"auto\""},
+        )
+
+    if not DPI_MINIMO <= valor <= DPI_MAXIMO:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "codigo": "dpi_invalido",
+                "detail": f"dpi debe estar entre {DPI_MINIMO} y {DPI_MAXIMO}",
+            },
+        )
+
+    return valor
 
 
 @router_api.post("/procesar", status_code=202, dependencies=[Depends(exigir_acceso)])
@@ -181,6 +250,9 @@ async def procesar_pdf(
     request: Request,
     file: UploadFile = File(...),
     paginas: str = Form(default=""),
+    dpi: str | None = Form(default=None),
+    idioma_original: str | None = Form(default=None),
+    modo_motor: str | None = Form(default=None),
     sesion: Session = Depends(obtener_sesion),
 ) -> TrabajoEncolado:
     """Encola un PDF y devuelve enseguida.
@@ -189,11 +261,23 @@ async def procesar_pdf(
     minutos: el navegador cortaba por timeout mucho antes y no había forma de
     saber si había pasado algo. Ahora el pipeline corre aparte y el avance se
     consulta en `GET /documentos/{id}/estado`.
+
+    `dpi` reemplaza el DPI adaptativo del triage para todo el documento; sin
+    mandarlo (o mandando "auto") sigue variando por zona como siempre.
+    `idioma_original` es sólo metadato para ofrecer un default al traducir, no
+    cambia qué motor de OCR reconoce el documento (ver `Pipeline.ejecutar`).
+
+    `modo_motor` sí lo cambia: `hibrido` (default) reconoce con el motor
+    determinista y reserva el modelo de IA para los recortes de fórmula;
+    `solo_ia` manda todos los bloques al modelo. Ver `ModoMotor`.
     """
 
     # Cada documento cuesta cómputo y, si escala, llamadas al modelo: sin tope,
     # un solo cliente puede vaciar el crédito del proveedor de IA configurado.
     exigir_limite(request, "procesar")
+
+    dpi_valido = _parsear_dpi(dpi)
+    modo = _parsear_modo_motor(modo_motor)
 
     contenido = await file.read()
 
@@ -217,16 +301,27 @@ async def procesar_pdf(
         total_paginas=len(elegidas),
         paginas_origen=elegidas if seleccion_parcial else None,
         progreso=progreso_inicial(),
+        idioma_original=idioma_original.strip() if idioma_original and idioma_original.strip() else None,
+        modo_motor=modo.value,
     )
     sesion.add(registro)
     sesion.commit()
 
     # Se pasa el contenido en memoria y no la ruta: el archivo temporal lo crea
     # el worker, así no depende de que el request siga vivo.
-    encolar(documento_id, contenido)
+    encolar(
+        documento_id,
+        contenido,
+        dpi_override=dpi_valido,
+        idioma_original=registro.idioma_original,
+        modo=modo,
+    )
 
     return TrabajoEncolado(
-        documento_id=documento_id, estado="en_cola", titulo=registro.titulo
+        documento_id=documento_id,
+        estado="en_cola",
+        titulo=registro.titulo,
+        modo_motor=modo.value,
     )
 
 
@@ -255,6 +350,8 @@ async def estado_documento(
         "total_paginas": documento.total_paginas,
         "total_bloques": documento.total_bloques,
         "costo_usd_parcial": float(costo_parcial or 0.0),
+        "idioma_original": documento.idioma_original,
+        "modo_motor": documento.modo_motor,
         "error": documento.error,
         "actualizado_en": (
             documento.actualizado_en.isoformat() if documento.actualizado_en else None
@@ -336,10 +433,18 @@ async def listar_documentos(
                 "documento_id": d.id,
                 "titulo": d.titulo,
                 "estado": d.estado,
+                # El motivo viaja en el listado y no sólo en el detalle: una
+                # fila en rojo sin explicación obliga a abrir el documento para
+                # enterarse de algo que entra en un tooltip.
+                "error": d.error,
                 "total_paginas": d.total_paginas,
                 "total_bloques": d.total_bloques,
                 "inconsistencias": d.inconsistencias,
                 "necesita_revision": d.necesita_revision,
+                # Con qué modo se reconoció: dos documentos de la misma
+                # instancia pueden tener calidades muy distintas y el modo es
+                # la primera explicación a mirar.
+                "modo_motor": d.modo_motor,
                 "creado_en": d.creado_en.isoformat() if d.creado_en else None,
             }
             for d in documentos
@@ -373,6 +478,7 @@ async def obtener_documento(
         "total_bloques": documento.total_bloques,
         "inconsistencias": documento.inconsistencias,
         "necesita_revision": documento.necesita_revision,
+        "modo_motor": documento.modo_motor,
         "costo_usd": float(costo or 0.0),
         "creado_en": documento.creado_en.isoformat() if documento.creado_en else None,
         "resumen": documento.resultado,

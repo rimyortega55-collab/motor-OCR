@@ -32,12 +32,6 @@ export const IconoRevision = ({ tam = 16 }: Props) => (
   </svg>
 )
 
-export const IconoGrafico = ({ tam = 16 }: Props) => (
-  <svg {...base(tam)}>
-    <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
-  </svg>
-)
-
 export const IconoDeslizadores = ({ tam = 16 }: Props) => (
   <svg {...base(tam)}>
     <path d="M4 7h16M4 12h16M4 17h16" />

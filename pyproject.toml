@@ -27,6 +27,9 @@ dependencies = [
     "anthropic",
 ]
 
+[project.urls]
+Repository = "https://github.com/rimyortega55-collab/motor-OCR"
+
 # El nucleo se instala solo: quien quiera convertir un PDF desde un script no
 # tiene que arrastrar un framework web ni una base de datos.
 [project.optional-dependencies]

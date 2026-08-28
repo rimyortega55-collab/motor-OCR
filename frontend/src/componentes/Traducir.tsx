@@ -20,9 +20,8 @@ import {
 } from '../api/consultas'
 import { useExportar } from '../api/consultas'
 import type { FormatoExport } from '../api/tipos'
+import { IDIOMAS } from '../constantes'
 import { IconoAlerta } from './Iconos'
-
-const IDIOMAS = ['español', 'inglés', 'portugués', 'francés', 'alemán', 'italiano']
 
 /** Tipos que el usuario puede elegir traducir o no. Sin fórmulas ni código. */
 const TIPOS_ELEGIBLES = [
@@ -37,17 +36,23 @@ const TIPOS_ELEGIBLES = [
 export default function Traducir({
   documentoId,
   titulo,
+  idiomaOriginal,
 }: {
   documentoId: string
   titulo: string
+  /** Lo que se declaró al subir, si se declaró algo. No tiene sentido
+   * ofrecerlo como destino: sería traducir el documento a su propio idioma. */
+  idiomaOriginal?: string | null
 }) {
   const traducciones = useTraducciones(documentoId)
   const pedir = usePedirTraduccion(documentoId)
   const borrar = useBorrarTraduccion(documentoId)
   const exportar = useExportar()
 
+  const idiomasDestino = IDIOMAS.filter((i) => i !== idiomaOriginal)
+
   const [abierto, setAbierto] = useState(false)
-  const [idioma, setIdioma] = useState('español')
+  const [idioma, setIdioma] = useState(idiomasDestino[0] ?? IDIOMAS[0])
   const [descripcion, setDescripcion] = useState('')
   const [tono, setTono] = useState<'academico' | 'accesible'>('academico')
   const [tipos, setTipos] = useState<string[]>([])
@@ -175,7 +180,7 @@ export default function Traducir({
             <div className="columna" style={{ gap: 5 }}>
               <span className="chico">Idioma</span>
               <div className="fila" style={{ gap: 6, flexWrap: 'wrap' }}>
-                {IDIOMAS.map((i) => (
+                {idiomasDestino.map((i) => (
                   <button
                     key={i}
                     type="button"

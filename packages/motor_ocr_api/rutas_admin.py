@@ -18,13 +18,17 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from motor_ocr.escalacion.cliente_llm import configurar_proveedor
+from motor_ocr.reconocimiento.engines import pix2tex_engine
 from motor_ocr_api.persistencia import (
+    ConfiguracionModeloMatematico,
     ConfiguracionMotorIA,
+    ConfiguracionProcesamiento,
     CostoRegistrado,
     DocumentoAlmacenado,
     obtener_sesion,
 )
 
+from . import trabajos
 from .acceso import clave_configurada, origen_clave, revocar_clave, rotada_en, rotar_clave
 
 router = APIRouter(tags=["admin"])
@@ -165,6 +169,143 @@ async def revocar_clave_acceso(sesion: Session = Depends(obtener_sesion)):
     vuelve a pedir esa; si no, queda abierta.
     """
     revocar_clave(sesion)
+
+
+class ActualizacionProcesamiento(BaseModel):
+    max_paralelo: int
+
+
+def obtener_o_crear_procesamiento(sesion: Session) -> ConfiguracionProcesamiento:
+    fila = sesion.get(ConfiguracionProcesamiento, "global")
+    if fila is not None:
+        return fila
+
+    fila = ConfiguracionProcesamiento(id="global", max_paralelo=trabajos.paralelo_actual())
+    sesion.add(fila)
+    sesion.commit()
+    return fila
+
+
+def _serializar_procesamiento(fila: ConfiguracionProcesamiento) -> dict:
+    return {
+        "max_paralelo": fila.max_paralelo,
+        "minimo": trabajos.MIN_PARALELO,
+        "maximo": trabajos.MAX_PARALELO_PERMITIDO,
+        "actualizado_en": _iso(fila.actualizado_en),
+    }
+
+
+@router.get("/admin/procesamiento")
+async def leer_procesamiento(sesion: Session = Depends(obtener_sesion)):
+    """Cuántos documentos procesa el pipeline a la vez, ahora mismo."""
+    return _serializar_procesamiento(obtener_o_crear_procesamiento(sesion))
+
+
+@router.put("/admin/procesamiento")
+async def actualizar_procesamiento(
+    cambios: ActualizacionProcesamiento,
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Sube o baja cuántos documentos corren en simultáneo, sin reiniciar el proceso.
+
+    Los que ya estaban procesándose o esperando lugar bajo el límite anterior
+    terminan igual; el límite nuevo rige recién para lo que se suba de acá en
+    más (ver `trabajos.aplicar_limite_paralelo`).
+    """
+    try:
+        trabajos.aplicar_limite_paralelo(cambios.max_paralelo)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=422,
+            detail={"codigo": "max_paralelo_invalido", "detail": str(e)},
+        )
+
+    fila = obtener_o_crear_procesamiento(sesion)
+    fila.max_paralelo = cambios.max_paralelo
+    fila.actualizado_en = datetime.now(timezone.utc)
+    sesion.commit()
+
+    return _serializar_procesamiento(fila)
+
+
+class ActualizacionModeloMatematico(BaseModel):
+    # None = volver a los pesos pre-entrenados de pix2tex.
+    checkpoint: str | None = None
+
+
+def obtener_o_crear_modelo_matematico(sesion: Session) -> ConfiguracionModeloMatematico:
+    fila = sesion.get(ConfiguracionModeloMatematico, "global")
+    if fila is not None:
+        return fila
+
+    fila = ConfiguracionModeloMatematico(
+        id="global", checkpoint=pix2tex_engine.checkpoint_actual()
+    )
+    sesion.add(fila)
+    sesion.commit()
+    return fila
+
+
+def _serializar_modelo_matematico(fila: ConfiguracionModeloMatematico) -> dict:
+    disponibles = pix2tex_engine.checkpoints_disponibles()
+    return {
+        # Lo que dice la fila guardada frente a lo que el proceso tiene cargado
+        # ahora mismo: difieren si el .pth se borró del disco después de
+        # elegirlo, y el panel necesita poder decirlo en vez de mentir.
+        "checkpoint": fila.checkpoint,
+        "checkpoint_en_uso": pix2tex_engine.checkpoint_actual(),
+        "directorio": str(pix2tex_engine.DIRECTORIO_CHECKPOINTS),
+        "disponibles": disponibles,
+        "actualizado_en": _iso(fila.actualizado_en),
+    }
+
+
+@router.get("/admin/modelo-matematico")
+async def leer_modelo_matematico(sesion: Session = Depends(obtener_sesion)):
+    """Qué checkpoint de pix2tex reconoce las fórmulas (Capa 3), y cuáles hay para elegir."""
+    return _serializar_modelo_matematico(obtener_o_crear_modelo_matematico(sesion))
+
+
+@router.put("/admin/modelo-matematico")
+async def actualizar_modelo_matematico(
+    cambios: ActualizacionModeloMatematico,
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Cambia el checkpoint en caliente, para poder probar un fine-tuning recién bajado.
+
+    Rige para los documentos que se suban de acá en más: lo que ya está a mitad
+    del pipeline termina con el modelo que tenía cargado.
+    """
+    nombre = (cambios.checkpoint or "").strip() or None
+
+    try:
+        pix2tex_engine.configurar_checkpoint(nombre)
+    except ValueError as e:
+        raise HTTPException(
+            status_code=422,
+            detail={"codigo": "checkpoint_invalido", "detail": str(e)},
+        )
+
+    fila = obtener_o_crear_modelo_matematico(sesion)
+    fila.checkpoint = nombre
+    fila.actualizado_en = datetime.now(timezone.utc)
+    sesion.commit()
+
+    return _serializar_modelo_matematico(fila)
+
+
+def aplicar_modelo_matematico(fila: ConfiguracionModeloMatematico) -> None:
+    """Empuja la fila guardada al engine al arrancar el proceso.
+
+    Si el .pth ya no está (se borró, o la instancia se movió de máquina), no
+    corta el arranque: avisa y sigue con los pesos pre-entrenados, que es lo
+    que el motor hacía antes de que esto existiera.
+    """
+    try:
+        pix2tex_engine.configurar_checkpoint(fila.checkpoint)
+    except ValueError as e:
+        print(f"[MODELO] Checkpoint guardado no utilizable ({e}); se usan los pesos base")
+        pix2tex_engine.configurar_checkpoint(None)
 
 
 @router.get("/admin/resumen")

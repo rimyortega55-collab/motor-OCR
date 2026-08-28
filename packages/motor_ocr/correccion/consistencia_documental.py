@@ -79,21 +79,32 @@ def _validar_numeracion(bloques: list[Bloque]) -> list[Inconsistencia]:
             if numero:
                 estructuras[bloque.tipo].append((numero, bloque))
 
-    # Verificar continuidad por tipo
+    # Verificar continuidad por tipo. Sólo se comparan elementos que comparten
+    # prefijo -es decir, que viven en el mismo capítulo o sección-: pasar del
+    # "Teorema 3.7" al "Teorema 4.1" no es un salto, es el capítulo siguiente,
+    # y contarlo como inconsistencia llenaría la cola de escalación de ruido en
+    # todo documento con más de un capítulo.
     for tipo_bloque, elementos in estructuras.items():
-        elementos.sort(key=lambda x: x[0])
+        por_prefijo = defaultdict(list)
+        for numero, bloque in elementos:
+            por_prefijo[numero[:-1]].append((numero, bloque))
 
-        for i in range(len(elementos) - 1):
-            num_actual, bloque_actual = elementos[i]
-            num_proximo, bloque_proximo = elementos[i + 1]
+        for elementos_del_prefijo in por_prefijo.values():
+            elementos_del_prefijo.sort(key=lambda x: x[0])
 
-            # Detectar saltos > 1
-            if num_proximo - num_actual > 1:
-                inconsistencias.append(Inconsistencia(
-                    tipo="salto_numeracion",
-                    detalle=f"Salto en numeración de {tipo_bloque.value}: {num_actual} → {num_proximo}",
-                    ubicacion_pagina=bloque_actual.pagina
-                ))
+            for i in range(len(elementos_del_prefijo) - 1):
+                num_actual, bloque_actual = elementos_del_prefijo[i]
+                num_proximo, _ = elementos_del_prefijo[i + 1]
+
+                if num_proximo[-1] - num_actual[-1] > 1:
+                    inconsistencias.append(Inconsistencia(
+                        tipo="salto_numeracion",
+                        detalle=(
+                            f"Salto en numeración de {tipo_bloque.value}: "
+                            f"{_numero_a_texto(num_actual)} → {_numero_a_texto(num_proximo)}"
+                        ),
+                        ubicacion_pagina=bloque_actual.pagina
+                    ))
 
     return inconsistencias
 
@@ -114,7 +125,7 @@ def _validar_referencias_cruzadas(bloques: list[Bloque]) -> list[Inconsistencia]
             numero = _extraer_numero(bloque.contenido.texto_plano or "")
             if numero:
                 tipo_nombre = bloque.tipo.value
-                key = f"{tipo_nombre}_{numero}"
+                key = f"{tipo_nombre}_{_numero_a_texto(numero)}"
                 indice_disponibles[key] = bloque
 
     # Buscar referencias en bloques de texto
@@ -155,22 +166,32 @@ def _validar_referencias_cruzadas(bloques: list[Bloque]) -> list[Inconsistencia]
     return inconsistencias
 
 
-def _extraer_numero(texto: str) -> float | None:
-    """Extrae número de formato "3.2" desde "Teorema 3.2."."""
+def _extraer_numero(texto: str) -> tuple[int, ...] | None:
+    """Extrae la numeración de "Teorema 3.2." como la tupla (3, 2).
+
+    La numeración de un documento no es un número decimal: "3.2" quiere decir
+    capítulo 3, elemento 2. Modelarla como `float` -3 + 2/10- parece
+    inofensivo y rompe dos cosas a la vez. El salto de 3.2 a 3.4 pasa a valer
+    0.2, con lo cual ningún umbral razonable lo detecta y el validador queda
+    inerte; y a partir del décimo elemento el mapeo deja de ser inyectivo,
+    porque "3.10" y "4" caen los dos en 4.0.
+
+    Con una tupla de enteros la comparación es exacta y ordena bien: (3, 9)
+    viene antes de (3, 10), que es lo que un lector espera.
+    """
     if not texto:
         return None
 
-    # Buscar patrón: número seguido de punto y opcional otro número
-    match = re.search(r'(\d+)(?:\.(\d+))?', texto)
+    match = re.search(r'\d+(?:\.\d+)*', texto)
+    if not match:
+        return None
 
-    if match:
-        parte_entera = int(match.group(1))
-        parte_decimal = int(match.group(2)) if match.group(2) else 0
+    return tuple(int(parte) for parte in match.group(0).split("."))
 
-        # Convertir a float: 3.2 → 3.2, 3 → 3.0
-        return parte_entera + (parte_decimal / 10.0)
 
-    return None
+def _numero_a_texto(numero: tuple[int, ...]) -> str:
+    """(3, 2) -> "3.2". Es la forma canónica con la que se arman las claves."""
+    return ".".join(str(parte) for parte in numero)
 
 
 def _construir_indice_estructural(bloques: list[Bloque]) -> dict:

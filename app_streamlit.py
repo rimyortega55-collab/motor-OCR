@@ -17,6 +17,7 @@ import pandas as pd
 import plotly.express as px
 
 from motor_ocr.escalacion.cliente_llm import configurar_proveedor
+from motor_ocr.modelos import ModoMotor
 from motor_ocr.pipeline import Pipeline
 
 # Configuración Streamlit
@@ -161,6 +162,20 @@ with tab1:
         )
 
     with col2:
+        # El mismo par de modos que ofrece el frontend: híbrido (motor
+        # determinista + modelo de IA sólo en las fórmulas) o todo al modelo.
+        modo_elegido = st.radio(
+            "Cómo reconocer",
+            options=[ModoMotor.HIBRIDO, ModoMotor.SOLO_IA],
+            format_func=lambda m: (
+                "Híbrido (recomendado)" if m == ModoMotor.HIBRIDO else "Sólo modelo de IA"
+            ),
+            help=(
+                "Híbrido lee el texto directo del PDF y le manda al modelo sólo los "
+                "recortes de fórmula. Sólo modelo de IA manda todos los bloques al "
+                "modelo: más lento, útil para medirlo o si la capa de texto está rota."
+            ),
+        )
         procesar_btn = st.button("▶️ Procesar", use_container_width=True)
 
     if pdf_file and procesar_btn:
@@ -171,7 +186,7 @@ with tab1:
 
             try:
                 pipeline = Pipeline()
-                documento, bloques = pipeline.ejecutar(ruta_temporal)
+                documento, bloques = pipeline.ejecutar(ruta_temporal, modo=modo_elegido)
                 documento.titulo = pdf_file.name
                 resultado_correccion = pipeline.ultima_correccion
             except Exception as e:

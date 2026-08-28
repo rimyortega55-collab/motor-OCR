@@ -35,6 +35,8 @@ entrenamiento/dataset_sintetico/
 entrenamiento/dataset_prueba/
 entrenamiento/dataset_validacion/
 entrenamiento/checkpoints_validacion/
+# Los .pth para probar en el motor: resultado de una corrida, no codigo (~97 MB c/u).
+entrenamiento/checkpoints/*.pth
 entrenamiento/outputs_validacion/
 entrenamiento/evaluacion_real/
 

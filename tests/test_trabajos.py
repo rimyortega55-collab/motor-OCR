@@ -92,7 +92,7 @@ def test_procesar_responde_202_sin_esperar_al_pipeline(cliente, monkeypatch):
 
     arrancado = []
 
-    def _lento(documento_id, contenido):
+    def _lento(documento_id, contenido, **_opciones):
         arrancado.append(documento_id)
 
     monkeypatch.setattr("motor_ocr_api.api.encolar", _lento)
@@ -117,7 +117,7 @@ def test_procesar_rechaza_archivo_vacio(cliente):
 
 
 def test_el_documento_aparece_en_la_lista_apenas_se_encola(cliente, monkeypatch):
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     cliente.post("/api/procesar", files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")})
 
@@ -131,7 +131,7 @@ def test_el_documento_aparece_en_la_lista_apenas_se_encola(cliente, monkeypatch)
 # ============================================================================
 
 def test_el_estado_arranca_con_las_cinco_capas_pendientes(cliente, monkeypatch):
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     documento_id = cliente.post(
         "/api/procesar", files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")}
@@ -154,7 +154,7 @@ def test_el_progreso_de_cada_capa_llega_a_la_base(cliente, monkeypatch):
         def __init__(self, al_progresar=None):
             self.avisar = al_progresar
 
-        def ejecutar(self, ruta_pdf):
+        def ejecutar(self, ruta_pdf, **_opciones):
             from motor_ocr.modelos import Documento, Origen
 
             self.avisar(1, "completada", total_paginas=34, detalle="34 páginas · nativo_digital")
@@ -201,7 +201,7 @@ def test_un_pipeline_que_falla_deja_el_documento_en_error(cliente, monkeypatch):
         def __init__(self, al_progresar=None):
             pass
 
-        def ejecutar(self, ruta_pdf):
+        def ejecutar(self, ruta_pdf, **_opciones):
             raise RuntimeError("cannot open broken document")
 
     monkeypatch.setattr("motor_ocr_api.trabajos.Pipeline", PipelineRoto)
@@ -224,7 +224,7 @@ def test_un_pipeline_que_falla_deja_el_documento_en_error(cliente, monkeypatch):
 def test_un_trabajo_sin_latido_se_cierra_como_error(cliente, monkeypatch):
     """Si el proceso muere, el documento no puede quedar en 'procesando' para siempre."""
 
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     documento_id = cliente.post(
         "/api/procesar", files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")}
@@ -243,7 +243,7 @@ def test_un_trabajo_sin_latido_se_cierra_como_error(cliente, monkeypatch):
 
 
 def test_un_trabajo_con_latido_reciente_se_deja_en_paz(cliente, monkeypatch):
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     documento_id = cliente.post(
         "/api/procesar", files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")}
@@ -305,3 +305,168 @@ def test_un_callback_que_explota_no_frena_el_procesamiento(monkeypatch):
     # la excepción.
     pipeline._avisar(1, "en_curso")
     pipeline._avisar(3, "completada", hechos=1, total=1)
+
+
+# ============================================================================
+# MODO DEL MOTOR
+# ============================================================================
+#
+# El modo cambia el resultado del documento, así que tiene que viajar entero
+# desde el formulario hasta el worker y quedar guardado: sin eso, no habría
+# forma de explicar por qué dos documentos de la misma instancia salieron
+# distintos.
+
+@pytest.fixture
+def modo_encolado(monkeypatch):
+    """Captura con qué modo se encoló, sin correr el pipeline."""
+    capturado: dict = {}
+
+    def _encolar(documento_id, contenido, **opciones):
+        capturado["modo"] = opciones.get("modo")
+
+    monkeypatch.setattr("motor_ocr_api.api.encolar", _encolar)
+    return capturado
+
+
+def test_sin_elegir_modo_se_procesa_en_hibrido(cliente, modo_encolado):
+    """El default no puede cambiar: es el motor que ya usaban los documentos."""
+    respuesta = cliente.post(
+        "/api/procesar", files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")}
+    )
+
+    assert respuesta.status_code == 202
+    assert respuesta.json()["modo_motor"] == "hibrido"
+    assert modo_encolado["modo"].value == "hibrido"
+
+
+def test_el_modo_solo_ia_llega_al_worker_y_queda_guardado(cliente, modo_encolado):
+    respuesta = cliente.post(
+        "/api/procesar",
+        files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")},
+        data={"modo_motor": "solo_ia"},
+    )
+
+    assert respuesta.status_code == 202
+    documento_id = respuesta.json()["documento_id"]
+    assert modo_encolado["modo"].value == "solo_ia"
+
+    estado = cliente.get(f"/api/documentos/{documento_id}/estado").json()
+    assert estado["modo_motor"] == "solo_ia"
+
+    listado = cliente.get("/api/documentos").json()
+    assert listado["items"][0]["modo_motor"] == "solo_ia"
+
+
+def test_un_modo_inexistente_se_rechaza_antes_de_encolar(cliente, modo_encolado):
+    """Mejor un 400 al subir que un documento que muere en el worker después."""
+    respuesta = cliente.post(
+        "/api/procesar",
+        files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")},
+        data={"modo_motor": "magia"},
+    )
+
+    assert respuesta.status_code == 400
+    assert respuesta.json()["detail"]["codigo"] == "modo_motor_invalido"
+    assert modo_encolado == {}
+    assert cliente.get("/api/documentos").json()["total"] == 0
+
+
+# ============================================================================
+# MODO DEL MOTOR
+# ============================================================================
+#
+# El modo cambia el resultado del documento, así que se valida al subirlo (un
+# valor mal escrito tiene que fallar antes de encolar, no media hora después
+# adentro del worker) y se guarda por documento, para poder explicar después
+# por qué dos documentos de la misma instancia salieron distintos.
+
+def _capturar_modo(monkeypatch) -> list:
+    """Reemplaza `encolar` y devuelve la lista donde va anotando el modo."""
+    modos = []
+
+    def _encolar(documento_id, contenido, **opciones):
+        modos.append(opciones.get("modo"))
+
+    monkeypatch.setattr("motor_ocr_api.api.encolar", _encolar)
+    return modos
+
+
+def test_sin_elegir_modo_el_documento_se_procesa_en_hibrido(cliente, monkeypatch):
+    """El default no puede cambiar: es el motor tal como venía funcionando."""
+    modos = _capturar_modo(monkeypatch)
+
+    respuesta = cliente.post(
+        "/api/procesar", files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")}
+    )
+
+    assert respuesta.status_code == 202
+    assert respuesta.json()["modo_motor"] == "hibrido"
+    assert [m.value for m in modos] == ["hibrido"]
+
+
+def test_el_modo_solo_ia_llega_al_worker_y_queda_guardado(cliente, monkeypatch):
+    modos = _capturar_modo(monkeypatch)
+
+    respuesta = cliente.post(
+        "/api/procesar",
+        files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")},
+        data={"modo_motor": "solo_ia"},
+    )
+
+    assert respuesta.status_code == 202
+    documento_id = respuesta.json()["documento_id"]
+    assert [m.value for m in modos] == ["solo_ia"]
+
+    # Guardado, no sólo en tránsito: la interfaz lo muestra al revisar el
+    # documento mucho después de que el worker terminó.
+    assert cliente.get(f"/api/documentos/{documento_id}/estado").json()["modo_motor"] == "solo_ia"
+    assert cliente.get("/api/documentos").json()["items"][0]["modo_motor"] == "solo_ia"
+
+
+def test_un_modo_desconocido_se_rechaza_antes_de_encolar(cliente, monkeypatch):
+    modos = _capturar_modo(monkeypatch)
+
+    respuesta = cliente.post(
+        "/api/procesar",
+        files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")},
+        data={"modo_motor": "magia"},
+    )
+
+    assert respuesta.status_code == 400
+    assert respuesta.json()["detail"]["codigo"] == "modo_motor_invalido"
+    assert modos == []
+    # Y no queda un documento fantasma en la lista.
+    assert cliente.get("/api/documentos").json()["total"] == 0
+
+
+def test_el_modo_elegido_llega_al_pipeline(cliente, monkeypatch):
+    """La cadena entera: formulario -> worker -> `Pipeline.ejecutar`."""
+    recibido = {}
+
+    class PipelineFalso:
+        def __init__(self, al_progresar=None):
+            pass
+
+        def ejecutar(self, ruta_pdf, **opciones):
+            from motor_ocr.modelos import Documento, Origen
+
+            recibido["modo"] = opciones.get("modo")
+            return (
+                Documento(
+                    titulo="c7.pdf", origen=Origen.NATIVO_DIGITAL, idioma_original="es",
+                    total_paginas=1, version_pipeline="prueba",
+                ),
+                [],
+            )
+
+    monkeypatch.setattr("motor_ocr_api.trabajos.Pipeline", PipelineFalso)
+
+    documento_id = cliente.post(
+        "/api/procesar",
+        files={"file": ("c7.pdf", PDF_MINIMO, "application/pdf")},
+        data={"modo_motor": "solo_ia"},
+    ).json()["documento_id"]
+
+    _esperar_estado(cliente, documento_id, {"completado", "error"})
+
+    assert recibido["modo"].value == "solo_ia"

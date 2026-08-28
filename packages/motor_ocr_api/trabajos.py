@@ -8,6 +8,20 @@ Acá el endpoint encola y responde 202 con el id; el pipeline corre en un hilo
 aparte que va escribiendo el progreso por capa en la fila del documento, y la
 interfaz lo consulta con `GET /documentos/{id}/estado`.
 
+Los hilos salen de un `ThreadPoolExecutor` acotado y no de `threading.Thread`
+suelto: subir mil PDFs de una tirase antes lanzaba mil hilos de OCR compitiendo
+por la misma CPU/GPU a la vez, con la instancia degradando en vez de ponerse en
+cola. El pool limita cuántos corren en simultáneo y el resto espera en la cola
+interna del propio executor, sin código nuevo que mantener para eso.
+
+Cuántos corren en simultáneo se puede cambiar en caliente desde el panel de
+administración (`aplicar_limite_paralelo`, ver `rutas_admin.py`), no sólo por
+variable de entorno: `ThreadPoolExecutor` no deja cambiarle `max_workers` una
+vez creado, así que reconfigurar arma un pool nuevo con el límite pedido y
+apaga el viejo con `shutdown(wait=False)` -deja terminar lo que ya estaba
+corriendo o encolado ahí, pero no acepta nada nuevo-, y `encolar` siempre lee
+el pool vigente al momento de mandar el trabajo.
+
 **Límite conocido:** los trabajos viven en el proceso. Alcanza para una
 instancia; con varias, cada una sólo ve los suyos, y si el proceso muere los
 documentos quedan en `procesando`. Por eso se escribe `latido_en`: `marcar_colgados`
@@ -18,8 +32,10 @@ arq) sin tocar los endpoints.
 
 from __future__ import annotations
 
+import os
 import tempfile
 import threading
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -31,6 +47,7 @@ from motor_ocr_api.persistencia import (
 )
 from motor_ocr.config.settings import settings
 from motor_ocr.escalacion.costo_tracking import limpiar_registro, obtener_registros
+from motor_ocr.modelos import ModoMotor
 from motor_ocr.pipeline import Pipeline
 
 from .almacen import guardar_pdf
@@ -46,6 +63,50 @@ CAPAS = {
 # Un documento sin latido por más de esto se da por muerto. Diez minutos es
 # holgado incluso para un PDF grande, porque la Capa 3 late cada 1 % de avance.
 LATIDO_MAXIMO = timedelta(minutes=10)
+
+# Límites del selector del panel. Uno solo sigue siendo válido -es lo que
+# había antes de que esto fuera configurable-; dieciséis es un techo contra
+# escribir un número al voleo y saturar la instancia por accidente.
+MIN_PARALELO = 1
+MAX_PARALELO_PERMITIDO = 16
+
+# Default más realista que el "2" original: la mayoría de las instancias
+# self-hosted tienen margen para esto, y ahora que es editable desde el panel
+# sin reiniciar el proceso, un default conservador ya no protege tanto como
+# obliga a subirlo a mano apenas se prueba con más de dos documentos.
+_DEFAULT_PARALELO = int(os.environ.get("MOTOR_OCR_PROCESAMIENTO_PARALELO", "4"))
+
+_bloqueo_pool = threading.Lock()
+_executor = ThreadPoolExecutor(max_workers=_DEFAULT_PARALELO, thread_name_prefix="ocr")
+_paralelo_actual = _DEFAULT_PARALELO
+
+
+def paralelo_actual() -> int:
+    return _paralelo_actual
+
+
+def aplicar_limite_paralelo(max_paralelo: int) -> None:
+    """Reconfigura cuántos documentos corren a la vez, sin reiniciar el proceso.
+
+    `ThreadPoolExecutor` no permite cambiar `max_workers` de uno ya creado, así
+    que se arma un pool nuevo y el viejo se apaga con `shutdown(wait=False)`:
+    lo que ya estaba corriendo o esperando en su cola interna termina igual,
+    pero deja de aceptar trabajos nuevos, que a partir de acá van al pool
+    nuevo.
+    """
+    global _executor, _paralelo_actual
+
+    if not MIN_PARALELO <= max_paralelo <= MAX_PARALELO_PERMITIDO:
+        raise ValueError(
+            f"max_paralelo debe estar entre {MIN_PARALELO} y {MAX_PARALELO_PERMITIDO}"
+        )
+
+    with _bloqueo_pool:
+        anterior = _executor
+        _executor = ThreadPoolExecutor(max_workers=max_paralelo, thread_name_prefix="ocr")
+        _paralelo_actual = max_paralelo
+
+    anterior.shutdown(wait=False)
 
 
 def _ahora() -> datetime:
@@ -107,19 +168,32 @@ class _Reportero:
                 documento.total_bloques = datos["total_bloques"]
 
 
-def encolar(documento_id: str, contenido: bytes) -> None:
-    """Arranca el procesamiento en segundo plano y vuelve enseguida."""
+def encolar(
+    documento_id: str,
+    contenido: bytes,
+    dpi_override: int | None = None,
+    idioma_original: str | None = None,
+    modo: ModoMotor = ModoMotor.HIBRIDO,
+) -> None:
+    """Manda el documento al pool vigente y vuelve enseguida.
 
-    hilo = threading.Thread(
-        target=_procesar,
-        args=(documento_id, contenido),
-        name=f"ocr-{documento_id[:8]}",
-        daemon=True,
+    Si ya hay `paralelo_actual()` documentos procesándose, este queda con
+    `estado="en_cola"` en la cola interna del executor hasta que se libere un
+    lugar; la interfaz no distingue "esperando lugar" de "esperando el
+    pipeline" porque para quien sube el PDF es el mismo estado.
+    """
+    _executor.submit(
+        _procesar, documento_id, contenido, dpi_override, idioma_original, modo
     )
-    hilo.start()
 
 
-def _procesar(documento_id: str, contenido: bytes) -> None:
+def _procesar(
+    documento_id: str,
+    contenido: bytes,
+    dpi_override: int | None = None,
+    idioma_original: str | None = None,
+    modo: ModoMotor = ModoMotor.HIBRIDO,
+) -> None:
     ruta = Path(tempfile.gettempdir()) / f"ocr_{documento_id}.pdf"
     reportero = _Reportero(documento_id)
 
@@ -137,7 +211,21 @@ def _procesar(documento_id: str, contenido: bytes) -> None:
         # demanda, y antes se borraba apenas terminaba el pipeline.
         ruta_guardada = guardar_pdf(documento_id, contenido)
 
-        documento_ocr, bloques = Pipeline(al_progresar=reportero).ejecutar(str(ruta))
+        # La ruta se anota apenas se guarda el archivo y no al terminar: si el
+        # pipeline falla o el proceso muere, el PDF ya está en disco pero la
+        # fila no lo sabría, y borrar el documento dejaba el archivo huérfano
+        # para siempre.
+        with session_scope() as sesion:
+            registro = sesion.get(DocumentoAlmacenado, documento_id)
+            if registro is not None:
+                registro.ruta_pdf = ruta_guardada
+
+        documento_ocr, bloques = Pipeline(al_progresar=reportero).ejecutar(
+            str(ruta),
+            dpi_override=dpi_override,
+            idioma_original=idioma_original,
+            modo=modo,
+        )
 
         inconsistencias = len(documento_ocr.inconsistencias_no_resueltas)
         baja_confianza = [

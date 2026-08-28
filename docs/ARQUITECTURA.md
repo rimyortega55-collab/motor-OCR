@@ -46,6 +46,28 @@ Enruta cada bloque al motor que mejor lo resuelve:
 Cada resultado lleva un puntaje de confianza que las capas siguientes usan
 para decidir si hace falta escalar.
 
+### Modo de reconocimiento: híbrido o sólo modelo de IA
+
+El enrutamiento de arriba es el modo **híbrido**, que es el default y el que
+conviene para procesar de verdad: el motor determinista resuelve todo lo que
+puede -la prosa nativa sale exacta y gratis de PyMuPDF- y el modelo de IA sólo
+ve los recortes que ya fueron localizados como fórmula.
+
+El modo **sólo modelo de IA** (`solo_ia`) desactiva todos esos atajos: cada
+bloque que no sea ruido ni figura se recorta de la página renderizada y se
+manda entero al modelo, incluido el texto que el PDF ya traía escrito y lo que
+docTR transcribió en la Capa 2. Existe por dos razones: poder medir al modelo
+solo -sin que el motor determinista le tape los errores, que es lo que hace
+falta para evaluar un fine-tuning- y procesar PDFs cuya capa de texto está
+rota. Es bastante más lento y más frágil, porque el modelo está afinado para
+fórmulas y no para párrafos.
+
+El modo se elige **por documento** al subirlo (campo `modo_motor` de
+`POST /api/procesar`, o el selector de la pantalla de subida) y queda guardado
+en la fila del documento: sin eso, dos documentos de la misma instancia con
+calidades muy distintas no se podrían explicar. Sólo gobierna la Capa 3 — las
+capas 1, 2, 4 y 5 corren igual en los dos modos.
+
 ## 4. Corrección determinista
 
 Normalización de LaTeX, reparación estructural (párrafos partidos por saltos
@@ -69,9 +91,10 @@ auto-ajuste de umbrales de la capa 7.
 
 ## 7. Interfaz web
 
-`motor_ocr_api` (FastAPI) expone el pipeline como servicio: cuentas, cuotas,
-subida de documentos, cola de revisión, traducción y administración. El
-frontend en `frontend/` (React + TypeScript) es la interfaz para usuarios que
+`motor_ocr_api` (FastAPI) expone el pipeline como servicio: sin cuentas —una
+clave única opcional protege la instancia entera—, subida de documentos, cola
+de revisión, traducción y administración (incluida la rotación de esa clave).
+El frontend en `frontend/` (React + TypeScript) es la interfaz para usuarios que
 no programan. `app_streamlit.py` es una interfaz alternativa más simple,
 pensada para correr el pipeline localmente sin levantar el frontend completo.
 
@@ -84,7 +107,8 @@ fórmulas complejas. El candidato natural es
 [pix2tex/LaTeX-OCR](https://github.com/lukas-blecher/LaTeX-OCR), que ya está
 integrado como motor determinista en
 [`pix2tex_engine.py`](../packages/motor_ocr/reconocimiento/engines/pix2tex_engine.py).
-Los scripts de entrenamiento y evaluación viven en [`entrenamiento/`](../entrenamiento/).
+Los scripts de entrenamiento y evaluación viven en [`entrenamiento/`](../entrenamiento/),
+y el procedimiento completo está en [`ENTRENAMIENTO.md`](ENTRENAMIENTO.md).
 
 El motor se refina un formato a la vez: primero LaTeX, después Markdown.
 

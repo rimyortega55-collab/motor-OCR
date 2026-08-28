@@ -16,14 +16,25 @@ export type EstadoAcceso = {
 
 export type EstadoDocumento = 'en_cola' | 'procesando' | 'completado' | 'error'
 
+/** Qué hace la Capa 3 con cada bloque.
+ *
+ * 'hibrido' es el motor como está diseñado: PyMuPDF entrega la prosa exacta,
+ * docTR resuelve lo escaneado y el modelo de IA sólo ve los recortes de
+ * fórmula. 'solo_ia' desactiva esos atajos y manda todos los bloques al
+ * modelo — sirve para medirlo solo, pero es más lento y más frágil. */
+export type ModoMotor = 'hibrido' | 'solo_ia'
+
 export type DocumentoResumen = {
   documento_id: string
   titulo: string
   estado: EstadoDocumento
+  /** Motivo del fallo cuando `estado` es 'error'; null en el resto. */
+  error: string | null
   total_paginas: number
   total_bloques: number
   inconsistencias: number
   necesita_revision: boolean
+  modo_motor: ModoMotor
   creado_en: string | null
 }
 
@@ -60,6 +71,12 @@ export type EstadoProceso = {
   total_paginas: number
   total_bloques: number
   costo_usd_parcial: number
+  /** Lo que se declaró al subir, si se declaró algo. Sólo metadato: no cambia
+   * qué motor de OCR reconoce el documento. */
+  idioma_original: string | null
+  /** Con qué modo se está reconociendo el documento. Se elige al subirlo y no
+   * se puede cambiar a mitad de camino. */
+  modo_motor: ModoMotor
   error: string | null
   actualizado_en: string | null
 }
@@ -68,6 +85,7 @@ export type TrabajoEncolado = {
   documento_id: string
   estado: EstadoDocumento
   titulo: string
+  modo_motor: ModoMotor
 }
 
 export type TipoBloque =
@@ -130,38 +148,6 @@ export type ResultadoDecision = {
   decision_id: number
   siguiente_bloque_id: string | null
   pendientes: number
-}
-
-export type TotalesConsumo = {
-  documentos: number
-  paginas: number
-  llamadas_llm: number
-  tokens_entrada: number
-  tokens_salida: number
-  costo_llm_usd: number
-}
-
-export type DiaConsumo = {
-  fecha: string
-  micro_segmento_usd: number
-  inconsistencia_documental_usd: number
-}
-
-export type ConsumoDocumento = {
-  documento_id: string
-  titulo: string
-  llamadas: number
-  tokens_entrada: number
-  tokens_salida: number
-  costo_usd: number
-}
-
-export type Consumo = {
-  desde: string
-  hasta: string
-  totales: TotalesConsumo
-  serie_diaria: DiaConsumo[]
-  por_documento: ConsumoDocumento[]
 }
 
 /** Los cuatro formatos de exportación. LaTeX y Markdown son los principales. */
@@ -267,6 +253,32 @@ export type ActualizacionMotorIA = Partial<{
 export type ResumenAdmin = {
   documentos_totales: number
   costo_llm_usd_total: number
+}
+
+export type ConfiguracionProcesamiento = {
+  max_paralelo: number
+  minimo: number
+  maximo: number
+  actualizado_en: string | null
+}
+
+export type CheckpointDisponible = {
+  nombre: string
+  bytes: number
+  /** Epoch en segundos, como lo devuelve `stat().st_mtime`. */
+  modificado_en: number
+}
+
+/** Qué pesos usa pix2tex para reconocer fórmulas (Capa 3). `null` = los
+ * pre-entrenados que trae el paquete; si no, un `.pth` del fine-tuning propio. */
+export type ConfiguracionModeloMatematico = {
+  checkpoint: string | null
+  /** Lo que el proceso tiene cargado ahora; difiere de `checkpoint` si el
+   * archivo elegido desapareció del disco. */
+  checkpoint_en_uso: string | null
+  directorio: string
+  disponibles: CheckpointDisponible[]
+  actualizado_en: string | null
 }
 
 /** "panel": se rotó desde acá y esa es la clave vigente. "entorno":

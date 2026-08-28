@@ -21,7 +21,7 @@ import pymupdf as fitz
 
 from motor_ocr.correccion import corregir_documento
 from motor_ocr.escalacion import procesar_escalaciones
-from motor_ocr.modelos import Bloque, Documento, Origen, OrigenContenido
+from motor_ocr.modelos import Bloque, Documento, ModoMotor, Origen, OrigenContenido
 from motor_ocr.modelos.results import DocumentPostCorrection
 from motor_ocr.reconocimiento import enrutar_bloque
 from motor_ocr.layout import segmentar_documento
@@ -57,7 +57,23 @@ class Pipeline:
         except Exception:
             pass
 
-    def ejecutar(self, ruta_pdf: str) -> tuple[Documento, list[Bloque]]:
+    def ejecutar(
+        self,
+        ruta_pdf: str,
+        dpi_override: int | None = None,
+        idioma_original: str | None = None,
+        modo: ModoMotor = ModoMotor.HIBRIDO,
+    ) -> tuple[Documento, list[Bloque]]:
+        """`dpi_override` reemplaza el DPI adaptativo del triage para todo el
+        documento (en vez de variar por zona); `idioma_original` es sólo
+        metadato -no cambia qué motor de OCR se usa- y sirve de default al
+        traducir.
+
+        `modo` sí cambia el reconocimiento: `HIBRIDO` deja que el motor
+        determinista resuelva todo lo que puede y reserve el modelo de IA para
+        los recortes de fórmula; `SOLO_IA` manda todos los bloques al modelo.
+        Las capas 1, 2, 4 y 5 corren igual en los dos modos —el modo sólo
+        gobierna la Capa 3."""
         titulo = Path(ruta_pdf).name
 
         # Capa 1: Triage
@@ -67,7 +83,7 @@ class Pipeline:
         documento = Documento(
             titulo=titulo,
             origen=Origen.NATIVO_DIGITAL,
-            idioma_original="es",
+            idioma_original=idioma_original or "es",
             total_paginas=len(resultados_triage),
             version_pipeline="0.1.0",
             zonas_dpi=zonas,
@@ -98,8 +114,13 @@ class Pipeline:
         )
 
         # Capa 3: OCR especializado (solo bloques que no traen texto nativo)
-        dpi_por_pagina = {t.pagina: t.dpi_objetivo for t in resultados_triage}
-        imagenes_pagina = self._ejecutar_ocr(ruta_pdf, bloques, dpi_por_pagina)
+        # Sin override, cada página usa el DPI que decidió el triage (150-400
+        # según cuánta fórmula tiene); con override, todas usan el mismo valor
+        # -a costa de esa adaptación por zona.
+        dpi_por_pagina = {
+            t.pagina: (dpi_override or t.dpi_objetivo) for t in resultados_triage
+        }
+        imagenes_pagina = self._ejecutar_ocr(ruta_pdf, bloques, dpi_por_pagina, modo)
 
         # Capa 4: Corrección determinista
         self._avisar(4, "en_curso")
@@ -137,12 +158,13 @@ class Pipeline:
         ruta_pdf: str,
         bloques: list[Bloque],
         dpi_por_pagina: dict[int, int],
+        modo: ModoMotor = ModoMotor.HIBRIDO,
     ) -> dict[int, np.ndarray]:
         """Ejecuta Capa 3 y devuelve las páginas renderizadas, que Capa 5 reutiliza."""
         doc = fitz.open(ruta_pdf)
         imagenes_pagina: dict[int, np.ndarray] = {}
 
-        pendientes = [b for b in bloques if self._requiere_capa3(b)]
+        pendientes = [b for b in bloques if self._requiere_capa3(b, modo)]
         self._avisar(3, "en_curso", hechos=0, total=len(pendientes))
 
         # Avisar bloque por bloque satura la base en documentos de 30 000
@@ -153,7 +175,7 @@ class Pipeline:
 
         try:
             for bloque in bloques:
-                if not self._requiere_capa3(bloque):
+                if not self._requiere_capa3(bloque, modo):
                     continue
 
                 pagina_num = bloque.pagina
@@ -166,6 +188,7 @@ class Pipeline:
                     bloque,
                     imagen_pagina=imagenes_pagina[pagina_num],
                     dpi_objetivo=dpi_por_pagina.get(pagina_num, 200),
+                    modo=modo,
                 )
 
                 bloque.contenido.texto_plano = resultado_ocr.contenido
@@ -198,10 +221,15 @@ class Pipeline:
         return imagenes_pagina
 
     @staticmethod
-    def _requiere_capa3(bloque: Bloque) -> bool:
+    def _requiere_capa3(bloque: Bloque, modo: ModoMotor = ModoMotor.HIBRIDO) -> bool:
         """Bloques escaneados siempre; nativo-digital sólo si tiene tramos de
         fórmula marcados en Capa 2 (ver layout/nativo_digital.py) — el resto
-        de su texto ya es correcto y gratis, sin pasar por OCR."""
+        de su texto ya es correcto y gratis, sin pasar por OCR.
+
+        En `SOLO_IA` no se filtra nada: hasta el bloque que trae texto nativo
+        pasa por el modelo, que es de lo que se trata el modo."""
+        if modo == ModoMotor.SOLO_IA:
+            return True
         if bloque.origen_contenido != OrigenContenido.TEXTO_NATIVO:
             return True
         return any(s.tipo == "formula" for s in bloque.segmentos_capa2)

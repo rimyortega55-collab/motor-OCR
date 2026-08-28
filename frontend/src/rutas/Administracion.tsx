@@ -12,14 +12,24 @@ import { useEffect, useState } from 'react'
 import {
   useClaveAcceso,
   useConfiguracionMotorIA,
+  useConfiguracionProcesamiento,
+  useGuardarModeloMatematico,
   useGuardarMotorIA,
+  useGuardarProcesamiento,
+  useModeloMatematico,
   useResumenAdmin,
   useRevocarClaveAcceso,
   useRotarClaveAcceso,
 } from '../api/consultas'
 import { FalloApi } from '../api/cliente'
 import type { ProveedorMotorIA } from '../api/tipos'
-import { IconoAlerta, IconoLlave, IconoRobot } from '../componentes/Iconos'
+import {
+  IconoAlerta,
+  IconoDeslizadores,
+  IconoEngranaje,
+  IconoLlave,
+  IconoRobot,
+} from '../componentes/Iconos'
 
 const PROVEEDORES: { valor: ProveedorMotorIA; titulo: string; bajada: string }[] = [
   {
@@ -222,6 +232,220 @@ function SeccionClaveAcceso() {
   )
 }
 
+function SeccionProcesamiento() {
+  const config = useConfiguracionProcesamiento()
+  const guardar = useGuardarProcesamiento()
+
+  const [valor, setValor] = useState<number | null>(null)
+  const vigente = valor ?? config.data?.max_paralelo ?? 1
+  const haCambiado = config.data !== undefined && valor !== null && valor !== config.data.max_paralelo
+
+  return (
+    <div className="tarjeta" style={{ padding: '18px 20px' }}>
+      <div className="columna" style={{ gap: 16 }}>
+        <div className="fila" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <div className="columna" style={{ gap: 3 }}>
+            <span className="etiqueta">
+              <IconoDeslizadores tam={13} /> Procesamiento en paralelo
+            </span>
+            <span className="chico apagado">
+              Cuántos PDFs procesa el motor a la vez. El resto queda encolado hasta que se libera
+              un lugar — subirlo no acelera cada documento, reparte la CPU entre más a la vez.
+            </span>
+          </div>
+          {config.data?.actualizado_en && (
+            <span className="chico apagado">
+              editado {new Date(config.data.actualizado_en).toLocaleString('es')}
+            </span>
+          )}
+        </div>
+
+        {config.error && (
+          <div className="aviso aviso-error">
+            <IconoAlerta />
+            <span>{(config.error as Error).message}</span>
+          </div>
+        )}
+
+        {config.isPending ? (
+          <div className="esqueleto" style={{ width: '60%', height: 18 }} />
+        ) : (
+          <div className="columna" style={{ gap: 6 }}>
+            <div className="fila" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+              <span className="chico">Documentos a la vez</span>
+              <span className="num" style={{ fontSize: 14, fontWeight: 600 }}>{vigente}</span>
+            </div>
+            <input
+              type="range"
+              min={config.data?.minimo ?? 1}
+              max={config.data?.maximo ?? 16}
+              step={1}
+              value={vigente}
+              aria-label="Documentos a la vez"
+              onChange={(e) => setValor(Number(e.target.value))}
+              style={{ width: '100%' }}
+            />
+            <div className="fila" style={{ justifyContent: 'space-between' }}>
+              <span className="chico apagado">{config.data?.minimo ?? 1} (uno por vez)</span>
+              <span className="chico apagado">{config.data?.maximo ?? 16} (techo)</span>
+            </div>
+          </div>
+        )}
+
+        {haCambiado && (
+          <div className="fila" style={{ gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              className="boton boton-primario"
+              disabled={guardar.isPending}
+              onClick={() => valor !== null && guardar.mutate(valor)}
+            >
+              {guardar.isPending ? 'Guardando…' : 'Guardar'}
+            </button>
+            <button type="button" className="boton boton-chico" onClick={() => setValor(null)}>
+              Descartar
+            </button>
+            <span className="chico apagado">
+              Se aplica en caliente. Lo que ya estaba corriendo o encolado termina igual.
+            </span>
+          </div>
+        )}
+
+        {guardar.error && (
+          <div className="aviso aviso-error">
+            <IconoAlerta />
+            <span>{(guardar.error as FalloApi).message}</span>
+          </div>
+        )}
+        {guardar.isSuccess && !haCambiado && (
+          <span className="chico" style={{ color: 'var(--bien, inherit)' }}>
+            Guardado.
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/** Tamaño en MB, que es la única magnitud útil acá: un checkpoint de pix2tex
+ * pesa ~97 MB y lo que importa es distinguirlo de un archivo truncado. */
+function enMegas(bytes: number) {
+  return `${(bytes / 1024 / 1024).toFixed(0)} MB`
+}
+
+const PESOS_BASE = ''
+
+function SeccionModeloMatematico() {
+  const config = useModeloMatematico()
+  const guardar = useGuardarModeloMatematico()
+
+  const [eleccion, setEleccion] = useState<string | null>(null)
+  const guardado = config.data?.checkpoint ?? PESOS_BASE
+  const vigente = eleccion ?? guardado
+  const haCambiado = config.data !== undefined && eleccion !== null && eleccion !== guardado
+
+  const disponibles = config.data?.disponibles ?? []
+  const desincronizado =
+    config.data !== undefined &&
+    config.data.checkpoint !== config.data.checkpoint_en_uso
+
+  return (
+    <div className="tarjeta" style={{ padding: '18px 20px' }}>
+      <div className="columna" style={{ gap: 16 }}>
+        <div className="fila" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <div className="columna" style={{ gap: 3 }}>
+            <span className="etiqueta">
+              <IconoEngranaje tam={13} /> Modelo matemático (Capa 3, fórmulas)
+            </span>
+            <span className="chico apagado">
+              Qué pesos usa pix2tex para pasar de un recorte de fórmula a LaTeX. Sirve para probar
+              un checkpoint propio recién bajado del fine-tuning sin reiniciar el servidor. La
+              prosa no pasa por acá: la extrae PyMuPDF, exacta.
+            </span>
+          </div>
+          {config.data?.actualizado_en && (
+            <span className="chico apagado">
+              editado {new Date(config.data.actualizado_en).toLocaleString('es')}
+            </span>
+          )}
+        </div>
+
+        {config.error && (
+          <div className="aviso aviso-error">
+            <IconoAlerta />
+            <span>{(config.error as Error).message}</span>
+          </div>
+        )}
+
+        {desincronizado && (
+          <div className="aviso aviso-error">
+            <IconoAlerta />
+            <span className="chico">
+              El checkpoint elegido ({config.data?.checkpoint}) no está en el disco: el motor está
+              corriendo con{' '}
+              {config.data?.checkpoint_en_uso ?? 'los pesos pre-entrenados'}.
+            </span>
+          </div>
+        )}
+
+        {config.isPending ? (
+          <div className="esqueleto" style={{ width: '60%', height: 18 }} />
+        ) : (
+          <label className="campo">
+            <span className="etiqueta">Pesos en uso</span>
+            <select value={vigente} onChange={(e) => setEleccion(e.target.value)}>
+              <option value={PESOS_BASE}>Pesos pre-entrenados de pix2tex (por defecto)</option>
+              {disponibles.map((c) => (
+                <option key={c.nombre} value={c.nombre}>
+                  {c.nombre} — {enMegas(c.bytes)},{' '}
+                  {new Date(c.modificado_en * 1000).toLocaleDateString('es')}
+                </option>
+              ))}
+            </select>
+            <span className="ayuda">
+              {disponibles.length === 0
+                ? `No hay ningún .pth en ${config.data?.directorio}. Copiá ahí el checkpoint que bajaste de Drive y recargá esta página.`
+                : `Se leen de ${config.data?.directorio} (MOTOR_OCR_CHECKPOINTS_DIR).`}
+            </span>
+          </label>
+        )}
+
+        {haCambiado && (
+          <div className="fila" style={{ gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              className="boton boton-primario"
+              disabled={guardar.isPending}
+              onClick={() => guardar.mutate(eleccion === PESOS_BASE ? null : eleccion)}
+            >
+              {guardar.isPending ? 'Aplicando…' : 'Aplicar'}
+            </button>
+            <button type="button" className="boton boton-chico" onClick={() => setEleccion(null)}>
+              Descartar
+            </button>
+            <span className="chico apagado">
+              Rige para los documentos que subas de acá en más; lo que ya está procesándose termina
+              con el modelo anterior.
+            </span>
+          </div>
+        )}
+
+        {guardar.error && (
+          <div className="aviso aviso-error">
+            <IconoAlerta />
+            <span>{(guardar.error as FalloApi).message}</span>
+          </div>
+        )}
+        {guardar.isSuccess && !haCambiado && (
+          <span className="chico" style={{ color: 'var(--bien, inherit)' }}>
+            Aplicado. Subí un PDF con fórmulas para probarlo.
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function SeccionMotorIA() {
   const config = useConfiguracionMotorIA()
   const guardar = useGuardarMotorIA()
@@ -400,6 +624,8 @@ export default function Administracion() {
       <div className="columna" style={{ gap: 24 }}>
         <SeccionResumen />
         <SeccionClaveAcceso />
+        <SeccionProcesamiento />
+        <SeccionModeloMatematico />
         <SeccionMotorIA />
       </div>
     </>

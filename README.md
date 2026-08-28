@@ -28,6 +28,14 @@ un añadido opcional.
 7. Interfaz web         API + frontend, con auto-ajuste de umbrales
 ```
 
+Cada documento se puede procesar en uno de dos modos, que se eligen al subirlo
+y sólo cambian la capa 3: **híbrido** (el default y el recomendado — el motor
+determinista resuelve todo lo que puede y el modelo de IA ve sólo los recortes
+de fórmula) o **sólo modelo de IA** (todos los bloques van al modelo, útil para
+evaluar el modelo por separado o para PDFs con la capa de texto rota, a costa
+de bastante más tiempo). Ver
+[docs/ARQUITECTURA.md](docs/ARQUITECTURA.md#modo-de-reconocimiento-híbrido-o-sólo-modelo-de-ia).
+
 Las capas 1 a 4 son 100% deterministas. La capa 5 es la única que llama a un
 LLM, y sólo para lo que el resto del pipeline no resolvió con confianza. El
 motor se refina un formato a la vez: primero LaTeX, después Markdown.
@@ -44,8 +52,8 @@ cero o reemplazar el pipeline determinista.
 packages/
   motor_ocr/          núcleo del pipeline (triage, layout, reconocimiento,
                        corrección, escalación, traducción)
-  motor_ocr_api/       backend FastAPI: cuentas, cuotas, subida, revisión,
-                       traducción, administración
+  motor_ocr_api/       backend FastAPI: sin cuentas —clave única opcional de
+                       instancia—, subida, revisión, traducción, administración
   motor_ocr_render/    renderizado de resultados (LaTeX, Markdown)
 frontend/              SPA en React + TypeScript + Vite
 entrenamiento/         fine-tuning y evaluación de pix2tex
@@ -133,7 +141,11 @@ restaura el dataset cacheado en segundos en vez de regenerarlo.
 
 Que el entrenamiento termine no significa que el modelo haya mejorado: hay que
 medirlo contra los pesos originales sobre fórmulas que el fine-tuning no vio.
-La última celda del notebook explica cómo.
+
+El procedimiento completo —qué modelo es y qué se entrena, cómo bajar el
+checkpoint de Drive, cómo compararlo contra los pesos originales y qué falta
+todavía para poder afirmar que mejoró— está en
+[`docs/ENTRENAMIENTO.md`](docs/ENTRENAMIENTO.md).
 
 ## Contribuir
 

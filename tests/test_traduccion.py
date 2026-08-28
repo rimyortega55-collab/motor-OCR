@@ -358,6 +358,11 @@ def test_el_costo_de_traducir_se_atribuye(cliente, traductor_falso):
     documento_id = _documento(cliente, [("parrafo", 0, f"texto {i}") for i in range(5)])
     _traducir_y_esperar(cliente, documento_id)
 
-    consumo = cliente.get("/api/consumo").json()
-    assert consumo["totales"]["costo_llm_usd"] > 0
-    assert consumo["por_documento"][0]["documento_id"] == documento_id
+    with session_scope() as sesion:
+        registros = (
+            sesion.query(CostoRegistrado)
+            .filter(CostoRegistrado.documento_id == documento_id)
+            .all()
+        )
+        assert registros
+        assert sum(r.costo_usd for r in registros) > 0
