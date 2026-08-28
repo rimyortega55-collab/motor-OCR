@@ -75,6 +75,18 @@ export default function Entrar() {
             </li>
           ))}
         </ul>
+
+        {/* AGPL-3.0 exige ofrecer el código fuente a quien interactúa con la
+            instancia por red (§13), y esta pantalla es lo primero que ve
+            cualquiera que no llegó a desbloquearla. */}
+        <a
+          href="https://github.com/rimyortega55-collab/motor-OCR"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ fontSize: 12.5, color: '#9b9488' }}
+        >
+          Código fuente (AGPL-3.0)
+        </a>
       </section>
 
       <section className="panel-formulario">

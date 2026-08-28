@@ -224,7 +224,6 @@ h2 { font-size: 16px; font-weight: 600; margin: 0; }
 }
 .menu a:hover { background: var(--superficie); }
 .menu a.activo { background: var(--acento-tinte); color: var(--acento); font-weight: 500; }
-.menu a.pendiente { color: var(--tenue); }
 
 .pie-lateral { margin-top: auto; padding: 16px 18px 0; border-top: 1px solid var(--linea); }
 

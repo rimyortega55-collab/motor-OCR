@@ -12,6 +12,10 @@ encabezado/caption/lista/codigo:
 figura:
     sin OCR; se preserva como imagen embebida + caption asociado.
 
+Todo lo anterior es el modo `HIBRIDO`. En `SOLO_IA` no se aplica nada de eso:
+cualquier bloque que no sea ruido ni figura se recorta de la página y va entero
+al modelo de IA (ver `ModoMotor`).
+
 (PaddleOCR/PP-Structure descartados: CPU sin AVX, ver
 .contexto/02-herramientas-stack.md.)
 """
@@ -24,7 +28,7 @@ import numpy as np
 from motor_ocr.layout.bbox import desnormalizar_bbox
 
 from motor_ocr.modelos import (
-    Bloque, TipoBloque, OrigenContenido, MicroSegmento, EngineOcr
+    Bloque, TipoBloque, OrigenContenido, MicroSegmento, EngineOcr, ModoMotor
 )
 from motor_ocr.modelos.results import BlockOcrResult, MicroSegmentoOcr
 
@@ -38,7 +42,8 @@ from .confianza import calcular_confianza_micro_segmento, calcular_confianza_blo
 def enrutar_bloque(
     bloque: Bloque,
     imagen_pagina=None,
-    dpi_objetivo: int = 150
+    dpi_objetivo: int = 150,
+    modo: ModoMotor = ModoMotor.HIBRIDO,
 ) -> BlockOcrResult:
     """Enruta bloque al engine OCR apropiado según su tipo.
 
@@ -46,6 +51,8 @@ def enrutar_bloque(
         bloque: Bloque a procesar
         imagen_pagina: Imagen de la página (para bloques escaneados)
         dpi_objetivo: DPI para renderizado (de Capa 1)
+        modo: `HIBRIDO` (default) usa los atajos deterministas descritos arriba;
+            `SOLO_IA` los saltea todos y manda cada bloque al modelo de IA.
 
     Returns:
         BlockOcrResult con contenido + micro-segmentos + confianza
@@ -60,6 +67,12 @@ def enrutar_bloque(
             confianza_global=1.0,
             requiere_escalacion=False
         )
+
+    # En SOLO_IA no se toma ningún atajo determinista: ni el texto nativo del
+    # PDF ni lo que docTR ya transcribió en Capa 2. Todo el bloque se recorta y
+    # se manda al modelo, que es justamente lo que este modo existe para medir.
+    if modo == ModoMotor.SOLO_IA:
+        return _procesar_bloque_solo_ia(bloque, imagen_pagina)
 
     # Si ya es nativo-digital, usar texto directamente — salvo que Capa 2 haya
     # marcado tramos de fórmula por fuente/tamaño de span (ver
@@ -116,6 +129,53 @@ def enrutar_bloque(
 
     else:  # ENCABEZADO, CAPTION, LISTA, CODIGO
         return _procesar_bloque_simple(bloque, imagen_pagina)
+
+def _procesar_bloque_solo_ia(bloque: Bloque, imagen_pagina) -> BlockOcrResult:
+    """Todo el bloque al modelo de IA, sin sub-segmentar ni mirar el texto nativo.
+
+    Es el camino del modo `SOLO_IA`. El recorte va entero -no se sub-segmenta en
+    [texto, fórmula]- porque la sub-segmentación es parte del motor determinista
+    que este modo desactiva a propósito: lo que se quiere ver acá es qué
+    devuelve el modelo cuando le toca el bloque completo.
+
+    La confianza no se ajusta a la baja por no ser fórmula: el bloque puede ser
+    prosa y el modelo está afinado para matemática, así que la confianza que
+    devuelva hay que leerla con eso en mente (`calcular_confianza_micro_segmento`
+    con `es_formula=False` penaliza justamente la salida que no parece texto).
+    """
+
+    recorte = _extraer_recorte_bloque(bloque, imagen_pagina)
+    if recorte is None:
+        return BlockOcrResult(
+            id=bloque.id,
+            contenido="",
+            micro_segmentos=[],
+            confianza_global=0.0,
+            requiere_escalacion=True,
+        )
+
+    es_formula = bloque.tipo == TipoBloque.FORMULA_DISPLAY
+    contenido, confianza_engine = ocr_formula(recorte)
+    confianza_estructural = calcular_confianza_micro_segmento(
+        confianza_engine, contenido, es_formula=es_formula
+    )
+
+    micro_seg = MicroSegmentoOcr(
+        tipo="formula_display" if es_formula else "texto",
+        contenido=contenido,
+        engine_usado=EngineOcr.PIX2TEX,
+        confianza_engine=confianza_engine,
+        confianza_estructural=confianza_estructural,
+    )
+
+    return BlockOcrResult(
+        id=bloque.id,
+        contenido=contenido,
+        micro_segmentos=[micro_seg],
+        confianza_global=confianza_estructural,
+        requiere_escalacion=confianza_estructural < 0.6,
+    )
+
 
 def _extraer_recorte_bloque(bloque: Bloque, imagen_pagina) -> np.ndarray | None:
     """Extrae el recorte de imagen correspondiente al bbox del bloque."""

@@ -163,54 +163,6 @@ def test_las_decisiones_sin_tipo_no_entran(cliente):
 
 
 # ============================================================================
-# CONSUMO
-# ============================================================================
-
-def test_consumo_desglosa_por_dia_y_por_documento(cliente):
-    doc_id = _documento("c7.pdf")
-
-    with session_scope() as sesion:
-        for cola, costo in (("micro_segmento", 0.01), ("inconsistencia_documental", 0.02)):
-            sesion.add(CostoRegistrado(
-                documento_id=doc_id, tipo_cola=cola,
-                modelo="claude-opus-5", tokens_entrada=100, tokens_salida=50,
-                costo_usd=costo, registrado_en=datetime.now(timezone.utc),
-            ))
-
-    datos = cliente.get("/api/consumo").json()
-
-    assert datos["totales"]["llamadas_llm"] == 2
-    assert datos["totales"]["costo_llm_usd"] == pytest.approx(0.03)
-
-    assert len(datos["serie_diaria"]) == 1
-    dia = datos["serie_diaria"][0]
-    assert dia["micro_segmento_usd"] == pytest.approx(0.01)
-    assert dia["inconsistencia_documental_usd"] == pytest.approx(0.02)
-
-    assert datos["por_documento"][0]["titulo"] == "c7.pdf"
-    assert datos["por_documento"][0]["llamadas"] == 2
-
-
-def test_consumo_rechaza_un_rango_al_reves(cliente):
-    r = cliente.get("/api/consumo?desde=2026-09-01&hasta=2026-08-01")
-    assert r.status_code == 400
-    assert r.json()["detail"]["codigo"] == "rango_invalido"
-
-
-def test_consumo_fuera_de_rango_no_se_cuenta(cliente):
-    doc_id = _documento()
-
-    with session_scope() as sesion:
-        sesion.add(CostoRegistrado(
-            documento_id=doc_id, tipo_cola="micro_segmento",
-            modelo="claude-opus-5", tokens_entrada=999, tokens_salida=999,
-            costo_usd=9.99, registrado_en=datetime(2020, 1, 1, tzinfo=timezone.utc),
-        ))
-
-    assert cliente.get("/api/consumo").json()["totales"]["costo_llm_usd"] == 0.0
-
-
-# ============================================================================
 # EXPORTACIÓN
 # ============================================================================
 

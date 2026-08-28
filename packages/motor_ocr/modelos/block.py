@@ -47,6 +47,26 @@ class EngineOcr(str, Enum):
     TESSERACT = "tesseract"
 
 
+class ModoMotor(str, Enum):
+    """Qué hace el reconocimiento de Capa 3 con cada bloque.
+
+    `HIBRIDO` es el motor tal como está diseñado: la prosa la entrega PyMuPDF
+    exacta y gratis desde la capa de texto del PDF, docTR resuelve lo escaneado
+    y el modelo de IA sólo ve los recortes que el motor ya localizó como
+    fórmula. Es lo que conviene para procesar de verdad.
+
+    `SOLO_IA` desactiva todos esos atajos deterministas: cada bloque se recorta
+    de la página renderizada y se manda entero al modelo de IA, incluso el
+    texto que el PDF ya traía escrito. Existe para poder medir al modelo solo
+    -qué reconoce y qué no, sin que el motor le tape los errores- y para
+    documentos donde la capa de texto es basura. Es mucho más lento y más
+    frágil: el modelo está afinado para fórmulas, no para párrafos.
+    """
+
+    HIBRIDO = "hibrido"
+    SOLO_IA = "solo_ia"
+
+
 class MotorTraduccion(str, Enum):
     NLLB_200 = "nllb-200"
     OPUS_MT = "opus-mt"

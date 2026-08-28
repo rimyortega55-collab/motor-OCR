@@ -79,6 +79,23 @@ def extraer_uno(ruta_pdf: Path, manifiesto: list[dict]) -> None:
     print(f"[{nombre}] {extraidos}/{len(bloques_math)} bloques matematicos extraidos")
 
 
+def _cargar_manifiesto_previo(nombres_a_reemplazar: set[str]) -> list[dict]:
+    """Carga entradas de un manifiesto.jsonl previo, descartando las de los
+    PDF que se van a (re)procesar en esta corrida -- asi se puede correr el
+    resto de los PDF en otro entorno (p.ej. Colab) y combinar resultados sin
+    duplicar ni perder lo ya extraido localmente."""
+    ruta_previa = DIR_SALIDA / "manifiesto.jsonl"
+    if not ruta_previa.exists():
+        return []
+    filas = []
+    with open(ruta_previa, encoding="utf-8") as fh:
+        for linea in fh:
+            fila = json.loads(linea)
+            if fila["pdf"] not in nombres_a_reemplazar:
+                filas.append(fila)
+    return filas
+
+
 def main() -> None:
     pedidos = sys.argv[1:]
     if pedidos:
@@ -87,16 +104,19 @@ def main() -> None:
         pdfs = sorted(DIR_PDFS.glob("c*.pdf"), key=lambda p: int(p.stem[1:]))
 
     DIR_SALIDA.mkdir(parents=True, exist_ok=True)
-    manifiesto: list[dict] = []
+    manifiesto = _cargar_manifiesto_previo({p.stem for p in pdfs})
     for ruta in pdfs:
         try:
             extraer_uno(ruta, manifiesto)
         except Exception as e:
             print(f"[{ruta.stem}] ERROR: {type(e).__name__}: {e}")
+        finally:
+            # Se reescribe tras cada PDF (no solo al final) para no perder lo
+            # ya procesado si la corrida se corta a mitad de camino.
+            with open(DIR_SALIDA / "manifiesto.jsonl", "w", encoding="utf-8") as fh:
+                for fila in manifiesto:
+                    fh.write(json.dumps(fila, ensure_ascii=False) + "\n")
 
-    with open(DIR_SALIDA / "manifiesto.jsonl", "w", encoding="utf-8") as fh:
-        for fila in manifiesto:
-            fh.write(json.dumps(fila, ensure_ascii=False) + "\n")
     print(f"\nTotal: {len(manifiesto)} recortes -> {DIR_SALIDA}")
 
 

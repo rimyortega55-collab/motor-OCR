@@ -3,9 +3,54 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useDocumentos, useEliminarDocumento, useExportar } from '../api/consultas'
+import { useDocumentos, useEliminarDocumento, useEstadoDocumento, useExportar } from '../api/consultas'
 import type { DocumentoResumen, EstadoDocumento, FiltrosDocumentos } from '../api/tipos'
 import { IconoAlerta, IconoBuscar, IconoDocumento, IconoSubir } from '../componentes/Iconos'
+
+const NOMBRES_CAPA: Record<string, string> = {
+  triage: 'Triage',
+  segmentacion: 'Segmentación',
+  ocr: 'OCR especializado',
+  correccion: 'Corrección',
+  escalacion: 'Escalación',
+}
+
+/** Línea de carga compacta para una fila de la tabla: qué capa va corriendo y
+ * cuánto avanzó, sondeando el mismo endpoint que usa la pantalla de subida.
+ * Sin esto, un documento "procesando" en la lista no decía nada más que eso
+ * hasta que terminaba. */
+function LineaProgreso({ documentoId }: { documentoId: string }) {
+  const { data } = useEstadoDocumento(documentoId)
+
+  if (!data || data.estado === 'en_cola') {
+    return <span className="pildora">en cola</span>
+  }
+
+  const total = data.capas.length || 1
+  const completas = data.capas.filter((c) => c.estado === 'completada' || c.estado === 'omitida').length
+  const actual = data.capas.find((c) => c.estado === 'en_curso')
+  const porcentaje = (completas / total) * 100
+
+  return (
+    <div className="columna" style={{ gap: 4, minWidth: 140 }}>
+      <span className="chico apagado">
+        {actual
+          ? `Capa ${actual.capa} de ${total} · ${NOMBRES_CAPA[actual.nombre] ?? actual.nombre}`
+          : `${completas} de ${total} capas`}
+      </span>
+      <div style={{ height: 4, borderRadius: 2, background: 'var(--linea-suave)', overflow: 'hidden' }}>
+        <div
+          style={{
+            width: `${porcentaje}%`,
+            height: '100%',
+            background: 'var(--acento)',
+            transition: 'width 0.4s ease',
+          }}
+        />
+      </div>
+    </div>
+  )
+}
 
 const ESTADOS: { valor?: EstadoDocumento; etiqueta: string }[] = [
   { valor: undefined, etiqueta: 'Todos' },
@@ -24,9 +69,22 @@ function fecha(iso: string | null): string {
 }
 
 function Estado({ documento }: { documento: DocumentoResumen }) {
-  if (documento.estado === 'error') return <span className="pildora pildora-alerta">error</span>
+  if (documento.estado === 'error') {
+    return (
+      <div className="columna" style={{ gap: 4, minWidth: 140 }}>
+        <span className="pildora pildora-alerta" style={{ alignSelf: 'flex-start' }}>
+          error
+        </span>
+        {documento.error && (
+          <span className="chico apagado" title={documento.error}>
+            {documento.error}
+          </span>
+        )}
+      </div>
+    )
+  }
   if (documento.estado === 'procesando' || documento.estado === 'en_cola') {
-    return <span className="pildora">{documento.estado === 'en_cola' ? 'en cola' : 'procesando'}</span>
+    return <LineaProgreso documentoId={documento.documento_id} />
   }
   if (documento.necesita_revision) return <span className="pildora pildora-alerta">revisar</span>
   return <span className="pildora pildora-bien">completado</span>
@@ -50,8 +108,14 @@ function FilaEsqueleto() {
  * revisión: acá la fila tiene que quedar legible, así que sólo van LaTeX y
  * Markdown, que es lo que la mayoría se lleva.
  */
-function AccionesDocumento({ documentoId, titulo }: { documentoId: string; titulo: string }) {
-  const exportar = useExportar()
+/** Botón de borrado con confirmación en la propia fila.
+ *
+ * Vive aparte de `AccionesDocumento` porque un documento que falló no tiene
+ * nada que exportar pero igual hay que poder sacarlo de la lista: antes la
+ * columna de acciones sólo se dibujaba para los completados, así que una fila
+ * en error se quedaba ahí sin ninguna forma de borrarla desde la interfaz.
+ */
+function BorrarDocumento({ documentoId }: { documentoId: string }) {
   const eliminar = useEliminarDocumento()
   const [confirmando, setConfirmando] = useState(false)
 
@@ -75,6 +139,21 @@ function AccionesDocumento({ documentoId, titulo }: { documentoId: string; titul
   }
 
   return (
+    <button
+      type="button"
+      className="boton boton-chico"
+      title="Borrar el documento y su PDF"
+      onClick={() => setConfirmando(true)}
+    >
+      Borrar
+    </button>
+  )
+}
+
+function AccionesDocumento({ documentoId, titulo }: { documentoId: string; titulo: string }) {
+  const exportar = useExportar()
+
+  return (
     <>
       <button
         type="button"
@@ -94,14 +173,7 @@ function AccionesDocumento({ documentoId, titulo }: { documentoId: string; titul
       >
         .md
       </button>
-      <button
-        type="button"
-        className="boton boton-chico"
-        title="Borrar el documento y su PDF"
-        onClick={() => setConfirmando(true)}
-      >
-        Borrar
-      </button>
+      <BorrarDocumento documentoId={documentoId} />
     </>
   )
 }
@@ -263,6 +335,14 @@ export default function Documentos() {
                               <IconoDocumento tam={15} />
                             </span>
                             <span>{d.titulo}</span>
+                            {/* Sólo cuando no es el modo habitual: marcar cada
+                                fila con "Híbrido" sería ruido en una columna
+                                que casi siempre diría lo mismo. */}
+                            {d.modo_motor === 'solo_ia' && (
+                              <span className="pildora" title="Procesado mandando todos los bloques al modelo de IA">
+                                sólo IA
+                              </span>
+                            )}
                           </div>
                         </td>
                         <td><Estado documento={d} /></td>
@@ -293,6 +373,7 @@ export default function Documentos() {
                             {d.estado === 'completado' && (
                               <AccionesDocumento documentoId={d.documento_id} titulo={d.titulo} />
                             )}
+                            {d.estado === 'error' && <BorrarDocumento documentoId={d.documento_id} />}
                           </div>
                         </td>
                       </tr>

@@ -118,7 +118,7 @@ def test_pedir_todas_no_reescribe_el_archivo():
 
 
 def test_procesar_solo_algunas_paginas(cliente, monkeypatch):
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     respuesta = cliente.post(
         "/api/procesar",
@@ -137,7 +137,7 @@ def test_procesar_solo_algunas_paginas(cliente, monkeypatch):
 
 def test_procesar_todo_no_guarda_mapeo(cliente, monkeypatch):
     """Sin selección no hay nada que mapear: la numeración ya coincide."""
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     documento_id = cliente.post(
         "/api/procesar",
@@ -150,7 +150,7 @@ def test_procesar_todo_no_guarda_mapeo(cliente, monkeypatch):
 
 def test_procesar_un_rango_grande_solo_encola_lo_elegido(cliente, monkeypatch):
     """Elegir un rango recorta de verdad, no sólo cuenta distinto."""
-    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a: None)
+    monkeypatch.setattr("motor_ocr_api.api.encolar", lambda *a, **k: None)
 
     respuesta = cliente.post(
         "/api/procesar",

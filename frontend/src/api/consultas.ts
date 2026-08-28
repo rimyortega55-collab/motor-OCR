@@ -10,13 +10,15 @@ import {
 import { descargar, esNoAutenticado, pedir, subir } from './cliente'
 import type {
   ActualizacionMotorIA,
-  Consumo,
   Bloque,
   ClaveAccesoRotada,
+  ConfiguracionModeloMatematico,
   ConfiguracionMotorIA,
+  ConfiguracionProcesamiento,
   EstadoAcceso,
   EstadoClaveAcceso,
   FormatoExport,
+  ModoMotor,
   PedidoTraduccion,
   Recomendaciones,
   ResultadoAplicar,
@@ -36,7 +38,6 @@ import type {
 
 export const claves = {
   acceso: ['acceso'] as const,
-  consumo: ['consumo'] as const,
   documentos: (filtros: FiltrosDocumentos) => ['documentos', filtros] as const,
   estado: (id: string) => ['documento-estado', id] as const,
   cola: (id: string) => ['cola', id] as const,
@@ -50,6 +51,8 @@ export const claves = {
   motorIA: ['admin', 'motor-ia'] as const,
   resumenAdmin: ['admin', 'resumen'] as const,
   claveAcceso: ['admin', 'clave-acceso'] as const,
+  procesamiento: ['admin', 'procesamiento'] as const,
+  modeloMatematico: ['admin', 'modelo-matematico'] as const,
 }
 
 // ============================================================================
@@ -108,6 +111,18 @@ export function useDocumentos(filtros: FiltrosDocumentos) {
       }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (ultima) => ultima.siguiente_cursor ?? undefined,
+    // Mientras algo esté en cola o procesándose, la lista se refresca sola
+    // para que la fila pase a "completado" sin que haya que recargar la
+    // página; cada fila en curso ya sondea su propio progreso por separado
+    // (`useEstadoDocumento`), esto es sólo lo que hace falta para que el
+    // estado general de la fila (y sus columnas de páginas/bloques) también
+    // se ponga al día.
+    refetchInterval: (consulta) => {
+      const enCurso = consulta.state.data?.pages.some((p) =>
+        p.items.some((d) => d.estado === 'procesando' || d.estado === 'en_cola'),
+      )
+      return enCurso ? 3000 : false
+    },
   })
 }
 
@@ -115,9 +130,29 @@ export function useProcesar() {
   const cliente = useQueryClient()
   return useMutation({
     // `paginas` viaja vacío cuando se quiere el documento entero; el servidor lo
-    // interpreta como "todas" y evita recortar el PDF sin necesidad.
-    mutationFn: ({ archivo, paginas }: { archivo: File; paginas?: string }) =>
-      subir<TrabajoEncolado>('/procesar', archivo, paginas ? { paginas } : {}),
+    // interpreta como "todas" y evita recortar el PDF sin necesidad. `dpi`
+    // vacío o "auto" deja el DPI adaptativo del triage, como siempre.
+    mutationFn: ({
+      archivo,
+      paginas,
+      dpi,
+      idioma_original,
+      modo_motor,
+    }: {
+      archivo: File
+      paginas?: string
+      dpi?: string
+      idioma_original?: string
+      modo_motor?: ModoMotor
+    }) =>
+      subir<TrabajoEncolado>('/procesar', archivo, {
+        ...(paginas ? { paginas } : {}),
+        ...(dpi ? { dpi } : {}),
+        ...(idioma_original ? { idioma_original } : {}),
+        // Sin mandarlo, el servidor procesa en híbrido: es el default de
+        // siempre y no hace falta que la interfaz lo repita.
+        ...(modo_motor && modo_motor !== 'hibrido' ? { modo_motor } : {}),
+      }),
     // El documento aparece en la lista apenas se encola, en estado "en cola".
     onSuccess: () => cliente.invalidateQueries({ queryKey: ['documentos'] }),
   })
@@ -205,17 +240,6 @@ export function useDecidir(documentoId: string) {
       cliente.invalidateQueries({ queryKey: ['documentos'] })
       cliente.invalidateQueries({ queryKey: ['bloques-pagina', documentoId] })
     },
-  })
-}
-
-// ============================================================================
-// CONSUMO
-// ============================================================================
-
-export function useConsumo() {
-  return useQuery({
-    queryKey: claves.consumo,
-    queryFn: () => pedir<Consumo>('/consumo'),
   })
 }
 
@@ -390,6 +414,51 @@ export function useGuardarMotorIA() {
     mutationFn: (cambios: ActualizacionMotorIA) =>
       pedir<ConfiguracionMotorIA>('/admin/motor-ia', { metodo: 'PUT', cuerpo: cambios }),
     onSuccess: (datos) => cliente.setQueryData(claves.motorIA, datos),
+  })
+}
+
+/** Cuántos documentos procesa el pipeline a la vez, ahora mismo. */
+export function useConfiguracionProcesamiento() {
+  return useQuery({
+    queryKey: claves.procesamiento,
+    queryFn: () => pedir<ConfiguracionProcesamiento>('/admin/procesamiento'),
+  })
+}
+
+/** Sube o baja el paralelismo en caliente. Lo que ya estaba corriendo o
+ * esperando lugar bajo el límite anterior termina igual. */
+export function useGuardarProcesamiento() {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (max_paralelo: number) =>
+      pedir<ConfiguracionProcesamiento>('/admin/procesamiento', {
+        metodo: 'PUT',
+        cuerpo: { max_paralelo },
+      }),
+    onSuccess: (datos) => cliente.setQueryData(claves.procesamiento, datos),
+  })
+}
+
+/** Qué checkpoint de pix2tex reconoce las fórmulas, y cuáles hay para elegir. */
+export function useModeloMatematico() {
+  return useQuery({
+    queryKey: claves.modeloMatematico,
+    queryFn: () => pedir<ConfiguracionModeloMatematico>('/admin/modelo-matematico'),
+  })
+}
+
+/** Cambia el checkpoint en caliente. `null` vuelve a los pesos pre-entrenados.
+ * Rige para lo que se suba de acá en más: un documento a mitad del pipeline
+ * termina con el modelo que ya tenía cargado. */
+export function useGuardarModeloMatematico() {
+  const cliente = useQueryClient()
+  return useMutation({
+    mutationFn: (checkpoint: string | null) =>
+      pedir<ConfiguracionModeloMatematico>('/admin/modelo-matematico', {
+        metodo: 'PUT',
+        cuerpo: { checkpoint },
+      }),
+    onSuccess: (datos) => cliente.setQueryData(claves.modeloMatematico, datos),
   })
 }
 

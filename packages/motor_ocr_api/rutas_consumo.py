@@ -1,7 +1,4 @@
-"""Consumo y exportación (§9 y §10 del contrato).
-
-El consumo es el de toda la instancia, no de una cuenta: sin usuarios ni
-planes, no hay "cuánto gastó tal persona", sólo cuánto gastó el despliegue.
+"""Exportación (§10 del contrato).
 
 La exportación entrega el documento con `contenido_final` aplicado donde la
 revisión humana lo haya dejado: si no lo hiciera, corregir un bloque en la
@@ -11,151 +8,20 @@ interfaz no cambiaría nada de lo que se descarga.
 from __future__ import annotations
 
 import io
-from datetime import date, datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import StreamingResponse
-from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from motor_ocr_api.persistencia import (
     BloqueAlmacenado,
-    CostoRegistrado,
     DocumentoAlmacenado,
     obtener_sesion,
 )
 
 import motor_ocr_render
 
-router = APIRouter(tags=["consumo"])
-
-
-def _rango(desde: str | None, hasta: str | None) -> tuple[datetime, datetime]:
-    """Interpreta el rango pedido; por omisión, los últimos 30 días."""
-
-    hoy = datetime.now(timezone.utc).date()
-
-    try:
-        fin = date.fromisoformat(hasta) if hasta else hoy
-        inicio = date.fromisoformat(desde) if desde else fin - timedelta(days=29)
-    except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={"codigo": "fecha_invalida", "detail": "Las fechas van en formato AAAA-MM-DD"},
-        )
-
-    if inicio > fin:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={"codigo": "rango_invalido", "detail": "`desde` es posterior a `hasta`"},
-        )
-
-    # `hasta` es inclusivo para quien lo lee, así que el corte va al día siguiente.
-    return (
-        datetime.combine(inicio, datetime.min.time(), tzinfo=timezone.utc),
-        datetime.combine(fin + timedelta(days=1), datetime.min.time(), tzinfo=timezone.utc),
-    )
-
-
-@router.get("/consumo")
-async def obtener_consumo(
-    desde: str | None = Query(default=None),
-    hasta: str | None = Query(default=None),
-    sesion: Session = Depends(obtener_sesion),
-):
-    """Consumo de la instancia en el rango pedido."""
-
-    inicio, fin = _rango(desde, hasta)
-
-    en_rango = [
-        CostoRegistrado.registrado_en >= inicio,
-        CostoRegistrado.registrado_en < fin,
-    ]
-
-    documentos, paginas = (
-        sesion.query(
-            func.count(DocumentoAlmacenado.id),
-            func.coalesce(func.sum(DocumentoAlmacenado.total_paginas), 0),
-        )
-        .filter(
-            DocumentoAlmacenado.creado_en >= inicio,
-            DocumentoAlmacenado.creado_en < fin,
-        )
-        .one()
-    )
-
-    costo, entrada, salida, llamadas = (
-        sesion.query(
-            func.coalesce(func.sum(CostoRegistrado.costo_usd), 0.0),
-            func.coalesce(func.sum(CostoRegistrado.tokens_entrada), 0),
-            func.coalesce(func.sum(CostoRegistrado.tokens_salida), 0),
-            func.count(CostoRegistrado.id),
-        )
-        .filter(*en_rango)
-        .one()
-    )
-
-    # La serie se agrupa en la base y no en Python: traer cada llamada para
-    # sumarlas acá no escala cuando el rango es de meses.
-    dia = func.date(CostoRegistrado.registrado_en)
-    filas_serie = (
-        sesion.query(dia, CostoRegistrado.tipo_cola, func.sum(CostoRegistrado.costo_usd))
-        .filter(*en_rango)
-        .group_by(dia, CostoRegistrado.tipo_cola)
-        .all()
-    )
-
-    serie: dict[str, dict] = {}
-    for fecha, cola, monto in filas_serie:
-        clave = str(fecha)
-        entrada_dia = serie.setdefault(
-            clave,
-            {"fecha": clave, "micro_segmento_usd": 0.0, "inconsistencia_documental_usd": 0.0},
-        )
-        campo = f"{cola}_usd"
-        if campo in entrada_dia:
-            entrada_dia[campo] = round(float(monto or 0.0), 6)
-
-    por_documento = (
-        sesion.query(
-            CostoRegistrado.documento_id,
-            DocumentoAlmacenado.titulo,
-            func.count(CostoRegistrado.id),
-            func.coalesce(func.sum(CostoRegistrado.tokens_entrada), 0),
-            func.coalesce(func.sum(CostoRegistrado.tokens_salida), 0),
-            func.coalesce(func.sum(CostoRegistrado.costo_usd), 0.0),
-        )
-        .join(DocumentoAlmacenado, CostoRegistrado.documento_id == DocumentoAlmacenado.id)
-        .filter(*en_rango)
-        .group_by(CostoRegistrado.documento_id, DocumentoAlmacenado.titulo)
-        .order_by(func.sum(CostoRegistrado.costo_usd).desc())
-        .all()
-    )
-
-    return {
-        "desde": inicio.date().isoformat(),
-        "hasta": (fin - timedelta(days=1)).date().isoformat(),
-        "totales": {
-            "documentos": documentos or 0,
-            "paginas": paginas or 0,
-            "llamadas_llm": llamadas or 0,
-            "tokens_entrada": entrada or 0,
-            "tokens_salida": salida or 0,
-            "costo_llm_usd": round(float(costo or 0.0), 6),
-        },
-        "serie_diaria": sorted(serie.values(), key=lambda d: d["fecha"]),
-        "por_documento": [
-            {
-                "documento_id": doc_id,
-                "titulo": titulo,
-                "llamadas": n,
-                "tokens_entrada": ent,
-                "tokens_salida": sal,
-                "costo_usd": round(float(monto or 0.0), 6),
-            }
-            for doc_id, titulo, n, ent, sal, monto in por_documento
-        ],
-    }
+router = APIRouter(tags=["exportacion"])
 
 
 # ============================================================================

@@ -11,8 +11,15 @@ import { FalloApi } from '../api/cliente'
 import { useEstadoDocumento, useProcesar } from '../api/consultas'
 import Exportar from '../componentes/Exportar'
 import Traducir from '../componentes/Traducir'
-import type { CapaProgreso } from '../api/tipos'
+import type { CapaProgreso, ModoMotor } from '../api/tipos'
+import { IDIOMAS, MODOS_MOTOR } from '../constantes'
 import { IconoAlerta, IconoDocumento, IconoSubir } from '../componentes/Iconos'
+
+/** Presets del selector de DPI. Coinciden con lo que ya usa el triage
+ * internamente (150 para el escaneo barato, 200 texto, 400 fórmula) más un
+ * techo de 600 para páginas muy densas; "Automático" es lo que hay hoy: cada
+ * zona de la página lleva el DPI que decide el triage según su contenido. */
+const DPI_PRESETS = [150, 200, 300, 400, 600]
 
 const NOMBRES: Record<CapaProgreso['nombre'], string> = {
   triage: 'Triage',
@@ -134,6 +141,12 @@ function Progreso({ documentoId }: { documentoId: string }) {
           {data.total_paginas > 0 && (
             <span className="pildora">{data.total_paginas} págs</span>
           )}
+          {/* El modo se muestra siempre y no sólo cuando no es el default: es
+              lo primero que explica un resultado raro, y con varios documentos
+              en curso no hay forma de recordar con cuál se subió cada uno. */}
+          <span className="pildora">
+            {MODOS_MOTOR.find((m) => m.valor === data.modo_motor)?.nombre ?? data.modo_motor}
+          </span>
           <div className="crece" />
           {data.estado === 'completado' && <span className="pildora pildora-bien">completado</span>}
           {data.estado === 'error' && <span className="pildora pildora-alerta">error</span>}
@@ -193,7 +206,11 @@ function Progreso({ documentoId }: { documentoId: string }) {
           <Exportar documentoId={documentoId} titulo={data.titulo} listo />
           {/* Traducir va después de exportar: primero se ve el resultado, y
               recién con eso a la vista tiene sentido decidir el contexto. */}
-          <Traducir documentoId={documentoId} titulo={data.titulo} />
+          <Traducir
+            documentoId={documentoId}
+            titulo={data.titulo}
+            idiomaOriginal={data.idioma_original}
+          />
         </div>
       )}
     </div>
@@ -206,6 +223,15 @@ export default function Subir() {
   // Vacío = documento entero. Se conserva entre subidas: quien procesa varios
   // capítulos del mismo libro suele querer el mismo rango.
   const [paginas, setPaginas] = useState('')
+  // '' = automático (lo decide el triage por zona); un preset lo reemplaza
+  // para todo el documento.
+  const [dpi, setDpi] = useState('')
+  // '' = sin declarar. Es sólo metadato: no cambia qué motor de OCR se usa,
+  // pero evita ofrecer traducir el documento a su propio idioma después.
+  const [idiomaOriginal, setIdiomaOriginal] = useState('')
+  // 'hibrido' es el motor como está diseñado; se conserva entre subidas igual
+  // que el resto de las opciones.
+  const [modoMotor, setModoMotor] = useState<ModoMotor>('hibrido')
   const entrada = useRef<HTMLInputElement>(null)
   const procesar = useProcesar()
 
@@ -214,7 +240,13 @@ export default function Subir() {
 
     for (const archivo of Array.from(archivos)) {
       procesar.mutate(
-        { archivo, paginas: paginas.trim() || undefined },
+        {
+          archivo,
+          paginas: paginas.trim() || undefined,
+          dpi: dpi || undefined,
+          idioma_original: idiomaOriginal || undefined,
+          modo_motor: modoMotor,
+        },
         {
           // Se agrega adelante para que el último subido quede arriba.
           onSuccess: ({ documento_id }) => setEncolados((previos) => [documento_id, ...previos]),
@@ -335,17 +367,88 @@ export default function Subir() {
             </div>
           </div>
 
-          <div className="aviso">
-            <span className="tenue" style={{ display: 'flex', flexShrink: 0 }}>
-              <IconoAlerta />
-            </span>
-            <div className="columna" style={{ gap: 5 }}>
-              <strong style={{ fontSize: 13 }}>El idioma y el DPI todavía no se eligen</strong>
-              <span className="apagado chico">
-                Están en el contrato pero no implementados: el motor usa el DPI que
-                decide el triage. El gasto por documento sí tiene tope, configurado en
-                el servidor.
+          <div className="tarjeta" style={{ padding: '16px 18px' }}>
+            <div className="columna" style={{ gap: 10 }}>
+              <div className="columna" style={{ gap: 3 }}>
+                <span className="etiqueta">Cómo reconocer el documento</span>
+                <span className="chico apagado">
+                  Se elige por documento y no se puede cambiar una vez que
+                  empezó a procesarse.
+                </span>
+              </div>
+
+              <div className="fila" style={{ gap: 6, flexWrap: 'wrap' }}>
+                {MODOS_MOTOR.map((modo) => (
+                  <button
+                    key={modo.valor}
+                    type="button"
+                    className={`pildora ${modoMotor === modo.valor ? 'pildora-activa' : ''}`}
+                    aria-pressed={modoMotor === modo.valor}
+                    onClick={() => setModoMotor(modo.valor)}
+                  >
+                    {modo.nombre}
+                  </button>
+                ))}
+              </div>
+
+              {/* La explicación del modo elegido, no las dos a la vez: son
+                  párrafos largos y mostrarlos juntos obliga a compararlos para
+                  saber cuál rige. */}
+              <span className="chico apagado">
+                {MODOS_MOTOR.find((m) => m.valor === modoMotor)?.detalle}
               </span>
+            </div>
+          </div>
+
+          <div className="tarjeta" style={{ padding: '16px 18px' }}>
+            <div className="columna" style={{ gap: 14 }}>
+              <div className="columna" style={{ gap: 5 }}>
+                <span className="etiqueta">Idioma del documento</span>
+                <span className="chico apagado">
+                  Sólo metadato: no cambia qué reconoce el motor, sirve de default al
+                  traducir después.
+                </span>
+                <div className="fila" style={{ gap: 6, flexWrap: 'wrap' }}>
+                  {IDIOMAS.map((i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`pildora ${idiomaOriginal === i ? 'pildora-activa' : ''}`}
+                      onClick={() => setIdiomaOriginal((actual) => (actual === i ? '' : i))}
+                    >
+                      {i}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="columna" style={{ gap: 5 }}>
+                <span className="etiqueta">DPI de renderizado</span>
+                <span className="chico apagado">
+                  Automático deja que cada zona de la página use el DPI que decide el
+                  triage (más para fórmulas, menos para texto). Un valor fijo lo
+                  reemplaza para todo el documento.
+                </span>
+                <div className="fila" style={{ gap: 6, flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    className={`pildora ${dpi === '' ? 'pildora-activa' : ''}`}
+                    onClick={() => setDpi('')}
+                  >
+                    Automático
+                  </button>
+                  {DPI_PRESETS.map((valor) => (
+                    <button
+                      key={valor}
+                      type="button"
+                      className={`pildora ${dpi === String(valor) ? 'pildora-activa' : ''}`}
+                      onClick={() => setDpi(String(valor))}
+                    >
+                      {valor}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -13,7 +13,6 @@ import {
   IconoAlerta,
   IconoDocumento,
   IconoEngranaje,
-  IconoGrafico,
   IconoDeslizadores,
   IconoSalir,
   IconoSubir,
@@ -67,10 +66,7 @@ export default function Armazon() {
           <NavLink to="/subir" className={({ isActive }) => (isActive ? 'activo' : '')}>
             <IconoSubir /> Subir y procesar
           </NavLink>
-          <NavLink to="/consumo" className={({ isActive }) => (isActive ? 'activo' : '')}>
-            <IconoGrafico /> Consumo
-          </NavLink>
-          <NavLink to="/umbrales" className={({ isActive }) => `pendiente ${isActive ? 'activo' : ''}`}>
+          <NavLink to="/umbrales" className={({ isActive }) => (isActive ? 'activo' : '')}>
             <IconoDeslizadores /> Umbrales
           </NavLink>
         </nav>
@@ -78,12 +74,12 @@ export default function Armazon() {
         <span className="etiqueta etiqueta-menu">Administración</span>
         <nav className="menu">
           <NavLink to="/admin" className={({ isActive }) => (isActive ? 'activo' : '')}>
-            <IconoEngranaje /> Motor IA y resumen
+            <IconoEngranaje /> Administración
           </NavLink>
         </nav>
 
-        {acceso?.requiere_clave && (
-          <div className="pie-lateral">
+        <div className="pie-lateral columna" style={{ gap: 10 }}>
+          {acceso?.requiere_clave && (
             <button
               type="button"
               className="boton boton-chico"
@@ -93,8 +89,18 @@ export default function Armazon() {
               <IconoSalir tam={14} />
               {salir.isPending ? 'Cerrando…' : 'Cerrar acceso'}
             </button>
-          </div>
-        )}
+          )}
+          {/* AGPL-3.0 exige ofrecer el código fuente a quien interactúa con la
+              instancia por red (§13); esto es lo que cumple esa obligación. */}
+          <a
+            href="https://github.com/rimyortega55-collab/motor-OCR"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="chico apagado"
+          >
+            Código fuente (AGPL-3.0)
+          </a>
+        </div>
       </aside>
 
       <main className="contenido">

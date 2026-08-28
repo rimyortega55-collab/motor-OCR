@@ -18,7 +18,9 @@ from .db import Base, get_session, init_db, obtener_sesion, session_scope
 from .models import (
     BloqueAlmacenado,
     ClaveAccesoInstancia,
+    ConfiguracionModeloMatematico,
     ConfiguracionMotorIA,
+    ConfiguracionProcesamiento,
     CostoRegistrado,
     DecisionAlmacenada,
     DocumentoAlmacenado,
@@ -42,4 +44,6 @@ __all__ = [
     "TraduccionBloque",
     "ConfiguracionMotorIA",
     "ClaveAccesoInstancia",
+    "ConfiguracionProcesamiento",
+    "ConfiguracionModeloMatematico",
 ]

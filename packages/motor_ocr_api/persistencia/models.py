@@ -74,6 +74,18 @@ class DocumentoAlmacenado(Base):
     # página que el usuario reconoce de su documento.
     paginas_origen: Mapped[list | None] = mapped_column(JSON)
 
+    # Lo que declaró quien subió el documento al procesarlo. Es sólo metadato
+    # -no cambia qué motor de OCR se usa- y sirve de default al abrir el
+    # diálogo de traducción, para no ofrecer traducir al mismo idioma.
+    idioma_original: Mapped[str | None] = mapped_column(String(20))
+
+    # Con qué modo de Capa 3 se procesó: "hibrido" (motor determinista + modelo
+    # de IA sólo en las fórmulas) o "solo_ia" (todos los bloques al modelo).
+    # Se guarda por documento y no como configuración global porque cambia el
+    # resultado: sin esto, dos documentos de la misma instancia con calidades
+    # muy distintas no se podrían explicar.
+    modo_motor: Mapped[str] = mapped_column(String(20), default="hibrido")
+
     costos: Mapped[list["CostoRegistrado"]] = relationship(
         back_populates="documento", cascade="all, delete-orphan"
     )
@@ -317,6 +329,25 @@ class ClaveAccesoInstancia(Base):
     rotada_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
+class ConfiguracionProcesamiento(Base):
+    """Cuántos documentos procesa el pipeline a la vez, para toda la instancia.
+
+    Fila única (id fijo "global"), mismo patrón que `ClaveAccesoInstancia`.
+    Vivía sólo en `MOTOR_OCR_PROCESAMIENTO_PARALELO`, fija al arrancar el
+    proceso; ahora el panel la edita en caliente y esta fila es lo que
+    sobrevive a un reinicio (`trabajos.aplicar_limite_paralelo` la aplica de
+    nuevo al arrancar).
+    """
+
+    __tablename__ = "configuracion_procesamiento"
+
+    id: Mapped[str] = mapped_column(String(20), primary_key=True, default="global")
+    max_paralelo: Mapped[int] = mapped_column(Integer, default=4)
+    actualizado_en: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=_ahora, onupdate=_ahora
+    )
+
+
 class ConfiguracionMotorIA(Base):
     """Qué proveedor de IA usa la Capa 5 (escalación) para este despliegue.
 
@@ -345,6 +376,29 @@ class ConfiguracionMotorIA(Base):
     api_key: Mapped[str | None] = mapped_column(Text)
     habilitado: Mapped[bool] = mapped_column(default=True)
 
+    actualizado_en: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=_ahora, onupdate=_ahora
+    )
+
+
+class ConfiguracionModeloMatematico(Base):
+    """Qué checkpoint de pix2tex usa la Capa 3 para reconocer fórmulas.
+
+    Fila única (id fijo "global"), mismo patrón que `ConfiguracionProcesamiento`.
+    `checkpoint` NULL significa "los pesos pre-entrenados que trae el paquete
+    pix2tex"; si no, es el nombre de un `.pth` dentro de
+    `MOTOR_OCR_CHECKPOINTS_DIR` salido del fine-tuning propio.
+
+    Se guarda el **nombre de archivo** y no una ruta: la ruta sale siempre de
+    resolverlo contra ese directorio (ver `pix2tex_engine.resolver_checkpoint`),
+    así una fila vieja no puede hacer que el proceso cargue un `.pth` de
+    cualquier lado del disco.
+    """
+
+    __tablename__ = "configuracion_modelo_matematico"
+
+    id: Mapped[str] = mapped_column(String(20), primary_key=True, default="global")
+    checkpoint: Mapped[str | None] = mapped_column(String(255))
     actualizado_en: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=_ahora, onupdate=_ahora
     )

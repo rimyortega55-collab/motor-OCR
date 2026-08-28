@@ -28,8 +28,50 @@ def migrar(engine: Engine) -> list[str]:
     hechos.extend(_quitar_usuario_de_costos(engine, inspector, tablas))
     hechos.extend(_migrar_umbrales_a_global(engine, inspector, tablas))
     hechos.extend(_quitar_tablas_de_cuentas(engine, tablas))
+    hechos.extend(_agregar_idioma_original(engine, inspector, tablas))
+    hechos.extend(_agregar_modo_motor(engine, inspector, tablas))
 
     return hechos
+
+
+def _agregar_modo_motor(engine: Engine, inspector, tablas: set[str]) -> list[str]:
+    """`documentos` gana `modo_motor`. Las filas viejas se marcan "hibrido":
+    es el único modo que existía cuando se procesaron, así que el default no
+    inventa nada sobre ellas."""
+
+    if "documentos" not in tablas:
+        return []
+
+    columnas = {c["name"] for c in inspector.get_columns("documentos")}
+    if "modo_motor" in columnas:
+        return []
+
+    with engine.begin() as conexion:
+        conexion.execute(
+            text(
+                "ALTER TABLE documentos ADD COLUMN modo_motor VARCHAR(20) "
+                "NOT NULL DEFAULT 'hibrido'"
+            )
+        )
+
+    return ["documentos.modo_motor (agregada)"]
+
+
+def _agregar_idioma_original(engine: Engine, inspector, tablas: set[str]) -> list[str]:
+    """`documentos` gana `idioma_original`: agregarla es segura con ADD COLUMN,
+    a diferencia de sacar una columna (ver `_quitar_columna`)."""
+
+    if "documentos" not in tablas:
+        return []
+
+    columnas = {c["name"] for c in inspector.get_columns("documentos")}
+    if "idioma_original" in columnas:
+        return []
+
+    with engine.begin() as conexion:
+        conexion.execute(text("ALTER TABLE documentos ADD COLUMN idioma_original VARCHAR(20)"))
+
+    return ["documentos.idioma_original (agregada)"]
 
 
 def _quitar_columna(engine: Engine, tabla: str, columna: str) -> None:
