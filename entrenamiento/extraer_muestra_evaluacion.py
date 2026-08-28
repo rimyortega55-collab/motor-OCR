@@ -1,11 +1,26 @@
 """Extrae recortes de las regiones matematicas de los 11 PDF de prueba, para
 anotarlas como ground truth de evaluacion del modelo de OCR matematico.
 
-Corre el pipeline completo (`Pipeline().ejecutar`) sobre cada PDF, se queda con
-los bloques `formula_display`/`formula_inline`, recorta esa region de la
-pagina renderizada segun su bbox normalizado, y guarda un manifiesto con la
-transcripcion que el motor actual (pix2tex) ya produjo para cada una -para
-poder comparar despues- y un campo `latex_referencia` vacio a completar.
+Corre Capas 1-2 (triage + segmentacion) sobre cada PDF -sin pasar por el
+pipeline completo, que ademas correria pix2tex una vez por bloque sin que lo
+necesitemos aca- y arma un candidato de recorte por cada region que la propia
+Capa 3 le pasaria a pix2tex en produccion:
+
+- Bloques `formula_display`: el bbox del bloque completo (asi es como los
+  procesa `_procesar_formula_display` en enrutador.py: sin sub-segmentar).
+- Bloques nativo-digital con formulas inline (parrafo/teorema/lema/...): el
+  bbox de cada tramo `formula` en `bloque.segmentos_capa2`, que es el mismo
+  bbox exacto por span que usa `_procesar_bloque_nativo_con_formulas` en
+  enrutador.py -no el bbox del bloque/parrafo entero, que mezclaria prosa.
+
+Los bloques escaneados (sin `segmentos_capa2`) quedan fuera de este muestreo:
+el proyecto prioriza LaTeX antes que abordar esa via (ver
+docs/direccion del proyecto).
+
+Se llama a `ocr_formula` directamente sobre cada recorte -la misma funcion
+que usa el pipeline en Capa 3- para que la prediccion del manifiesto sea
+exactamente la que produciria una corrida real, sin pasar por la
+recomposicion de texto+formula pensada para el documento final.
 
 Uso:
     python entrenamiento/extraer_muestra_evaluacion.py [c1 c2 ...]
@@ -19,30 +34,57 @@ import json
 import sys
 from pathlib import Path
 
+import numpy as np
 import pymupdf as fitz
 from PIL import Image
 
+from motor_ocr.layout import segmentar_documento
 from motor_ocr.layout.bbox import desnormalizar_bbox
-from motor_ocr.modelos import TipoBloque
-from motor_ocr.pipeline import Pipeline
+from motor_ocr.modelos import Documento, Origen, OrigenContenido, TipoBloque
+from motor_ocr.reconocimiento.engines.pix2tex_engine import ocr_formula
+from motor_ocr.triage import procesar_triage
 
 RAIZ_PRUEBAS = Path(__file__).parent.parent / "pruebas"
 DIR_PDFS = RAIZ_PRUEBAS / "pdfs_de_prueba"
 DIR_SALIDA = Path(__file__).parent / "evaluacion_real"
 DPI_RECORTE = 300
 
-TIPOS_MATEMATICOS = {TipoBloque.FORMULA_DISPLAY, TipoBloque.FORMULA_INLINE}
 
+def _candidatos_de_bloque(bloque) -> list[tuple[str, tuple[float, float, float, float]]]:
+    """[(tipo, bbox_normalizado), ...] de las regiones que pix2tex vería en produccion."""
+    if bloque.tipo == TipoBloque.FORMULA_DISPLAY:
+        return [("formula_display", bloque.layout.bbox)]
 
-def _pixmap_a_pil(pix: fitz.Pixmap) -> Image.Image:
-    return Image.open(io.BytesIO(pix.tobytes("png")))
+    if bloque.origen_contenido == OrigenContenido.TEXTO_NATIVO and bloque.segmentos_capa2:
+        return [
+            ("formula_inline", seg.bbox)
+            for seg in bloque.segmentos_capa2
+            if seg.tipo == "formula" and seg.bbox is not None
+        ]
+
+    return []
 
 
 def extraer_uno(ruta_pdf: Path, manifiesto: list[dict]) -> None:
     nombre = ruta_pdf.stem
-    documento, bloques = Pipeline().ejecutar(str(ruta_pdf))
-    bloques_math = [b for b in bloques if b.tipo in TIPOS_MATEMATICOS]
-    if not bloques_math:
+
+    resultados_triage, zonas = procesar_triage(str(ruta_pdf))
+    documento = Documento(
+        titulo=ruta_pdf.name,
+        origen=Origen.NATIVO_DIGITAL,
+        idioma_original="es",
+        total_paginas=len(resultados_triage),
+        version_pipeline="0.1.0",
+        zonas_dpi=zonas,
+    )
+    bloques = segmentar_documento(documento, str(ruta_pdf), resultados_triage)
+
+    candidatos = [
+        (bloque.pagina, tipo, bbox)
+        for bloque in bloques
+        for tipo, bbox in _candidatos_de_bloque(bloque)
+    ]
+    if not candidatos:
         print(f"[{nombre}] sin bloques matematicos detectados")
         return
 
@@ -52,31 +94,36 @@ def extraer_uno(ruta_pdf: Path, manifiesto: list[dict]) -> None:
 
     cache_paginas: dict[int, Image.Image] = {}
     extraidos = 0
-    for i, b in enumerate(bloques_math):
-        if b.pagina not in cache_paginas:
-            page = doc_fitz[b.pagina]
+    for i, (pagina, tipo, bbox) in enumerate(candidatos):
+        if pagina not in cache_paginas:
+            page = doc_fitz[pagina]
             zoom = DPI_RECORTE / 72.0
             pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
-            cache_paginas[b.pagina] = _pixmap_a_pil(pix)
-        imagen_pagina = cache_paginas[b.pagina]
-        x0, y0, x1, y1 = desnormalizar_bbox(b.layout.bbox, imagen_pagina.size)
+            cache_paginas[pagina] = Image.open(io.BytesIO(pix.tobytes("png")))
+        imagen_pagina = cache_paginas[pagina]
+
+        x0, y0, x1, y1 = desnormalizar_bbox(bbox, imagen_pagina.size)
         if x1 <= x0 or y1 <= y0:
             continue
 
+        recorte_pil = imagen_pagina.crop((x0, y0, x1, y1))
+        latex, confianza = ocr_formula(np.array(recorte_pil))
+
         nombre_archivo = f"{i:03d}.png"
-        imagen_pagina.crop((x0, y0, x1, y1)).save(str(dir_pdf / nombre_archivo))
+        recorte_pil.save(str(dir_pdf / nombre_archivo))
         extraidos += 1
         manifiesto.append({
             "pdf": nombre,
             "archivo": f"{nombre}/{nombre_archivo}",
-            "pagina": b.pagina,
-            "tipo": b.tipo.value,
-            "bbox": list(b.layout.bbox),
-            "prediccion_actual": b.contenido.latex or b.contenido.texto_plano or "",
+            "pagina": pagina,
+            "tipo": tipo,
+            "bbox": list(bbox),
+            "prediccion_actual": latex,
+            "confianza_engine": confianza,
             "latex_referencia": None,
         })
     doc_fitz.close()
-    print(f"[{nombre}] {extraidos}/{len(bloques_math)} bloques matematicos extraidos")
+    print(f"[{nombre}] {extraidos}/{len(candidatos)} bloques matematicos extraidos")
 
 
 def _cargar_manifiesto_previo(nombres_a_reemplazar: set[str]) -> list[dict]:
