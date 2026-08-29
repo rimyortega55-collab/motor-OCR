@@ -33,6 +33,13 @@
   --bien-tinte: #17210d;
 
   --rejilla: rgba(255, 255, 255, 0.026);
+  /* Velo del bloque activo sobre la página, en el visor de revisión. */
+  --acento-velo: rgba(183, 238, 63, 0.14);
+
+  /* Le dice al navegador de qué color pintar lo que dibuja él: la barra del
+     range, el scrollbar, el desplegable nativo del select. Sin esto quedan
+     claros sobre el fondo oscuro. */
+  color-scheme: dark;
 
   --radio: 12px;
   --radio-chico: 8px;
@@ -41,6 +48,8 @@
 }
 
 :root[data-theme='light'] {
+  color-scheme: light;
+
   --papel: #f7f8f5;
   --superficie: #ffffff;
   --superficie-2: #f0f2ec;
@@ -65,6 +74,7 @@
   --bien-tinte: #eef7dc;
 
   --rejilla: rgba(16, 19, 15, 0.035);
+  --acento-velo: rgba(85, 120, 15, 0.14);
 
   --sombra: 0 1px 2px rgba(16, 19, 15, 0.06);
   --sombra-alta: 0 18px 48px rgba(16, 19, 15, 0.14);
@@ -140,6 +150,8 @@ h2 { font-size: 16px; font-weight: 600; letter-spacing: -0.015em; margin: 0; }
   background: var(--superficie);
   color: var(--tinta);
   cursor: pointer;
+  /* Varios botones son <Link>: sin esto se los come el subrayado del navegador. */
+  text-decoration: none;
   transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 .boton:hover:not(:disabled) { background: var(--superficie-2); border-color: var(--tenue); }
@@ -165,7 +177,12 @@ h2 { font-size: 16px; font-weight: 600; letter-spacing: -0.015em; margin: 0; }
 
 .campo { display: flex; flex-direction: column; gap: 6px; }
 
-.campo input, .campo select {
+/* Va sobre el elemento y no sobre `.campo input`: hay campos que llevan la
+   clase en el propio input, y con el selector descendente se quedaban con el
+   cromo blanco del navegador en medio de una pantalla oscura. */
+input:not([type='range']):not([type='checkbox']):not([type='radio']):not([type='file']),
+select,
+textarea {
   font: inherit;
   font-size: 14px;
   padding: 9px 11px;
@@ -175,13 +192,23 @@ h2 { font-size: 16px; font-weight: 600; letter-spacing: -0.015em; margin: 0; }
   color: var(--tinta);
   width: 100%;
 }
-.campo input::placeholder { color: var(--tenue); }
-.campo input:focus,
-.campo select:focus {
+input::placeholder, textarea::placeholder { color: var(--tenue); }
+input:not([type='range']):not([type='checkbox']):not([type='radio']):not([type='file']):focus,
+select:focus,
+textarea:focus {
   border-color: var(--acento);
   outline: none;
   box-shadow: 0 0 0 3px var(--acento-tinte);
 }
+
+/* El deslizador es el control central de Umbrales: sin `accent-color` sale con
+   el azul de sistema, que no pertenece a esta paleta. */
+input[type='range'] {
+  accent-color: var(--acento);
+  cursor: pointer;
+}
+input[type='checkbox'], input[type='radio'] { accent-color: var(--acento); }
+
 .campo .ayuda { font-size: 12px; color: var(--apagado); }
 
 /* ------------------------------------------------------------------ píldora */
