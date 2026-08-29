@@ -11,7 +11,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { FalloApi } from '../api/cliente'
 import { useDesbloquear, useEstadoAcceso } from '../api/consultas'
-import { IconoAlerta, IconoDocumento } from '../componentes/Iconos'
+import { IconoAlerta, IconoDocumento, IconoTilde } from '../componentes/Iconos'
 
 export default function Entrar() {
   const [clave, setClave] = useState('')
@@ -40,7 +40,10 @@ export default function Entrar() {
           <strong>motor-OCR</strong>
         </div>
 
-        <h1>OCR para documentos matemáticos, con la revisión humana incluida.</h1>
+        <div className="columna" style={{ gap: 14 }}>
+          <span className="etiqueta">Motor de OCR</span>
+          <h1>OCR para documentos matemáticos, con la revisión humana incluida.</h1>
+        </div>
 
         <p>
           Siete capas deterministas: triage, segmentación, OCR especializado por tipo de
@@ -48,30 +51,17 @@ export default function Entrar() {
           Sólo hace falta revisar lo que el motor no pudo resolver.
         </p>
 
-        <ul className="columna" style={{ gap: 10, listStyle: 'none', padding: 0, margin: 0 }}>
+        <ul className="lista-tilde">
           {[
             'Fórmulas a LaTeX con pix2tex, tablas con docTR',
             'El modelo sólo entra en lo ambiguo — costo medido por bloque',
             'Salida indexable como grafo de bloques',
-          ].map((texto, i) => (
-            <li key={texto} className="fila" style={{ gap: 11 }}>
-              <span
-                className="num"
-                style={{
-                  flex: '0 0 auto',
-                  width: 22,
-                  height: 22,
-                  borderRadius: '50%',
-                  border: '1px solid #6b655c',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 11,
-                }}
-              >
-                {i + 1}
+          ].map((texto) => (
+            <li key={texto}>
+              <span className="tilde">
+                <IconoTilde tam={13} />
               </span>
-              <span style={{ fontSize: 13.5, color: '#d6d0c6' }}>{texto}</span>
+              <span>{texto}</span>
             </li>
           ))}
         </ul>
@@ -83,7 +73,7 @@ export default function Entrar() {
           href="https://github.com/rimyortega55-collab/motor-OCR"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ fontSize: 12.5, color: '#9b9488' }}
+          style={{ fontSize: 12.5 }}
         >
           Código fuente (AGPL-3.0)
         </a>

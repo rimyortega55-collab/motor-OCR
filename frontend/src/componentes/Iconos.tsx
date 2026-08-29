@@ -97,3 +97,9 @@ export const IconoRobot = ({ tam = 16 }: Props) => (
     <path d="M9 17h6M2.5 12v4M21.5 12v4" />
   </svg>
 )
+
+export const IconoTilde = ({ tam = 16 }: Props) => (
+  <svg {...base(tam)} strokeWidth={2.4}>
+    <path d="M5 12.5 10 17.5 19 7" />
+  </svg>
+)
