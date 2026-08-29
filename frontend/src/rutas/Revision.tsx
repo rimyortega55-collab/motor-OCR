@@ -166,7 +166,7 @@ function Pagina({
               width: `${(b.bbox.x1 - b.bbox.x0) * 100}%`,
               height: `${(b.bbox.y1 - b.bbox.y0) * 100}%`,
               border: `2px solid ${activo ? 'var(--acento)' : 'var(--alerta)'}`,
-              background: activo ? 'rgba(79, 76, 222, 0.14)' : 'transparent',
+              background: activo ? 'var(--acento-velo)' : 'transparent',
               borderRadius: 2,
               padding: 0,
               cursor: 'pointer',

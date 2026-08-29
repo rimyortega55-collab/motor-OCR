@@ -3,10 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0a0d0b" />
     <title>motor-OCR</title>
-    <script type="module" crossorigin src="/assets/index-DZXYyD1_.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-S_Ko-eJ2.css">
+    <!-- El tema se resuelve antes del primer pintado. Si esperara al bundle,
+         quien eligió el tema claro vería un parpadeo oscuro en cada carga.
+         Duplica la lógica de src/tema.ts a propósito: es la única forma de que
+         corra antes que React, y son tres líneas. -->
+    <script>
+      (function () {
+        try {
+          var elegido = localStorage.getItem('motor-ocr:tema')
+          var claro =
+            elegido === 'claro' ||
+            (!elegido && matchMedia('(prefers-color-scheme: light)').matches)
+          if (claro) document.documentElement.setAttribute('data-theme', 'light')
+        } catch (e) {
+          /* sin localStorage queda el tema oscuro, que es el de :root */
+        }
+      })()
+    </script>
+    <script type="module" crossorigin src="/assets/index-DOuFiMPC.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CSkzDL9M.css">
   </head>
   <body>
     <div id="root"></div>
