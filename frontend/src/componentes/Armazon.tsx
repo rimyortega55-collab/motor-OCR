@@ -17,6 +17,7 @@ import {
   IconoSalir,
   IconoSubir,
 } from './Iconos'
+import SelectorTema from './SelectorTema'
 
 function Cargando() {
   return (
@@ -78,7 +79,9 @@ export default function Armazon() {
           </NavLink>
         </nav>
 
-        <div className="pie-lateral columna" style={{ gap: 10 }}>
+        <div className="pie-lateral columna" style={{ gap: 12 }}>
+          <SelectorTema />
+
           {acceso?.requiere_clave && (
             <button
               type="button"
