@@ -9,15 +9,14 @@
     <!-- El tema se resuelve antes del primer pintado. Si esperara al bundle,
          quien eligió el tema claro vería un parpadeo oscuro en cada carga.
          Duplica la lógica de src/tema.ts a propósito: es la única forma de que
-         corra antes que React, y son cuatro líneas. -->
+         corra antes que React, y son tres líneas. -->
     <script>
       (function () {
         try {
           var elegido = localStorage.getItem('motor-ocr:tema')
           var claro =
             elegido === 'claro' ||
-            ((!elegido || elegido === 'sistema') &&
-              matchMedia('(prefers-color-scheme: light)').matches)
+            (!elegido && matchMedia('(prefers-color-scheme: light)').matches)
           if (claro) document.documentElement.setAttribute('data-theme', 'light')
         } catch (e) {
           /* sin localStorage queda el tema oscuro, que es el de :root */

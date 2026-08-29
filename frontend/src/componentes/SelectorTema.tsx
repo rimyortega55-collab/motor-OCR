@@ -6,7 +6,6 @@ import {
   PREFERENCIAS,
   type Preferencia,
   aplicarTema,
-  escucharSistema,
   guardarPreferencia,
   leerPreferencia,
 } from '../tema'
@@ -15,12 +14,9 @@ export default function SelectorTema() {
   const [preferencia, setPreferencia] = useState<Preferencia>(leerPreferencia)
 
   // El tema ya lo dejó puesto el script de index.html antes del primer pintado;
-  // esto lo vuelve a aplicar cuando cambia la elección, y mientras esté en
-  // "sistema" sigue los cambios del sistema en vivo.
+  // esto lo vuelve a aplicar cuando cambia la elección.
   useEffect(() => {
     aplicarTema(preferencia)
-    if (preferencia !== 'sistema') return
-    return escucharSistema(() => aplicarTema('sistema'))
   }, [preferencia])
 
   function elegir(valor: Preferencia) {
@@ -31,7 +27,7 @@ export default function SelectorTema() {
   return (
     <div className="columna" style={{ gap: 6 }}>
       <span className="etiqueta">Tema</span>
-      <div className="fila" style={{ gap: 5, flexWrap: 'wrap' }} role="group" aria-label="Tema">
+      <div className="fila" style={{ gap: 5 }} role="group" aria-label="Tema">
         {PREFERENCIAS.map((opcion) => (
           <button
             key={opcion.valor}
